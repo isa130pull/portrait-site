@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:appmarketinglabo.net)"
+      "WebFetch(domain:appmarketinglabo.net)",
+      "WebFetch(domain:gamebiz.jp)",
+      "WebFetch(domain:www.infiniteloop.co.jp)",
+      "WebFetch(domain:apps.apple.com)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []
