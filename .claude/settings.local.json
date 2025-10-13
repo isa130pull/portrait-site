@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:appmarketinglabo.net)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
