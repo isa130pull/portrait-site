@@ -39,7 +39,7 @@ function doPost(e) {
       data.message          // お問い合わせ内容
     ]);
 
-    // メール通知（オプション）
+    // メール通知
     MailApp.sendEmail({
       to: "isa130pull@gmail.com",  // あなたのメールアドレス
       subject: "【お問い合わせ】" + data.subject,
@@ -55,16 +55,41 @@ function doPost(e) {
             SpreadsheetApp.getActiveSpreadsheet().getUrl()
     });
 
-    // 成功レスポンス
-    return ContentService.createTextOutput(
-      JSON.stringify({success: true})
-    ).setMimeType(ContentService.MimeType.JSON);
+    // 送信者への確認メール（オプション）
+    MailApp.sendEmail({
+      to: data.email,
+      subject: "お問い合わせを受け付けました - かわぐち（isa130pull）",
+      body: data.name + " 様\n\n" +
+            "お問い合わせいただきありがとうございます。\n" +
+            "以下の内容で受け付けいたしました。\n\n" +
+            "━━━━━━━━━━━━━━━━━━━━\n" +
+            "ご相談内容: " + data.subject + "\n" +
+            "お問い合わせ内容:\n" +
+            data.message + "\n" +
+            "━━━━━━━━━━━━━━━━━━━━\n\n" +
+            "通常2営業日以内にご返信いたします。\n" +
+            "しばらくお待ちください。\n\n" +
+            "━━━━━━━━━━━━━━━━━━━━\n" +
+            "かわぐち（isa130pull）\n" +
+            "https://isa130pull.github.io/portrait-site/"
+    });
+
+    // CORS対応の成功レスポンス
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: true,
+        message: "お問い合わせを受け付けました"
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
 
   } catch(error) {
-    // エラーレスポンス
-    return ContentService.createTextOutput(
-      JSON.stringify({success: false, error: error.toString()})
-    ).setMimeType(ContentService.MimeType.JSON);
+    // CORS対応のエラーレスポンス
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: false,
+        error: error.toString()
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
@@ -86,11 +111,22 @@ function testDoPost() {
 }
 ```
 
-4. **重要**: 16行目のメールアドレスを自分のアドレスに変更
+4. **重要**: 44行目のメールアドレスを自分のアドレスに変更
 5. 上部の「保存」アイコンをクリック
 6. プロジェクト名を「お問い合わせフォーム」などに変更
 
+### 注意事項
+
+このコードは**CORS対応版**です。以下の機能が含まれています：
+- ✅ 正確な成功/失敗判定
+- ✅ エラーメッセージの取得
+- ✅ 送信者への確認メール（オプション、58-75行目）
+
+送信者への確認メールが不要な場合は、58-75行目を削除してください。
+
 ## 手順3: デプロイ
+
+### 初めて設定する場合
 
 1. 右上の「デプロイ」→「新しいデプロイ」をクリック
 2. 「種類の選択」→「ウェブアプリ」を選択
@@ -105,6 +141,18 @@ function testDoPost() {
    - 「詳細」→「（安全ではないページ）に移動」をクリック
    - 「許可」をクリック
 6. **ウェブアプリのURL**をコピー（`https://script.google.com/macros/s/xxxxx/exec` の形式）
+
+### 既に設定済みで、コードを更新する場合
+
+**重要**: Apps Scriptのコードを変更した場合は、必ず再デプロイが必要です。
+
+1. Apps Scriptエディタで右上の「デプロイ」→「デプロイを管理」をクリック
+2. 既存のデプロイの右側の「編集」アイコン（鉛筆マーク）をクリック
+3. 「バージョン」→「新バージョン」を選択
+4. 「デプロイ」をクリック
+5. URLは変わらないので、フォームの設定変更は不要
+
+**注意**: 「新バージョン」として再デプロイしないと、変更が反映されません。
 
 ## 手順4: フォームにURLを設定
 
@@ -134,19 +182,31 @@ function testDoPost() {
 
 ## トラブルシューティング
 
-### フォーム送信後、エラーメッセージが表示される
+### フォーム送信後、「送信に失敗しました」と表示される
 
-**原因**: Apps ScriptのURLが正しく設定されていない
+**原因1**: Apps ScriptのURLが正しく設定されていない
 **解決策**:
-- `pages/contact.html` の `SCRIPT_URL` を確認
+- `pages/contact.html` の175行目の `SCRIPT_URL` を確認
 - URLの末尾が `/exec` になっているか確認
+
+**原因2**: Apps Scriptが正しくデプロイされていない
+**解決策**:
+- Apps Scriptエディタで「デプロイ」→「デプロイを管理」を確認
+- アクティブなデプロイが存在するか確認
+- コードを変更した場合は「新バージョン」として再デプロイ
+
+**原因3**: Apps Scriptの権限が承認されていない
+**解決策**:
+- デプロイ時の権限承認を再度実行
+- 「詳細」→「（安全ではないページ）に移動」をクリック
 
 ### スプレッドシートにデータが保存されない
 
 **原因**: Apps Scriptのコードにエラーがある
 **解決策**:
 - Apps Scriptエディタで「実行」→「testDoPost」を選択
-- ログを確認してエラーメッセージを確認
+- 実行ログを確認してエラーメッセージを確認
+- スプレッドシートのヘッダー行（A1:E1）が正しいか確認
 
 ### メール通知が届かない
 
@@ -154,6 +214,23 @@ function testDoPost() {
 **解決策**:
 - Apps Scriptで「MailApp」の権限が承認されているか確認
 - Gmail のスパムフォルダを確認
+- 送信先メールアドレスが正しいか確認（44行目）
+
+### 送信者への確認メールが届かない
+
+**原因**: 確認メール機能が有効になっていない、または送信先アドレスが間違っている
+**解決策**:
+- Apps Scriptの58-75行目が存在するか確認
+- フォームで入力したメールアドレスが正しいか確認
+- 迷惑メールフォルダを確認
+
+### 「送信中...」のまま固まる
+
+**原因**: ネットワーク接続の問題、またはApps ScriptのURLが無効
+**解決策**:
+- インターネット接続を確認
+- ブラウザのコンソール（F12）でエラーメッセージを確認
+- Apps ScriptのURLが有効か確認（ブラウザで直接アクセスしてみる）
 
 ## セキュリティ対策（推奨）
 

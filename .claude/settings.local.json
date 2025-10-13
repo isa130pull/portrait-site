@@ -6,7 +6,10 @@
       "WebFetch(domain:www.infiniteloop.co.jp)",
       "WebFetch(domain:apps.apple.com)",
       "WebSearch",
-      "WebFetch(domain:qiita.com)"
+      "WebFetch(domain:qiita.com)",
+      "Bash(open:*)",
+      "Bash(curl -X POST \"https://script.google.com/macros/s/AKfycbxDEGXU2sPv1bqoBzahhaYclDfDer1VlA2zABVL94VbTWdgRjPMw2RnxWBOPcLz0iBOAA/exec\" )",
+      "Bash(curl -L -X POST \"https://script.google.com/macros/s/AKfycbxDEGXU2sPv1bqoBzahhaYclDfDer1VlA2zABVL94VbTWdgRjPMw2RnxWBOPcLz0iBOAA/exec\" )"
     ],
     "deny": [],
     "ask": []
