@@ -5,7 +5,8 @@
       "WebFetch(domain:gamebiz.jp)",
       "WebFetch(domain:www.infiniteloop.co.jp)",
       "WebFetch(domain:apps.apple.com)",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:qiita.com)"
     ],
     "deny": [],
     "ask": []
