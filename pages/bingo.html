@@ -3,9 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bingo Maker | かわぐち（isa130pull）</title>
+  <title>セトリビンゴ | かわぐち（isa130pull）</title>
   <meta name="description" content="3×3のビンゴカードを作成・共有できるツール。編集モード・チェックモード搭載。画像保存、リンク共有に対応。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/bingo.html" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Kosugi+Maru&family=Yusei+Magic&family=RocknRoll+One&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg: #0b0c0f;
@@ -58,7 +63,7 @@
 <div class="wrap">
   <header>
     <a href="../index.html" class="back-link">← トップページに戻る</a>
-    <h1>🎯 Bingo Maker</h1>
+    <h1>🎯 セトリビンゴ</h1>
     <p class="lead">3×3のビンゴカードを作成・共有できるツールです。編集モードでマスを入力し、チェックモードでビンゴを楽しめます。</p>
   </header>
 
@@ -66,6 +71,17 @@
     <div class="form-group" style="margin-bottom:20px">
       <label for="title" style="display:block;font-weight:600;margin-bottom:8px;font-size:15px">ビンゴタイトル</label>
       <input type="text" id="title" placeholder="例：自己紹介ビンゴ" style="width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:15px;font-family:inherit">
+    </div>
+
+    <div class="form-group" style="margin-bottom:20px">
+      <label for="fontSelect" style="display:block;font-weight:600;margin-bottom:8px;font-size:15px">フォント（画像保存時）</label>
+      <select id="fontSelect" style="width:100%;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:15px;font-family:inherit;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 12 12%27%3E%3Cpath fill=%27%23a1a7b3%27 d=%27M6 9L1 4h10z%27/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:40px">
+        <option value="system">システム標準</option>
+        <option value="klee">手書き風（Klee One）</option>
+        <option value="maru">丸ゴシック（Kosugi Maru）</option>
+        <option value="pop">ポップ体（Yusei Magic）</option>
+        <option value="rock">カジュアル（RocknRoll One）</option>
+      </select>
     </div>
 
     <div class="row" style="justify-content:flex-end;margin-bottom:16px">
@@ -129,11 +145,21 @@ const b64u = {
 const defaultTitle = 'ビンゴ';
 const BOARD_SIZE = 3;
 
+// フォント定義
+const fontMap = {
+  system: 'system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif',
+  klee: '"Klee One", "Hiragino Maru Gothic ProN", "Yu Gothic UI", cursive',
+  maru: '"Kosugi Maru", "Hiragino Maru Gothic ProN", "Yu Gothic UI", sans-serif',
+  pop: '"Yusei Magic", "Hiragino Sans", "Yu Gothic", sans-serif',
+  rock: '"RocknRoll One", "Kosugi Maru", sans-serif'
+};
+
 let state = {
   id: null,
   cells: Array.from({length:BOARD_SIZE},()=>Array(BOARD_SIZE).fill('')),
   marked: Array.from({length:BOARD_SIZE},()=>Array(BOARD_SIZE).fill(false)),
   title: defaultTitle,
+  font: 'system',
   version: 1,
   mode: 'edit',
 };
@@ -167,6 +193,7 @@ function serialize(){
     cells: state.cells,
     marked: state.marked,
     title: state.title,
+    font: state.font,
     version: state.version
   });
 }
@@ -176,8 +203,10 @@ function loadFrom(obj){
   state.cells = obj.cells;
   state.marked = obj.marked;
   state.title = obj.title || defaultTitle;
+  state.font = obj.font || 'system';
   state.version = obj.version || 1;
   titleInput.value = state.title;
+  $('#fontSelect').value = state.font;
   render();
 }
 
@@ -338,7 +367,15 @@ function saveLocal(){ try{ localStorage.setItem(LS_KEY, serialize()); }catch(e){
 function loadLocal(){ try{ const j = localStorage.getItem(LS_KEY); if(j){ loadFrom(JSON.parse(j)); } }catch(e){} }
 
 // ===== PNG export (Canvas 2D) =====
-function exportPNG(){
+async function exportPNG(){
+  // フォント読み込み待機
+  const fontFamily = fontMap[state.font] || fontMap.system;
+  try {
+    await document.fonts.load(`80px ${fontFamily}`);
+  } catch(e) {
+    console.warn('Font load failed, using fallback', e);
+  }
+
   const px = 2048; const topMargin = 180; const sideMargin = 80; const gridStroke = 8;
   const n = BOARD_SIZE; const gridSize = px - sideMargin*2; const cell = gridSize / n;
   const gridTop = topMargin;
@@ -347,10 +384,10 @@ function exportPNG(){
   ctx.clearRect(0,0,px,px+topMargin);
   ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,px,px+topMargin);
 
-  // タイトル描画
+  // タイトル描画（フォント適用）
   const title = state.title || defaultTitle;
   ctx.fillStyle = '#111';
-  ctx.font = 'bold 80px system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif';
+  ctx.font = `bold 80px ${fontFamily}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(title, px/2, topMargin/2);
@@ -371,7 +408,7 @@ function exportPNG(){
       if(state.marked[r][c]){ ctx.fillStyle = 'rgba(46, 204, 112, 0.2)'; ctx.fillRect(x,y,cell,cell); ctx.fillStyle = '#111'; }
       const label = (state.cells[r][c]||'').trim();
       if(!label) continue;
-      drawWrappedText(ctx, label, x, y, cell, cell, 64);
+      drawWrappedText(ctx, label, x, y, cell, cell, 64, fontFamily);
     }
   }
 
@@ -388,20 +425,20 @@ function exportPNG(){
   }, 'image/png', 1.0);
 }
 
-function drawWrappedText(ctx, text, x, y, w, h, baseSize){
+function drawWrappedText(ctx, text, x, y, w, h, baseSize, fontFamily){
   // Adaptive font size & wrapping
   let fontSize = baseSize; ctx.textBaseline = 'middle'; ctx.textAlign='center'; ctx.fillStyle = '#111';
   const words = splitGraphemes(text);
   // Find lines that fit
   function measure(lines){
-    ctx.font = `${fontSize}px system-ui, -apple-system, Segoe UI, Roboto, \"Noto Sans JP\", sans-serif`;
+    ctx.font = `${fontSize}px ${fontFamily}`;
     let max = 0; for(const line of lines) max = Math.max(max, ctx.measureText(line).width);
     return max;
   }
   let lines = [];
   let cur = '';
   for(const wch of words){
-    const next = cur + wch; ctx.font = `${fontSize}px system-ui, -apple-system, Segoe UI, Roboto, \"Noto Sans JP\", sans-serif`;
+    const next = cur + wch; ctx.font = `${fontSize}px ${fontFamily}`;
     if(ctx.measureText(next).width > w*0.9 && cur){ lines.push(cur); cur = wch; }
     else cur = next;
   }
@@ -409,7 +446,7 @@ function drawWrappedText(ctx, text, x, y, w, h, baseSize){
   while(lines.length*fontSize*1.2 > h*0.9){ fontSize -= 2; if(fontSize<18) break; }
   while(measure(lines) > w*0.9){ fontSize -= 2; if(fontSize<18) break; }
   const totalH = lines.length*fontSize*1.2; let sy = y + (h-totalH)/2 + fontSize*0.8;
-  for(const line of lines){ ctx.font = `${fontSize}px system-ui, -apple-system, Segoe UI, Roboto, \"Noto Sans JP\", sans-serif`; ctx.fillText(line, x + w/2, sy); sy += fontSize*1.2; }
+  for(const line of lines){ ctx.font = `${fontSize}px ${fontFamily}`; ctx.fillText(line, x + w/2, sy); sy += fontSize*1.2; }
 }
 
 function splitGraphemes(str){
@@ -459,6 +496,13 @@ $('#shareLink').addEventListener('click', shareLink);
 // タイトル入力の監視
 titleInput.addEventListener('input', (e)=>{
   state.title = e.target.value || defaultTitle;
+  saveLocal();
+});
+
+// フォント選択の監視
+const fontSelect = $('#fontSelect');
+fontSelect.addEventListener('change', (e)=>{
+  state.font = e.target.value;
   saveLocal();
 });
 
