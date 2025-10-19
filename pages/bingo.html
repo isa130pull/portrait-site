@@ -35,7 +35,7 @@
     html,body{height:100%}
     body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
-    header{padding:24px 0;border-bottom:1px solid var(--border);margin-bottom:24px}
+    header{padding:24px 0;margin-bottom:24px}
     .back-link{display:inline-block;margin-bottom:16px;padding:8px 16px;border:1px solid var(--border);border-radius:8px;color:var(--fg);text-decoration:none}
     .back-link:hover{border-color:var(--accent);text-decoration:none}
     h1{font-size:clamp(24px, 4vw, 32px);margin:0;font-weight:700;letter-spacing:.02em}
@@ -55,8 +55,8 @@
     .cell{background:var(--bg);border:1px solid var(--border);border-radius:12px;position:relative;overflow:hidden;transition:all .2s ease}
     .cell.filled{background:color-mix(in oklab, var(--accent), transparent 95%);border-color:color-mix(in oklab, var(--accent), transparent 70%)}
     .cell.focused{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in oklab, var(--accent), transparent 85%)}
-    .cell input{width:100%;height:100%;background:transparent;border:0;outline:none;color:var(--fg);padding:10px;text-align:center;font-weight:600;font-size:15px}
-    .cell input:disabled{pointer-events:none}
+    .cell textarea{width:100%;height:100%;background:transparent;border:0;outline:none;color:var(--fg);padding:10px;text-align:center;font-weight:600;font-size:15px;resize:none;overflow:hidden;font-family:inherit;word-break:break-word;line-height:1.3}
+    .cell textarea:disabled{pointer-events:none}
     .mark{position:absolute;inset:0;opacity:0;transition:.2s ease;display:flex;align-items:center;justify-content:center;pointer-events:none}
     .cell.marked .mark{opacity:1}
     .mark::before{content:'';position:absolute;width:auto;height:70%;aspect-ratio:1;background:transparent;border:6px solid #ff3b3b;border-radius:50%;transform:rotate(-12deg);box-shadow:0 4px 12px rgba(255,59,59,0.4)}
@@ -76,6 +76,10 @@
     .modal-footer button{min-width:80px}
     canvas{display:none}
     footer{margin-top:64px;padding:24px 0;border-top:1px solid var(--border);color:var(--muted);font-size:14px;text-align:center}
+    @media (max-width: 480px){
+      .cell textarea{padding:8px 6px}
+      .grid{gap:6px}
+    }
   </style>
 </head>
 <body>
@@ -104,7 +108,6 @@
 
     <div class="row" style="justify-content:space-between;margin-bottom:16px">
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button id="undoBtn" class="ghost">1つ前に戻す</button>
         <button id="shuffleBtn" class="ghost">シャッフル</button>
       </div>
       <div class="seg" role="tablist" aria-label="Mode">
@@ -118,8 +121,8 @@
     <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;align-items:center">
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button id="resetBtn" class="ghost">リセット</button>
+        <button id="shareLink">共有URL</button>
         <button id="exportPng" class="primary">画像保存</button>
-        <button id="shareLink">共有URLをコピー</button>
       </div>
       <small id="status" style="color:var(--muted)"></small>
     </div>
@@ -261,10 +264,6 @@ let state = {
   mode: 'edit',
 };
 
-// アンドゥ用の前回状態保存
-let prevMarked = null;
-let prevCells = null;
-
 function setMode(m){
   state.mode = m;
   render();
@@ -288,29 +287,6 @@ async function resetBoard(){
   showToast('リセットしました');
 }
 
-function undo(){
-  if(!prevMarked && !prevCells){
-    showToast('戻す操作がありません');
-    return;
-  }
-
-  // セルの内容を復元（シャッフルの取り消し）
-  if(prevCells){
-    state.cells = prevCells;
-    prevCells = null;
-  }
-
-  // マークを復元
-  if(prevMarked){
-    state.marked = prevMarked;
-    prevMarked = null;
-  }
-
-  render();
-  saveLocal();
-  showToast('1つ前に戻しました');
-}
-
 function shuffleCells(){
   // 空でないセルのみを取得
   const filledCells = [];
@@ -326,10 +302,6 @@ function shuffleCells(){
     showToast('シャッフルする内容がありません');
     return;
   }
-
-  // アンドゥ用にシャッフル前の状態を保存（ディープコピー）
-  prevCells = state.cells.map(row => [...row]);
-  prevMarked = state.marked.map(row => [...row]);
 
   // Fisher-Yatesアルゴリズムでシャッフル
   for(let i = filledCells.length - 1; i > 0; i--){
@@ -350,7 +322,6 @@ function shuffleCells(){
 
   // マークをクリア
   state.marked = Array.from({length:BOARD_SIZE},()=>Array(BOARD_SIZE).fill(false));
-  prevMarked = null;
 
   render();
   saveLocal();
@@ -399,11 +370,17 @@ function render(){
 
       cell.dataset.r=r; cell.dataset.c=c;
 
-      const input = document.createElement('input');
+      const input = document.createElement('textarea');
       input.value = state.cells[r][c] || '';
-      input.inputMode = 'text';
       input.maxLength = 40;
       input.dataset.index = r * n + c;  // インデックスを保存
+      input.rows = 1;
+
+      // textareaの高さを自動調整
+      function adjustHeight(textarea){
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+      }
 
       // IME変換中かどうかのフラグ
       let isComposing = false;
@@ -418,6 +395,7 @@ function render(){
 
       input.addEventListener('input', (e)=>{
         state.cells[r][c] = e.target.value;
+        adjustHeight(e.target);  // 高さ調整
         saveLocal();
         updateProgress();
         // 入力済みクラスの更新
@@ -427,6 +405,9 @@ function render(){
           cell.classList.remove('filled');
         }
       });
+
+      // 初期表示時の高さ調整
+      setTimeout(()=> adjustHeight(input), 0);
 
       // Enterキーで次のマスへ移動（IME変換中は除外）
       input.addEventListener('keydown', (e)=>{
@@ -460,10 +441,6 @@ function render(){
           input.focus();
         } else {
           // ビンゴモード：マークのトグル
-          // アンドゥ用に前回状態を保存（ディープコピー）
-          prevCells = state.cells.map(row => [...row]);
-          prevMarked = state.marked.map(row => [...row]);
-
           state.marked[r][c] = !state.marked[r][c];
           saveLocal();
           render();
@@ -484,7 +461,7 @@ function focusNextCell(currentIndex){
   const totalCells = BOARD_SIZE * BOARD_SIZE;
 
   if(nextIndex < totalCells) {
-    const inputs = boardEl.querySelectorAll('input');
+    const inputs = boardEl.querySelectorAll('textarea');
     if(inputs[nextIndex]) {
       inputs[nextIndex].focus();
     }
@@ -503,7 +480,7 @@ function focusFirstEmptyCell(){
     for(let c=0; c<BOARD_SIZE; c++){
       if(!state.cells[r][c] || state.cells[r][c].trim() === ''){
         const index = r * BOARD_SIZE + c;
-        const inputs = boardEl.querySelectorAll('input');
+        const inputs = boardEl.querySelectorAll('textarea');
         if(inputs[index]) {
           inputs[index].focus();
           return;
@@ -513,7 +490,7 @@ function focusFirstEmptyCell(){
   }
 
   // すべて入力済みの場合は最初のマスにフォーカス
-  const inputs = boardEl.querySelectorAll('input');
+  const inputs = boardEl.querySelectorAll('textarea');
   if(inputs[0]) inputs[0].focus();
 }
 
@@ -575,7 +552,7 @@ async function exportPNG(){
   // タイトル描画（フォント適用）
   const title = state.title || defaultTitle;
   ctx.fillStyle = '#111';
-  ctx.font = `bold 80px ${fallbackFont}`;
+  ctx.font = `bold 120px ${fallbackFont}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(title, px/2, topMargin/2);
@@ -597,7 +574,7 @@ async function exportPNG(){
       // まず文字を描画
       const label = (state.cells[r][c]||'').trim();
       if(label) {
-        drawWrappedText(ctx, label, x, y, cell, cell, 64, fallbackFont);
+        drawWrappedText(ctx, label, x, y, cell, cell, 100, fallbackFont);
       }
 
       // マークがある場合、丸スタンプを上から描画
@@ -665,8 +642,8 @@ function drawWrappedText(ctx, text, x, y, w, h, baseSize, fontFamily){
     else cur = next;
   }
   if(cur) lines.push(cur);
-  while(lines.length*fontSize*1.2 > h*0.9){ fontSize -= 2; if(fontSize<18) break; }
-  while(measure(lines) > w*0.9){ fontSize -= 2; if(fontSize<18) break; }
+  while(lines.length*fontSize*1.2 > h*0.9){ fontSize -= 2; if(fontSize<48) break; }
+  while(measure(lines) > w*0.9){ fontSize -= 2; if(fontSize<48) break; }
   const totalH = lines.length*fontSize*1.2; let sy = y + (h-totalH)/2 + fontSize*0.8;
   for(const line of lines){ ctx.font = `${fontSize}px ${fontFamily}`; ctx.fillText(line, x + w/2, sy); sy += fontSize*1.2; }
 }
@@ -711,7 +688,6 @@ function tryLoadFromURL(){
 // ===== Events =====
 $('#edit').addEventListener('change', ()=> setMode('edit'));
 $('#play').addEventListener('change', ()=> setMode('play'));
-$('#undoBtn').addEventListener('click', undo);
 $('#shuffleBtn').addEventListener('click', shuffleCells);
 $('#resetBtn').addEventListener('click', resetBoard);
 $('#exportPng').addEventListener('click', exportPNG);
