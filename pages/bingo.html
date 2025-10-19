@@ -83,7 +83,6 @@
   <header>
     <a href="../index.html" class="back-link">← トップページに戻る</a>
     <h1>🎯 セトリビンゴ</h1>
-    <p class="lead">3×3のビンゴカードを作成・共有できるツールです。編集モードでマスを入力し、ビンゴモードでビンゴを楽しめます。</p>
   </header>
 
   <section class="card">
@@ -96,14 +95,18 @@
       <label for="fontSelect" style="display:block;font-weight:600;margin-bottom:8px;font-size:15px">フォント（画像保存時）</label>
       <select id="fontSelect" style="width:100%;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:15px;font-family:inherit;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 12 12%27%3E%3Cpath fill=%27%23a1a7b3%27 d=%27M6 9L1 4h10z%27/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:40px">
         <option value="system">システム標準</option>
-        <option value="pop">ポップ体〔油性マジック〕</option>
+        <option value="pop" selected>ポップ体〔油性マジック〕</option>
         <option value="maru">丸ゴシック〔こすぎまる〕</option>
         <option value="zen">ペン書き風〔ZEN紅道〕</option>
         <option value="hachi">丸文字風〔はちまるポップ〕</option>
       </select>
     </div>
 
-    <div class="row" style="justify-content:flex-end;margin-bottom:16px">
+    <div class="row" style="justify-content:space-between;margin-bottom:16px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button id="undoBtn" class="ghost">1つ前に戻す</button>
+        <button id="shuffleBtn" class="ghost">シャッフル</button>
+      </div>
       <div class="seg" role="tablist" aria-label="Mode">
         <input type="radio" name="mode" id="edit" checked><label for="edit">編集</label>
         <input type="radio" name="mode" id="play"><label for="play">ビンゴ</label>
@@ -116,7 +119,7 @@
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button id="resetBtn" class="ghost">リセット</button>
         <button id="exportPng" class="primary">画像保存</button>
-        <button id="shareLink">リンク共有</button>
+        <button id="shareLink">共有URLをコピー</button>
       </div>
       <small id="status" style="color:var(--muted)"></small>
     </div>
@@ -258,6 +261,10 @@ let state = {
   mode: 'edit',
 };
 
+// アンドゥ用の前回状態保存
+let prevMarked = null;
+let prevCells = null;
+
 function setMode(m){
   state.mode = m;
   render();
@@ -279,6 +286,75 @@ async function resetBoard(){
   render();
   saveLocal();
   showToast('リセットしました');
+}
+
+function undo(){
+  if(!prevMarked && !prevCells){
+    showToast('戻す操作がありません');
+    return;
+  }
+
+  // セルの内容を復元（シャッフルの取り消し）
+  if(prevCells){
+    state.cells = prevCells;
+    prevCells = null;
+  }
+
+  // マークを復元
+  if(prevMarked){
+    state.marked = prevMarked;
+    prevMarked = null;
+  }
+
+  render();
+  saveLocal();
+  showToast('1つ前に戻しました');
+}
+
+function shuffleCells(){
+  // 空でないセルのみを取得
+  const filledCells = [];
+  for(let r=0; r<BOARD_SIZE; r++){
+    for(let c=0; c<BOARD_SIZE; c++){
+      if(state.cells[r][c] && state.cells[r][c].trim()){
+        filledCells.push(state.cells[r][c]);
+      }
+    }
+  }
+
+  if(filledCells.length === 0){
+    showToast('シャッフルする内容がありません');
+    return;
+  }
+
+  // アンドゥ用にシャッフル前の状態を保存（ディープコピー）
+  prevCells = state.cells.map(row => [...row]);
+  prevMarked = state.marked.map(row => [...row]);
+
+  // Fisher-Yatesアルゴリズムでシャッフル
+  for(let i = filledCells.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [filledCells[i], filledCells[j]] = [filledCells[j], filledCells[i]];
+  }
+
+  // シャッフルした結果を配置
+  let index = 0;
+  for(let r=0; r<BOARD_SIZE; r++){
+    for(let c=0; c<BOARD_SIZE; c++){
+      if(state.cells[r][c] && state.cells[r][c].trim()){
+        state.cells[r][c] = filledCells[index];
+        index++;
+      }
+    }
+  }
+
+  // マークをクリア
+  state.marked = Array.from({length:BOARD_SIZE},()=>Array(BOARD_SIZE).fill(false));
+  prevMarked = null;
+
+  render();
+  saveLocal();
+  showToast('シャッフルしました');
 }
 
 function serialize(){
@@ -384,6 +460,10 @@ function render(){
           input.focus();
         } else {
           // ビンゴモード：マークのトグル
+          // アンドゥ用に前回状態を保存（ディープコピー）
+          prevCells = state.cells.map(row => [...row]);
+          prevMarked = state.marked.map(row => [...row]);
+
           state.marked[r][c] = !state.marked[r][c];
           saveLocal();
           render();
@@ -631,6 +711,8 @@ function tryLoadFromURL(){
 // ===== Events =====
 $('#edit').addEventListener('change', ()=> setMode('edit'));
 $('#play').addEventListener('change', ()=> setMode('play'));
+$('#undoBtn').addEventListener('click', undo);
+$('#shuffleBtn').addEventListener('click', shuffleCells);
 $('#resetBtn').addEventListener('click', resetBoard);
 $('#exportPng').addEventListener('click', exportPNG);
 $('#shareLink').addEventListener('click', shareLink);
