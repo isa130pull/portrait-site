@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>🎯セトリビンゴ</title>
-  <meta name="description" content="3×3のビンゴカードを作成・共有できるツール。編集モード・チェックモード搭載。画像保存、リンク共有に対応。" />
+  <meta name="description" content="3×3のビンゴカードを作成・共有できるツール。編集モード・ビンゴモード搭載。画像保存、リンク共有に対応。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/bingo.html" />
 
   <!-- Google Fonts -->
@@ -49,9 +49,11 @@
     .cell.filled{background:color-mix(in oklab, var(--accent), transparent 95%);border-color:color-mix(in oklab, var(--accent), transparent 70%)}
     .cell.focused{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in oklab, var(--accent), transparent 85%)}
     .cell input{width:100%;height:100%;background:transparent;border:0;outline:none;color:var(--fg);padding:10px;text-align:center;font-weight:600;font-size:15px}
-    .mark{position:absolute;inset:0;background:rgba(46, 204, 112, 0.15);border:2px dashed #2ecc70;border-radius:10px;opacity:0;transition:.12s ease}
+    .cell input:disabled{pointer-events:none}
+    .mark{position:absolute;inset:0;opacity:0;transition:.2s ease;display:flex;align-items:center;justify-content:center;pointer-events:none}
     .cell.marked .mark{opacity:1}
-    .cell .tick{position:absolute;right:8px;top:8px;font-size:14px;color:#2ecc70;opacity:.9}
+    .mark::before{content:'';position:absolute;width:auto;height:70%;aspect-ratio:1;background:transparent;border:6px solid #ff3b3b;border-radius:50%;transform:rotate(-12deg);box-shadow:0 4px 12px rgba(255,59,59,0.4)}
+    .cell .tick{display:none}
     .footer{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:16px;color:var(--muted);font-size:13px}
     .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--card);color:var(--fg);border:1px solid var(--border);padding:12px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;box-shadow:0 4px 12px rgba(0,0,0,.3)}
     .toast.show{opacity:1}
@@ -74,7 +76,7 @@
   <header>
     <a href="../index.html" class="back-link">← トップページに戻る</a>
     <h1>🎯 セトリビンゴ</h1>
-    <p class="lead">3×3のビンゴカードを作成・共有できるツールです。編集モードでマスを入力し、チェックモードでビンゴを楽しめます。</p>
+    <p class="lead">3×3のビンゴカードを作成・共有できるツールです。編集モードでマスを入力し、ビンゴモードでビンゴを楽しめます。</p>
   </header>
 
   <section class="card">
@@ -97,7 +99,7 @@
     <div class="row" style="justify-content:flex-end;margin-bottom:16px">
       <div class="seg" role="tablist" aria-label="Mode">
         <input type="radio" name="mode" id="edit" checked><label for="edit">編集</label>
-        <input type="radio" name="mode" id="play"><label for="play">チェック</label>
+        <input type="radio" name="mode" id="play"><label for="play">ビンゴ</label>
       </div>
     </div>
 
@@ -374,7 +376,7 @@ function render(){
           // 編集モード：inputにフォーカス
           input.focus();
         } else {
-          // チェックモード：マークのトグル
+          // ビンゴモード：マークのトグル
           state.marked[r][c] = !state.marked[r][c];
           saveLocal();
           render();
@@ -444,7 +446,7 @@ function updateProgress(){
   const progressText = `${filledCount}/${totalCells} 入力済み`;
   statusEl.textContent = state.mode === 'edit'
     ? `${progressText} | モード: 編集`
-    : `モード: チェック`;
+    : `モード: ビンゴ`;
 }
 
 // ===== Local persistence =====
@@ -504,10 +506,38 @@ async function exportPNG(){
   for(let r=0;r<n;r++){
     for(let c=0;c<n;c++){
       const x = sideMargin + c*cell, y = gridTop + r*cell;
-      if(state.marked[r][c]){ ctx.fillStyle = 'rgba(46, 204, 112, 0.2)'; ctx.fillRect(x,y,cell,cell); ctx.fillStyle = '#111'; }
+
+      // まず文字を描画
       const label = (state.cells[r][c]||'').trim();
-      if(!label) continue;
-      drawWrappedText(ctx, label, x, y, cell, cell, 64, fallbackFont);
+      if(label) {
+        drawWrappedText(ctx, label, x, y, cell, cell, 64, fallbackFont);
+      }
+
+      // マークがある場合、丸スタンプを上から描画
+      if(state.marked[r][c]){
+        const centerX = x + cell/2;
+        const centerY = y + cell/2;
+        const radius = cell * 0.35;
+
+        // 赤い円（枠線のみ）を描画（回転させる）
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(-12 * Math.PI / 180);
+        ctx.strokeStyle = '#ff3b3b';
+        ctx.lineWidth = 20;
+        ctx.shadowColor = 'rgba(255, 59, 59, 0.4)';
+        ctx.shadowBlur = 12;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 4;
+        ctx.beginPath();
+        ctx.arc(0, 0, radius, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+
+        // シャドウをリセット
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+      }
     }
   }
 
