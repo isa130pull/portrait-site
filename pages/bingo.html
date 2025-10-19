@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>セトリビンゴ | かわぐち（isa130pull）</title>
+  <title>🎯セトリビンゴ</title>
   <meta name="description" content="3×3のビンゴカードを作成・共有できるツール。編集モード・チェックモード搭載。画像保存、リンク共有に対応。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/bingo.html" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Kosugi+Maru&family=Yusei+Magic&family=RocknRoll+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Yusei+Magic&family=Zen+Kurenaido&family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg: #0b0c0f;
@@ -55,6 +55,16 @@
     .footer{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:16px;color:var(--muted);font-size:13px}
     .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--card);color:var(--fg);border:1px solid var(--border);padding:12px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;box-shadow:0 4px 12px rgba(0,0,0,.3)}
     .toast.show{opacity:1}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(4px)}
+    .modal-overlay.show{display:flex}
+    .modal-dialog{background:var(--card);border:1px solid var(--border);border-radius:16px;max-width:400px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:modalFadeIn .2s ease}
+    @keyframes modalFadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+    .modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--border)}
+    .modal-header h3{margin:0;font-size:18px;font-weight:600;color:var(--fg)}
+    .modal-body{padding:20px 24px}
+    .modal-body p{margin:0;color:var(--fg);line-height:1.6}
+    .modal-footer{padding:16px 24px;display:flex;gap:12px;justify-content:flex-end;border-top:1px solid var(--border)}
+    .modal-footer button{min-width:80px}
     canvas{display:none}
     footer{margin-top:64px;padding:24px 0;border-top:1px solid var(--border);color:var(--muted);font-size:14px;text-align:center}
   </style>
@@ -70,17 +80,17 @@
   <section class="card">
     <div class="form-group" style="margin-bottom:20px">
       <label for="title" style="display:block;font-weight:600;margin-bottom:8px;font-size:15px">ビンゴタイトル</label>
-      <input type="text" id="title" placeholder="例：自己紹介ビンゴ" style="width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:15px;font-family:inherit">
+      <input type="text" id="title" placeholder="例：セトリビンゴ" style="width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:15px;font-family:inherit">
     </div>
 
     <div class="form-group" style="margin-bottom:20px">
       <label for="fontSelect" style="display:block;font-weight:600;margin-bottom:8px;font-size:15px">フォント（画像保存時）</label>
       <select id="fontSelect" style="width:100%;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:15px;font-family:inherit;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 12 12%27%3E%3Cpath fill=%27%23a1a7b3%27 d=%27M6 9L1 4h10z%27/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:40px">
         <option value="system">システム標準</option>
-        <option value="klee">手書き風（Klee One）</option>
-        <option value="maru">丸ゴシック（Kosugi Maru）</option>
-        <option value="pop">ポップ体（Yusei Magic）</option>
-        <option value="rock">カジュアル（RocknRoll One）</option>
+        <option value="pop">ポップ体〔油性マジック〕</option>
+        <option value="maru">丸ゴシック〔こすぎまる〕</option>
+        <option value="zen">ペン書き風〔ZEN紅道〕</option>
+        <option value="hachi">丸文字風〔はちまるポップ〕</option>
       </select>
     </div>
 
@@ -105,6 +115,23 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- カスタム確認ダイアログ -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3 id="modalTitle">確認</h3>
+    </div>
+    <div class="modal-body">
+      <p id="modalMessage"></p>
+    </div>
+    <div class="modal-footer">
+      <button id="modalCancel" class="ghost">キャンセル</button>
+      <button id="modalConfirm" class="primary">OK</button>
+    </div>
+  </div>
+</div>
+
 <canvas id="off"></canvas>
 
 <footer>
@@ -123,6 +150,49 @@ const off = $('#off');
 function showToast(msg){
   toast.textContent = msg; toast.classList.add('show');
   setTimeout(()=>toast.classList.remove('show'), 1600);
+}
+
+// カスタム確認ダイアログ
+function showConfirm(title, message){
+  return new Promise((resolve)=>{
+    const modal = $('#confirmModal');
+    const modalTitle = $('#modalTitle');
+    const modalMessage = $('#modalMessage');
+    const confirmBtn = $('#modalConfirm');
+    const cancelBtn = $('#modalCancel');
+
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    modal.classList.add('show');
+
+    function cleanup(){
+      modal.classList.remove('show');
+      confirmBtn.removeEventListener('click', onConfirm);
+      cancelBtn.removeEventListener('click', onCancel);
+      modal.removeEventListener('click', onOverlayClick);
+    }
+
+    function onConfirm(){
+      cleanup();
+      resolve(true);
+    }
+
+    function onCancel(){
+      cleanup();
+      resolve(false);
+    }
+
+    function onOverlayClick(e){
+      if(e.target === modal){
+        cleanup();
+        resolve(false);
+      }
+    }
+
+    confirmBtn.addEventListener('click', onConfirm);
+    cancelBtn.addEventListener('click', onCancel);
+    modal.addEventListener('click', onOverlayClick);
+  });
 }
 
 // UTF-8 safe base64 for shorter share links
@@ -147,11 +217,26 @@ const BOARD_SIZE = 3;
 
 // フォント定義
 const fontMap = {
-  system: 'system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif',
-  klee: '"Klee One", "Hiragino Maru Gothic ProN", "Yu Gothic UI", cursive',
-  maru: '"Kosugi Maru", "Hiragino Maru Gothic ProN", "Yu Gothic UI", sans-serif',
-  pop: '"Yusei Magic", "Hiragino Sans", "Yu Gothic", sans-serif',
-  rock: '"RocknRoll One", "Kosugi Maru", sans-serif'
+  system: {
+    primary: 'system-ui',
+    fallback: 'system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif'
+  },
+  maru: {
+    primary: 'Kosugi Maru',
+    fallback: '"Kosugi Maru", "Hiragino Maru Gothic ProN", "Yu Gothic UI", sans-serif'
+  },
+  pop: {
+    primary: 'Yusei Magic',
+    fallback: '"Yusei Magic", "Hiragino Sans", "Yu Gothic", sans-serif'
+  },
+  zen: {
+    primary: 'Zen Kurenaido',
+    fallback: '"Zen Kurenaido", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif'
+  },
+  hachi: {
+    primary: 'Hachi Maru Pop',
+    fallback: '"Hachi Maru Pop", "Hiragino Maru Gothic ProN", "Yu Gothic UI", cursive'
+  }
 };
 
 let state = {
@@ -159,7 +244,7 @@ let state = {
   cells: Array.from({length:BOARD_SIZE},()=>Array(BOARD_SIZE).fill('')),
   marked: Array.from({length:BOARD_SIZE},()=>Array(BOARD_SIZE).fill(false)),
   title: defaultTitle,
-  font: 'system',
+  font: 'pop',
   version: 1,
   mode: 'edit',
 };
@@ -175,8 +260,9 @@ function setMode(m){
   }
 }
 
-function resetBoard(){
-  if(!confirm('ビンゴカードをリセットしますか？\n（入力内容が削除されます）')) return;
+async function resetBoard(){
+  const confirmed = await showConfirm('ビンゴカードのリセット', '入力内容がすべて削除されます。よろしいですか？');
+  if(!confirmed) return;
   state.cells = Array.from({length:BOARD_SIZE},()=>Array(BOARD_SIZE).fill(''));
   state.marked = Array.from({length:BOARD_SIZE},()=>Array(BOARD_SIZE).fill(false));
   state.title = defaultTitle;
@@ -203,7 +289,7 @@ function loadFrom(obj){
   state.cells = obj.cells;
   state.marked = obj.marked;
   state.title = obj.title || defaultTitle;
-  state.font = obj.font || 'system';
+  state.font = obj.font || 'pop';
   state.version = obj.version || 1;
   titleInput.value = state.title;
   $('#fontSelect').value = state.font;
@@ -367,11 +453,24 @@ function saveLocal(){ try{ localStorage.setItem(LS_KEY, serialize()); }catch(e){
 function loadLocal(){ try{ const j = localStorage.getItem(LS_KEY); if(j){ loadFrom(JSON.parse(j)); } }catch(e){} }
 
 // ===== PNG export (Canvas 2D) =====
+// モバイルデバイス判定
+function isMobileDevice() {
+  const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const isSmallScreen = window.innerWidth <= 900; // タブレットも考慮
+  return hasTouchScreen && isSmallScreen;
+}
+
 async function exportPNG(){
   // フォント読み込み待機
-  const fontFamily = fontMap[state.font] || fontMap.system;
+  const fontConfig = fontMap[state.font] || fontMap.pop;
+  const primaryFont = fontConfig.primary;
+  const fallbackFont = fontConfig.fallback;
+
   try {
-    await document.fonts.load(`80px ${fontFamily}`);
+    // 主要フォントのみをロード
+    await document.fonts.load(`80px "${primaryFont}"`);
+    // 追加の待機時間を設けてフォントが確実に適用されるようにする
+    await new Promise(resolve => setTimeout(resolve, 100));
   } catch(e) {
     console.warn('Font load failed, using fallback', e);
   }
@@ -387,7 +486,7 @@ async function exportPNG(){
   // タイトル描画（フォント適用）
   const title = state.title || defaultTitle;
   ctx.fillStyle = '#111';
-  ctx.font = `bold 80px ${fontFamily}`;
+  ctx.font = `bold 80px ${fallbackFont}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(title, px/2, topMargin/2);
@@ -408,18 +507,24 @@ async function exportPNG(){
       if(state.marked[r][c]){ ctx.fillStyle = 'rgba(46, 204, 112, 0.2)'; ctx.fillRect(x,y,cell,cell); ctx.fillStyle = '#111'; }
       const label = (state.cells[r][c]||'').trim();
       if(!label) continue;
-      drawWrappedText(ctx, label, x, y, cell, cell, 64, fontFamily);
+      drawWrappedText(ctx, label, x, y, cell, cell, 64, fallbackFont);
     }
   }
 
   off.toBlob(async (blob)=>{
     const fileName = `${state.title || 'bingo'}_${n}x${n}.png`.replace(/[\/\\?%*:|"<>]/g, '-');
     const file = new File([blob], fileName, {type:'image/png'});
-    if(navigator.canShare && navigator.canShare({files:[file]})){
-      try{ await navigator.share({files:[file], title:state.title}); }catch(e){
+
+    // モバイルデバイスの場合のみ共有ダイアログを表示
+    if(isMobileDevice() && navigator.canShare && navigator.canShare({files:[file]})){
+      try{
+        await navigator.share({files:[file], title:state.title});
+      }catch(e){
+        // 共有がキャンセルまたは失敗した場合はダウンロード
         downloadBlob(blob, fileName);
       }
     }else{
+      // PCの場合は直接ダウンロード
       downloadBlob(blob, fileName);
     }
   }, 'image/png', 1.0);
