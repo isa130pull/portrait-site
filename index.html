@@ -531,6 +531,32 @@
     ]
   }
   </script>
+
+  <!-- Firebase Analytics -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCNXbUt440aa0cMaNS8nN-vHHbsgRMn9-A",
+      authDomain: "portal-site-38285.firebaseapp.com",
+      projectId: "portal-site-38285",
+      storageBucket: "portal-site-38285.firebasestorage.app",
+      messagingSenderId: "398085669341",
+      appId: "1:398085669341:web:dc3db9c8d32174b3e87634",
+      measurementId: "G-CF20TVK6DP"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // ページビューを明示的に記録
+    logEvent(analytics, 'page_view', {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: window.location.pathname
+    });
+  </script>
 </head>
 <body>
   <header>
