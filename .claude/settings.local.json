@@ -10,7 +10,8 @@
       "Bash(open:*)",
       "Bash(curl -X POST \"https://script.google.com/macros/s/AKfycbxDEGXU2sPv1bqoBzahhaYclDfDer1VlA2zABVL94VbTWdgRjPMw2RnxWBOPcLz0iBOAA/exec\" )",
       "Bash(curl -L -X POST \"https://script.google.com/macros/s/AKfycbxDEGXU2sPv1bqoBzahhaYclDfDer1VlA2zABVL94VbTWdgRjPMw2RnxWBOPcLz0iBOAA/exec\" )",
-      "WebFetch(domain:photoshopvip.net)"
+      "WebFetch(domain:photoshopvip.net)",
+      "WebFetch(domain:play.google.com)"
     ],
     "deny": [],
     "ask": []

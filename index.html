@@ -501,6 +501,113 @@
         transition-duration: 0.01ms !important;
       }
     }
+
+    /* Subsection Styles */
+    .subsection-title {
+      font-size: var(--text-2xl);
+      line-height: var(--leading-snug);
+      margin-top: var(--space-8);
+      margin-bottom: var(--space-4);
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .subsection-title:first-of-type {
+      margin-top: var(--space-6);
+    }
+
+    .subsection-desc {
+      color: var(--fg-muted);
+      font-size: var(--text-base);
+      line-height: var(--leading-relaxed);
+      margin-top: calc(var(--space-2) * -1);
+      margin-bottom: var(--space-5);
+    }
+
+    /* Browser App Card Styles */
+    .browser-app {
+      border: 2px solid var(--accent);
+      background: var(--card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .browser-app::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+      opacity: 0.8;
+    }
+
+    .browser-app:hover {
+      border-color: var(--accent-hover);
+      box-shadow: 0 12px 24px var(--shadow),
+                  0 0 0 3px color-mix(in oklab, var(--accent), transparent 80%);
+      transform: translateY(-4px);
+    }
+
+    .browser-app .muted {
+      min-height: 3em;
+    }
+
+    /* Play Button Styles */
+    .play-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-6);
+      margin-top: var(--space-3);
+      background: var(--accent);
+      color: #000;
+      border-radius: 999px;
+      font-size: var(--text-base);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px color-mix(in oklab, var(--accent), transparent 60%);
+      min-height: 48px;
+      min-width: 48px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .play-btn:hover {
+      background: var(--accent-hover);
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 4px 12px color-mix(in oklab, var(--accent), transparent 40%);
+      text-decoration: none;
+    }
+
+    .play-btn:active {
+      transform: scale(0.98);
+    }
+
+    .play-icon {
+      font-size: 0.9em;
+      line-height: 1;
+    }
+
+    .play-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 767px){
+      .subsection-title {
+        margin-top: var(--space-6);
+        font-size: var(--text-xl);
+      }
+
+      .play-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
   </style>
 
   <!-- JSON-LD (Person) -->
@@ -603,7 +710,7 @@
         <div class="list-item">
           <div>
             <strong>2024年</strong><br>
-            <span class="muted">AiHUB株式会社と業務委託契約。対話型バーチャルヒューマン「Velle」の企画・開発を担当</span>
+            <span class="muted">AiHUB株式会社と業務委託契約。対話型バーチャルヒューマン「Velle/SDSali」の企画・開発を担当</span>
           </div>
         </div>
         <div class="list-item">
@@ -629,6 +736,88 @@
             <strong>2012年</strong><br>
             <span class="muted">岐阜大学工学部卒業<br>医療系SIerに入社。電子カルテ端末リプレース業務とiPad用電子カルテビューワー開発に従事</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="personal" class="section" aria-labelledby="personal-title">
+      <h2 id="personal-title">自作アプリ</h2>
+
+      <!-- ブラウザアプリ -->
+      <div aria-labelledby="browser-apps-title">
+        <h3 id="browser-apps-title" class="subsection-title">🌐 ブラウザアプリ</h3>
+        <div class="cards">
+          <article class="card browser-app">
+            <h3>🎯 セトリビンゴ</h3>
+            <p class="muted">3×3のビンゴカードを作成・共有できるWebツール。画像保存、リンク共有に対応。</p>
+            <a href="pages/bingo.html" class="play-btn">
+              <span class="play-icon">▶</span>
+              今すぐプレイ
+            </a>
+            <div class="tags">
+              <div class="tag">JavaScript</div>
+              <div class="tag">Web</div>
+            </div>
+          </article>
+          <article class="card browser-app">
+            <h3>🎮 POPONG</h3>
+            <p class="muted">クラシックなPONGゲーム。複数の難易度でCPUと対戦できます。</p>
+            <a href="pages/pong/" class="play-btn">
+              <span class="play-icon">▶</span>
+              今すぐプレイ
+            </a>
+            <div class="tags">
+              <div class="tag">JavaScript</div>
+              <div class="tag">Canvas</div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- スマホアプリ -->
+      <div aria-labelledby="mobile-apps-title">
+        <h3 id="mobile-apps-title" class="subsection-title">📱 スマホアプリ</h3>
+        <div class="cards">
+          <article class="card">
+            <h3>いえばく!</h3>
+            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:12px;">
+              <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/XoXWpOk2fl4" title="いえばく!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <p class="muted">30秒で家を破壊するカジュアル破壊ゲーム。企画・開発を単独で実施。<br>
+            <a href="https://apps.apple.com/jp/app/id1550488323" target="_blank" rel="noopener">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.isao.breakhouse" target="_blank" rel="noopener">Google Play</a></p>
+            <div class="tags">
+              <div class="tag">Unity</div>
+            </div>
+          </article>
+          <article class="card">
+            <h3>すしばく!</h3>
+            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:12px;">
+              <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/NqURL3L-qAw" title="すしばく!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <p class="muted">30秒で回転寿司店を爆破するカジュアル破壊ゲーム第2弾。企画・開発を単独で実施。<br>
+            <a href="https://apps.apple.com/jp/app/id1632633407" target="_blank" rel="noopener">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.isao.sushi" target="_blank" rel="noopener">Google Play</a></p>
+            <div class="tags">
+              <div class="tag">Unity</div>
+            </div>
+          </article>
+          <article class="card">
+            <h3>AI美少女1/100</h3>
+            <p class="muted">10問の質問に答えて好みのAI美少女を見つけるゲーム。企画・開発を単独で実施。<br>
+            <a href="https://apps.apple.com/jp/app/id6451026485" target="_blank" rel="noopener">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.Isao.AIGirl" target="_blank" rel="noopener">Google Play</a></p>
+            <div class="tags">
+              <div class="tag">Unity</div>
+              <div class="tag">AI</div>
+            </div>
+          </article>
+          <article class="card">
+            <h3>QR美少女1/100</h3>
+            <p class="muted">QRコードを読み込んでAI美少女を発見する図鑑コンプリートゲーム。企画・開発を単独で実施。<br>
+            <a href="https://apps.apple.com/jp/app/id6453685967" target="_blank" rel="noopener">App Store</a></p>
+            <div class="tags">
+              <div class="tag">Unity</div>
+              <div class="tag">AI</div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -659,76 +848,15 @@
           </div>
         </article>
         <article class="card">
-          <h3>対話型バーチャルヒューマン「Velle（ヴェール）」</h3>
+          <h3>対話型バーチャルヒューマン「Velle/SDSali」</h3>
+          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:12px;">
+            <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/p4ydRSVih_U" title="対話型バーチャルヒューマン「Velle/SDSali」" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
           <p class="muted">LLMプロンプト組み込み、音声認識・合成システム連携、Unityによるキャラクターアニメーションを実装。<br>
           <a href="https://2b4u.aihub.co.jp/" target="_blank" rel="noopener">詳細</a></p>
           <div class="tags">
             <div class="tag">Unity</div>
             <div class="tag">AI</div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="personal" class="section" aria-labelledby="personal-title">
-      <h2 id="personal-title">自作アプリ</h2>
-      <div class="cards">
-        <article class="card">
-          <h3>いえばく!</h3>
-          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:12px;">
-            <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/XoXWpOk2fl4" title="いえばく!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-          </div>
-          <p class="muted">30秒で家を破壊するカジュアル破壊ゲーム。企画・開発を単独で実施。<br>
-          <a href="https://apps.apple.com/jp/app/id1550488323" target="_blank" rel="noopener">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.isao.breakhouse" target="_blank" rel="noopener">Google Play</a></p>
-          <div class="tags">
-            <div class="tag">Unity</div>
-          </div>
-        </article>
-        <article class="card">
-          <h3>すしばく!</h3>
-          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:12px;">
-            <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/NqURL3L-qAw" title="すしばく!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-          </div>
-          <p class="muted">30秒で回転寿司店を爆破するカジュアル破壊ゲーム第2弾。企画・開発を単独で実施。<br>
-          <a href="https://apps.apple.com/jp/app/id1632633407" target="_blank" rel="noopener">App Store</a></p>
-          <div class="tags">
-            <div class="tag">Unity</div>
-          </div>
-        </article>
-        <article class="card">
-          <h3>AI美少女1/100</h3>
-          <p class="muted">10問の質問に答えて好みのAI美少女を見つけるゲーム。企画・開発を単独で実施。<br>
-          <a href="https://apps.apple.com/jp/app/id6451026485" target="_blank" rel="noopener">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.Isao.AIGirl" target="_blank" rel="noopener">Google Play</a></p>
-          <div class="tags">
-            <div class="tag">Unity</div>
-            <div class="tag">AI</div>
-          </div>
-        </article>
-        <article class="card">
-          <h3>QR美少女1/100</h3>
-          <p class="muted">QRコードを読み込んでAI美少女を発見する図鑑コンプリートゲーム。企画・開発を単独で実施。<br>
-          <a href="https://apps.apple.com/jp/app/id6453685967" target="_blank" rel="noopener">App Store</a></p>
-          <div class="tags">
-            <div class="tag">Unity</div>
-            <div class="tag">AI</div>
-          </div>
-        </article>
-        <article class="card">
-          <h3>🎯 セトリビンゴ</h3>
-          <p class="muted">3×3のビンゴカードを作成・共有できるWebツール。画像保存、リンク共有に対応。<br>
-          <a href="pages/bingo.html">ツールを開く</a></p>
-          <div class="tags">
-            <div class="tag">JavaScript</div>
-            <div class="tag">Web</div>
-          </div>
-        </article>
-        <article class="card">
-          <h3>🎮 POPONG</h3>
-          <p class="muted">ブラウザで遊べるクラシックなPONGゲーム。NORMAL・HARDの2つの難易度で7点先取を目指そう。<br>
-          <a href="pages/pong/">ゲームを開く</a></p>
-          <div class="tags">
-            <div class="tag">JavaScript</div>
-            <div class="tag">Canvas</div>
           </div>
         </article>
       </div>
