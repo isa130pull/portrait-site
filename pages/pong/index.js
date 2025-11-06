@@ -59,7 +59,9 @@ var isLoading = false;
 var isInitLoad = false;
 var hitAudio = new Audio("hit.mp3");
 var startAudio = new Audio("start.mp3");
-var isMute = true;
+var scoreUpAudio = new Audio("score_up.mp3");
+var clearAudio = new Audio("clear.mp3");
+var isMute = false;
 var hasPlayerScoredLast = false; // 一つ前にプレイヤーがポイントを取ったかどうか
 var isGameOver = false;
 var isGameClear = false;
@@ -73,6 +75,7 @@ var flashTimes = 0;
 // ローカルストレージ（クリア情報の永続化）
 // ============================================
 var PONG_LS_KEY = 'pong.progress.v1';
+var PONG_MUTE_LS_KEY = 'pong.mute.v1';
 
 function savePongProgress() {
     try {
@@ -97,6 +100,36 @@ function loadPongProgress() {
         }
     } catch(e) {
         console.warn('Failed to load progress', e);
+    }
+}
+
+function saveMuteState() {
+    try {
+        localStorage.setItem(PONG_MUTE_LS_KEY, isMute.toString());
+    } catch(e) {
+        console.warn('Failed to save mute state', e);
+    }
+}
+
+function loadMuteState() {
+    try {
+        var saved = localStorage.getItem(PONG_MUTE_LS_KEY);
+        if (saved !== null) {
+            isMute = saved === 'true';
+        }
+    } catch(e) {
+        console.warn('Failed to load mute state', e);
+    }
+}
+
+// Firebase Analytics ヘルパー関数
+function logGameEvent(eventName, params) {
+    try {
+        if (window.firebaseLogEvent && window.firebaseAnalytics) {
+            window.firebaseLogEvent(window.firebaseAnalytics, eventName, params);
+        }
+    } catch(e) {
+        console.warn('Failed to log event', e);
     }
 }
 
@@ -156,8 +189,9 @@ function handleResize(){
 }
 
 function init(){
-    // クリア情報を読み込み
+    // クリア情報とミュート状態を読み込み
     loadPongProgress();
+    loadMuteState();
 
     window.scrollTo(0,0);
 
@@ -197,6 +231,14 @@ function init(){
         window.visualViewport.addEventListener('resize', handleResize);
     }
 
+    // ミュートボタンのイベントリスナー登録
+    var muteBtn = document.getElementById("muteBtn");
+    if (muteBtn) {
+        muteBtn.addEventListener("click", toggleMute);
+        // 初期状態のUI更新
+        updateMuteButton();
+    }
+
     // フォントの初期読み込み待機
     setTimeout(function() {
         isInitLoad = true;
@@ -225,10 +267,14 @@ function TouchEventStart(e) {
     if (isLoading) return;
     if(isTitle) {
         isLoading = true;
-        //オーディオの読み込み(現在未使用)
+        // タイトル画面でのタップ時に音声再生
         if (!isMute) {
             hitAudio.load();
             startAudio.load();
+            // 再生中の音声をキャンセルして新しく再生
+            startAudio.pause();
+            startAudio.currentTime = 0;
+            startAudio.play();
         }
         setTimeout(function(){
             isTitle = false;
@@ -242,6 +288,17 @@ function TouchEventStart(e) {
             touchY <= screenH * GAME_CONFIG.NORMAL_SELECT_Y_END) {
             isLoading = true;
             currentDifficulty = GAME_CONFIG.DIFFICULTY_NORMAL;
+            // Firebase Analytics: ゲーム開始イベント
+            logGameEvent('pong_game_start', {
+                difficulty: 'normal'
+            });
+            // 難易度選択時に音声再生
+            if (!isMute) {
+                // 再生中の音声をキャンセルして新しく再生
+                startAudio.pause();
+                startAudio.currentTime = 0;
+                startAudio.play();
+            }
             setTimeout(function(){
                 isLoading = false;
                 isStageSelect = false;
@@ -254,6 +311,17 @@ function TouchEventStart(e) {
                  touchY <= screenH * GAME_CONFIG.HARD_SELECT_Y_END) {
             isLoading = true;
             currentDifficulty = GAME_CONFIG.DIFFICULTY_HARD;
+            // Firebase Analytics: ゲーム開始イベント
+            logGameEvent('pong_game_start', {
+                difficulty: 'hard'
+            });
+            // 難易度選択時に音声再生
+            if (!isMute) {
+                // 再生中の音声をキャンセルして新しく再生
+                startAudio.pause();
+                startAudio.currentTime = 0;
+                startAudio.play();
+            }
             setTimeout(function(){
                 isLoading = false;
                 isStageSelect = false;
@@ -522,8 +590,6 @@ function drawBall() {
     if(ball.x + ball.w >= screenW) {
         ball.x = screenW - ball.w;
         ball.dx = -ball.dx;
-
-        playHitSE();
     }
     // 敵ポイント（ボールが画面下に落ちた）
     else if(ball.y + ball.h >= screenH) {
@@ -532,11 +598,20 @@ function drawBall() {
 
         if(++enemy.point >= GAME_CONFIG.WIN_SCORE) {
             isGameOver = true;
+            playClearSE();
+            // Firebase Analytics: ゲームオーバーイベント
+            logGameEvent('pong_game_over', {
+                difficulty: currentDifficulty === GAME_CONFIG.DIFFICULTY_NORMAL ? 'normal' : 'hard',
+                player_score: player.point,
+                enemy_score: enemy.point
+            });
             setTimeout(function(){
                 isTitle = true;
             }, GAME_CONFIG.GAME_OVER_DELAY);
         }
         else {
+            // 得点時の音声再生
+            playScoreUpSE();
             setTimeout(fireBall, GAME_CONFIG.POINT_DELAY);
         }
 
@@ -544,8 +619,6 @@ function drawBall() {
     else if(ball.x <= 0) {
         ball.x = 0;
         ball.dx = -ball.dx;
-
-        playHitSE();
     }
     // プレイヤーポイント（ボールが画面上に抜けた）
     else if(ball.y <= 0) {
@@ -560,11 +633,19 @@ function drawBall() {
             // クリア情報を保存
             savePongProgress();
 
+            playClearSE();
+            // Firebase Analytics: ゲームクリアイベント
+            logGameEvent('pong_game_clear', {
+                difficulty: currentDifficulty === GAME_CONFIG.DIFFICULTY_NORMAL ? 'normal' : 'hard',
+                player_score: player.point,
+                enemy_score: enemy.point
+            });
             setTimeout(function(){
                 isTitle = true;
             }, GAME_CONFIG.GAME_CLEAR_DELAY);
         }
         else {
+            playScoreUpSE();
             setTimeout(fireBall, GAME_CONFIG.POINT_DELAY);
         }
 
@@ -748,7 +829,55 @@ function fireBall() {
 
 function playHitSE(){
     if (!isMute){
-        hitAudio.play();        
+        // 再生中の音声をキャンセルして新しく再生
+        hitAudio.pause();
+        hitAudio.currentTime = 0;
+        hitAudio.play();
+    }
+}
+
+function playScoreUpSE(){
+    if (!isMute){
+        // 再生中の音声をキャンセルして新しく再生
+        scoreUpAudio.pause();
+        scoreUpAudio.currentTime = 0;
+        scoreUpAudio.play();
+    }
+}
+
+function playClearSE(){
+    if (!isMute){
+        // 再生中の音声をキャンセルして新しく再生
+        clearAudio.pause();
+        clearAudio.currentTime = 0;
+        clearAudio.play();
+    }
+}
+
+// ミュート切り替え
+function toggleMute() {
+    isMute = !isMute;
+    updateMuteButton();
+    saveMuteState();
+    // Firebase Analytics: ミュートトグルイベント
+    logGameEvent('pong_mute_toggle', {
+        muted: isMute
+    });
+}
+
+// ミュートボタンのUI更新
+function updateMuteButton() {
+    var muteBtn = document.getElementById("muteBtn");
+    if (!muteBtn) return;
+
+    if (isMute) {
+        muteBtn.textContent = "🔇";
+        muteBtn.classList.add("muted");
+        muteBtn.setAttribute("aria-label", "音声ミュート解除");
+    } else {
+        muteBtn.textContent = "🔊";
+        muteBtn.classList.remove("muted");
+        muteBtn.setAttribute("aria-label", "音声ミュート");
     }
 }
 

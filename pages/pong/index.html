@@ -54,6 +54,11 @@
       padding:8px 0;
       border-bottom:1px solid var(--border);
     }
+    header .wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
     .back-link{
       display:inline-block;
       margin-bottom:0;
@@ -74,6 +79,28 @@
       justify-content:center;
       background:#000;
       position:relative;
+    }
+    .mute-btn{
+      width:48px;
+      height:48px;
+      border:2px solid var(--border);
+      border-radius:8px;
+      background:var(--card);
+      color:var(--fg);
+      font-size:24px;
+      cursor:pointer;
+      transition:all 0.2s;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+      flex-shrink:0;
+    }
+    .mute-btn:hover{
+      border-color:var(--accent);
+    }
+    .mute-btn.muted{
+      opacity:0.5;
     }
     #canvas{
       display:block;
@@ -108,6 +135,10 @@
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
 
+    // グローバルに公開（index.jsから使用できるように）
+    window.firebaseAnalytics = analytics;
+    window.firebaseLogEvent = logEvent;
+
     logEvent(analytics, 'page_view', {
       page_title: document.title,
       page_location: window.location.href,
@@ -115,12 +146,13 @@
     });
   </script>
 
-  <script src="index.js?v=8" charset="UTF-8"></script>
+  <script src="index.js?v=15" charset="UTF-8"></script>
 </head>
 <body onload="init()">
   <header>
     <div class="wrap">
       <a href="../../index.html" class="back-link">← トップページに戻る</a>
+      <button id="muteBtn" class="mute-btn" aria-label="音声ミュート">🔊</button>
     </div>
   </header>
 
