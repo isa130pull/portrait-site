@@ -638,9 +638,10 @@ async function exportPNG(){
     if(isMobileDevice() && navigator.canShare && navigator.canShare({files:[file]})){
       try{
         await navigator.share({files:[file], title:state.title});
+        showToast('画像を共有しました');
       }catch(e){
-        // 共有がキャンセルまたは失敗した場合はダウンロード
-        downloadBlob(blob, fileName);
+        // キャンセルまたは失敗した場合は何もしない
+        console.log('Share cancelled or failed', e);
       }
     }else{
       // PCの場合は直接ダウンロード

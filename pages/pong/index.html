@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+
+  <title>🎮 POPONG - クラシックPONGゲーム</title>
+  <meta name="description" content="ブラウザで遊べるクラシックなPONGゲーム。NORMAL・HARDの2つの難易度で7点先取を目指そう。" />
+  <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/pong/" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../images/bingo/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="../images/bingo/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/bingo/apple-touch-icon.png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b0c0f;
+      --fg: #e8eaed;
+      --muted: #a1a7b3;
+      --accent: #60d5ff;
+      --card: #14161a;
+      --border: #1f2329;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#ffffff; --fg:#111318; --muted:#5a6472; --card:#f7f8fa; --border:#e5e7eb; --accent:#0ea5e9; }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0}
+    body{
+      background:var(--bg);
+      color:var(--fg);
+      font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif;
+      display:flex;
+      flex-direction:column;
+    }
+    .wrap{
+      max-width:1280px;
+      margin:0 auto;
+      padding:16px 24px;
+      width:100%;
+    }
+    header{
+      padding:16px 0;
+      border-bottom:1px solid var(--border);
+    }
+    .back-link{
+      display:inline-block;
+      margin-bottom:12px;
+      padding:8px 16px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      color:var(--fg);
+      text-decoration:none;
+      transition:border-color 0.2s;
+    }
+    .back-link:hover{
+      border-color:var(--accent);
+    }
+    h1{
+      font-size:clamp(24px, 4vw, 32px);
+      margin:0;
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+    .game-container{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#000;
+      position:relative;
+    }
+    #canvas{
+      display:block;
+      max-width:100%;
+      max-height:100%;
+    }
+    footer{
+      padding:16px 0;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:14px;
+      text-align:center;
+    }
+    @media (max-width: 767px){
+      .wrap{padding:12px 16px}
+      header{padding:12px 0}
+    }
+  </style>
+
+  <!-- Firebase Analytics -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCNXbUt440aa0cMaNS8nN-vHHbsgRMn9-A",
+      authDomain: "portal-site-38285.firebaseapp.com",
+      projectId: "portal-site-38285",
+      storageBucket: "portal-site-38285.firebasestorage.app",
+      messagingSenderId: "398085669341",
+      appId: "1:398085669341:web:dc3db9c8d32174b3e87634",
+      measurementId: "G-CF20TVK6DP"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    logEvent(analytics, 'page_view', {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: window.location.pathname
+    });
+  </script>
+
+  <script src="index.js" charset="UTF-8"></script>
+</head>
+<body onload="init()">
+  <header>
+    <div class="wrap">
+      <a href="../../index.html" class="back-link">← トップページに戻る</a>
+      <h1>🎮 POPONG</h1>
+    </div>
+  </header>
+
+  <div class="game-container">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <footer>
+    <p>© <span id="y"></span> かわぐち (isa130pull)</p>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
