@@ -1,6 +1,58 @@
+// ============================================
+// 定数定義
+// ============================================
+var GAME_CONFIG = {
+    // レイアウト比率
+    PADDLE_WIDTH_RATIO: 0.25,        // バーの幅（画面幅の25%）
+    PADDLE_HEIGHT_RATIO: 0.04,       // バーの高さ（画面高さの4%）
+    PLAYER_Y_POSITION_RATIO: 0.85,   // プレイヤーバーのY位置（画面高さの85%）
+    ENEMY_Y_POSITION_RATIO: 0.10,    // 敵バーのY位置（画面高さの10%）
+    CENTER_LINE_Y_RATIO: 0.475,      // 中央線のY位置（画面高さの47.5%）
+
+    // ボール設定
+    BALL_SIZE_DIVISOR: 120,          // ボールサイズ計算用（screenW/120 + screenH/120）
+
+    // 当たり判定
+    HIT_PADDING_RATIO: 0.05,         // 当たり判定の余裕・幅方向（バー幅の5%）
+    HIT_PADDING_HEIGHT_RATIO: 0.02,  // 当たり判定の余裕・高さ方向（バー高さの2%）
+    HIT_WAIT_TIME: 100,              // 連続ヒット防止の待機時間（ミリ秒）
+
+    // ゲームルール
+    WIN_SCORE: 5,                    // 勝利条件（先取点数）
+    WINNING_SCORE_COLOR_THRESHOLD: 4, // 得点表示が黄色になる閾値（リーチ）
+
+    // UI位置
+    SCORE_X_RATIO: 1/30,             // スコア表示のX位置
+    PLAYER_SCORE_Y_RATIO: 11/20,     // プレイヤースコアのY位置
+    ENEMY_SCORE_Y_RATIO: 9/20,       // 敵スコアのY位置
+    SCORE_FONT_SIZE: 100,            // スコアのフォントサイズ
+
+    // 難易度選択UI
+    NORMAL_SELECT_Y_START: 7/20,     // NORMAL選択エリアの開始Y（画面高さの35%）
+    NORMAL_SELECT_Y_END: 10/20,      // NORMAL選択エリアの終了Y（画面高さの50%）
+    HARD_SELECT_Y_START: 11/20,      // HARD選択エリアの開始Y（画面高さの55%）
+    HARD_SELECT_Y_END: 15/20,        // HARD選択エリアの終了Y（画面高さの75%）
+
+    // タイミング
+    RENDER_INTERVAL: 16.6,           // 描画間隔（ミリ秒、約60fps）
+    FONT_LOAD_WAIT: 100,             // フォント読み込み待機時間（ミリ秒）
+    GAME_START_DELAY: 3000,          // ゲーム開始遅延（ミリ秒）
+    POINT_DELAY: 1500,               // 得点後の遅延（ミリ秒）
+    GAME_OVER_DELAY: 5000,           // ゲームオーバー後の遅延（ミリ秒）
+    GAME_CLEAR_DELAY: 7500,          // ゲームクリア後の遅延（ミリ秒）
+    STAGE_SELECT_DELAY: 1000,        // ステージ選択遷移の遅延（ミリ秒）
+
+    // 難易度
+    DIFFICULTY_NORMAL: 0,
+    DIFFICULTY_HARD: 1
+};
+
+// ============================================
+// グローバル変数
+// ============================================
 var ctx;
-var screenW,screenH;
-var touchX = 0,touchY = 0;
+var screenW, screenH;
+var touchX = 0, touchY = 0;
 var isGame = false;
 var isTitle = true;
 var isLoading = false;
@@ -8,11 +60,11 @@ var isInitLoad = false;
 var hitAudio = new Audio("hit.mp3");
 var startAudio = new Audio("start.mp3");
 var isMute = true;
-var isPlayerPrePoint = false; //一つ前にプレイヤーがポイントを取ったかどうかのフラグ
+var hasPlayerScoredLast = false; // 一つ前にプレイヤーがポイントを取ったかどうか
 var isGameOver = false;
 var isGameClear = false;
 var isStageSelect = false;
-var difficult = 0; // 0..NORMAL,1..HARD
+var currentDifficulty = 0; // 0: NORMAL, 1: HARD
 var isNormalCleared = false;
 var isHardCleared = false;
 var flashTimes = 0;
@@ -89,8 +141,8 @@ function init(){
                                   　window.webkitRequestAnimationFrame ||
     　　　　　　　　　　　　　　　　　　　window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
-//    window.requestAnimationFrame(render);
-    setInterval(render,16.6);
+    // 描画ループを開始（約60fps）
+    setInterval(render, GAME_CONFIG.RENDER_INTERVAL);
     
     //タッチ可能か検出
     var touchStart = ('ontouchstart' in window) ? "touchstart" : "mousedown";
@@ -111,11 +163,11 @@ function init(){
         window.visualViewport.addEventListener('resize', handleResize);
     }
 
-    //フォントの初期読み込みにかかりそうな短い時間
+    // フォントの初期読み込み待機
     setTimeout(function() {
         isInitLoad = true;
         ctx.fillStyle = "white";
-    }, 100);
+    }, GAME_CONFIG.FONT_LOAD_WAIT);
 
 }
 
@@ -150,27 +202,29 @@ function TouchEventStart(e) {
         },1000);
     }
     else if(isStageSelect) {
-        //難易度NORMALでSTART
-        if (touchY >= screenH / 20 * 7 && touchY <= screenH / 20 * 10) {
+        // 難易度NORMAL選択
+        if (touchY >= screenH * GAME_CONFIG.NORMAL_SELECT_Y_START &&
+            touchY <= screenH * GAME_CONFIG.NORMAL_SELECT_Y_END) {
             isLoading = true;
-            difficult = 0;
+            currentDifficulty = GAME_CONFIG.DIFFICULTY_NORMAL;
             setTimeout(function(){
                 isLoading = false;
                 isStageSelect = false;
                 initParam();
-                setTimeout(fireBall,3000);    
-            },1000);
+                setTimeout(fireBall, GAME_CONFIG.GAME_START_DELAY);
+            }, GAME_CONFIG.STAGE_SELECT_DELAY);
         }
-        //難易度NORMALでHARD
-        else if (touchY >= screenH / 20 * 11 && touchY <= screenH / 20 * 15) {
+        // 難易度HARD選択
+        else if (touchY >= screenH * GAME_CONFIG.HARD_SELECT_Y_START &&
+                 touchY <= screenH * GAME_CONFIG.HARD_SELECT_Y_END) {
             isLoading = true;
-            difficult = 1;
+            currentDifficulty = GAME_CONFIG.DIFFICULTY_HARD;
             setTimeout(function(){
                 isLoading = false;
                 isStageSelect = false;
                 initParam();
-                setTimeout(fireBall,3000);    
-            },1000);
+                setTimeout(fireBall, GAME_CONFIG.GAME_START_DELAY);
+            }, GAME_CONFIG.STAGE_SELECT_DELAY);
         }
 
     }
@@ -269,8 +323,11 @@ function drawEnemy() {
     // ボールが発射されるまでは画面中央に布陣させる
     moveEnemyCenter();
     }
-    //HARDで4得点取っている時色が変わる
-    if (difficult == 1 && player.point >= 4)     ctx.fillStyle = "#FF0000";
+    // HARDモードでプレイヤーがリーチの時、敵バーが赤くなる（本気モード）
+    if (currentDifficulty === GAME_CONFIG.DIFFICULTY_HARD &&
+        player.point >= GAME_CONFIG.WINNING_SCORE_COLOR_THRESHOLD) {
+        ctx.fillStyle = "#FF0000";
+    }
     ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
     ctx.fillStyle = "#FFFFFF";
 }
@@ -289,26 +346,33 @@ function moveEnemyCenter() {
 
 // 得点を描画
 function drawPoint() {
-    ctx.font = "100px Orbitron";
+    ctx.font = GAME_CONFIG.SCORE_FONT_SIZE + "px Orbitron";
 
-    if (isPlayerPrePoint && !isGame && flashTimes % 20 < 10){}
+    // プレイヤースコア（得点時は点滅）
+    if (hasPlayerScoredLast && !isGame && flashTimes % 20 < 10){}
     else {
-        if (player.point >= 4) ctx.fillStyle = "#FFFF00";
-        ctx.fillText(player.point,screenW/30,screenH/ 20 * 11);
-        ctx.fillStyle = "#FFFFFF";
-    }
-    if (!isPlayerPrePoint && !isGame && flashTimes % 20 < 10 && enemy.point != 0){}
-    else {
-        if (enemy.point >= 4) ctx.fillStyle = "#FFFF00";
-        ctx.fillText(enemy.point,screenW/30,screenH/ 20 * 9);
+        if (player.point >= GAME_CONFIG.WINNING_SCORE_COLOR_THRESHOLD) {
+            ctx.fillStyle = "#FFFF00"; // リーチ時は黄色
+        }
+        ctx.fillText(player.point, screenW * GAME_CONFIG.SCORE_X_RATIO, screenH * GAME_CONFIG.PLAYER_SCORE_Y_RATIO);
         ctx.fillStyle = "#FFFFFF";
     }
 
-    //最初のみ説明を表示
+    // 敵スコア（敵得点時は点滅）
+    if (!hasPlayerScoredLast && !isGame && flashTimes % 20 < 10 && enemy.point != 0){}
+    else {
+        if (enemy.point >= GAME_CONFIG.WINNING_SCORE_COLOR_THRESHOLD) {
+            ctx.fillStyle = "#FFFF00"; // リーチ時は黄色
+        }
+        ctx.fillText(enemy.point, screenW * GAME_CONFIG.SCORE_X_RATIO, screenH * GAME_CONFIG.ENEMY_SCORE_Y_RATIO);
+        ctx.fillStyle = "#FFFFFF";
+    }
+
+    // 最初のみ勝利条件を表示
     if (!isGame && player.point + enemy.point == 0) {
-        var text = "5 POINTS WIN";
+        var text = GAME_CONFIG.WIN_SCORE + " POINTS WIN";
         var textWidth = ctx.measureText(text);
-        ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 20 * 7);
+        ctx.fillText(text, screenW/2 - textWidth.width / 2, screenH * GAME_CONFIG.NORMAL_SELECT_Y_START);
     }
 }
 
@@ -346,16 +410,16 @@ function drawStageSelect() {
     text = "NORMAL";
     textWidth = ctx.measureText(text);
 
-    if(!isLoading || difficult == 1 || flashTimes % 10 < 5 ) {
+    if(!isLoading || currentDifficulty == 1 || flashTimes % 10 < 5 ) {
         if(isNormalCleared) ctx.fillStyle = "#FFFF00";
-        ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 20 * 9);        
+        ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 20 * 9);
     }
     ctx.fillStyle = "#FFFFFF";
     text = "HARD";
     textWidth = ctx.measureText(text);
 
-    if(!isLoading || difficult == 0 || flashTimes % 10 < 5 ) {
-        if(isHardCleared) ctx.fillStyle = "#FFFF00";        
+    if(!isLoading || currentDifficulty == 0 || flashTimes % 10 < 5 ) {
+        if(isHardCleared) ctx.fillStyle = "#FFFF00";
         ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 20 * 13);
     }
 
@@ -377,19 +441,19 @@ function drawBall() {
 
         playHitSE();
     }
-    //敵ポイント
+    // 敵ポイント（ボールが画面下に落ちた）
     else if(ball.y + ball.h >= screenH) {
         isGame = false;
-        isPlayerPrePoint = false;
+        hasPlayerScoredLast = false;
 
-        if(++enemy.point >= 5) {
+        if(++enemy.point >= GAME_CONFIG.WIN_SCORE) {
             isGameOver = true;
             setTimeout(function(){
                 isTitle = true;
-            },5000);
+            }, GAME_CONFIG.GAME_OVER_DELAY);
         }
         else {
-            setTimeout(fireBall,1500);
+            setTimeout(fireBall, GAME_CONFIG.POINT_DELAY);
         }
 
     }
@@ -399,33 +463,34 @@ function drawBall() {
 
         playHitSE();
     }
-    //プレイヤーポイント
+    // プレイヤーポイント（ボールが画面上に抜けた）
     else if(ball.y <= 0) {
         isGame = false;
-        isPlayerPrePoint = true;
+        hasPlayerScoredLast = true;
 
-        if(++player.point >= 5) {
+        if(++player.point >= GAME_CONFIG.WIN_SCORE) {
             isGameClear = true;
-            if (difficult == 0) isNormalCleared = true;
-            else if(difficult == 1) isHardCleared = true;
+            if (currentDifficulty === GAME_CONFIG.DIFFICULTY_NORMAL) isNormalCleared = true;
+            else if(currentDifficulty === GAME_CONFIG.DIFFICULTY_HARD) isHardCleared = true;
 
             setTimeout(function(){
                 isTitle = true;
-            },7500);
+            }, GAME_CONFIG.GAME_CLEAR_DELAY);
         }
         else {
-            setTimeout(fireBall,1500);
+            setTimeout(fireBall, GAME_CONFIG.POINT_DELAY);
         }
 
     }
 
-    //プレイヤーバーの跳ね返りチェック
-    // 当たり判定（バーの描画より5%大きい範囲で判定）
-    var hitPadding = player.w * 0.05;
-    var playerHitLeft = player.x - hitPadding;
-    var playerHitRight = player.x + player.w + hitPadding;
-    var playerHitTop = player.y - hitPadding;
-    var playerHitBottom = player.y + player.h + hitPadding;
+    // プレイヤーバーの跳ね返りチェック
+    // 当たり判定（バーの描画より指定%大きい範囲で判定）
+    var hitPaddingWidth = player.w * GAME_CONFIG.HIT_PADDING_RATIO;
+    var hitPaddingHeight = player.h * GAME_CONFIG.HIT_PADDING_HEIGHT_RATIO;
+    var playerHitLeft = player.x - hitPaddingWidth;
+    var playerHitRight = player.x + player.w + hitPaddingWidth;
+    var playerHitTop = player.y - hitPaddingHeight;
+    var playerHitBottom = player.y + player.h + hitPaddingHeight;
 
     // ボールの範囲（ball.x, ball.y は中心座標、ball.w は半径）
     var ballLeft = ball.x - ball.w;
@@ -459,15 +524,15 @@ function drawBall() {
         player.isHitWait = true;
         setTimeout(function(){
             player.isHitWait = false;
-        },100);
+        }, GAME_CONFIG.HIT_WAIT_TIME);
     }
 
-    //敵バーの跳ね返りチェック
-    // 当たり判定（バーの描画より5%大きい範囲で判定）
-    var enemyHitLeft = enemy.x - hitPadding;
-    var enemyHitRight = enemy.x + enemy.w + hitPadding;
-    var enemyHitTop = enemy.y - hitPadding;
-    var enemyHitBottom = enemy.y + enemy.h + hitPadding;
+    // 敵バーの跳ね返りチェック
+    // 当たり判定（バーの描画より指定%大きい範囲で判定）
+    var enemyHitLeft = enemy.x - hitPaddingWidth;
+    var enemyHitRight = enemy.x + enemy.w + hitPaddingWidth;
+    var enemyHitTop = enemy.y - hitPaddingHeight;
+    var enemyHitBottom = enemy.y + enemy.h + hitPaddingHeight;
 
     if( enemyHitLeft < ballRight && enemyHitRight > ballLeft &&
         enemyHitTop < ballBottom && enemyHitBottom > ballTop &&
@@ -480,7 +545,7 @@ function drawBall() {
         enemy.isHitWait = true;
         setTimeout(function(){
             enemy.isHitWait = false;
-        },100);
+        }, GAME_CONFIG.HIT_WAIT_TIME);
     }
 
 
@@ -493,37 +558,38 @@ function drawBall() {
 function fireBall() {
     isGame = true;
 
-    if (isPlayerPrePoint) {
-        //敵プレイヤーから発射
+    // ボールの初期位置（前回得点した側から発射）
+    // 当たり判定を拡大した影響で、初期位置を調整
+    var hitPaddingHeight = player.h * GAME_CONFIG.HIT_PADDING_HEIGHT_RATIO;
+
+    if (hasPlayerScoredLast) {
+        // 敵プレイヤーから発射（当たり判定範囲外に配置）
         ball.x = enemy.x + enemy.w / 2;
-        ball.y = enemy.y + enemy.h + ball.h / 2;
+        ball.y = enemy.y + enemy.h + ball.w + hitPaddingHeight * 2;
     }
     else {
-        //味方プレイヤーから発射
+        // 味方プレイヤーから発射（当たり判定範囲外に配置）
         ball.x = player.x + player.w / 2;
-        ball.y = player.y - ball.h / 2;
+        ball.y = player.y - ball.w - hitPaddingHeight * 2;
     }
 
+    // 難易度別パラメータ設定
+    var initSpeedArray, initRangeArray, enemySpeedArray, hdpArray;
 
-    var initSpeedArray,initRangeArray,enemySpeedArray,hdpArray;
-
-    //難易度によってパラメータを変える
-
-    //初速補正(ポイントが増えるごとに初速が増す)
-
-    if(difficult == 0) {
-        //NORMAL（ボール初速20%減、敵AI速度20%減）
-        initSpeedArray = [1.04,1.2,1.28,1.36,1.44,1.6,1.76];
-        initRangeArray = [130,115,100,90,80,70,60];
-        enemySpeedArray = [212.5,187.5,168.75,137.5,125,112.5,93.75]
-        hdpArray = [0,-10,-20,20,30];
+    // 初速補正（ポイントが増えるごとに初速が増す）
+    if(currentDifficulty === GAME_CONFIG.DIFFICULTY_NORMAL) {
+        // NORMAL（ボール初速20%減、敵AI速度20%減）
+        initSpeedArray = [1.04, 1.2, 1.28, 1.36, 1.44, 1.6, 1.76];
+        initRangeArray = [130, 115, 100, 90, 80, 70, 60];
+        enemySpeedArray = [212.5, 187.5, 168.75, 137.5, 125, 112.5, 93.75];
+        hdpArray = [0, -10, -20, 20, 30];
     }
-    else if(difficult == 1) {
-        //HARD（ボール初速20%減、敵AI速度20%減）
-        initSpeedArray = [2.08,2.24,2.4,2.56,2.64,2.72,2.8];
-        initRangeArray = [80,70,60,50,40,30,25];
-        enemySpeedArray = [112.5,100,87.5,81.25,62.5,56.25,50]
-        hdpArray = [0,-10,-20,10,20];
+    else if(currentDifficulty === GAME_CONFIG.DIFFICULTY_HARD) {
+        // HARD（ボール初速20%減、敵AI速度20%減）
+        initSpeedArray = [2.08, 2.24, 2.4, 2.56, 2.64, 2.72, 2.8];
+        initRangeArray = [80, 70, 60, 50, 40, 30, 25];
+        enemySpeedArray = [112.5, 100, 87.5, 81.25, 62.5, 56.25, 50];
+        hdpArray = [0, -10, -20, 10, 20];
     }
 
 
@@ -579,15 +645,15 @@ function fireBall() {
         enemy.speed = screenW / (enemySpeedArray[6] + hdp);
     }
 
-    ball.dx = screenW / (initRange + Math.floor(Math.random() * (initRange*1.5) ));
+    // ボールの初速を計算
+    ball.dx = screenW / (initRange + Math.floor(Math.random() * (initRange * 1.5)));
     ball.dy = screenH / 150.0 * initSpeed;
 
-
-    //ボールの飛ぶ方向をX方向はランダムに
+    // X方向はランダム
     ball.dx = Math.random() * 2 >= 1 ? ball.dx : -ball.dx;
 
-    //Y方向は前回ポイントを取った方(初回は必ず敵)
-    ball.dy = isPlayerPrePoint ? ball.dy : -ball.dy;
+    // Y方向は前回得点した側へ（初回は必ず敵側へ）
+    ball.dy = hasPlayerScoredLast ? ball.dy : -ball.dy;
 
     ball.baseSpeed = Math.sqrt(Math.pow(Math.abs(ball.dx),2) + Math.pow(Math.abs(ball.dy),2));
     ball.speed = 1.0;
@@ -675,30 +741,35 @@ function drawGameClear() {
 
 
 function initParam(){
-    //各パラメータ初期化
+    // 各パラメータ初期化
     touchX = screenW / 2;
-    player.w = screenW / 4;
-    player.h = screenH / 25;
+
+    // プレイヤーバー設定
+    player.w = screenW * GAME_CONFIG.PADDLE_WIDTH_RATIO;
+    player.h = screenH * GAME_CONFIG.PADDLE_HEIGHT_RATIO;
     player.x = touchX - player.w / 2;
-    player.y = screenH / 20 * 17 - player.h / 2;
+    player.y = screenH * GAME_CONFIG.PLAYER_Y_POSITION_RATIO - player.h / 2;
     player.point = 0;
 
+    // 敵バー設定
     enemy.w = player.w;
     enemy.h = player.h;
     enemy.x = player.x;
-    enemy.y = screenH / 20 * 2 - enemy.h / 2;
+    enemy.y = screenH * GAME_CONFIG.ENEMY_Y_POSITION_RATIO - enemy.h / 2;
     enemy.speed = screenW / 100;
     enemy.point = 0;
 
-    ball.w = (screenW / 120 + screenH / 120);
+    // ボール設定
+    ball.w = (screenW / GAME_CONFIG.BALL_SIZE_DIVISOR + screenH / GAME_CONFIG.BALL_SIZE_DIVISOR);
     ball.h = ball.w;
     ball.rad = 0.5;
 
-    gameEndStrY = - screenH / 10;
+    // ゲーム終了演出用
+    gameEndStrY = -screenH / 10;
 
+    // 状態リセット
     isGameOver = false;
     isGameClear = false;
-
-    isPlayerPrePoint = false;
+    hasPlayerScoredLast = false;
     flashTimes = 0;
 }
