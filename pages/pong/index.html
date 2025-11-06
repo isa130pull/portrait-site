@@ -51,12 +51,12 @@
       width:100%;
     }
     header{
-      padding:16px 0;
+      padding:8px 0;
       border-bottom:1px solid var(--border);
     }
     .back-link{
       display:inline-block;
-      margin-bottom:12px;
+      margin-bottom:0;
       padding:8px 16px;
       border:1px solid var(--border);
       border-radius:8px;
@@ -66,12 +66,6 @@
     }
     .back-link:hover{
       border-color:var(--accent);
-    }
-    h1{
-      font-size:clamp(24px, 4vw, 32px);
-      margin:0;
-      font-weight:700;
-      letter-spacing:.02em;
     }
     .game-container{
       flex:1;
@@ -90,16 +84,9 @@
       -webkit-user-select:none;
       -webkit-touch-callout:none;
     }
-    footer{
-      padding:16px 0;
-      border-top:1px solid var(--border);
-      color:var(--muted);
-      font-size:14px;
-      text-align:center;
-    }
     @media (max-width: 767px){
-      .wrap{padding:12px 16px}
-      header{padding:12px 0}
+      .wrap{padding:8px 12px}
+      header{padding:6px 0}
     }
   </style>
 
@@ -128,26 +115,17 @@
     });
   </script>
 
-  <script src="index.js?v=5" charset="UTF-8"></script>
+  <script src="index.js?v=8" charset="UTF-8"></script>
 </head>
 <body onload="init()">
   <header>
     <div class="wrap">
       <a href="../../index.html" class="back-link">← トップページに戻る</a>
-      <h1>🎮 POPONG</h1>
     </div>
   </header>
 
   <div class="game-container">
     <canvas id="canvas"></canvas>
   </div>
-
-  <footer>
-    <p>© <span id="y"></span> かわぐち (isa130pull)</p>
-  </footer>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>

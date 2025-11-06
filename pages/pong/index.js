@@ -459,7 +459,7 @@ function drawTitle() {
         titleFontSize = 160; // 大画面: 元のサイズ
     }
     ctx.font = titleFontSize + "px Orbitron";
-    text = (isNormalCleared && isHardCleared) ? "DESHI" : "POPONG";
+    text = (isNormalCleared && isHardCleared) ? "POPOPONG" : "POPONG";
     textWidth = ctx.measureText(text);
     ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 3);
 }
