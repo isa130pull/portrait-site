@@ -121,15 +121,18 @@ function init(){
 
 function TouchEventStart(e) {
 
+    var canvas = document.getElementById("canvas");
+    var rect = canvas.getBoundingClientRect();
+
     // タッチイベントかマウスイベントかを判定
     if (e.changedTouches) {
-        // タッチイベントの場合
-        touchX = e.changedTouches[0].pageX;
-        touchY = e.changedTouches[0].pageY;
+        // タッチイベントの場合 - Canvas内の相対座標に変換
+        touchX = e.changedTouches[0].clientX - rect.left;
+        touchY = e.changedTouches[0].clientY - rect.top;
     } else {
-        // マウスイベントの場合
-        touchX = e.pageX;
-        touchY = e.pageY;
+        // マウスイベントの場合 - Canvas内の相対座標に変換
+        touchX = e.clientX - rect.left;
+        touchY = e.clientY - rect.top;
     }
 
     if (isLoading) return;
@@ -177,15 +180,18 @@ function TouchEventStart(e) {
 function TouchEventMove(e) {
     e.preventDefault(); // タッチによる画面スクロールを止める
 
+    var canvas = document.getElementById("canvas");
+    var rect = canvas.getBoundingClientRect();
+
     // タッチイベントかマウスイベントかを判定
     if (e.changedTouches) {
-        // タッチイベントの場合
-        touchX = e.changedTouches[0].pageX;
-        touchY = e.changedTouches[0].pageY;
+        // タッチイベントの場合 - Canvas内の相対座標に変換
+        touchX = e.changedTouches[0].clientX - rect.left;
+        touchY = e.changedTouches[0].clientY - rect.top;
     } else {
-        // マウスイベントの場合
-        touchX = e.pageX;
-        touchY = e.pageY;
+        // マウスイベントの場合 - Canvas内の相対座標に変換
+        touchX = e.clientX - rect.left;
+        touchY = e.clientY - rect.top;
     }
 }
 
@@ -209,8 +215,7 @@ function drawPlayer(){
         player.x += (dx / 10);
     } 
     //プレイヤー描画
-    // 実際の当たり判定より小さく描画するため補正値をかけている
-    ctx.fillRect(player.x * 1.05, player.y * 1.02, player.w * 0.95, player.h * 0.98);
+    ctx.fillRect(player.x, player.y, player.w, player.h);
 }
 
 //画面中央の点線描画
@@ -264,9 +269,9 @@ function drawEnemy() {
     // ボールが発射されるまでは画面中央に布陣させる
     moveEnemyCenter();
     }
-    //HARDで5得点取っている時色が変わる
-    if (difficult == 1 && player.point >= 5)     ctx.fillStyle = "#FF0000";    
-    ctx.fillRect(enemy.x * 1.05, enemy.y * 0.9, enemy.w * 0.95, enemy.h * 0.9);    
+    //HARDで4得点取っている時色が変わる
+    if (difficult == 1 && player.point >= 4)     ctx.fillStyle = "#FF0000";
+    ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
     ctx.fillStyle = "#FFFFFF";
 }
 
@@ -288,22 +293,22 @@ function drawPoint() {
 
     if (isPlayerPrePoint && !isGame && flashTimes % 20 < 10){}
     else {
-        if (player.point >= 6) ctx.fillStyle = "#FFFF00";
+        if (player.point >= 4) ctx.fillStyle = "#FFFF00";
         ctx.fillText(player.point,screenW/30,screenH/ 20 * 11);
-        ctx.fillStyle = "#FFFFFF";    
+        ctx.fillStyle = "#FFFFFF";
     }
     if (!isPlayerPrePoint && !isGame && flashTimes % 20 < 10 && enemy.point != 0){}
     else {
-        if (enemy.point >= 6) ctx.fillStyle = "#FFFF00";    
+        if (enemy.point >= 4) ctx.fillStyle = "#FFFF00";
         ctx.fillText(enemy.point,screenW/30,screenH/ 20 * 9);
         ctx.fillStyle = "#FFFFFF";
     }
 
     //最初のみ説明を表示
     if (!isGame && player.point + enemy.point == 0) {
-        var text = "7 POINTS WIN";
+        var text = "5 POINTS WIN";
         var textWidth = ctx.measureText(text);
-        ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 20 * 7);    
+        ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 20 * 7);
     }
 }
 
@@ -377,14 +382,14 @@ function drawBall() {
         isGame = false;
         isPlayerPrePoint = false;
 
-        if(++enemy.point >= 7) {
+        if(++enemy.point >= 5) {
             isGameOver = true;
             setTimeout(function(){
                 isTitle = true;
             },5000);
         }
         else {
-            setTimeout(fireBall,1500);            
+            setTimeout(fireBall,1500);
         }
 
     }
@@ -396,10 +401,10 @@ function drawBall() {
     }
     //プレイヤーポイント
     else if(ball.y <= 0) {
-        isGame = false;        
+        isGame = false;
         isPlayerPrePoint = true;
 
-        if(++player.point >= 7) {
+        if(++player.point >= 5) {
             isGameClear = true;
             if (difficult == 0) isNormalCleared = true;
             else if(difficult == 1) isHardCleared = true;
@@ -415,18 +420,28 @@ function drawBall() {
     }
 
     //プレイヤーバーの跳ね返りチェック
-    // 当たり判定
-    if( (player.x <= (ball.x + ball.w) && (player.x + player.w) >= ball.x - ball.w)
-    &&
-        (player.y <= (ball.y + ball.h / 2)  && (player.y + player.h) >= ball.y - ball.h)
-    &&
+    // 当たり判定（バーの描画より5%大きい範囲で判定）
+    var hitPadding = player.w * 0.05;
+    var playerHitLeft = player.x - hitPadding;
+    var playerHitRight = player.x + player.w + hitPadding;
+    var playerHitTop = player.y - hitPadding;
+    var playerHitBottom = player.y + player.h + hitPadding;
+
+    // ボールの範囲（ball.x, ball.y は中心座標、ball.w は半径）
+    var ballLeft = ball.x - ball.w;
+    var ballRight = ball.x + ball.w;
+    var ballTop = ball.y - ball.w;
+    var ballBottom = ball.y + ball.w;
+
+    if( playerHitLeft < ballRight && playerHitRight > ballLeft &&
+        playerHitTop < ballBottom && playerHitBottom > ballTop &&
         (!player.isHitWait)
     ){
         playHitSE();
         accelBall();
 
         //当たった場所によって角度を変える (範囲 0 〜 0.5)
-        var hitXRate = (((ball.x + (ball.w / 2)) - player.x) / (player.w + (ball.w / 2)) ) / 2;
+        var hitXRate = ((ball.x - player.x) / player.w) / 2;
 
         //rad 1.25〜1.75の範囲
         var rad = Math.PI * 1.25 + (Math.PI * hitXRate);
@@ -448,26 +463,29 @@ function drawBall() {
     }
 
     //敵バーの跳ね返りチェック
-    // 当たり判定
-    if( (enemy.x <= ball.x + ball.w && (enemy.x + enemy.w) >= ball.x - ball.w)
-    &&
-        (enemy.y + enemy.h >= ball.y - ball.h / 2  &&  enemy.y <= ball.y + ball.h / 2)
-    &&
+    // 当たり判定（バーの描画より5%大きい範囲で判定）
+    var enemyHitLeft = enemy.x - hitPadding;
+    var enemyHitRight = enemy.x + enemy.w + hitPadding;
+    var enemyHitTop = enemy.y - hitPadding;
+    var enemyHitBottom = enemy.y + enemy.h + hitPadding;
+
+    if( enemyHitLeft < ballRight && enemyHitRight > ballLeft &&
+        enemyHitTop < ballBottom && enemyHitBottom > ballTop &&
         (!enemy.isHitWait)
-        ){
-            playHitSE();
-            accelBall();
-            
-            ball.dy = -ball.dy;
-            enemy.isHitWait = true;
-            setTimeout(function(){
-                enemy.isHitWait = false;
-            },100);
+    ){
+        playHitSE();
+        accelBall();
+
+        ball.dy = -ball.dy;
+        enemy.isHitWait = true;
+        setTimeout(function(){
+            enemy.isHitWait = false;
+        },100);
     }
-    
+
 
     ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.w * 2, 0, Math.PI*2, false);
+    ctx.arc(ball.x, ball.y, ball.w, 0, Math.PI*2, false);
     ctx.fill();
 }
 
@@ -494,17 +512,17 @@ function fireBall() {
     //初速補正(ポイントが増えるごとに初速が増す)
 
     if(difficult == 0) {
-        //NORMAL
-        initSpeedArray = [1.3,1.5,1.6,1.7,1.8,2.0,2.2];
+        //NORMAL（ボール初速20%減、敵AI速度20%減）
+        initSpeedArray = [1.04,1.2,1.28,1.36,1.44,1.6,1.76];
         initRangeArray = [130,115,100,90,80,70,60];
-        enemySpeedArray = [170,150,135,110,100,90,75]
+        enemySpeedArray = [212.5,187.5,168.75,137.5,125,112.5,93.75]
         hdpArray = [0,-10,-20,20,30];
     }
     else if(difficult == 1) {
-        //HARD
-        initSpeedArray = [2.6,2.8,3.0,3.2,3.3,3.4,3.5];
+        //HARD（ボール初速20%減、敵AI速度20%減）
+        initSpeedArray = [2.08,2.24,2.4,2.56,2.64,2.72,2.8];
         initRangeArray = [80,70,60,50,40,30,25];
-        enemySpeedArray = [90,80,70,65,50,45,40]
+        enemySpeedArray = [112.5,100,87.5,81.25,62.5,56.25,50]
         hdpArray = [0,-10,-20,10,20];
     }
 
