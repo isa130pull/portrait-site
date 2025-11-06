@@ -3,7 +3,8 @@
 // ============================================
 var GAME_CONFIG = {
     // レイアウト比率
-    PADDLE_WIDTH_RATIO: 0.25,        // バーの幅（画面幅の25%）
+    PADDLE_WIDTH_RATIO: 0.25,        // バーの幅（画面幅の25%、PC）
+    PADDLE_WIDTH_RATIO_MOBILE: 0.35, // バーの幅（画面幅の35%、モバイル）
     PADDLE_HEIGHT_RATIO: 0.04,       // バーの高さ（画面高さの4%）
     PLAYER_Y_POSITION_RATIO: 0.85,   // プレイヤーバーのY位置（画面高さの85%）
     ENEMY_Y_POSITION_RATIO: 0.10,    // 敵バーのY位置（画面高さの10%）
@@ -25,7 +26,6 @@ var GAME_CONFIG = {
     SCORE_X_RATIO: 1/30,             // スコア表示のX位置
     PLAYER_SCORE_Y_RATIO: 11/20,     // プレイヤースコアのY位置
     ENEMY_SCORE_Y_RATIO: 9/20,       // 敵スコアのY位置
-    SCORE_FONT_SIZE: 100,            // スコアのフォントサイズ
 
     // 難易度選択UI
     NORMAL_SELECT_Y_START: 7/20,     // NORMAL選択エリアの開始Y（画面高さの35%）
@@ -69,6 +69,36 @@ var isNormalCleared = false;
 var isHardCleared = false;
 var flashTimes = 0;
 
+// ============================================
+// ローカルストレージ（クリア情報の永続化）
+// ============================================
+var PONG_LS_KEY = 'pong.progress.v1';
+
+function savePongProgress() {
+    try {
+        var data = JSON.stringify({
+            isNormalCleared: isNormalCleared,
+            isHardCleared: isHardCleared,
+            version: 1
+        });
+        localStorage.setItem(PONG_LS_KEY, data);
+    } catch(e) {
+        console.warn('Failed to save progress', e);
+    }
+}
+
+function loadPongProgress() {
+    try {
+        var data = localStorage.getItem(PONG_LS_KEY);
+        if (data) {
+            var obj = JSON.parse(data);
+            isNormalCleared = obj.isNormalCleared || false;
+            isHardCleared = obj.isHardCleared || false;
+        }
+    } catch(e) {
+        console.warn('Failed to load progress', e);
+    }
+}
 
 var player = {
     x: 0,
@@ -104,10 +134,12 @@ var ball = {
 // 画面サイズを更新する関数
 function updateScreenSize(){
     var canvas = document.getElementById("canvas");
+    var gameContainer = document.querySelector(".game-container");
 
-    // viewport高さを優先的に使用（モバイルのアドレスバー対応）
-    screenW = window.innerWidth;
-    screenH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    // game-containerの実際のサイズを取得（headerとfooterを除いた領域）
+    var containerRect = gameContainer.getBoundingClientRect();
+    screenW = containerRect.width;
+    screenH = containerRect.height;
 
     canvas.width = screenW;
     canvas.height = screenH;
@@ -124,6 +156,9 @@ function handleResize(){
 }
 
 function init(){
+    // クリア情報を読み込み
+    loadPongProgress();
+
     window.scrollTo(0,0);
 
     var canvas = document.getElementById("canvas");
@@ -149,12 +184,11 @@ function init(){
     var touchMove = ('ontouchstart' in window) ? "touchmove" : "mousemove";
     var touchEnd = ('ontouchstart' in window) ? "touchend" : "mouseup";
 
-    // // タッチを開始すると実行されるイベント
-    document.addEventListener(touchStart,TouchEventStart);
-    // タッチしたまま平行移動すると実行されるイベント
-    document.addEventListener(touchMove,TouchEventMove);
-    // タッチを終了すると実行されるイベント
-    document.addEventListener(touchEnd,TouchEventEnd);
+    // タッチイベントリスナーをcanvasに登録（passive: falseでスクロール防止を有効化）
+    // canvas要素に限定することで、ヘッダー・フッターのリンクが正常に機能する
+    canvas.addEventListener(touchStart, TouchEventStart, {passive: false});
+    canvas.addEventListener(touchMove, TouchEventMove, {passive: false});
+    canvas.addEventListener(touchEnd, TouchEventEnd, {passive: false});
 
     // リサイズイベント
     window.addEventListener('resize', handleResize);
@@ -172,6 +206,7 @@ function init(){
 }
 
 function TouchEventStart(e) {
+    e.preventDefault(); // タッチによる画面スクロールを止める
 
     var canvas = document.getElementById("canvas");
     var rect = canvas.getBoundingClientRect();
@@ -346,7 +381,15 @@ function moveEnemyCenter() {
 
 // 得点を描画
 function drawPoint() {
-    ctx.font = GAME_CONFIG.SCORE_FONT_SIZE + "px Orbitron";
+    var scoreFontSize;
+    if (screenW <= 480) {
+        scoreFontSize = Math.floor(screenW * 0.13); // 小画面: 49-62px
+    } else if (screenW <= 768) {
+        scoreFontSize = Math.floor(screenW * 0.11); // 中画面: 84px程度
+    } else {
+        scoreFontSize = 100; // 大画面: 元のサイズ
+    }
+    ctx.font = scoreFontSize + "px Orbitron";
 
     // プレイヤースコア（得点時は点滅）
     if (hasPlayerScoredLast && !isGame && flashTimes % 20 < 10){}
@@ -370,6 +413,15 @@ function drawPoint() {
 
     // 最初のみ勝利条件を表示
     if (!isGame && player.point + enemy.point == 0) {
+        var winTextFontSize;
+        if (screenW <= 480) {
+            winTextFontSize = Math.floor(screenW * 0.06); // 小画面: 22-28px
+        } else if (screenW <= 768) {
+            winTextFontSize = Math.floor(screenW * 0.07); // 中画面: 53px程度
+        } else {
+            winTextFontSize = 60; // 大画面: 60px
+        }
+        ctx.font = winTextFontSize + "px Orbitron";
         var text = GAME_CONFIG.WIN_SCORE + " POINTS WIN";
         var textWidth = ctx.measureText(text);
         ctx.fillText(text, screenW/2 - textWidth.width / 2, screenH * GAME_CONFIG.NORMAL_SELECT_Y_START);
@@ -379,18 +431,34 @@ function drawPoint() {
 // タイトルを描画
 function drawTitle() {
     if(!isInitLoad) ctx.fillStyle = "black";
-    
+
     //Tap Startの文字を点滅させる
     var flashTime = isLoading ? 10 : 100;
-    ctx.font = "80px Orbitron";
+    var tapStartFontSize;
+    if (screenW <= 480) {
+        tapStartFontSize = Math.floor(screenW * 0.08); // 小画面: 30-38px
+    } else if (screenW <= 768) {
+        tapStartFontSize = Math.floor(screenW * 0.10); // 中画面: 77px程度
+    } else {
+        tapStartFontSize = 80; // 大画面: 元のサイズ
+    }
+    ctx.font = tapStartFontSize + "px Orbitron";
     var text = "Tap Start";
     var textWidth = ctx.measureText(text);
 
     if(flashTimes % flashTime < flashTime/2 ) {
-        ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 1.5);    
+        ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 1.5);
     }
 
-    ctx.font = "160px Orbitron";
+    var titleFontSize;
+    if (screenW <= 480) {
+        titleFontSize = Math.floor(screenW * 0.16); // 小画面: 60-76px
+    } else if (screenW <= 768) {
+        titleFontSize = Math.floor(screenW * 0.13); // 中画面: 100px程度
+    } else {
+        titleFontSize = 160; // 大画面: 元のサイズ
+    }
+    ctx.font = titleFontSize + "px Orbitron";
     text = (isNormalCleared && isHardCleared) ? "DESHI" : "POPONG";
     textWidth = ctx.measureText(text);
     ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 3);
@@ -400,12 +468,28 @@ function drawTitle() {
 function drawStageSelect() {
     if(!isStageSelect) return;
 
-    ctx.font = "60px Orbitron";
+    var selectFontSize;
+    if (screenW <= 480) {
+        selectFontSize = Math.floor(screenW * 0.07); // 小画面: 26-33px
+    } else if (screenW <= 768) {
+        selectFontSize = Math.floor(screenW * 0.08); // 中画面: 61px程度
+    } else {
+        selectFontSize = 60; // 大画面: 元のサイズ
+    }
+    ctx.font = selectFontSize + "px Orbitron";
     var text = "SELECT DIFFICULTY";
     var textWidth = ctx.measureText(text);
     ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 10 * 2);
 
-    ctx.font = "120px Orbitron";
+    var difficultyFontSize;
+    if (screenW <= 480) {
+        difficultyFontSize = Math.floor(screenW * 0.12); // 小画面: 45-57px
+    } else if (screenW <= 768) {
+        difficultyFontSize = Math.floor(screenW * 0.10); // 中画面: 77px程度
+    } else {
+        difficultyFontSize = 120; // 大画面: 元のサイズ
+    }
+    ctx.font = difficultyFontSize + "px Orbitron";
 
     text = "NORMAL";
     textWidth = ctx.measureText(text);
@@ -472,6 +556,9 @@ function drawBall() {
             isGameClear = true;
             if (currentDifficulty === GAME_CONFIG.DIFFICULTY_NORMAL) isNormalCleared = true;
             else if(currentDifficulty === GAME_CONFIG.DIFFICULTY_HARD) isHardCleared = true;
+
+            // クリア情報を保存
+            savePongProgress();
 
             setTimeout(function(){
                 isTitle = true;
@@ -578,10 +665,10 @@ function fireBall() {
 
     // 初速補正（ポイントが増えるごとに初速が増す）
     if(currentDifficulty === GAME_CONFIG.DIFFICULTY_NORMAL) {
-        // NORMAL（ボール初速20%減、敵AI速度20%減）
-        initSpeedArray = [1.04, 1.2, 1.28, 1.36, 1.44, 1.6, 1.76];
+        // NORMAL（ボール初速は元に戻す、敵AI速度は序盤を緩和）
+        initSpeedArray = [1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.2];
         initRangeArray = [130, 115, 100, 90, 80, 70, 60];
-        enemySpeedArray = [212.5, 187.5, 168.75, 137.5, 125, 112.5, 93.75];
+        enemySpeedArray = [250, 225, 200, 137.5, 125, 112.5, 93.75];
         hdpArray = [0, -10, -20, 20, 30];
     }
     else if(currentDifficulty === GAME_CONFIG.DIFFICULTY_HARD) {
@@ -609,17 +696,17 @@ function fireBall() {
     else hdp = hdpArray[0];
 
     //敵味方の総得点でパラメータを設定
-    if(totalPoint <= 2) {
+    if(totalPoint <= 3) {
         initSpeed = initSpeedArray[0];
         initRange = initRangeArray[0];
         enemy.speed = screenW / (enemySpeedArray[0] + hdp);
     }
-    else if(totalPoint < 5) {
+    else if(totalPoint < 6) {
         initSpeed = initSpeedArray[1];
         initRange = initRangeArray[1];
         enemy.speed = screenW / (enemySpeedArray[1] + hdp);
     }
-    else if(totalPoint < 7) {
+    else if(totalPoint < 8) {
         initSpeed = initSpeedArray[2];
         initRange = initRangeArray[2];
         enemy.speed = screenW / (enemySpeedArray[2] + hdp);
@@ -718,11 +805,19 @@ function drawGameOver() {
     if (gameEndStrY > screenH / 3) {
         gameEndStrY = screenH / 3;
     }
-    ctx.font = "120px Orbitron";
+    var gameEndFontSize;
+    if (screenW <= 480) {
+        gameEndFontSize = Math.floor(screenW * 0.11); // 小画面: 41-52px
+    } else if (screenW <= 768) {
+        gameEndFontSize = Math.floor(screenW * 0.10); // 中画面: 77px程度
+    } else {
+        gameEndFontSize = 120; // 大画面: 元のサイズ
+    }
+    ctx.font = gameEndFontSize + "px Orbitron";
     var text = "GAME OVER...";
     var textWidth = ctx.measureText(text);
     ctx.fillText(text,screenW/2 - textWidth.width / 2 ,gameEndStrY);
-    
+
 }
 
 function drawGameClear() {
@@ -732,7 +827,15 @@ function drawGameClear() {
     if (gameEndStrY > screenH / 3) {
         gameEndStrY = screenH / 3;
     }
-    ctx.font = "120px Orbitron";
+    var gameEndFontSize;
+    if (screenW <= 480) {
+        gameEndFontSize = Math.floor(screenW * 0.11); // 小画面: 41-52px
+    } else if (screenW <= 768) {
+        gameEndFontSize = Math.floor(screenW * 0.10); // 中画面: 77px程度
+    } else {
+        gameEndFontSize = 120; // 大画面: 元のサイズ
+    }
+    ctx.font = gameEndFontSize + "px Orbitron";
     var text  = "GAME CLEAR!!";
     var textWidth = ctx.measureText(text);
     ctx.fillText(text,screenW/2 - textWidth.width / 2 ,gameEndStrY);
@@ -744,8 +847,12 @@ function initParam(){
     // 各パラメータ初期化
     touchX = screenW / 2;
 
+    // 縦長画面（スマホ）かどうかを判定してバーの幅を調整
+    var isPortrait = screenH > screenW;
+    var paddleWidthRatio = isPortrait ? GAME_CONFIG.PADDLE_WIDTH_RATIO_MOBILE : GAME_CONFIG.PADDLE_WIDTH_RATIO;
+
     // プレイヤーバー設定
-    player.w = screenW * GAME_CONFIG.PADDLE_WIDTH_RATIO;
+    player.w = screenW * paddleWidthRatio;
     player.h = screenH * GAME_CONFIG.PADDLE_HEIGHT_RATIO;
     player.x = touchX - player.w / 2;
     player.y = screenH * GAME_CONFIG.PLAYER_Y_POSITION_RATIO - player.h / 2;
