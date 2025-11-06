@@ -71,10 +71,17 @@ var isNormalCleared = false;
 var isHardCleared = false;
 var flashTimes = 0;
 
+// タイム計測用変数
+var gameStartTime = 0;
+var currentClearTime = 0;
+var isNewRecord = false;
+var bestTimeNormal = null;
+var bestTimeHard = null;
+
 // ============================================
 // ローカルストレージ（クリア情報の永続化）
 // ============================================
-var PONG_LS_KEY = 'pong.progress.v1';
+var PONG_LS_KEY = 'pong.progress.v2';
 var PONG_MUTE_LS_KEY = 'pong.mute.v1';
 
 function savePongProgress() {
@@ -82,7 +89,9 @@ function savePongProgress() {
         var data = JSON.stringify({
             isNormalCleared: isNormalCleared,
             isHardCleared: isHardCleared,
-            version: 1
+            bestTimeNormal: bestTimeNormal,
+            bestTimeHard: bestTimeHard,
+            version: 2
         });
         localStorage.setItem(PONG_LS_KEY, data);
     } catch(e) {
@@ -97,6 +106,8 @@ function loadPongProgress() {
             var obj = JSON.parse(data);
             isNormalCleared = obj.isNormalCleared || false;
             isHardCleared = obj.isHardCleared || false;
+            bestTimeNormal = obj.bestTimeNormal || null;
+            bestTimeHard = obj.bestTimeHard || null;
         }
     } catch(e) {
         console.warn('Failed to load progress', e);
@@ -131,6 +142,19 @@ function logGameEvent(eventName, params) {
     } catch(e) {
         console.warn('Failed to log event', e);
     }
+}
+
+// 時間フォーマット関数（ミリ秒を M:SS.mm 形式に変換）
+function formatTime(ms) {
+    var totalSeconds = Math.floor(ms / 1000);
+    var minutes = Math.floor(totalSeconds / 60);
+    var seconds = totalSeconds % 60;
+    var centiseconds = Math.floor((ms % 1000) / 10);
+
+    var secondsStr = seconds < 10 ? '0' + seconds : '' + seconds;
+    var centisecondsStr = centiseconds < 10 ? '0' + centiseconds : '' + centiseconds;
+
+    return minutes + ':' + secondsStr + '.' + centisecondsStr;
 }
 
 var player = {
@@ -561,18 +585,43 @@ function drawStageSelect() {
 
     text = "NORMAL";
     textWidth = ctx.measureText(text);
+    var normalY = screenH / 20 * 9;
 
     if(!isLoading || currentDifficulty == 1 || flashTimes % 10 < 5 ) {
         if(isNormalCleared) ctx.fillStyle = "#FFFF00";
-        ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 20 * 9);
+        ctx.fillText(text,screenW/2 - textWidth.width / 2 , normalY);
     }
+
+    // NORMALのベストタイム表示
+    if (bestTimeNormal !== null) {
+        var bestTimeFontSize = Math.floor(difficultyFontSize * 0.40);
+        ctx.font = bestTimeFontSize + "px Orbitron";
+        ctx.fillStyle = "#AAAAAA";
+        var bestTimeText = "BEST: " + formatTime(bestTimeNormal);
+        var bestTimeWidth = ctx.measureText(bestTimeText);
+        ctx.fillText(bestTimeText, screenW/2 - bestTimeWidth.width / 2, normalY + difficultyFontSize * 0.4);
+        ctx.font = difficultyFontSize + "px Orbitron";
+    }
+
     ctx.fillStyle = "#FFFFFF";
     text = "HARD";
     textWidth = ctx.measureText(text);
+    var hardY = screenH / 20 * 13;
 
     if(!isLoading || currentDifficulty == 0 || flashTimes % 10 < 5 ) {
         if(isHardCleared) ctx.fillStyle = "#FFFF00";
-        ctx.fillText(text,screenW/2 - textWidth.width / 2 ,screenH / 20 * 13);
+        ctx.fillText(text,screenW/2 - textWidth.width / 2 , hardY);
+    }
+
+    // HARDのベストタイム表示
+    if (bestTimeHard !== null) {
+        var bestTimeFontSize = Math.floor(difficultyFontSize * 0.40);
+        ctx.font = bestTimeFontSize + "px Orbitron";
+        ctx.fillStyle = "#AAAAAA";
+        var bestTimeText = "BEST: " + formatTime(bestTimeHard);
+        var bestTimeWidth = ctx.measureText(bestTimeText);
+        ctx.fillText(bestTimeText, screenW/2 - bestTimeWidth.width / 2, hardY + difficultyFontSize * 0.4);
+        ctx.font = difficultyFontSize + "px Orbitron";
     }
 
     ctx.fillStyle = "#FFFFFF";
@@ -630,6 +679,22 @@ function drawBall() {
             if (currentDifficulty === GAME_CONFIG.DIFFICULTY_NORMAL) isNormalCleared = true;
             else if(currentDifficulty === GAME_CONFIG.DIFFICULTY_HARD) isHardCleared = true;
 
+            // クリア時間を計算
+            currentClearTime = Date.now() - gameStartTime;
+
+            // ベスト記録の更新判定
+            var bestTime = (currentDifficulty === GAME_CONFIG.DIFFICULTY_NORMAL) ? bestTimeNormal : bestTimeHard;
+            if (bestTime === null || currentClearTime < bestTime) {
+                isNewRecord = true;
+                if (currentDifficulty === GAME_CONFIG.DIFFICULTY_NORMAL) {
+                    bestTimeNormal = currentClearTime;
+                } else {
+                    bestTimeHard = currentClearTime;
+                }
+            } else {
+                isNewRecord = false;
+            }
+
             // クリア情報を保存
             savePongProgress();
 
@@ -638,7 +703,9 @@ function drawBall() {
             logGameEvent('pong_game_clear', {
                 difficulty: currentDifficulty === GAME_CONFIG.DIFFICULTY_NORMAL ? 'normal' : 'hard',
                 player_score: player.point,
-                enemy_score: enemy.point
+                enemy_score: enemy.point,
+                clear_time_ms: currentClearTime,
+                is_new_record: isNewRecord
             });
             setTimeout(function(){
                 isTitle = true;
@@ -725,6 +792,11 @@ function drawBall() {
 //ボールを発射
 function fireBall() {
     isGame = true;
+
+    // 初回呼び出し時にゲーム開始時刻を記録
+    if (player.point === 0 && enemy.point === 0) {
+        gameStartTime = Date.now();
+    }
 
     // ボールの初期位置（前回得点した側から発射）
     // 当たり判定を拡大した影響で、初期位置を調整
@@ -968,6 +1040,26 @@ function drawGameClear() {
     var text  = "GAME CLEAR!!";
     var textWidth = ctx.measureText(text);
     ctx.fillText(text,screenW/2 - textWidth.width / 2 ,gameEndStrY);
+
+    // クリア時間の表示（1.3倍に拡大）
+    var timeY = gameEndStrY + gameEndFontSize * 0.8;
+    var timeFontSize = Math.floor(gameEndFontSize * 0.4 * 1.3);
+    ctx.font = timeFontSize + "px Orbitron";
+    var timeText = "TIME: " + formatTime(currentClearTime);
+    var timeWidth = ctx.measureText(timeText);
+    ctx.fillText(timeText, screenW/2 - timeWidth.width / 2, timeY);
+
+    // NEW RECORD の表示（1.3倍に拡大）
+    if (isNewRecord) {
+        var recordY = timeY + timeFontSize * 0.7;
+        var recordFontSize = Math.floor(timeFontSize * 0.5 * 1.3);
+        ctx.font = recordFontSize + "px Orbitron";
+        ctx.fillStyle = "#FFD700"; // ゴールド色
+        var recordText = "NEW RECORD";
+        var recordWidth = ctx.measureText(recordText);
+        ctx.fillText(recordText, screenW/2 - recordWidth.width / 2, recordY);
+        ctx.fillStyle = "#fff"; // 色を戻す
+    }
 
 }
 
