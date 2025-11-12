@@ -14,7 +14,8 @@
       "WebFetch(domain:play.google.com)",
       "Bash(python3:*)",
       "Bash(ffmpeg:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []

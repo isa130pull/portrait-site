@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+
+  <title>ランキング - POPONG</title>
+  <meta name="description" content="POPONGのクリアタイムランキング" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../images/bingo/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="../images/bingo/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/bingo/apple-touch-icon.png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+
+  <!-- PlayFab SDK -->
+  <script src="https://download.playfab.com/PlayFabClientApi.js"></script>
+  <script src="playfab-manager.js?v=1"></script>
+
+  <style>
+    :root{
+      --bg: #0b0c0f;
+      --fg: #e8eaed;
+      --muted: #a1a7b3;
+      --accent: #60d5ff;
+      --card: #14161a;
+      --border: #1f2329;
+      --gold: #FFD700;
+      --silver: #C0C0C0;
+      --bronze: #CD7F32;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#ffffff; --fg:#111318; --muted:#5a6472; --card:#f7f8fa; --border:#e5e7eb; --accent:#0ea5e9; }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0}
+    body{
+      background:var(--bg);
+      color:var(--fg);
+      font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif;
+      display:flex;
+      flex-direction:column;
+    }
+    .wrap{
+      max-width:1280px;
+      margin:0 auto;
+      padding:16px 24px;
+      width:100%;
+    }
+    header{
+      padding:8px 0;
+      border-bottom:1px solid var(--border);
+    }
+    header .wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .back-link{
+      display:inline-block;
+      padding:8px 16px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      color:var(--fg);
+      text-decoration:none;
+      transition:border-color 0.2s;
+    }
+    .back-link:hover{
+      border-color:var(--accent);
+    }
+    main{
+      flex:1;
+      overflow-y:auto;
+    }
+    .title-section{
+      text-align:center;
+      padding:32px 0 24px;
+    }
+    .title-section h1{
+      font-family:'Orbitron',monospace;
+      font-size:48px;
+      margin:0 0 16px 0;
+      color:var(--accent);
+    }
+    .difficulty-tabs{
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      margin-bottom:32px;
+    }
+    .difficulty-tabs button{
+      padding:12px 32px;
+      font-family:'Orbitron',monospace;
+      font-size:18px;
+      border:2px solid var(--border);
+      border-radius:8px;
+      background:var(--card);
+      color:var(--fg);
+      cursor:pointer;
+      transition:all 0.2s;
+    }
+    .difficulty-tabs button:hover{
+      border-color:var(--accent);
+    }
+    .difficulty-tabs button.active{
+      border-color:var(--accent);
+      background:var(--accent);
+      color:var(--bg);
+    }
+    .leaderboard-container{
+      max-width:800px;
+      margin:0 auto;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:12px;
+      overflow:hidden;
+    }
+    .leaderboard-header{
+      background:var(--accent);
+      color:var(--bg);
+      padding:16px 24px;
+      font-family:'Orbitron',monospace;
+      font-size:20px;
+      font-weight:bold;
+      text-align:center;
+    }
+    .leaderboard-table{
+      width:100%;
+      border-collapse:collapse;
+    }
+    .leaderboard-table th{
+      background:var(--bg);
+      color:var(--muted);
+      padding:12px 16px;
+      text-align:left;
+      font-family:'Orbitron',monospace;
+      font-size:14px;
+      font-weight:normal;
+      border-bottom:1px solid var(--border);
+    }
+    .leaderboard-table td{
+      padding:16px;
+      border-bottom:1px solid var(--border);
+      font-family:'Orbitron',monospace;
+    }
+    .leaderboard-table tr:last-child td{
+      border-bottom:none;
+    }
+    .leaderboard-table tr:hover{
+      background:var(--bg);
+    }
+    .leaderboard-table .rank{
+      width:80px;
+      text-align:center;
+      font-weight:bold;
+      font-size:18px;
+    }
+    .leaderboard-table .name{
+      max-width:200px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .leaderboard-table .time{
+      text-align:right;
+      font-weight:bold;
+    }
+    .rank-1 .rank{ color:var(--gold); }
+    .rank-2 .rank{ color:var(--silver); }
+    .rank-3 .rank{ color:var(--bronze); }
+    .player-entry{
+      background:rgba(96, 213, 255, 0.1);
+    }
+    .player-entry .rank,
+    .player-entry .name,
+    .player-entry .time{
+      color:var(--accent);
+    }
+    .loading{
+      text-align:center;
+      padding:48px;
+      color:var(--muted);
+      font-family:'Orbitron',monospace;
+    }
+    .error{
+      text-align:center;
+      padding:48px;
+      color:#ff5555;
+      font-family:'Orbitron',monospace;
+    }
+    .empty{
+      text-align:center;
+      padding:48px;
+      color:var(--muted);
+      font-family:'Orbitron',monospace;
+    }
+    @media (max-width: 767px){
+      .wrap{padding:8px 12px}
+      header{padding:6px 0}
+      .title-section h1{font-size:32px}
+      .difficulty-tabs{gap:8px}
+      .difficulty-tabs button{padding:10px 20px;font-size:16px}
+      .leaderboard-table th,
+      .leaderboard-table td{padding:12px 8px}
+      .leaderboard-table .rank{width:60px;font-size:16px}
+    }
+  </style>
+</head>
+<body onload="initRanking()">
+  <header>
+    <div class="wrap">
+      <a href="index.html" class="back-link">← ゲームに戻る</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="title-section">
+        <h1>RANKING</h1>
+      </div>
+
+      <div class="difficulty-tabs">
+        <button id="normalTab" class="active" onclick="switchDifficulty(0)">NORMAL</button>
+        <button id="hardTab" onclick="switchDifficulty(1)">HARD</button>
+      </div>
+
+      <div class="leaderboard-container">
+        <div class="leaderboard-header" id="leaderboardTitle">NORMAL MODE</div>
+        <div id="leaderboardContent">
+          <div class="loading">Loading...</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    var currentDifficulty = 0; // 0: NORMAL, 1: HARD
+
+    // 時間フォーマット関数（ミリ秒を M:SS.mm 形式に変換）
+    function formatTime(ms) {
+        var totalSeconds = Math.floor(ms / 1000);
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = totalSeconds % 60;
+        var centiseconds = Math.floor((ms % 1000) / 10);
+
+        var secondsStr = seconds < 10 ? '0' + seconds : '' + seconds;
+        var centisecondsStr = centiseconds < 10 ? '0' + centiseconds : '' + centiseconds;
+
+        return minutes + ':' + secondsStr + '.' + centisecondsStr;
+    }
+
+    function initRanking() {
+        // PlayFab初期化
+        initPlayFab();
+
+        // URLパラメータから難易度を取得
+        var urlParams = new URLSearchParams(window.location.search);
+        var difficulty = urlParams.get('difficulty');
+        if (difficulty === 'hard') {
+            currentDifficulty = 1;
+            switchDifficulty(1);
+        } else {
+            loadLeaderboard(0);
+        }
+    }
+
+    function switchDifficulty(difficulty) {
+        currentDifficulty = difficulty;
+
+        // タブの切り替え
+        var normalTab = document.getElementById('normalTab');
+        var hardTab = document.getElementById('hardTab');
+
+        if (difficulty === 0) {
+            normalTab.classList.add('active');
+            hardTab.classList.remove('active');
+        } else {
+            normalTab.classList.remove('active');
+            hardTab.classList.add('active');
+        }
+
+        // タイトル更新
+        var title = document.getElementById('leaderboardTitle');
+        if (title) {
+            title.textContent = difficulty === 0 ? 'NORMAL MODE' : 'HARD MODE';
+        }
+
+        // ランキング読み込み
+        loadLeaderboard(difficulty);
+    }
+
+    function loadLeaderboard(difficulty) {
+        var content = document.getElementById('leaderboardContent');
+        if (!content) return;
+
+        content.innerHTML = '<div class="loading">Loading...</div>';
+
+        getLeaderboard(difficulty, 100, function(result) {
+            if (!result.success) {
+                content.innerHTML = '<div class="error">' + (result.message || 'ランキングの読み込みに失敗しました') + '</div>';
+                return;
+            }
+
+            var leaderboard = result.leaderboard;
+
+            if (!leaderboard || leaderboard.length === 0) {
+                content.innerHTML = '<div class="empty">まだランキングがありません</div>';
+                return;
+            }
+
+            // テーブル作成
+            var html = '<table class="leaderboard-table">';
+            html += '<thead><tr>';
+            html += '<th class="rank">順位</th>';
+            html += '<th class="name">名前</th>';
+            html += '<th class="time">タイム</th>';
+            html += '</tr></thead>';
+            html += '<tbody>';
+
+            for (var i = 0; i < leaderboard.length; i++) {
+                var entry = leaderboard[i];
+                var rank = entry.Position + 1;
+                var isPlayer = entry.PlayFabId === playfabPlayerId;
+                var rankClass = 'rank-' + rank;
+                var rowClass = isPlayer ? 'player-entry' : '';
+
+                if (rank > 3) rankClass = '';
+
+                html += '<tr class="' + rankClass + ' ' + rowClass + '">';
+                html += '<td class="rank">' + rank + '</td>';
+                html += '<td class="name">' + escapeHtml(entry.DisplayName || 'Anonymous') + (isPlayer ? ' ★' : '') + '</td>';
+                html += '<td class="time">' + formatTime(entry.StatValue) + '</td>';
+                html += '</tr>';
+            }
+
+            html += '</tbody></table>';
+            content.innerHTML = html;
+        });
+    }
+
+    // HTML エスケープ
+    function escapeHtml(text) {
+        var map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    }
+  </script>
+</body>
+</html>

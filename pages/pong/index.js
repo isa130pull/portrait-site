@@ -361,6 +361,14 @@ function init(){
         updateMuteButton();
     }
 
+    // ランキングボタンのイベントリスナー登録
+    var rankingBtn = document.getElementById("rankingBtn");
+    if (rankingBtn) {
+        rankingBtn.addEventListener("click", function() {
+            window.location.href = "ranking.html";
+        });
+    }
+
     // Web Audio APIの初期化（iOS対応）
     if (initAudioContext() && audioContext) {
         console.log('AudioContext initialized, state:', audioContext.state);
@@ -371,6 +379,12 @@ function init(){
     } else {
         console.warn('AudioContext initialization failed');
     }
+
+    // PlayFabの初期化
+    initPlayFab();
+
+    // 名前入力UIのイベントリスナー登録
+    setupNameInputListeners();
 
     // フォントの初期読み込み待機
     setTimeout(function() {
@@ -837,9 +851,11 @@ function drawBall() {
                 clear_time_ms: currentClearTime,
                 is_new_record: isNewRecord
             });
+
+            // 名前入力UIを表示（3秒後）
             setTimeout(function(){
-                isTitle = true;
-            }, GAME_CONFIG.GAME_CLEAR_DELAY);
+                showNameInputUI();
+            }, 3000);
         }
         else {
             playScoreUpSE();
@@ -1178,6 +1194,129 @@ function drawGameClear() {
 
 }
 
+
+// ============================================
+// 名前入力UI関連
+// ============================================
+function setupNameInputListeners() {
+    var submitBtn = document.getElementById('submitScoreBtn');
+    var skipBtn = document.getElementById('skipScoreBtn');
+    var nameInput = document.getElementById('playerNameInput');
+
+    if (submitBtn) {
+        submitBtn.addEventListener('click', handleSubmitScore);
+    }
+
+    if (skipBtn) {
+        skipBtn.addEventListener('click', handleSkipScore);
+    }
+
+    // Enterキーで送信
+    if (nameInput) {
+        nameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleSubmitScore();
+            }
+        });
+    }
+}
+
+function showNameInputUI() {
+    var container = document.getElementById('nameInputContainer');
+    var overlay = document.getElementById('overlay');
+    var nameInput = document.getElementById('playerNameInput');
+    var errorMessage = document.getElementById('nameErrorMessage');
+
+    if (!container || !overlay) return;
+
+    // 保存されたプレイヤー名を自動入力
+    var savedName = getSavedPlayerName();
+    if (nameInput && savedName) {
+        nameInput.value = savedName;
+    }
+
+    // エラーメッセージをクリア
+    if (errorMessage) {
+        errorMessage.textContent = '';
+        errorMessage.classList.remove('show');
+    }
+
+    // 表示
+    overlay.classList.add('show');
+    container.classList.add('show');
+
+    // 入力フォーカス
+    if (nameInput) {
+        setTimeout(function() {
+            nameInput.focus();
+        }, 100);
+    }
+}
+
+function hideNameInputUI() {
+    var container = document.getElementById('nameInputContainer');
+    var overlay = document.getElementById('overlay');
+
+    if (container) container.classList.remove('show');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function handleSubmitScore() {
+    var nameInput = document.getElementById('playerNameInput');
+    var errorMessage = document.getElementById('nameErrorMessage');
+    var submitBtn = document.getElementById('submitScoreBtn');
+
+    if (!nameInput || !errorMessage) return;
+
+    var playerName = nameInput.value.trim();
+
+    // バリデーション
+    var validation = validatePlayerName(playerName);
+    if (!validation.valid) {
+        errorMessage.textContent = validation.message;
+        errorMessage.classList.add('show');
+        return;
+    }
+
+    // エラーメッセージをクリア
+    errorMessage.textContent = '';
+    errorMessage.classList.remove('show');
+
+    // ボタン無効化（二重送信防止）
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '送信中...';
+    }
+
+    // スコアを送信
+    submitScore(validation.name, currentClearTime, currentDifficulty, function(result) {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = '登録する';
+        }
+
+        if (result.success) {
+            console.log('Score submitted successfully!');
+            hideNameInputUI();
+            // ランキングページへ遷移
+            var difficultyParam = currentDifficulty === 0 ? 'normal' : 'hard';
+            window.location.href = 'ranking.html?difficulty=' + difficultyParam;
+        } else {
+            errorMessage.textContent = result.message || 'スコアの送信に失敗しました';
+            errorMessage.classList.add('show');
+        }
+    });
+}
+
+function handleSkipScore() {
+    hideNameInputUI();
+    // タイトル画面に戻る
+    setTimeout(function() {
+        isTitle = true;
+        isGameClear = false;
+        isGameOver = false;
+    }, 500);
+}
 
 function initParam(){
     // 各パラメータ初期化
