@@ -1298,9 +1298,11 @@ function handleSubmitScore() {
         if (result.success) {
             console.log('Score submitted successfully!');
             hideNameInputUI();
-            // ランキングページへ遷移
+            // PlayFab側での反映を待ってからランキングページへ遷移
             var difficultyParam = currentDifficulty === 0 ? 'normal' : 'hard';
-            window.location.href = 'ranking.html?difficulty=' + difficultyParam;
+            setTimeout(function() {
+                window.location.href = 'ranking.html?difficulty=' + difficultyParam;
+            }, 500);
         } else {
             errorMessage.textContent = result.message || 'スコアの送信に失敗しました';
             errorMessage.classList.add('show');

@@ -21,7 +21,7 @@
 
   <!-- PlayFab SDK -->
   <script src="https://download.playfab.com/PlayFabClientApi.js"></script>
-  <script src="playfab-manager.js?v=1"></script>
+  <script src="playfab-manager.js?v=3"></script>
 
   <style>
     :root{
@@ -265,7 +265,7 @@
     });
   </script>
 
-  <script src="index.js?v=23" charset="UTF-8"></script>
+  <script src="index.js?v=24" charset="UTF-8"></script>
 </head>
 <body onload="init()">
   <header>
@@ -289,7 +289,7 @@
   <div id="nameInputContainer">
     <h2>RANKING</h2>
     <p>ランキングに登録しますか？</p>
-    <input type="text" id="playerNameInput" placeholder="名前を入力（1-12文字）" maxlength="12" autocomplete="off">
+    <input type="text" id="playerNameInput" placeholder="名前を入力（3-12文字）" maxlength="12" autocomplete="off">
     <div class="error-message" id="nameErrorMessage"></div>
     <div class="name-input-buttons">
       <button id="skipScoreBtn">スキップ</button>

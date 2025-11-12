@@ -93,10 +93,10 @@ function validatePlayerName(name) {
         return { valid: false, message: "名前を入力してください" };
     }
 
-    // 長さチェック
+    // 長さチェック（PlayFabの要件：3-25文字）
     var trimmedName = name.trim();
-    if (trimmedName.length < 1 || trimmedName.length > 12) {
-        return { valid: false, message: "名前は1~12文字で入力してください" };
+    if (trimmedName.length < 3 || trimmedName.length > 12) {
+        return { valid: false, message: "名前は3~12文字で入力してください" };
     }
 
     // 使用可能文字チェック（英数字、ひらがな、カタカナ、漢字、スペース）
@@ -131,7 +131,11 @@ function updateDisplayName(playerName, callback) {
         },
         function(error) {
             console.error('Failed to update display name:', error);
-            if (callback) callback({ success: false, error: error });
+            var errorMessage = '名前の更新に失敗しました';
+            if (error && error.errorMessage) {
+                errorMessage = error.errorMessage;
+            }
+            if (callback) callback({ success: false, message: errorMessage });
         }
     );
 }
@@ -208,7 +212,10 @@ function getLeaderboard(difficulty, maxResults, callback) {
         var request = {
             StatisticName: statisticName,
             StartPosition: 0,
-            MaxResultsCount: maxResults
+            MaxResultsCount: maxResults,
+            ProfileConstraints: {
+                ShowDisplayName: true
+            }
         };
 
         PlayFab.ClientApi.GetLeaderboard(request,
