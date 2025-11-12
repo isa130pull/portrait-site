@@ -361,8 +361,16 @@ function init(){
         updateMuteButton();
     }
 
-    // Web Audio APIの初期化
-    initAudioContext();
+    // Web Audio APIの初期化（iOS対応）
+    if (initAudioContext() && audioContext) {
+        console.log('AudioContext initialized, state:', audioContext.state);
+        // iOSでsuspended状態の場合、最初のユーザーインタラクションでresumeする
+        if (audioContext.state === 'suspended') {
+            console.log('AudioContext is suspended, will resume on first user interaction');
+        }
+    } else {
+        console.warn('AudioContext initialization failed');
+    }
 
     // フォントの初期読み込み待機
     setTimeout(function() {
@@ -392,14 +400,25 @@ function TouchEventStart(e) {
     if (isLoading) return;
     if(isTitle) {
         isLoading = true;
-        // タイトル画面でのタップ時に音声プリロード開始
+
+        // タイトル画面でのタップ時に音声プリロード開始（iOS対応）
         if (audioContext && !isAudioReady) {
+            // AudioContextがsuspendedの場合はresume（iOS対応）
+            if (audioContext.state === 'suspended') {
+                audioContext.resume().then(function() {
+                    console.log('AudioContext resumed');
+                });
+            }
+
+            // 音声プリロード完了後に再生
             preloadAllAudio().then(function() {
                 console.log('Audio preload completed');
+                playSound('start', 1.0);
             });
+        } else if (isAudioReady) {
+            // すでにプリロード済みの場合は即座に再生
+            playSound('start', 1.0);
         }
-        // 音声再生
-        playSound('start', 1.0);
 
         setTimeout(function(){
             isTitle = false;
@@ -417,8 +436,15 @@ function TouchEventStart(e) {
             logGameEvent('pong_game_start', {
                 difficulty: 'normal'
             });
-            // 難易度選択時に音声再生
-            playSound('start', 1.0);
+
+            // 難易度選択時に音声再生（iOS対応：AudioContextのresume確認）
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume().then(function() {
+                    playSound('start', 1.0);
+                });
+            } else {
+                playSound('start', 1.0);
+            }
 
             setTimeout(function(){
                 isLoading = false;
@@ -436,8 +462,15 @@ function TouchEventStart(e) {
             logGameEvent('pong_game_start', {
                 difficulty: 'hard'
             });
-            // 難易度選択時に音声再生
-            playSound('start', 1.0);
+
+            // 難易度選択時に音声再生（iOS対応：AudioContextのresume確認）
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume().then(function() {
+                    playSound('start', 1.0);
+                });
+            } else {
+                playSound('start', 1.0);
+            }
 
             setTimeout(function(){
                 isLoading = false;
@@ -615,7 +648,11 @@ function drawPoint() {
 
 // タイトルを描画
 function drawTitle() {
-    if(!isInitLoad) ctx.fillStyle = "black";
+    // フォント読み込み完了前は何も描画しない（iOS対応）
+    if(!isInitLoad) return;
+
+    // 常に白色で描画
+    ctx.fillStyle = "#FFFFFF";
 
     //Tap Startの文字を点滅させる
     var flashTime = isLoading ? 10 : 100;
