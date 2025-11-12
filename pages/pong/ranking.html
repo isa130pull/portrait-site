@@ -313,6 +313,16 @@
                 return;
             }
 
+            // StatValueの昇順（小さい値が上位）にソート
+            leaderboard.sort(function(a, b) {
+                return a.StatValue - b.StatValue;
+            });
+
+            // Position（順位）を再計算
+            for (var i = 0; i < leaderboard.length; i++) {
+                leaderboard[i].Position = i;
+            }
+
             // テーブル作成
             var html = '<table class="leaderboard-table">';
             html += '<thead><tr>';

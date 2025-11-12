@@ -15,7 +15,8 @@
       "Bash(python3:*)",
       "Bash(ffmpeg:*)",
       "Bash(mv:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
