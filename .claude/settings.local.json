@@ -12,7 +12,9 @@
       "Bash(curl -L -X POST \"https://script.google.com/macros/s/AKfycbxDEGXU2sPv1bqoBzahhaYclDfDer1VlA2zABVL94VbTWdgRjPMw2RnxWBOPcLz0iBOAA/exec\" )",
       "WebFetch(domain:photoshopvip.net)",
       "WebFetch(domain:play.google.com)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(mv:*)"
     ],
     "deny": [],
     "ask": []

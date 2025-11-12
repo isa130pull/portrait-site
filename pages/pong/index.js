@@ -57,10 +57,6 @@ var isGame = false;
 var isTitle = true;
 var isLoading = false;
 var isInitLoad = false;
-var hitAudio = new Audio("hit.mp3");
-var startAudio = new Audio("start.mp3");
-var scoreUpAudio = new Audio("score_up.mp3");
-var clearAudio = new Audio("clear.mp3");
 var isMute = false;
 var hasPlayerScoredLast = false; // 一つ前にプレイヤーがポイントを取ったかどうか
 var isGameOver = false;
@@ -70,6 +66,108 @@ var currentDifficulty = 0; // 0: NORMAL, 1: HARD
 var isNormalCleared = false;
 var isHardCleared = false;
 var flashTimes = 0;
+
+// ============================================
+// Web Audio API 音声管理システム
+// ============================================
+var audioContext = null;
+var audioBuffers = {};
+var isAudioReady = false;
+
+// Web Audio APIの初期化
+function initAudioContext() {
+    try {
+        // AudioContextの作成（iOS対応のためwebkit prefix付きも試行）
+        var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) {
+            console.warn('Web Audio API not supported');
+            return false;
+        }
+        audioContext = new AudioContextClass();
+        return true;
+    } catch (e) {
+        console.warn('Failed to create AudioContext:', e);
+        return false;
+    }
+}
+
+// 音声ファイルのロードとデコード
+function loadAudioFile(name, url) {
+    return fetch(url)
+        .then(function(response) {
+            if (!response.ok) throw new Error('Failed to load ' + url);
+            return response.arrayBuffer();
+        })
+        .then(function(arrayBuffer) {
+            return audioContext.decodeAudioData(arrayBuffer);
+        })
+        .then(function(audioBuffer) {
+            audioBuffers[name] = audioBuffer;
+            console.log('Loaded audio:', name);
+        })
+        .catch(function(error) {
+            console.warn('Error loading audio ' + name + ':', error);
+        });
+}
+
+// 全音声ファイルのプリロード
+function preloadAllAudio() {
+    if (!audioContext) {
+        console.warn('AudioContext not initialized');
+        return Promise.resolve();
+    }
+
+    var audioFiles = [
+        { name: 'hit', url: 'hit.mp3' },
+        { name: 'start', url: 'start.mp3' },
+        { name: 'scoreUp', url: 'score_up.mp3' },
+        { name: 'clear', url: 'clear.mp3' }
+    ];
+
+    var promises = audioFiles.map(function(file) {
+        return loadAudioFile(file.name, file.url);
+    });
+
+    return Promise.all(promises).then(function() {
+        isAudioReady = true;
+        console.log('All audio files loaded');
+    });
+}
+
+// Web Audio APIで音声を再生
+function playSound(name, volume) {
+    if (isMute || !audioContext || !isAudioReady) return;
+
+    var buffer = audioBuffers[name];
+    if (!buffer) {
+        console.warn('Audio buffer not found:', name);
+        return;
+    }
+
+    try {
+        // AudioContextがsuspendedの場合はresume（iOS対応）
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+
+        // BufferSourceNodeを作成（毎回新しいノードを作成することで同時再生可能）
+        var source = audioContext.createBufferSource();
+        source.buffer = buffer;
+
+        // ボリュームコントロール
+        var gainNode = audioContext.createGain();
+        gainNode.gain.value = volume || 1.0;
+
+        // 接続: source -> gain -> destination
+        source.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        // 再生開始
+        source.start(0);
+    } catch (e) {
+        console.warn('Error playing sound:', name, e);
+    }
+}
 
 // タイム計測用変数
 var gameStartTime = 0;
@@ -236,7 +334,7 @@ function init(){
     window.requestAnimationFrame = requestAnimationFrame;
     // 描画ループを開始（約60fps）
     setInterval(render, GAME_CONFIG.RENDER_INTERVAL);
-    
+
     //タッチ可能か検出
     var touchStart = ('ontouchstart' in window) ? "touchstart" : "mousedown";
     var touchMove = ('ontouchstart' in window) ? "touchmove" : "mousemove";
@@ -262,6 +360,9 @@ function init(){
         // 初期状態のUI更新
         updateMuteButton();
     }
+
+    // Web Audio APIの初期化
+    initAudioContext();
 
     // フォントの初期読み込み待機
     setTimeout(function() {
@@ -291,15 +392,15 @@ function TouchEventStart(e) {
     if (isLoading) return;
     if(isTitle) {
         isLoading = true;
-        // タイトル画面でのタップ時に音声再生
-        if (!isMute) {
-            hitAudio.load();
-            startAudio.load();
-            // 再生中の音声をキャンセルして新しく再生
-            startAudio.pause();
-            startAudio.currentTime = 0;
-            startAudio.play();
+        // タイトル画面でのタップ時に音声プリロード開始
+        if (audioContext && !isAudioReady) {
+            preloadAllAudio().then(function() {
+                console.log('Audio preload completed');
+            });
         }
+        // 音声再生
+        playSound('start', 1.0);
+
         setTimeout(function(){
             isTitle = false;
             isLoading = false;
@@ -317,12 +418,8 @@ function TouchEventStart(e) {
                 difficulty: 'normal'
             });
             // 難易度選択時に音声再生
-            if (!isMute) {
-                // 再生中の音声をキャンセルして新しく再生
-                startAudio.pause();
-                startAudio.currentTime = 0;
-                startAudio.play();
-            }
+            playSound('start', 1.0);
+
             setTimeout(function(){
                 isLoading = false;
                 isStageSelect = false;
@@ -340,12 +437,8 @@ function TouchEventStart(e) {
                 difficulty: 'hard'
             });
             // 難易度選択時に音声再生
-            if (!isMute) {
-                // 再生中の音声をキャンセルして新しく再生
-                startAudio.pause();
-                startAudio.currentTime = 0;
-                startAudio.play();
-            }
+            playSound('start', 1.0);
+
             setTimeout(function(){
                 isLoading = false;
                 isStageSelect = false;
@@ -900,30 +993,15 @@ function fireBall() {
 }
 
 function playHitSE(){
-    if (!isMute){
-        // 再生中の音声をキャンセルして新しく再生
-        hitAudio.pause();
-        hitAudio.currentTime = 0;
-        hitAudio.play();
-    }
+    playSound('hit', 0.8);
 }
 
 function playScoreUpSE(){
-    if (!isMute){
-        // 再生中の音声をキャンセルして新しく再生
-        scoreUpAudio.pause();
-        scoreUpAudio.currentTime = 0;
-        scoreUpAudio.play();
-    }
+    playSound('scoreUp', 1.0);
 }
 
 function playClearSE(){
-    if (!isMute){
-        // 再生中の音声をキャンセルして新しく再生
-        clearAudio.pause();
-        clearAudio.currentTime = 0;
-        clearAudio.play();
-    }
+    playSound('clear', 1.0);
 }
 
 // ミュート切り替え
