@@ -36,10 +36,6 @@
     /* Section Card */
     .section { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
 
-    /* Common Settings */
-    .common-settings { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
-    .settings-row { display: flex; align-items: center; gap: 16px; }
-
     /* Search X Button */
     .search-x-btn { width: 100%; padding: 14px 24px; background: var(--bg); border: 2px solid var(--accent); border-radius: 10px; color: var(--accent); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 16px; }
     .search-x-btn:hover:not(:disabled) { background: var(--accent); color: var(--bg); }
@@ -222,20 +218,6 @@
 
   <!-- Main Section -->
   <section class="section">
-    <!-- 共通設定 -->
-    <div class="common-settings">
-      <div class="form-group" style="margin-bottom: 0;">
-        <label for="targetUsername">対象ユーザーID</label>
-        <div class="username-dropdown" id="usernameDropdownContainer">
-          <div class="username-input-wrapper">
-            <input type="text" id="targetUsername" placeholder="@なしで入力" autocomplete="off">
-            <button type="button" class="dropdown-toggle" id="dropdownToggle">▼</button>
-          </div>
-          <div class="dropdown-menu" id="usernameDropdown"></div>
-        </div>
-      </div>
-    </div>
-
     <!-- Mode Tabs -->
     <div class="mode-tabs">
       <button class="mode-tab active" data-mode="basic">基本</button>
@@ -244,7 +226,28 @@
 
     <!-- Basic Mode -->
     <div class="mode-content active" id="basicMode">
+      <!-- 対象ユーザーID -->
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label for="targetUsername">対象ユーザーID(必須)</label>
+        <div class="username-dropdown" id="usernameDropdownContainer">
+          <div class="username-input-wrapper">
+            <input type="text" id="targetUsername" placeholder="@なしで入力" autocomplete="off">
+            <button type="button" class="dropdown-toggle" id="dropdownToggle">▼</button>
+          </div>
+          <div class="dropdown-menu" id="usernameDropdown"></div>
+        </div>
+      </div>
+
       <div class="preset-grid" id="presetGrid"></div>
+
+      <!-- 過去の今日 -->
+      <div class="past-today">
+        <div class="past-today-header">
+          <span class="past-today-title">過去の今日</span>
+          <span class="past-today-date" id="todayDate"></span>
+        </div>
+        <select id="yearSelect"></select>
+      </div>
 
       <!-- 相手ユーザーID -->
       <div class="past-today">
@@ -262,15 +265,6 @@
         </div>
         <div class="preset-grid" id="specificPresetGrid"></div>
       </div>
-
-      <!-- 過去の今日 -->
-      <div class="past-today">
-        <div class="past-today-header">
-          <span class="past-today-title">過去の今日</span>
-          <span class="past-today-date" id="todayDate"></span>
-        </div>
-        <select id="yearSelect"></select>
-      </div>
     </div>
 
     <!-- Advanced Mode -->
@@ -280,7 +274,13 @@
         <div class="form-row" style="align-items: flex-end;">
           <div class="form-group" style="flex: 1; margin-bottom: 0;">
             <label for="keyword">検索キーワード</label>
-            <input type="text" id="keyword" placeholder="例: 推しメン かわいい">
+            <div class="username-dropdown" id="keywordDropdownContainer">
+              <div class="username-input-wrapper">
+                <input type="text" id="keyword" placeholder="例: 推しメン かわいい" autocomplete="off">
+                <button type="button" class="dropdown-toggle" id="keywordDropdownToggle">▼</button>
+              </div>
+              <div class="dropdown-menu" id="keywordDropdown"></div>
+            </div>
           </div>
           <div class="form-group inline" style="margin-bottom: 0;">
             <label class="checkbox">
@@ -291,18 +291,36 @@
         </div>
         <div class="form-group">
           <label for="excludeKeyword">除外キーワード</label>
-          <input type="text" id="excludeKeyword" placeholder="スペース区切りで複数指定">
+          <div class="username-dropdown" id="excludeKeywordDropdownContainer">
+            <div class="username-input-wrapper">
+              <input type="text" id="excludeKeyword" placeholder="スペース区切りで複数指定" autocomplete="off">
+              <button type="button" class="dropdown-toggle" id="excludeKeywordDropdownToggle">▼</button>
+            </div>
+            <div class="dropdown-menu" id="excludeKeywordDropdown"></div>
+          </div>
         </div>
 
         <!-- Users -->
         <div class="form-row">
           <div class="form-group" style="margin-bottom: 0;">
             <label for="fromUser">投稿者 (from:)</label>
-            <input type="text" id="fromUser" placeholder="@なしで入力">
+            <div class="username-dropdown" id="fromUserDropdownContainer">
+              <div class="username-input-wrapper">
+                <input type="text" id="fromUser" placeholder="@なしで入力" autocomplete="off">
+                <button type="button" class="dropdown-toggle" id="fromUserDropdownToggle">▼</button>
+              </div>
+              <div class="dropdown-menu" id="fromUserDropdown"></div>
+            </div>
           </div>
           <div class="form-group" style="margin-bottom: 0;">
             <label for="toUser">宛先 (to:)</label>
-            <input type="text" id="toUser" placeholder="@なしで入力">
+            <div class="username-dropdown" id="toUserDropdownContainer">
+              <div class="username-input-wrapper">
+                <input type="text" id="toUser" placeholder="@なしで入力" autocomplete="off">
+                <button type="button" class="dropdown-toggle" id="toUserDropdownToggle">▼</button>
+              </div>
+              <div class="dropdown-menu" id="toUserDropdown"></div>
+            </div>
           </div>
         </div>
 
@@ -354,7 +372,7 @@
 
     <!-- Query Preview (共通) -->
     <div class="query-preview">
-      <div class="query-preview-label">生成されたクエリ</div>
+      <div class="query-preview-label">検索コマンド</div>
       <code id="queryOutput"><span class="empty">上で入力するとここに表示</span></code>
       <div class="query-actions">
         <button id="copyBtn" class="primary" disabled>コピー</button>
@@ -362,13 +380,7 @@
       </div>
     </div>
 
-    <!-- X検索ボタン (独立) -->
-    <div style="margin-top: 16px;">
-      <label class="checkbox" style="justify-content: center;">
-        <input type="checkbox" id="latestTab">
-        Xで「最新」タブに遷移する
-      </label>
-    </div>
+    <!-- X検索ボタン -->
     <button id="searchBtn" class="search-x-btn" disabled>Xで検索</button>
   </section>
 
@@ -433,16 +445,146 @@ const LS_USERNAME_KEY = 'x-search.username';
 const LS_USERNAMES_KEY = 'x-search.usernames';
 const LS_BUILDER_KEY = 'x-search.builder';
 const LS_MODE_KEY = 'x-search.mode';
-const LS_LATEST_TAB_KEY = 'x-search.latestTab';
 const LS_BASIC_SELECTIONS_KEY = 'x-search.basicSelections';
 const LS_SPECIFIC_USERNAME_KEY = 'x-search.specificUsername';
 const LS_SPECIFIC_USERNAMES_KEY = 'x-search.specificUsernames';
+const LS_KEYWORDS_KEY = 'x-search.keywords';
+const LS_EXCLUDE_KEYWORDS_KEY = 'x-search.excludeKeywords';
+const LS_FROM_USERS_KEY = 'x-search.fromUsers';
+const LS_TO_USERS_KEY = 'x-search.toUsers';
 const MAX_SAVED_USERNAMES = 10;
+const MAX_SAVED_ITEMS = 10;
 
 function showToast(msg) {
   toast.textContent = msg;
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 1600);
+}
+
+// Generic dropdown manager factory
+function createDropdownManager(config) {
+  const { containerId, inputId, toggleId, dropdownId, storageKey, maxItems = MAX_SAVED_ITEMS, onSelect } = config;
+  const container = $(`#${containerId}`);
+  const input = $(`#${inputId}`);
+  const toggle = $(`#${toggleId}`);
+  const dropdown = $(`#${dropdownId}`);
+
+  function getItems() {
+    try {
+      const saved = localStorage.getItem(storageKey);
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) { return []; }
+  }
+
+  function saveItems(items) {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(items));
+    } catch (e) {}
+  }
+
+  function addItem(value) {
+    if (!value) return;
+    const items = getItems();
+    const index = items.indexOf(value);
+    if (index > -1) items.splice(index, 1);
+    items.unshift(value);
+    if (items.length > maxItems) items.length = maxItems;
+    saveItems(items);
+    render();
+  }
+
+  function removeItem(value) {
+    const items = getItems();
+    const index = items.indexOf(value);
+    if (index > -1) {
+      items.splice(index, 1);
+      saveItems(items);
+      render();
+    }
+  }
+
+  function render() {
+    const items = getItems();
+    const currentValue = input.value.trim();
+
+    if (items.length === 0) {
+      dropdown.innerHTML = '<div class="dropdown-empty">履歴はありません</div>';
+      return;
+    }
+
+    dropdown.innerHTML = items.map(item => {
+      const isSelected = item === currentValue;
+      return `
+        <div class="dropdown-item${isSelected ? ' selected' : ''}" data-value="${escapeHtml(item)}">
+          <span class="username">${escapeHtml(item)}</span>
+          <button class="delete-btn" data-delete="${escapeHtml(item)}">×</button>
+        </div>
+      `;
+    }).join('');
+
+    dropdown.querySelectorAll('.dropdown-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-btn')) return;
+        selectItem(item.dataset.value);
+      });
+    });
+
+    dropdown.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        removeItem(btn.dataset.delete);
+      });
+    });
+  }
+
+  function selectItem(value) {
+    input.value = value;
+    close();
+    render();
+    if (onSelect) onSelect(value);
+  }
+
+  function toggleDropdown() {
+    dropdown.classList.toggle('show');
+  }
+
+  function close() {
+    dropdown.classList.remove('show');
+  }
+
+  function clear() {
+    try { localStorage.removeItem(storageKey); } catch (e) {}
+  }
+
+  // Event listeners
+  if (toggle) {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleDropdown();
+    });
+  }
+
+  if (input) {
+    input.addEventListener('blur', () => {
+      const value = input.value.trim();
+      if (value) addItem(value);
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const value = input.value.trim();
+        if (value) addItem(value);
+        close();
+      }
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    if (container && !e.target.closest(`#${containerId}`)) {
+      close();
+    }
+  });
+
+  return { addItem, removeItem, render, clear, close };
 }
 
 // Custom prompt modal
@@ -521,14 +663,8 @@ function isAndroid() {
 }
 
 function openXSearch(query) {
-  const latestTab = $('#latestTab').checked;
   const encodedQuery = encodeURIComponent(query);
-
-  // Web URL (フォールバック用)
-  let webUrl = `https://x.com/search?q=${encodedQuery}&src=typed_query`;
-  if (latestTab) {
-    webUrl += '&f=live';
-  }
+  const webUrl = `https://x.com/search?q=${encodedQuery}&src=typed_query`;
 
   if (isMobile()) {
     if (isIOS()) {
@@ -731,28 +867,17 @@ function setMode(mode) {
   if (mode === 'basic') {
     buildBasicQuery();
   } else {
+    // Sync specificUsername to toUser when switching to advanced mode
+    const specificUser = getSpecificUsername();
+    if (specificUser && formElements.toUser && !formElements.toUser.value) {
+      formElements.toUser.value = specificUser;
+    }
     buildQuery();
   }
 }
 
 $$('.mode-tab').forEach(tab => {
   tab.addEventListener('click', () => setMode(tab.dataset.mode));
-});
-
-// ===== Latest Tab Setting =====
-const latestTabCheckbox = $('#latestTab');
-
-function initLatestTab() {
-  try {
-    const saved = localStorage.getItem(LS_LATEST_TAB_KEY);
-    latestTabCheckbox.checked = saved === 'true';
-  } catch (e) {}
-}
-
-latestTabCheckbox.addEventListener('change', () => {
-  try {
-    localStorage.setItem(LS_LATEST_TAB_KEY, latestTabCheckbox.checked);
-  } catch (e) {}
 });
 
 // ===== Basic Mode (Toggle Options) =====
@@ -1203,8 +1328,8 @@ function buildQuery() {
   if (f.minFaves.value) parts.push(`min_faves:${f.minFaves.value}`);
   if (f.minRetweets.value) parts.push(`min_retweets:${f.minRetweets.value}`);
 
-  if (f.sinceDate.value) parts.push(`since:${f.sinceDate.value}`);
-  if (f.untilDate.value) parts.push(`until:${f.untilDate.value}`);
+  if (f.sinceDate.value) parts.push(`since:${f.sinceDate.value}_00:00:00_JST`);
+  if (f.untilDate.value) parts.push(`until:${f.untilDate.value}_00:00:00_JST`);
 
   generatedQuery = parts.join(' ');
   updatePreview();
@@ -1229,6 +1354,15 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+// Apply default selection: if targetUsername exists, select 'from' option
+function applyDefaultFromSelection() {
+  const username = getTargetUsername();
+  if (username) {
+    selectedOptions.add('from');
+    saveBasicSelections();
+  }
+}
+
 function resetAll() {
   // Reset advanced mode form
   $('#queryBuilder').reset();
@@ -1242,11 +1376,22 @@ function resetAll() {
   } catch (e) {}
   // Clear specific username input
   if (specificUsernameInput) specificUsernameInput.value = '';
+  // Apply default 'from' selection if username exists
+  applyDefaultFromSelection();
   // Reset query
   generatedQuery = '';
   updatePreview();
   renderPresets();
   renderSpecificDropdown();
+  // Re-render advanced mode dropdowns
+  if (typeof keywordDropdown !== 'undefined') keywordDropdown.render();
+  if (typeof excludeKeywordDropdown !== 'undefined') excludeKeywordDropdown.render();
+  if (typeof fromUserDropdown !== 'undefined') fromUserDropdown.render();
+  if (typeof toUserDropdown !== 'undefined') toUserDropdown.render();
+  // Rebuild query for current mode
+  if (currentMode === 'basic') {
+    buildBasicQuery();
+  }
   showToast('リセットしました');
 }
 
@@ -1254,6 +1399,14 @@ function resetAll() {
 Object.values(formElements).forEach(el => {
   el.addEventListener('input', buildQuery);
   el.addEventListener('change', buildQuery);
+});
+
+// Set untilDate to sinceDate value when focused and empty
+formElements.untilDate.addEventListener('focus', () => {
+  if (formElements.sinceDate.value && !formElements.untilDate.value) {
+    formElements.untilDate.value = formElements.sinceDate.value;
+    buildQuery();
+  }
 });
 
 // Button handlers
@@ -1266,6 +1419,43 @@ searchBtn.addEventListener('click', () => {
 });
 
 resetBtn.addEventListener('click', resetAll);
+
+// ===== Advanced Mode Dropdown Managers =====
+const keywordDropdown = createDropdownManager({
+  containerId: 'keywordDropdownContainer',
+  inputId: 'keyword',
+  toggleId: 'keywordDropdownToggle',
+  dropdownId: 'keywordDropdown',
+  storageKey: LS_KEYWORDS_KEY,
+  onSelect: buildQuery
+});
+
+const excludeKeywordDropdown = createDropdownManager({
+  containerId: 'excludeKeywordDropdownContainer',
+  inputId: 'excludeKeyword',
+  toggleId: 'excludeKeywordDropdownToggle',
+  dropdownId: 'excludeKeywordDropdown',
+  storageKey: LS_EXCLUDE_KEYWORDS_KEY,
+  onSelect: buildQuery
+});
+
+const fromUserDropdown = createDropdownManager({
+  containerId: 'fromUserDropdownContainer',
+  inputId: 'fromUser',
+  toggleId: 'fromUserDropdownToggle',
+  dropdownId: 'fromUserDropdown',
+  storageKey: LS_FROM_USERS_KEY,
+  onSelect: buildQuery
+});
+
+const toUserDropdown = createDropdownManager({
+  containerId: 'toUserDropdownContainer',
+  inputId: 'toUser',
+  toggleId: 'toUserDropdownToggle',
+  dropdownId: 'toUserDropdown',
+  storageKey: LS_TO_USERS_KEY,
+  onSelect: buildQuery
+});
 
 // ===== Collapsible Sections =====
 function setupCollapsible(toggleId, contentId) {
@@ -1282,10 +1472,17 @@ setupCollapsible('referenceToggle', 'referenceContent');
 // ===== Init =====
 loadBuilderState();
 loadBasicSelections();
+// Apply default 'from' selection if no saved selections and targetUsername exists
+if (selectedOptions.size === 0) {
+  applyDefaultFromSelection();
+}
 loadSpecificUsername();
 renderDropdown();
 renderSpecificDropdown();
-initLatestTab();
+keywordDropdown.render();
+excludeKeywordDropdown.render();
+fromUserDropdown.render();
+toUserDropdown.render();
 renderPresets();
 initPastToday();
 
