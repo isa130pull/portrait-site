@@ -388,7 +388,7 @@
       <div class="query-preview-label">検索コマンド</div>
       <code id="queryOutput"><span class="empty">上で入力するとここに表示</span></code>
       <div class="query-actions">
-        <button id="copyBtn" class="primary" disabled>コピー</button>
+        <button id="copyBtn" class="primary" disabled>クリップボードにコピー</button>
         <button id="resetBtn">リセット</button>
       </div>
     </div>
@@ -675,9 +675,20 @@ function isAndroid() {
   return /Android/i.test(navigator.userAgent);
 }
 
+function isInXApp() {
+  // X/Twitterアプリの内部ブラウザを検出
+  return /Twitter/i.test(navigator.userAgent);
+}
+
 function openXSearch(query) {
   const encodedQuery = encodeURIComponent(query);
   const webUrl = `https://x.com/search?q=${encodedQuery}&src=typed_query`;
+
+  // Xアプリ内ブラウザの場合はWeb URLを直接開く
+  if (isInXApp()) {
+    window.location.href = webUrl;
+    return;
+  }
 
   if (isMobile()) {
     if (isIOS()) {
@@ -839,13 +850,23 @@ targetUsernameInput.addEventListener('input', () => {
 // Save username when used (on blur or enter)
 targetUsernameInput.addEventListener('blur', () => {
   const username = targetUsernameInput.value.trim().replace(/^@/, '');
-  if (username) addUsername(username);
+  if (username) {
+    addUsername(username);
+    applyDefaultFromSelection();
+    renderPresets();
+    buildBasicQuery();
+  }
 });
 
 targetUsernameInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     const username = targetUsernameInput.value.trim().replace(/^@/, '');
-    if (username) addUsername(username);
+    if (username) {
+      addUsername(username);
+      applyDefaultFromSelection();
+      renderPresets();
+      buildBasicQuery();
+    }
     closeDropdown();
   }
 });
