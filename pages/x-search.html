@@ -55,6 +55,9 @@
     .preset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
     .preset-btn { padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; cursor: pointer; text-align: left; transition: all 0.2s; }
     .preset-btn:hover { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent), transparent 85%); }
+    .preset-btn.selected { background: var(--accent); border-color: var(--accent); }
+    .preset-btn.selected .label { color: var(--bg); }
+    .preset-btn.selected code { color: color-mix(in oklab, var(--bg), transparent 30%); }
     .preset-btn .label { font-weight: 600; font-size: 13px; color: var(--fg); margin-bottom: 2px; }
     .preset-btn code { display: block; font-size: 11px; color: var(--muted); font-family: 'SF Mono', Consolas, monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
@@ -153,14 +156,15 @@
     .mode-content { display: none; }
     .mode-content.active { display: block; }
 
-    /* Past This Day */
-    .past-this-day { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
-    .past-this-day-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .past-this-day-title { font-weight: 600; font-size: 14px; color: var(--fg); }
-    .past-this-day-date { font-size: 13px; color: var(--muted); }
-    .year-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
-    .year-btn { padding: 10px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--fg); transition: all 0.2s; }
-    .year-btn:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent), transparent 90%); }
+    /* Past Today */
+    .past-today { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .past-today-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .past-today-title { font-weight: 600; font-size: 14px; color: var(--fg); }
+    .past-today-date { font-size: 13px; color: var(--muted); }
+    .past-today-controls { display: flex; gap: 8px; }
+    .past-today-controls select { flex: 1; max-width: 200px; }
+    .past-today-btn { padding: 8px 20px; background: var(--accent); border: none; border-radius: 8px; color: var(--bg); font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .past-today-btn:hover { opacity: 0.9; }
 
     /* Responsive */
     @media (max-width: 600px) {
@@ -169,6 +173,16 @@
       .query-actions { flex-direction: column; }
       .query-actions button { width: 100%; }
     }
+
+    /* Custom Prompt Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.2s; padding: 20px; }
+    .modal-overlay.show { opacity: 1; pointer-events: auto; }
+    .modal-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; width: 100%; max-width: 340px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .modal-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--fg); }
+    .modal-input { width: 100%; padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--fg); font-size: 15px; margin-bottom: 16px; }
+    .modal-input:focus { outline: none; border-color: var(--accent); }
+    .modal-buttons { display: flex; gap: 10px; justify-content: flex-end; }
+    .modal-buttons button { min-width: 80px; }
   </style>
 
   <!-- Firebase Analytics -->
@@ -207,7 +221,7 @@
   <section class="section">
     <!-- 共通設定 -->
     <div class="common-settings">
-      <div class="form-group" style="margin-bottom: 12px;">
+      <div class="form-group" style="margin-bottom: 0;">
         <label for="targetUsername">対象ユーザーID（@抜き）</label>
         <div class="username-dropdown" id="usernameDropdownContainer">
           <div class="username-input-wrapper">
@@ -216,12 +230,6 @@
           </div>
           <div class="dropdown-menu" id="usernameDropdown"></div>
         </div>
-      </div>
-      <div class="settings-row">
-        <label class="checkbox">
-          <input type="checkbox" id="latestTab">
-          Xで「最新」タブに遷移する
-        </label>
       </div>
     </div>
 
@@ -235,13 +243,16 @@
     <div class="mode-content active" id="basicMode">
       <div class="preset-grid" id="presetGrid"></div>
 
-      <!-- 過去のこの日 -->
-      <div class="past-this-day">
-        <div class="past-this-day-header">
-          <span class="past-this-day-title">過去のこの日</span>
-          <span class="past-this-day-date" id="todayDate"></span>
+      <!-- 過去の今日 -->
+      <div class="past-today">
+        <div class="past-today-header">
+          <span class="past-today-title">過去の今日</span>
+          <span class="past-today-date" id="todayDate"></span>
         </div>
-        <div class="year-buttons" id="yearButtons"></div>
+        <div class="past-today-controls">
+          <select id="yearSelect"></select>
+          <button type="button" id="pastTodayBtn" class="past-today-btn">検索</button>
+        </div>
       </div>
     </div>
 
@@ -270,10 +281,7 @@
         <div class="form-row">
           <div class="form-group" style="margin-bottom: 0;">
             <label for="fromUser">投稿者 (from:)</label>
-            <div style="display: flex; gap: 8px;">
-              <input type="text" id="fromUser" placeholder="@なしで入力" style="flex: 1;">
-              <button type="button" id="setFromUser" class="small">↑セット</button>
-            </div>
+            <input type="text" id="fromUser" placeholder="@なしで入力">
           </div>
           <div class="form-group" style="margin-bottom: 0;">
             <label for="toUser">宛先 (to:)</label>
@@ -301,23 +309,15 @@
           </div>
         </div>
 
-        <!-- Collapsible: Engagement -->
-        <div class="collapsible">
-          <div class="collapsible-toggle" id="engagementToggle">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 12l4-4-4-4v8z"/></svg>
-            エンゲージメント
+        <!-- Engagement -->
+        <div class="form-row" style="margin-top: 12px;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="minFaves">最小いいね数</label>
+            <input type="number" id="minFaves" min="0" placeholder="例: 100">
           </div>
-          <div class="collapsible-content" id="engagementContent">
-            <div class="form-row">
-              <div class="form-group" style="margin-bottom: 0;">
-                <label for="minFaves">最小いいね数</label>
-                <input type="number" id="minFaves" min="0" placeholder="例: 100">
-              </div>
-              <div class="form-group" style="margin-bottom: 0;">
-                <label for="minRetweets">最小RT数</label>
-                <input type="number" id="minRetweets" min="0" placeholder="例: 10">
-              </div>
-            </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="minRetweets">最小RT数</label>
+            <input type="number" id="minRetweets" min="0" placeholder="例: 10">
           </div>
         </div>
 
@@ -346,6 +346,12 @@
     </div>
 
     <!-- X検索ボタン (独立) -->
+    <div style="margin-top: 16px;">
+      <label class="checkbox" style="justify-content: center;">
+        <input type="checkbox" id="latestTab">
+        Xで「最新」タブに遷移する
+      </label>
+    </div>
     <button id="searchBtn" class="search-x-btn" disabled>Xで検索</button>
   </section>
 
@@ -388,6 +394,18 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- Custom Prompt Modal -->
+<div class="modal-overlay" id="promptModal">
+  <div class="modal-box">
+    <div class="modal-title" id="promptTitle">ユーザーIDを入力（@なし）</div>
+    <input type="text" class="modal-input" id="promptInput" placeholder="@なしで入力">
+    <div class="modal-buttons">
+      <button type="button" id="promptCancel">キャンセル</button>
+      <button type="button" class="primary" id="promptOk">OK</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ===== Utilities =====
 const $ = (q) => document.querySelector(q);
@@ -406,6 +424,49 @@ function showToast(msg) {
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 1600);
 }
+
+// Custom prompt modal
+const promptModal = $('#promptModal');
+const promptTitle = $('#promptTitle');
+const promptInput = $('#promptInput');
+const promptOkBtn = $('#promptOk');
+const promptCancelBtn = $('#promptCancel');
+let promptResolve = null;
+
+function customPrompt(title) {
+  return new Promise((resolve) => {
+    promptResolve = resolve;
+    promptTitle.textContent = title;
+    promptInput.value = '';
+    promptModal.classList.add('show');
+    setTimeout(() => promptInput.focus(), 100);
+  });
+}
+
+promptOkBtn.addEventListener('click', () => {
+  const value = promptInput.value.trim().replace(/^@/, '');
+  promptModal.classList.remove('show');
+  if (promptResolve) promptResolve(value || null);
+});
+
+promptCancelBtn.addEventListener('click', () => {
+  promptModal.classList.remove('show');
+  if (promptResolve) promptResolve(null);
+});
+
+promptInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    promptOkBtn.click();
+  } else if (e.key === 'Escape') {
+    promptCancelBtn.click();
+  }
+});
+
+promptModal.addEventListener('click', (e) => {
+  if (e.target === promptModal) {
+    promptCancelBtn.click();
+  }
+});
 
 async function copyToClipboard(text) {
   try {
@@ -426,13 +487,53 @@ async function copyToClipboard(text) {
   }
 }
 
+// Mobile detection
+function isMobile() {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+function isIOS() {
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function isAndroid() {
+  return /Android/i.test(navigator.userAgent);
+}
+
 function openXSearch(query) {
   const latestTab = $('#latestTab').checked;
-  let url = `https://x.com/search?q=${encodeURIComponent(query)}&src=typed_query`;
+  const encodedQuery = encodeURIComponent(query);
+
+  // Web URL (フォールバック用)
+  let webUrl = `https://x.com/search?q=${encodedQuery}&src=typed_query`;
   if (latestTab) {
-    url += '&f=live';
+    webUrl += '&f=live';
   }
-  window.open(url, '_blank');
+
+  if (isMobile()) {
+    if (isIOS()) {
+      // iOS: twitter:// スキーム + タイムアウトでフォールバック
+      const appUrl = `twitter://search?query=${encodedQuery}`;
+      const start = Date.now();
+
+      window.location.href = appUrl;
+
+      // アプリが開かなければ2秒後にWeb版へ
+      setTimeout(() => {
+        if (Date.now() - start < 2500) {
+          window.location.href = webUrl;
+        }
+      }, 2000);
+    } else if (isAndroid()) {
+      // Android: Intent URL (フォールバック組み込み)
+      window.location.href = `intent://search?query=${encodedQuery}#Intent;scheme=twitter;package=com.twitter.android;S.browser_fallback_url=${encodeURIComponent(webUrl)};end`;
+    } else {
+      window.open(webUrl, '_blank');
+    }
+  } else {
+    // PCの場合はブラウザで開く
+    window.open(webUrl, '_blank');
+  }
 }
 
 // ===== Target Username =====
@@ -550,7 +651,15 @@ targetUsernameInput.addEventListener('input', () => {
   const username = targetUsernameInput.value.trim().replace(/^@/, '');
   setTargetUsername(username);
   renderPresets();
-  buildQuery();
+  // Sync to advanced mode fromUser field
+  if (formElements.fromUser) {
+    formElements.fromUser.value = username;
+  }
+  if (currentMode === 'basic') {
+    buildBasicQuery();
+  } else {
+    buildQuery();
+  }
 });
 
 // Save username when used (on blur or enter)
@@ -595,8 +704,7 @@ function setMode(mode) {
 
   // Update query preview based on mode
   if (mode === 'basic') {
-    generatedQuery = '';
-    updatePreview();
+    buildBasicQuery();
   } else {
     buildQuery();
   }
@@ -622,94 +730,134 @@ latestTabCheckbox.addEventListener('change', () => {
   } catch (e) {}
 });
 
-// ===== Presets (Basic Mode) =====
-const PRESETS = [
-  { label: 'このユーザーの投稿', command: 'from:USERNAME', needsUsername: true },
-  { label: 'リプライ除外', command: 'from:USERNAME -filter:replies', needsUsername: true },
-  { label: '画像付き', command: 'from:USERNAME filter:images', needsUsername: true },
-  { label: '動画付き', command: 'from:USERNAME filter:videos', needsUsername: true },
-  { label: 'リプライ', command: 'to:USERNAME', needsUsername: true },
+// ===== Basic Mode (Toggle Options) =====
+const BASIC_OPTIONS = [
+  { id: 'from', label: 'このユーザーの投稿', command: 'from:USERNAME', group: 'user', needsUsername: true },
+  { id: 'to', label: 'このユーザーへのリプライ', command: 'to:USERNAME', group: 'user', needsUsername: true },
+  { id: 'fromReply', label: 'このユーザーからのリプライ', command: 'from:USERNAME filter:replies', group: 'user', needsUsername: true },
+  { id: 'images', label: '画像付き', command: 'filter:images', group: 'media', needsUsername: false },
+  { id: 'videos', label: '動画付き', command: 'filter:videos', group: 'media', needsUsername: false },
 ];
+
+let selectedOptions = new Set();
 
 function renderPresets() {
   const grid = $('#presetGrid');
   const username = getTargetUsername();
 
-  grid.innerHTML = PRESETS.map((p, i) => {
-    let displayCommand = p.command;
-    if (username && p.needsUsername) {
-      displayCommand = p.command.replace(/USERNAME/g, username);
+  grid.innerHTML = BASIC_OPTIONS.map(opt => {
+    const isSelected = selectedOptions.has(opt.id);
+    let displayCommand = opt.command;
+    if (username && opt.needsUsername) {
+      displayCommand = opt.command.replace(/USERNAME/g, username);
     }
     return `
-      <div class="preset-btn" data-index="${i}">
-        <div class="label">${p.label}</div>
+      <div class="preset-btn${isSelected ? ' selected' : ''}" data-id="${opt.id}">
+        <div class="label">${opt.label}</div>
         <code>${displayCommand}</code>
       </div>
     `;
   }).join('');
 
-  grid.querySelectorAll('.preset-btn').forEach((btn, i) => {
-    btn.addEventListener('click', () => handlePresetClick(PRESETS[i]));
+  grid.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => toggleOption(btn.dataset.id));
   });
 }
 
-function handlePresetClick(preset) {
-  let command = preset.command;
-  let username = getTargetUsername();
+async function toggleOption(optionId) {
+  const option = BASIC_OPTIONS.find(o => o.id === optionId);
+  if (!option) return;
 
-  if (preset.needsUsername) {
+  // Check if username is needed
+  if (option.needsUsername) {
+    let username = getTargetUsername();
     if (!username) {
-      username = prompt('ユーザーIDを入力（@なし）:');
+      username = await customPrompt('ユーザーIDを入力（@なし）');
       if (!username) return;
       setTargetUsername(username);
       targetUsernameInput.value = username;
-      renderPresets();
+      if (formElements.fromUser) {
+        formElements.fromUser.value = username;
+      }
     }
     addUsername(username);
-    command = command.replace(/USERNAME/g, username);
   }
 
-  // Update preview and copy
-  generatedQuery = command;
-  updatePreview();
-  copyToClipboard(command);
+  // Toggle selection
+  if (selectedOptions.has(optionId)) {
+    selectedOptions.delete(optionId);
+  } else {
+    // Remove other options in the same group (exclusive)
+    if (option.group) {
+      BASIC_OPTIONS.filter(o => o.group === option.group && o.id !== optionId)
+        .forEach(o => selectedOptions.delete(o.id));
+    }
+    selectedOptions.add(optionId);
+  }
+
+  renderPresets();
+  buildBasicQuery();
 }
 
-// ===== Past This Day =====
-function initPastThisDay() {
+function buildBasicQuery() {
+  if (currentMode !== 'basic') return;
+
+  const username = getTargetUsername();
+  const parts = [];
+
+  BASIC_OPTIONS.forEach(opt => {
+    if (selectedOptions.has(opt.id)) {
+      let cmd = opt.command;
+      if (opt.needsUsername && username) {
+        cmd = cmd.replace(/USERNAME/g, username);
+      }
+      parts.push(cmd);
+    }
+  });
+
+  generatedQuery = parts.join(' ');
+  updatePreview();
+}
+
+// ===== Past Today =====
+function initPastToday() {
   const today = new Date();
   const month = today.getMonth() + 1;
   const day = today.getDate();
+  const currentYear = today.getFullYear();
 
   // Display today's date
   $('#todayDate').textContent = `${month}月${day}日`;
 
-  // Generate year buttons (1-5 years ago)
-  const yearButtonsContainer = $('#yearButtons');
-  const years = [1, 2, 3, 4, 5];
+  // Generate year options (1-15 years ago)
+  const yearSelect = $('#yearSelect');
+  let options = '';
+  for (let y = 1; y <= 15; y++) {
+    const targetYear = currentYear - y;
+    options += `<option value="${y}">${y}年前（${targetYear}年）</option>`;
+  }
+  yearSelect.innerHTML = options;
 
-  yearButtonsContainer.innerHTML = years.map(y => {
-    const targetYear = today.getFullYear() - y;
-    return `<button class="year-btn" data-years="${y}">${y}年前（${targetYear}年）</button>`;
-  }).join('');
-
-  yearButtonsContainer.querySelectorAll('.year-btn').forEach(btn => {
-    btn.addEventListener('click', () => handlePastThisDayClick(parseInt(btn.dataset.years)));
-  });
+  // Button click handler
+  $('#pastTodayBtn').addEventListener('click', handlePastTodayClick);
 }
 
-function handlePastThisDayClick(yearsAgo) {
+async function handlePastTodayClick() {
   let username = getTargetUsername();
 
   if (!username) {
-    username = prompt('ユーザーIDを入力（@なし）:');
+    username = await customPrompt('ユーザーIDを入力（@なし）');
     if (!username) return;
     setTargetUsername(username);
     targetUsernameInput.value = username;
+    if (formElements.fromUser) {
+      formElements.fromUser.value = username;
+    }
     renderPresets();
   }
   addUsername(username);
 
+  const yearsAgo = parseInt($('#yearSelect').value);
   const today = new Date();
   const targetDate = new Date(today.getFullYear() - yearsAgo, today.getMonth(), today.getDate());
   const nextDate = new Date(targetDate);
@@ -834,13 +982,12 @@ function escapeHtml(str) {
 }
 
 function resetAll() {
-  // Reset form
+  // Reset advanced mode form
   $('#queryBuilder').reset();
-  // Reset target username
-  targetUsernameInput.value = '';
-  setTargetUsername('');
-  // Clear storage
+  // Clear advanced mode storage
   clearBuilderState();
+  // Reset basic mode selections
+  selectedOptions.clear();
   // Reset query
   generatedQuery = '';
   updatePreview();
@@ -852,17 +999,6 @@ function resetAll() {
 Object.values(formElements).forEach(el => {
   el.addEventListener('input', buildQuery);
   el.addEventListener('change', buildQuery);
-});
-
-// Set from target username button
-$('#setFromUser').addEventListener('click', () => {
-  const username = getTargetUsername();
-  if (username) {
-    formElements.fromUser.value = username;
-    buildQuery();
-  } else {
-    showToast('対象ユーザーIDを入力してください');
-  }
 });
 
 // Button handlers
@@ -886,14 +1022,21 @@ function setupCollapsible(toggleId, contentId) {
   });
 }
 
-setupCollapsible('engagementToggle', 'engagementContent');
 setupCollapsible('referenceToggle', 'referenceContent');
 
 // ===== Init =====
 loadBuilderState();
 renderDropdown();
+initLatestTab();
 renderPresets();
-initPastThisDay();
+initPastToday();
+
+// Sync target username to fromUser on load
+const savedUsername = getTargetUsername();
+if (savedUsername && formElements.fromUser && !formElements.fromUser.value) {
+  formElements.fromUser.value = savedUsername;
+}
+
 setMode(currentMode);
 if (currentMode === 'advanced') {
   buildQuery();
