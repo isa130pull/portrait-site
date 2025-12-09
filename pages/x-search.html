@@ -684,9 +684,10 @@ function openXSearch(query) {
   const encodedQuery = encodeURIComponent(query);
   const webUrl = `https://x.com/search?q=${encodedQuery}&src=typed_query`;
 
-  // Xアプリ内ブラウザの場合はWeb URLを直接開く
+  // Xアプリ内ブラウザの場合はコピーして案内
   if (isInXApp()) {
-    window.location.href = webUrl;
+    copyToClipboard(query);
+    showToast('検索コマンドをコピーしました。Xアプリの検索欄に貼り付けてください');
     return;
   }
 
