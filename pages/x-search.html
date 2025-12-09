@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>X検索コマンドビルダー | かわぐち（isa130pull）</title>
+  <meta name="description" content="X(旧Twitter)の高度な検索クエリを簡単に作成できるツール。プリセットコマンドとクエリビルダーで複雑な検索も楽々。" />
+  <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/x-search.html" />
+  <link rel="icon" href="../images/index/favicon.ico" />
+
+  <style>
+    :root {
+      --bg: #0b0c0f;
+      --fg: #e8eaed;
+      --muted: #a1a7b3;
+      --accent: #6ee7ff;
+      --card: #14161a;
+      --border: #1f2329;
+      --maxw: 900px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#ffffff; --fg:#111318; --muted:#5a6472; --card:#f7f8fa; --border:#e5e7eb; --accent:#0ea5e9; }
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: var(--maxw); margin-inline: auto; padding: 24px; }
+    header { padding: 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+    h1 { font-size: clamp(24px, 4vw, 32px); margin: 0; }
+    h2 { font-size: clamp(16px, 3vw, 18px); margin: 0 0 12px; font-weight: 600; }
+    .back-link { display: inline-block; margin-bottom: 16px; padding: 8px 16px; border: 1px solid var(--border); border-radius: 8px; color: var(--fg); font-size: 14px; }
+    .back-link:hover { border-color: var(--accent); text-decoration: none; }
+
+    /* Section Card */
+    .section { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+
+    /* Common Settings */
+    .common-settings { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .settings-row { display: flex; align-items: center; gap: 16px; }
+
+    /* Search X Button */
+    .search-x-btn { width: 100%; padding: 14px 24px; background: var(--bg); border: 2px solid var(--accent); border-radius: 10px; color: var(--accent); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 16px; }
+    .search-x-btn:hover:not(:disabled) { background: var(--accent); color: var(--bg); }
+    .search-x-btn:disabled { opacity: 0.4; cursor: not-allowed; border-color: var(--border); color: var(--muted); }
+
+    /* Mode Tabs */
+    .mode-tabs { display: flex; gap: 0; margin-bottom: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .mode-tab { flex: 1; padding: 12px 16px; background: transparent; border: none; color: var(--muted); cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; text-align: center; }
+    .mode-tab:hover { color: var(--fg); }
+    .mode-tab.active { background: var(--accent); color: var(--bg); font-weight: 600; }
+
+    /* Preset Grid */
+    .preset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+    .preset-btn { padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; cursor: pointer; text-align: left; transition: all 0.2s; }
+    .preset-btn:hover { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent), transparent 85%); }
+    .preset-btn .label { font-weight: 600; font-size: 13px; color: var(--fg); margin-bottom: 2px; }
+    .preset-btn code { display: block; font-size: 11px; color: var(--muted); font-family: 'SF Mono', Consolas, monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* Form Styles */
+    .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 12px; }
+    .form-group { margin-bottom: 12px; }
+    .form-group.inline { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 13px; color: var(--fg); }
+    label.checkbox { display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer; font-size: 13px; }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--fg);
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus { outline: none; border-color: var(--accent); }
+    input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
+    input[type="number"] { -moz-appearance: textfield; }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a1a7b3' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 32px;
+    }
+
+    /* Username Dropdown */
+    .username-dropdown { position: relative; }
+    .username-input-wrapper { display: flex; gap: 0; }
+    .username-input-wrapper input { border-radius: 8px 0 0 8px; flex: 1; }
+    .dropdown-toggle { padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-left: none; border-radius: 0 8px 8px 0; color: var(--muted); cursor: pointer; font-size: 12px; transition: all 0.2s; }
+    .dropdown-toggle:hover { color: var(--fg); background: var(--card); }
+    .dropdown-menu { position: absolute; top: 100%; left: 0; right: 0; background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-top: 4px; display: none; z-index: 100; max-height: 240px; overflow-y: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .dropdown-menu.show { display: block; }
+    .dropdown-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; cursor: pointer; font-size: 14px; transition: background 0.15s; }
+    .dropdown-item:hover { background: var(--bg); }
+    .dropdown-item.selected { color: var(--accent); }
+    .dropdown-item .username { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dropdown-item .delete-btn { padding: 2px 6px; background: transparent; border: none; color: var(--muted); cursor: pointer; font-size: 14px; border-radius: 4px; opacity: 0; transition: all 0.15s; }
+    .dropdown-item:hover .delete-btn { opacity: 1; }
+    .dropdown-item .delete-btn:hover { background: color-mix(in oklab, #ef4444, transparent 80%); color: #ef4444; }
+    .dropdown-empty { padding: 12px; color: var(--muted); font-size: 13px; text-align: center; }
+
+    /* Collapsible Section */
+    .collapsible { margin-top: 12px; }
+    .collapsible-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--muted); font-size: 13px; font-weight: 500; padding: 8px 0; }
+    .collapsible-toggle:hover { color: var(--fg); }
+    .collapsible-toggle svg { transition: transform 0.2s; width: 14px; height: 14px; }
+    .collapsible-toggle.open svg { transform: rotate(90deg); }
+    .collapsible-content { display: none; padding-top: 12px; }
+    .collapsible-content.show { display: block; }
+
+    /* Query Preview */
+    .query-preview { background: var(--bg); border: 2px solid var(--accent); border-radius: 12px; padding: 14px; margin-top: 16px; }
+    .query-preview-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .query-preview code { display: block; font-family: 'SF Mono', Consolas, monospace; font-size: 14px; color: var(--accent); word-break: break-all; min-height: 20px; }
+    .query-preview .empty { color: var(--muted); font-style: italic; }
+    .query-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+
+    /* Buttons */
+    button { appearance: none; border: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; }
+    button:hover { border-color: var(--accent); }
+    button.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+    button.primary:hover { opacity: 0.9; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button.small { padding: 6px 12px; font-size: 12px; }
+
+    /* Toast */
+    .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--card); color: var(--fg); border: 1px solid var(--border); padding: 10px 18px; border-radius: 10px; opacity: 0; pointer-events: none; transition: opacity 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000; font-size: 14px; }
+    .toast.show { opacity: 1; }
+
+    /* Reference Section */
+    .reference { margin-top: 8px; }
+    .reference-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--muted); font-size: 13px; padding: 8px 0; }
+    .reference-toggle:hover { color: var(--fg); }
+    .reference-toggle svg { transition: transform 0.2s; }
+    .reference-toggle.open svg { transform: rotate(90deg); }
+    .reference-content { display: none; margin-top: 12px; }
+    .reference-content.show { display: block; }
+    .reference-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .reference-table th, .reference-table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+    .reference-table th { color: var(--muted); font-weight: 600; }
+    .reference-table code { background: var(--bg); padding: 2px 5px; border-radius: 4px; font-size: 11px; }
+
+    /* Mode Content */
+    .mode-content { display: none; }
+    .mode-content.active { display: block; }
+
+    /* Past This Day */
+    .past-this-day { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .past-this-day-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .past-this-day-title { font-weight: 600; font-size: 14px; color: var(--fg); }
+    .past-this-day-date { font-size: 13px; color: var(--muted); }
+    .year-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+    .year-btn { padding: 10px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--fg); transition: all 0.2s; }
+    .year-btn:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent), transparent 90%); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .preset-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .query-actions { flex-direction: column; }
+      .query-actions button { width: 100%; }
+    }
+  </style>
+
+  <!-- Firebase Analytics -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCNXbUt440aa0cMaNS8nN-vHHbsgRMn9-A",
+      authDomain: "portal-site-38285.firebaseapp.com",
+      projectId: "portal-site-38285",
+      storageBucket: "portal-site-38285.firebasestorage.app",
+      messagingSenderId: "398085669341",
+      appId: "1:398085669341:web:dc3db9c8d32174b3e87634",
+      measurementId: "G-CF20TVK6DP"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    logEvent(analytics, 'page_view', {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: window.location.pathname
+    });
+  </script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a href="../index.html" class="back-link">← トップページに戻る</a>
+    <h1>X検索コマンドビルダー</h1>
+  </header>
+
+  <!-- Main Section -->
+  <section class="section">
+    <!-- 共通設定 -->
+    <div class="common-settings">
+      <div class="form-group" style="margin-bottom: 12px;">
+        <label for="targetUsername">対象ユーザーID（@抜き）</label>
+        <div class="username-dropdown" id="usernameDropdownContainer">
+          <div class="username-input-wrapper">
+            <input type="text" id="targetUsername" placeholder="@なしで入力" autocomplete="off">
+            <button type="button" class="dropdown-toggle" id="dropdownToggle">▼</button>
+          </div>
+          <div class="dropdown-menu" id="usernameDropdown"></div>
+        </div>
+      </div>
+      <div class="settings-row">
+        <label class="checkbox">
+          <input type="checkbox" id="latestTab">
+          Xで「最新」タブに遷移する
+        </label>
+      </div>
+    </div>
+
+    <!-- Mode Tabs -->
+    <div class="mode-tabs">
+      <button class="mode-tab active" data-mode="basic">基本</button>
+      <button class="mode-tab" data-mode="advanced">詳細</button>
+    </div>
+
+    <!-- Basic Mode -->
+    <div class="mode-content active" id="basicMode">
+      <div class="preset-grid" id="presetGrid"></div>
+
+      <!-- 過去のこの日 -->
+      <div class="past-this-day">
+        <div class="past-this-day-header">
+          <span class="past-this-day-title">過去のこの日</span>
+          <span class="past-this-day-date" id="todayDate"></span>
+        </div>
+        <div class="year-buttons" id="yearButtons"></div>
+      </div>
+    </div>
+
+    <!-- Advanced Mode -->
+    <div class="mode-content" id="advancedMode">
+      <form id="queryBuilder">
+        <!-- Keywords -->
+        <div class="form-row" style="align-items: flex-end;">
+          <div class="form-group" style="flex: 1; margin-bottom: 0;">
+            <label for="keyword">検索キーワード</label>
+            <input type="text" id="keyword" placeholder="例: Unity ゲーム開発">
+          </div>
+          <div class="form-group inline" style="margin-bottom: 0;">
+            <label class="checkbox">
+              <input type="checkbox" id="exactMatch">
+              完全一致
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="excludeKeyword">除外キーワード</label>
+          <input type="text" id="excludeKeyword" placeholder="スペース区切りで複数指定">
+        </div>
+
+        <!-- Users -->
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="fromUser">投稿者 (from:)</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="fromUser" placeholder="@なしで入力" style="flex: 1;">
+              <button type="button" id="setFromUser" class="small">↑セット</button>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="toUser">宛先 (to:)</label>
+            <input type="text" id="toUser" placeholder="@なしで入力">
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="form-row" style="margin-top: 12px;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="mediaType">メディア</label>
+            <select id="mediaType">
+              <option value="">指定なし</option>
+              <option value="images">画像付き</option>
+              <option value="videos">動画付き</option>
+              <option value="links">リンク付き</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="replyFilter">リプライ</label>
+            <select id="replyFilter">
+              <option value="">含む</option>
+              <option value="exclude">除外</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Collapsible: Engagement -->
+        <div class="collapsible">
+          <div class="collapsible-toggle" id="engagementToggle">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 12l4-4-4-4v8z"/></svg>
+            エンゲージメント
+          </div>
+          <div class="collapsible-content" id="engagementContent">
+            <div class="form-row">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="minFaves">最小いいね数</label>
+                <input type="number" id="minFaves" min="0" placeholder="例: 100">
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="minRetweets">最小RT数</label>
+                <input type="number" id="minRetweets" min="0" placeholder="例: 10">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Date Range -->
+        <div class="form-row" style="margin-top: 12px;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="sinceDate">開始日</label>
+            <input type="date" id="sinceDate">
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="untilDate">終了日</label>
+            <input type="date" id="untilDate">
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Query Preview (共通) -->
+    <div class="query-preview">
+      <div class="query-preview-label">生成されたクエリ</div>
+      <code id="queryOutput"><span class="empty">上で入力するとここに表示</span></code>
+      <div class="query-actions">
+        <button id="copyBtn" class="primary" disabled>コピー</button>
+        <button id="resetBtn">リセット</button>
+      </div>
+    </div>
+
+    <!-- X検索ボタン (独立) -->
+    <button id="searchBtn" class="search-x-btn" disabled>Xで検索</button>
+  </section>
+
+  <!-- Reference Section -->
+  <section class="section">
+    <div class="reference">
+      <div class="reference-toggle" id="referenceToggle">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 12l4-4-4-4v8z"/></svg>
+        コマンドリファレンス
+      </div>
+      <div class="reference-content" id="referenceContent">
+        <table class="reference-table">
+          <thead>
+            <tr>
+              <th>コマンド</th>
+              <th>説明</th>
+              <th>例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>from:</code></td><td>特定ユーザーの投稿</td><td><code>from:username</code></td></tr>
+            <tr><td><code>to:</code></td><td>特定ユーザーへのリプライ</td><td><code>to:username</code></td></tr>
+            <tr><td><code>@</code></td><td>特定ユーザーへのメンション</td><td><code>@username</code></td></tr>
+            <tr><td><code>since:</code></td><td>指定日以降</td><td><code>since:2024-01-01</code></td></tr>
+            <tr><td><code>until:</code></td><td>指定日まで</td><td><code>until:2024-12-31</code></td></tr>
+            <tr><td><code>filter:images</code></td><td>画像付き投稿のみ</td><td></td></tr>
+            <tr><td><code>filter:videos</code></td><td>動画付き投稿のみ</td><td></td></tr>
+            <tr><td><code>-filter:replies</code></td><td>リプライを除外</td><td></td></tr>
+            <tr><td><code>min_faves:</code></td><td>最小いいね数</td><td><code>min_faves:100</code></td></tr>
+            <tr><td><code>min_retweets:</code></td><td>最小リツイート数</td><td><code>min_retweets:10</code></td></tr>
+            <tr><td><code>lang:</code></td><td>言語指定</td><td><code>lang:ja</code></td></tr>
+            <tr><td><code>"..."</code></td><td>完全一致検索</td><td><code>"Unity 開発"</code></td></tr>
+            <tr><td><code>-</code></td><td>除外</td><td><code>-広告</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== Utilities =====
+const $ = (q) => document.querySelector(q);
+const $$ = (q) => document.querySelectorAll(q);
+const toast = $('#toast');
+
+const LS_USERNAME_KEY = 'x-search.username';
+const LS_USERNAMES_KEY = 'x-search.usernames';
+const LS_BUILDER_KEY = 'x-search.builder';
+const LS_MODE_KEY = 'x-search.mode';
+const LS_LATEST_TAB_KEY = 'x-search.latestTab';
+const MAX_SAVED_USERNAMES = 10;
+
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 1600);
+}
+
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('コピーしました');
+    return true;
+  } catch (e) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    showToast('コピーしました');
+    return true;
+  }
+}
+
+function openXSearch(query) {
+  const latestTab = $('#latestTab').checked;
+  let url = `https://x.com/search?q=${encodeURIComponent(query)}&src=typed_query`;
+  if (latestTab) {
+    url += '&f=live';
+  }
+  window.open(url, '_blank');
+}
+
+// ===== Target Username =====
+const targetUsernameInput = $('#targetUsername');
+const dropdownToggle = $('#dropdownToggle');
+const usernameDropdown = $('#usernameDropdown');
+
+function getTargetUsername() {
+  try { return localStorage.getItem(LS_USERNAME_KEY) || ''; } catch (e) { return ''; }
+}
+
+function setTargetUsername(username) {
+  try {
+    if (username) { localStorage.setItem(LS_USERNAME_KEY, username); }
+    else { localStorage.removeItem(LS_USERNAME_KEY); }
+  } catch (e) {}
+}
+
+// ===== Saved Usernames (Multiple) =====
+function getSavedUsernames() {
+  try {
+    const saved = localStorage.getItem(LS_USERNAMES_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (e) { return []; }
+}
+
+function saveSavedUsernames(usernames) {
+  try {
+    localStorage.setItem(LS_USERNAMES_KEY, JSON.stringify(usernames));
+  } catch (e) {}
+}
+
+function addUsername(username) {
+  if (!username) return;
+  const usernames = getSavedUsernames();
+  // Remove if exists (to move to top)
+  const index = usernames.indexOf(username);
+  if (index > -1) usernames.splice(index, 1);
+  // Add to beginning
+  usernames.unshift(username);
+  // Limit to max
+  if (usernames.length > MAX_SAVED_USERNAMES) {
+    usernames.length = MAX_SAVED_USERNAMES;
+  }
+  saveSavedUsernames(usernames);
+  renderDropdown();
+}
+
+function removeUsername(username) {
+  const usernames = getSavedUsernames();
+  const index = usernames.indexOf(username);
+  if (index > -1) {
+    usernames.splice(index, 1);
+    saveSavedUsernames(usernames);
+    renderDropdown();
+  }
+}
+
+// ===== Dropdown UI =====
+function renderDropdown() {
+  const usernames = getSavedUsernames();
+  const currentUsername = getTargetUsername();
+
+  if (usernames.length === 0) {
+    usernameDropdown.innerHTML = '<div class="dropdown-empty">保存済みのIDはありません</div>';
+    return;
+  }
+
+  usernameDropdown.innerHTML = usernames.map(u => {
+    const isSelected = u === currentUsername;
+    return `
+      <div class="dropdown-item${isSelected ? ' selected' : ''}" data-username="${escapeHtml(u)}">
+        <span class="username">${escapeHtml(u)}</span>
+        <button class="delete-btn" data-delete="${escapeHtml(u)}">×</button>
+      </div>
+    `;
+  }).join('');
+
+  // Add click handlers
+  usernameDropdown.querySelectorAll('.dropdown-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete-btn')) return;
+      selectUsername(item.dataset.username);
+    });
+  });
+
+  usernameDropdown.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      removeUsername(btn.dataset.delete);
+    });
+  });
+}
+
+function toggleDropdown() {
+  usernameDropdown.classList.toggle('show');
+}
+
+function closeDropdown() {
+  usernameDropdown.classList.remove('show');
+}
+
+function selectUsername(username) {
+  targetUsernameInput.value = username;
+  setTargetUsername(username);
+  renderPresets();
+  buildQuery();
+  closeDropdown();
+  renderDropdown();
+}
+
+// Event listeners
+targetUsernameInput.value = getTargetUsername();
+targetUsernameInput.addEventListener('input', () => {
+  const username = targetUsernameInput.value.trim().replace(/^@/, '');
+  setTargetUsername(username);
+  renderPresets();
+  buildQuery();
+});
+
+// Save username when used (on blur or enter)
+targetUsernameInput.addEventListener('blur', () => {
+  const username = targetUsernameInput.value.trim().replace(/^@/, '');
+  if (username) addUsername(username);
+});
+
+targetUsernameInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const username = targetUsernameInput.value.trim().replace(/^@/, '');
+    if (username) addUsername(username);
+    closeDropdown();
+  }
+});
+
+dropdownToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  toggleDropdown();
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#usernameDropdownContainer')) {
+    closeDropdown();
+  }
+});
+
+// ===== Mode Switching =====
+let currentMode = localStorage.getItem(LS_MODE_KEY) || 'basic';
+
+function setMode(mode) {
+  currentMode = mode;
+  try { localStorage.setItem(LS_MODE_KEY, mode); } catch (e) {}
+
+  $$('.mode-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.mode === mode);
+  });
+  $$('.mode-content').forEach(content => {
+    content.classList.toggle('active', content.id === (mode === 'basic' ? 'basicMode' : 'advancedMode'));
+  });
+
+  // Update query preview based on mode
+  if (mode === 'basic') {
+    generatedQuery = '';
+    updatePreview();
+  } else {
+    buildQuery();
+  }
+}
+
+$$('.mode-tab').forEach(tab => {
+  tab.addEventListener('click', () => setMode(tab.dataset.mode));
+});
+
+// ===== Latest Tab Setting =====
+const latestTabCheckbox = $('#latestTab');
+
+function initLatestTab() {
+  try {
+    const saved = localStorage.getItem(LS_LATEST_TAB_KEY);
+    latestTabCheckbox.checked = saved === 'true';
+  } catch (e) {}
+}
+
+latestTabCheckbox.addEventListener('change', () => {
+  try {
+    localStorage.setItem(LS_LATEST_TAB_KEY, latestTabCheckbox.checked);
+  } catch (e) {}
+});
+
+// ===== Presets (Basic Mode) =====
+const PRESETS = [
+  { label: 'このユーザーの投稿', command: 'from:USERNAME', needsUsername: true },
+  { label: 'リプライ除外', command: 'from:USERNAME -filter:replies', needsUsername: true },
+  { label: '画像付き', command: 'from:USERNAME filter:images', needsUsername: true },
+  { label: '動画付き', command: 'from:USERNAME filter:videos', needsUsername: true },
+  { label: 'リプライ', command: 'to:USERNAME', needsUsername: true },
+];
+
+function renderPresets() {
+  const grid = $('#presetGrid');
+  const username = getTargetUsername();
+
+  grid.innerHTML = PRESETS.map((p, i) => {
+    let displayCommand = p.command;
+    if (username && p.needsUsername) {
+      displayCommand = p.command.replace(/USERNAME/g, username);
+    }
+    return `
+      <div class="preset-btn" data-index="${i}">
+        <div class="label">${p.label}</div>
+        <code>${displayCommand}</code>
+      </div>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('.preset-btn').forEach((btn, i) => {
+    btn.addEventListener('click', () => handlePresetClick(PRESETS[i]));
+  });
+}
+
+function handlePresetClick(preset) {
+  let command = preset.command;
+  let username = getTargetUsername();
+
+  if (preset.needsUsername) {
+    if (!username) {
+      username = prompt('ユーザーIDを入力（@なし）:');
+      if (!username) return;
+      setTargetUsername(username);
+      targetUsernameInput.value = username;
+      renderPresets();
+    }
+    addUsername(username);
+    command = command.replace(/USERNAME/g, username);
+  }
+
+  // Update preview and copy
+  generatedQuery = command;
+  updatePreview();
+  copyToClipboard(command);
+}
+
+// ===== Past This Day =====
+function initPastThisDay() {
+  const today = new Date();
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+
+  // Display today's date
+  $('#todayDate').textContent = `${month}月${day}日`;
+
+  // Generate year buttons (1-5 years ago)
+  const yearButtonsContainer = $('#yearButtons');
+  const years = [1, 2, 3, 4, 5];
+
+  yearButtonsContainer.innerHTML = years.map(y => {
+    const targetYear = today.getFullYear() - y;
+    return `<button class="year-btn" data-years="${y}">${y}年前（${targetYear}年）</button>`;
+  }).join('');
+
+  yearButtonsContainer.querySelectorAll('.year-btn').forEach(btn => {
+    btn.addEventListener('click', () => handlePastThisDayClick(parseInt(btn.dataset.years)));
+  });
+}
+
+function handlePastThisDayClick(yearsAgo) {
+  let username = getTargetUsername();
+
+  if (!username) {
+    username = prompt('ユーザーIDを入力（@なし）:');
+    if (!username) return;
+    setTargetUsername(username);
+    targetUsernameInput.value = username;
+    renderPresets();
+  }
+  addUsername(username);
+
+  const today = new Date();
+  const targetDate = new Date(today.getFullYear() - yearsAgo, today.getMonth(), today.getDate());
+  const nextDate = new Date(targetDate);
+  nextDate.setDate(nextDate.getDate() + 1);
+
+  const formatDate = (d) => {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  };
+
+  const query = `from:${username} since:${formatDate(targetDate)}_00:00:00_JST until:${formatDate(nextDate)}_00:00:00_JST`;
+
+  generatedQuery = query;
+  updatePreview();
+  copyToClipboard(query);
+  openXSearch(query);
+}
+
+// ===== Query Builder (Advanced Mode) =====
+const formElements = {
+  keyword: $('#keyword'),
+  exactMatch: $('#exactMatch'),
+  excludeKeyword: $('#excludeKeyword'),
+  fromUser: $('#fromUser'),
+  toUser: $('#toUser'),
+  mediaType: $('#mediaType'),
+  replyFilter: $('#replyFilter'),
+  minFaves: $('#minFaves'),
+  minRetweets: $('#minRetweets'),
+  sinceDate: $('#sinceDate'),
+  untilDate: $('#untilDate')
+};
+
+const queryOutput = $('#queryOutput');
+const copyBtn = $('#copyBtn');
+const searchBtn = $('#searchBtn');
+const resetBtn = $('#resetBtn');
+
+let generatedQuery = '';
+
+function saveBuilderState() {
+  try {
+    const state = {};
+    Object.entries(formElements).forEach(([key, el]) => {
+      state[key] = el.type === 'checkbox' ? el.checked : el.value;
+    });
+    localStorage.setItem(LS_BUILDER_KEY, JSON.stringify(state));
+  } catch (e) {}
+}
+
+function loadBuilderState() {
+  try {
+    const saved = localStorage.getItem(LS_BUILDER_KEY);
+    if (!saved) return;
+    const state = JSON.parse(saved);
+    Object.entries(state).forEach(([key, value]) => {
+      const el = formElements[key];
+      if (!el) return;
+      if (el.type === 'checkbox') { el.checked = value; }
+      else { el.value = value; }
+    });
+  } catch (e) {}
+}
+
+function clearBuilderState() {
+  try { localStorage.removeItem(LS_BUILDER_KEY); } catch (e) {}
+}
+
+function buildQuery() {
+  if (currentMode !== 'advanced') return;
+
+  const parts = [];
+  const f = formElements;
+
+  const keyword = f.keyword.value.trim();
+  if (keyword) {
+    parts.push(f.exactMatch.checked ? `"${keyword}"` : keyword);
+  }
+
+  const excludes = f.excludeKeyword.value.trim();
+  if (excludes) {
+    excludes.split(/\s+/).forEach(word => {
+      if (word) parts.push(`-${word}`);
+    });
+  }
+
+  if (f.fromUser.value.trim()) parts.push(`from:${f.fromUser.value.trim()}`);
+  if (f.toUser.value.trim()) parts.push(`to:${f.toUser.value.trim()}`);
+
+  if (f.mediaType.value) parts.push(`filter:${f.mediaType.value}`);
+  if (f.replyFilter.value === 'exclude') parts.push('-filter:replies');
+
+  if (f.minFaves.value) parts.push(`min_faves:${f.minFaves.value}`);
+  if (f.minRetweets.value) parts.push(`min_retweets:${f.minRetweets.value}`);
+
+  if (f.sinceDate.value) parts.push(`since:${f.sinceDate.value}`);
+  if (f.untilDate.value) parts.push(`until:${f.untilDate.value}`);
+
+  generatedQuery = parts.join(' ');
+  updatePreview();
+  saveBuilderState();
+}
+
+function updatePreview() {
+  if (generatedQuery) {
+    queryOutput.innerHTML = `<span>${escapeHtml(generatedQuery)}</span>`;
+    copyBtn.disabled = false;
+    searchBtn.disabled = false;
+  } else {
+    queryOutput.innerHTML = '<span class="empty">上で入力するとここに表示</span>';
+    copyBtn.disabled = true;
+    searchBtn.disabled = true;
+  }
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function resetAll() {
+  // Reset form
+  $('#queryBuilder').reset();
+  // Reset target username
+  targetUsernameInput.value = '';
+  setTargetUsername('');
+  // Clear storage
+  clearBuilderState();
+  // Reset query
+  generatedQuery = '';
+  updatePreview();
+  renderPresets();
+  showToast('リセットしました');
+}
+
+// Form event listeners
+Object.values(formElements).forEach(el => {
+  el.addEventListener('input', buildQuery);
+  el.addEventListener('change', buildQuery);
+});
+
+// Set from target username button
+$('#setFromUser').addEventListener('click', () => {
+  const username = getTargetUsername();
+  if (username) {
+    formElements.fromUser.value = username;
+    buildQuery();
+  } else {
+    showToast('対象ユーザーIDを入力してください');
+  }
+});
+
+// Button handlers
+copyBtn.addEventListener('click', () => {
+  if (generatedQuery) copyToClipboard(generatedQuery);
+});
+
+searchBtn.addEventListener('click', () => {
+  if (generatedQuery) openXSearch(generatedQuery);
+});
+
+resetBtn.addEventListener('click', resetAll);
+
+// ===== Collapsible Sections =====
+function setupCollapsible(toggleId, contentId) {
+  const toggle = $(`#${toggleId}`);
+  const content = $(`#${contentId}`);
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('open');
+    content.classList.toggle('show');
+  });
+}
+
+setupCollapsible('engagementToggle', 'engagementContent');
+setupCollapsible('referenceToggle', 'referenceContent');
+
+// ===== Init =====
+loadBuilderState();
+renderDropdown();
+renderPresets();
+initPastThisDay();
+setMode(currentMode);
+if (currentMode === 'advanced') {
+  buildQuery();
+}
+</script>
+</body>
+</html>
