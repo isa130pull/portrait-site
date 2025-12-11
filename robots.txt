@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://isa130pull.github.io/portrait-site/sitemap.xml
+
+# インデックス不要なページ
+Disallow: /pages/privacy.html
+Disallow: /pages/contact.html
