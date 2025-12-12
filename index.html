@@ -9,6 +9,9 @@
   <meta name="author" content="かわぐち (isa130pull)" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/" />
 
+  <!-- Preload critical resources -->
+  <link rel="preload" href="images/profile@1x.jpg" as="image">
+
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="images/index/favicon.ico">
   <link rel="icon" type="image/png" sizes="96x96" href="images/index/favicon-96x96.png">
@@ -639,6 +642,63 @@
   }
   </script>
 
+  <!-- JSON-LD (WebSite) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://isa130pull.github.io/portrait-site/",
+    "name": "かわぐち（isa130pull）ポートフォリオ",
+    "description": "Unityゲームエンジニア かわぐち（isa130pull）のポートフォリオサイト",
+    "author": {
+      "@type": "Person",
+      "name": "かわぐち (isa130pull)"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD (SoftwareApplication - breaker) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "breaker:ブロック崩し",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "iOS, Android",
+    "description": "30秒でブロックを壊し続けるカジュアルゲーム。100万DL達成。",
+    "author": {
+      "@type": "Person",
+      "name": "かわぐち (isa130pull)"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD (SoftwareApplication - いえばく!) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "いえばく!",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "iOS, Android",
+    "description": "30秒で家を破壊するカジュアル破壊ゲーム。",
+    "author": {
+      "@type": "Person",
+      "name": "かわぐち (isa130pull)"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    }
+  }
+  </script>
+
   <!-- Firebase Analytics -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
@@ -689,7 +749,7 @@
         <p class="muted">Unity を使ったモバイルゲーム開発が専門。カジュアルゲームからマネタイズ設計まで幅広く対応します。</p>
       </div>
       <div class="avatar-wrap">
-        <img class="avatar" src="images/profile@1x.jpg" alt="かわぐちのポートレート写真" loading="lazy" width="220" height="220" />
+        <img class="avatar" src="images/profile@1x.jpg" alt="かわぐちのポートレート写真" width="220" height="220" fetchpriority="high" />
       </div>
     </section>
 
