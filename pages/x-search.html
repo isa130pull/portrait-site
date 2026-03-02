@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>X(旧Twitter)検索ビルダー</title>
+  <title>X(旧Twitter)検索コマンドビルダー - 高度な検索を簡単作成【無料】</title>
   <meta name="description" content="X(旧Twitter)の高度な検索クエリを簡単に作成できるツール。プリセットコマンドとクエリビルダーで複雑な検索も楽々。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/x-search.html" />
   <link rel="icon" href="../images/index/favicon.ico" />
@@ -21,15 +21,21 @@
   <meta name="twitter:title" content="X(旧Twitter)検索ビルダー" />
   <meta name="twitter:description" content="X(旧Twitter)の高度な検索クエリを簡単に作成できるツール。" />
 
-  <!-- JSON-LD WebSite -->
+  <!-- JSON-LD WebApplication -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "url": "https://isa130pull.github.io/portrait-site/",
-    "name": "X検索コマンドビルダー",
-    "alternateName": "かわぐち（isa130pull）ポートフォリオ",
-    "description": "X(旧Twitter)の高度な検索クエリを簡単に作成できるツール",
+    "@type": "WebApplication",
+    "name": "X(旧Twitter)検索コマンドビルダー",
+    "url": "https://isa130pull.github.io/portrait-site/pages/x-search.html",
+    "description": "X(旧Twitter)の高度な検索クエリを簡単に作成できる無料ツール。from:、since:、filter: などの検索オペレーターをフォーム入力で組み立て。",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    },
     "author": {
       "@type": "Person",
       "name": "かわぐち (isa130pull)"
@@ -235,29 +241,25 @@
     .modal-buttons button { min-width: 80px; }
   </style>
 
-  <!-- Firebase Analytics -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-    import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCNXbUt440aa0cMaNS8nN-vHHbsgRMn9-A",
-      authDomain: "portal-site-38285.firebaseapp.com",
-      projectId: "portal-site-38285",
-      storageBucket: "portal-site-38285.firebasestorage.app",
-      messagingSenderId: "398085669341",
-      appId: "1:398085669341:web:dc3db9c8d32174b3e87634",
-      measurementId: "G-CF20TVK6DP"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-
-    logEvent(analytics, 'page_view', {
-      page_title: document.title,
-      page_location: window.location.href,
-      page_path: window.location.pathname
-    });
+  <!-- Google Analytics (gtag.js) - lazy loaded -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CF20TVK6DP');
+    (function(){
+      function loadGtag(){
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag);
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    })();
   </script>
 </head>
 <body>
@@ -471,6 +473,31 @@
     </div>
   </section>
 </div>
+
+<section class="wrap" style="margin-top:48px;color:var(--muted);font-size:14px;line-height:1.8;max-width:var(--maxw);margin-inline:auto;padding-inline:24px">
+  <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">X(旧Twitter)検索コマンドビルダーとは？</h2>
+  <p style="margin:0 0 16px">X（旧Twitter）の高度な検索コマンドを、フォーム入力で簡単に組み立てられる無料ツールです。複雑な検索オペレーターを覚えなくても、直感的に検索クエリを作成できます。</p>
+  <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">対応する主な検索コマンド</h2>
+  <ul style="margin:0 0 16px;padding-left:20px">
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">from:</code> 特定ユーザーの投稿を検索</li>
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">to:</code> 特定ユーザー宛てのリプライを検索</li>
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">since:</code> / <code style="background:var(--card);padding:2px 6px;border-radius:4px">until:</code> 日付範囲で絞り込み</li>
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">filter:images</code> 画像付き投稿のみ表示</li>
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">min_faves:</code> 最低いいね数で絞り込み</li>
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">-filter:replies</code> リプライを除外</li>
+  </ul>
+  <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">特徴</h2>
+  <ul style="margin:0;padding-left:20px">
+    <li>登録不要・完全無料</li>
+    <li>プリセットモードで即座に検索開始</li>
+    <li>カスタムビルダーで複数条件を組み合わせ</li>
+    <li>作成したクエリをワンクリックでコピー</li>
+  </ul>
+</section>
+
+<footer style="margin-top:48px;padding:24px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;text-align:center">
+  <p style="margin:0">&copy; <script>document.write(new Date().getFullYear())</script> かわぐち (isa130pull)</p>
+</footer>
 
 <div class="toast" id="toast"></div>
 

@@ -7,7 +7,7 @@
   <meta http-equiv="cache-control" content="no-cache" />
   <meta http-equiv="expires" content="0" />
 
-  <title>🎮 POPONG - クラシックPONGゲーム</title>
+  <title>POPONG - ブラウザで遊べるPONGゲーム【無料・登録不要】</title>
   <meta name="description" content="ブラウザで遊べるクラシックなPONGゲーム。NORMAL・HARDの2つの難易度で7点先取を目指そう。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/pong/" />
 
@@ -27,15 +27,26 @@
   <meta name="twitter:description" content="NORMAL・HARDの2つの難易度で7点先取を目指そう。" />
   <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/bingo/web-app-manifest-512x512.png" />
 
-  <!-- JSON-LD WebSite -->
+  <!-- JSON-LD VideoGame -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "url": "https://isa130pull.github.io/portrait-site/",
-    "name": "POPONG",
-    "alternateName": "かわぐち（isa130pull）ポートフォリオ",
-    "description": "ブラウザで遊べるクラシックなPONGゲーム",
+    "@type": "VideoGame",
+    "name": "POPONG - ブラウザで遊べるPONGゲーム",
+    "url": "https://isa130pull.github.io/portrait-site/pages/pong/",
+    "description": "ブラウザで遊べるクラシックなPONGゲーム。NORMALとHARDの2つの難易度で7点先取を目指そう。",
+    "genre": "Arcade",
+    "gamePlatform": "Web Browser",
+    "playMode": "SinglePlayer",
+    "numberOfPlayers": {
+      "@type": "QuantitativeValue",
+      "value": 1
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    },
     "author": {
       "@type": "Person",
       "name": "かわぐち (isa130pull)"
@@ -290,33 +301,25 @@
     }
   </style>
 
-  <!-- Firebase Analytics -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-    import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCNXbUt440aa0cMaNS8nN-vHHbsgRMn9-A",
-      authDomain: "portal-site-38285.firebaseapp.com",
-      projectId: "portal-site-38285",
-      storageBucket: "portal-site-38285.firebasestorage.app",
-      messagingSenderId: "398085669341",
-      appId: "1:398085669341:web:dc3db9c8d32174b3e87634",
-      measurementId: "G-CF20TVK6DP"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-
-    // グローバルに公開（index.jsから使用できるように）
-    window.firebaseAnalytics = analytics;
-    window.firebaseLogEvent = logEvent;
-
-    logEvent(analytics, 'page_view', {
-      page_title: document.title,
-      page_location: window.location.href,
-      page_path: window.location.pathname
-    });
+  <!-- Google Analytics (gtag.js) - lazy loaded -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CF20TVK6DP');
+    (function(){
+      function loadGtag(){
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag);
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    })();
   </script>
 
   <script src="index.js?v=24" charset="UTF-8"></script>

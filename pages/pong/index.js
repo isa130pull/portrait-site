@@ -231,11 +231,11 @@ function loadMuteState() {
     }
 }
 
-// Firebase Analytics ヘルパー関数
+// Analytics ヘルパー関数（gtag.js）
 function logGameEvent(eventName, params) {
     try {
-        if (window.firebaseLogEvent && window.firebaseAnalytics) {
-            window.firebaseLogEvent(window.firebaseAnalytics, eventName, params);
+        if (typeof gtag === 'function') {
+            gtag('event', eventName, params);
         }
     } catch(e) {
         console.warn('Failed to log event', e);

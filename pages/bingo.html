@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>🎯セトリビンゴ</title>
+  <title>セトリビンゴ - ビンゴカード作成・共有ツール【無料】</title>
   <meta name="description" content="3×3のビンゴカードを作成・共有できるツール。編集モード・ビンゴモード搭載。画像保存、リンク共有に対応。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/bingo.html" />
 
@@ -23,15 +23,21 @@
   <meta name="twitter:description" content="3×3のビンゴカードを作成・共有できるツール。編集モード・ビンゴモード搭載。" />
   <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/bingo/web-app-manifest-512x512.png" />
 
-  <!-- JSON-LD WebSite -->
+  <!-- JSON-LD WebApplication -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "url": "https://isa130pull.github.io/portrait-site/",
-    "name": "セトリビンゴ",
-    "alternateName": "かわぐち（isa130pull）ポートフォリオ",
-    "description": "3×3のビンゴカードを作成・共有できるWebツール",
+    "@type": "WebApplication",
+    "name": "セトリビンゴ - ビンゴカード作成・共有ツール",
+    "url": "https://isa130pull.github.io/portrait-site/pages/bingo.html",
+    "description": "ライブのセトリ予想ビンゴカードを無料で作成・共有できるWebツール。画像保存、リンク共有に対応。",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    },
     "author": {
       "@type": "Person",
       "name": "かわぐち (isa130pull)"
@@ -136,36 +142,32 @@
     }
   </style>
 
-  <!-- Firebase Analytics -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-    import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCNXbUt440aa0cMaNS8nN-vHHbsgRMn9-A",
-      authDomain: "portal-site-38285.firebaseapp.com",
-      projectId: "portal-site-38285",
-      storageBucket: "portal-site-38285.firebasestorage.app",
-      messagingSenderId: "398085669341",
-      appId: "1:398085669341:web:dc3db9c8d32174b3e87634",
-      measurementId: "G-CF20TVK6DP"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-
-    logEvent(analytics, 'page_view', {
-      page_title: document.title,
-      page_location: window.location.href,
-      page_path: window.location.pathname
-    });
+  <!-- Google Analytics (gtag.js) - lazy loaded -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CF20TVK6DP');
+    (function(){
+      function loadGtag(){
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag);
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    })();
   </script>
 </head>
 <body>
 <div class="wrap">
   <header>
     <a href="../index.html" class="back-link">← トップページに戻る</a>
-    <h1>🎯 セトリビンゴ</h1>
+    <h1>セトリビンゴ</h1>
   </header>
 
   <section class="card">
@@ -227,6 +229,25 @@
 </div>
 
 <canvas id="off"></canvas>
+
+<section class="wrap" style="margin-top:48px;color:var(--muted);font-size:14px;line-height:1.8">
+  <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">セトリビンゴとは？</h2>
+  <p style="margin:0 0 16px">ライブやコンサートのセットリストを予想して楽しむ、3x3ビンゴカード作成・共有ツールです。登録不要・完全無料でお使いいただけます。</p>
+  <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">使い方</h2>
+  <ol style="margin:0 0 16px;padding-left:20px">
+    <li>編集モードで9マスに予想曲名を入力</li>
+    <li>「共有URL」ボタンでリンクをコピーして友達に送信</li>
+    <li>ライブ当日にビンゴモードに切り替えてマーク</li>
+    <li>「画像保存」で結果をSNSに投稿</li>
+  </ol>
+  <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">特徴</h2>
+  <ul style="margin:0;padding-left:20px">
+    <li>登録不要・完全無料</li>
+    <li>複数フォントから選べる画像保存機能</li>
+    <li>URL共有でカードを友達に送れる</li>
+    <li>スマホ・PC両対応のレスポンシブデザイン</li>
+  </ul>
+</section>
 
 <footer>
   <p>© <span id="y"></span> かわぐち (isa130pull)</p>

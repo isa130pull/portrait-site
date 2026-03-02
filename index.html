@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>かわぐち（isa130pull）| Unityゲームエンジニア - モバイルゲーム開発・AI開発</title>
+  <title>Unityゲームエンジニア かわぐち | モバイルゲーム・AI開発 ポートフォリオ</title>
   <meta name="description" content="Unityを使ったモバイルゲーム開発が専門のゲームエンジニア、かわぐち（isa130pull）のポートフォリオサイト。breaker（100万DL）、対話型バーチャルヒューマン開発など。カジュアルゲームからAI分野まで幅広く対応。" />
   <meta name="keywords" content="Unity,ゲームエンジニア,モバイルゲーム開発,カジュアルゲーム,AI,バーチャルヒューマン,breaker,いえばく,Cocos2d-x,フリーランス" />
   <meta name="author" content="かわぐち (isa130pull)" />
@@ -21,7 +21,7 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="かわぐち（isa130pull）| Unityゲームエンジニア - モバイルゲーム開発・AI開発" />
+  <meta property="og:title" content="Unityゲームエンジニア かわぐち | モバイルゲーム・AI開発 ポートフォリオ" />
   <meta property="og:description" content="Unityを使ったモバイルゲーム開発が専門のゲームエンジニア。breaker（100万DL）、対話型バーチャルヒューマン開発など。カジュアルゲームからAI分野まで幅広く対応。" />
   <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/profile@1x.jpg" />
   <meta property="og:image:width" content="365" />
@@ -34,7 +34,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@isa130pull" />
   <meta name="twitter:creator" content="@isa130pull" />
-  <meta name="twitter:title" content="かわぐち（isa130pull）| Unityゲームエンジニア" />
+  <meta name="twitter:title" content="Unityゲームエンジニア かわぐち | モバイルゲーム・AI開発 ポートフォリオ" />
   <meta name="twitter:description" content="Unityを使ったモバイルゲーム開発が専門のゲームエンジニア。breaker（100万DL）、対話型バーチャルヒューマン開発など。" />
   <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/profile@1x.jpg" />
 
@@ -599,6 +599,62 @@
       outline-offset: 4px;
     }
 
+    /* YouTube Lite Embed */
+    .lite-yt {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin-bottom: 12px;
+      background: #000;
+      cursor: pointer;
+    }
+
+    .lite-yt img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lite-yt .lite-yt-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px;
+      height: 48px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 14px;
+      transition: background 0.2s ease;
+    }
+
+    .lite-yt:hover .lite-yt-play {
+      background: #f00;
+    }
+
+    .lite-yt .lite-yt-play::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-35%, -50%);
+      border-style: solid;
+      border-width: 11px 0 11px 19px;
+      border-color: transparent transparent transparent #fff;
+    }
+
+    .lite-yt iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     /* Responsive Adjustments */
     @media (max-width: 767px){
       .subsection-title {
@@ -699,30 +755,27 @@
   }
   </script>
 
-  <!-- Firebase Analytics -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-    import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+  <!-- Google Analytics (gtag.js) - lazy loaded -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CF20TVK6DP');
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCNXbUt440aa0cMaNS8nN-vHHbsgRMn9-A",
-      authDomain: "portal-site-38285.firebaseapp.com",
-      projectId: "portal-site-38285",
-      storageBucket: "portal-site-38285.firebasestorage.app",
-      messagingSenderId: "398085669341",
-      appId: "1:398085669341:web:dc3db9c8d32174b3e87634",
-      measurementId: "G-CF20TVK6DP"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-
-    // ページビューを明示的に記録
-    logEvent(analytics, 'page_view', {
-      page_title: document.title,
-      page_location: window.location.href,
-      page_path: window.location.pathname
-    });
+    // Load gtag.js after page is idle
+    (function(){
+      function loadGtag(){
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag);
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    })();
   </script>
 </head>
 <body>
@@ -852,8 +905,9 @@
         <div class="cards">
           <article class="card">
             <h3>いえばく!</h3>
-            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:12px;">
-              <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/XoXWpOk2fl4" title="いえばく!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <div class="lite-yt" data-yt-id="XoXWpOk2fl4" data-yt-title="いえばく!">
+              <img src="https://i.ytimg.com/vi/XoXWpOk2fl4/hqdefault.jpg" alt="いえばく!" loading="lazy" width="480" height="360">
+              <div class="lite-yt-play"></div>
             </div>
             <p class="muted">30秒で家を破壊するカジュアル破壊ゲーム。企画・開発を単独で実施。<br>
             <a href="https://apps.apple.com/jp/app/id1550488323" target="_blank" rel="noopener">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.isao.breakhouse" target="_blank" rel="noopener">Google Play</a></p>
@@ -863,8 +917,9 @@
           </article>
           <article class="card">
             <h3>すしばく!</h3>
-            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:12px;">
-              <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/NqURL3L-qAw" title="すしばく!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <div class="lite-yt" data-yt-id="NqURL3L-qAw" data-yt-title="すしばく!">
+              <img src="https://i.ytimg.com/vi/NqURL3L-qAw/hqdefault.jpg" alt="すしばく!" loading="lazy" width="480" height="360">
+              <div class="lite-yt-play"></div>
             </div>
             <p class="muted">30秒で回転寿司店を爆破するカジュアル破壊ゲーム第2弾。企画・開発を単独で実施。<br>
             <a href="https://apps.apple.com/jp/app/id1632633407" target="_blank" rel="noopener">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.isao.sushi" target="_blank" rel="noopener">Google Play</a></p>
@@ -883,8 +938,9 @@
           </article>
           <article class="card">
             <h3>ろりだま</h3>
-            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:12px;">
-              <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/kh-0qSpyHLI" title="ろりだま" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <div class="lite-yt" data-yt-id="kh-0qSpyHLI" data-yt-title="ろりだま">
+              <img src="https://i.ytimg.com/vi/kh-0qSpyHLI/hqdefault.jpg" alt="ろりだま" loading="lazy" width="480" height="360">
+              <div class="lite-yt-play"></div>
             </div>
             <p class="muted">ローリングアクションゲーム。企画・開発を単独で実施。<br>
             <a href="https://play.google.com/store/apps/details?id=com.isao.rollinggirlz" target="_blank" rel="noopener">Google Play</a></p>
@@ -901,8 +957,9 @@
       <div class="cards">
         <article class="card">
           <h3>breaker:ブロック崩し</h3>
-          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:12px;">
-            <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/qQq5J-pr2Tc" title="breaker:ブロック崩し" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="lite-yt" data-yt-id="qQq5J-pr2Tc" data-yt-title="breaker:ブロック崩し">
+            <img src="https://i.ytimg.com/vi/qQq5J-pr2Tc/hqdefault.jpg" alt="breaker:ブロック崩し" loading="lazy" width="480" height="360">
+            <div class="lite-yt-play"></div>
           </div>
           <p class="muted">30秒でブロックを壊し続けるカジュアルゲーム。企画・開発を担当。100万DL、課金売上30%を達成。<br>
           <a href="https://apps.apple.com/jp/app/id997366267" target="_blank" rel="noopener">App Store</a> / <a href="https://gamebiz.jp/news/146448" target="_blank" rel="noopener">GameBiz記事</a> / <a href="https://appmarketinglabo.net/breaker/" target="_blank" rel="noopener">App Marketing Labo記事</a></p>
@@ -912,8 +969,9 @@
         </article>
         <article class="card">
           <h3>Vタビ 日本横断旅情アドベンチャーゲーム</h3>
-          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:12px;">
-            <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/gJ0-bvgUu1A" title="Vタビ 日本横断旅情アドベンチャーゲーム" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="lite-yt" data-yt-id="gJ0-bvgUu1A" data-yt-title="Vタビ 日本横断旅情アドベンチャーゲーム">
+            <img src="https://i.ytimg.com/vi/gJ0-bvgUu1A/hqdefault.jpg" alt="Vタビ 日本横断旅情アドベンチャーゲーム" loading="lazy" width="480" height="360">
+            <div class="lite-yt-play"></div>
           </div>
           <p class="muted">日本を横断する旅をバーチャル体験できるアドベンチャーゲーム。開発、企画、運用を担当。<br>
           <a href="https://apps.apple.com/jp/app/id1445658426" target="_blank" rel="noopener">App Store</a> / <a href="https://play.google.com/store/apps/details?id=jp.co.infiniteloop.VJ" target="_blank" rel="noopener">Google Play</a> / <a href="https://www.infiniteloop.co.jp/works/v%E3%82%BF%E3%83%93-%E6%97%A5%E6%9C%AC%E6%A8%AA%E6%96%AD%E6%97%85%E6%83%85%E3%82%A2%E3%83%89%E3%83%99%E3%83%B3%E3%83%81%E3%83%A3%E3%83%BC%E3%82%B2%E3%83%BC%E3%83%A0/" target="_blank" rel="noopener">詳細</a></p>
@@ -923,8 +981,9 @@
         </article>
         <article class="card">
           <h3>対話型バーチャルヒューマン「Velle/SDSali」</h3>
-          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:12px;">
-            <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/p4ydRSVih_U" title="対話型バーチャルヒューマン「Velle/SDSali」" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="lite-yt" data-yt-id="p4ydRSVih_U" data-yt-title="対話型バーチャルヒューマン「Velle/SDSali」">
+            <img src="https://i.ytimg.com/vi/p4ydRSVih_U/hqdefault.jpg" alt="対話型バーチャルヒューマン「Velle/SDSali」" loading="lazy" width="480" height="360">
+            <div class="lite-yt-play"></div>
           </div>
           <p class="muted">LLMプロンプト組み込み、音声認識・合成システム連携、Unityによるキャラクターアニメーションを実装。<br>
           <a href="https://2b4u.aihub.co.jp/" target="_blank" rel="noopener">詳細</a></p>
@@ -1010,6 +1069,22 @@
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'メニューを開く');
       }
+    });
+
+    // YouTube Lite Embed - load iframe on click
+    document.querySelectorAll('.lite-yt').forEach(function(el){
+      el.addEventListener('click', function(){
+        var id = this.dataset.ytId;
+        var title = this.dataset.ytTitle || '';
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+        iframe.title = title;
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        this.textContent = '';
+        this.style.cursor = 'default';
+        this.appendChild(iframe);
+      }, { once: true });
     });
 
     // Scroll detection for header

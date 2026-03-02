@@ -3,6 +3,6 @@ Allow: /
 
 Sitemap: https://isa130pull.github.io/portrait-site/sitemap.xml
 
-# インデックス不要なページ
-Disallow: /pages/privacy.html
-Disallow: /pages/contact.html
+# インデックス不要なページ（GitHub Pages project site のためフルパス指定）
+Disallow: /portrait-site/pages/privacy.html
+Disallow: /portrait-site/pages/contact.html
