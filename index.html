@@ -9,8 +9,11 @@
   <meta name="author" content="かわぐち (isa130pull)" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/" />
 
+  <meta name="robots" content="max-image-preview:large" />
+
   <!-- Preload critical resources -->
   <link rel="preload" href="images/profile@1x.jpg" as="image">
+  <link rel="preconnect" href="https://i.ytimg.com">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="images/index/favicon.ico">
@@ -24,6 +27,7 @@
   <meta property="og:title" content="Unityゲームエンジニア かわぐち | モバイルゲーム・AI開発 ポートフォリオ" />
   <meta property="og:description" content="Unityを使ったモバイルゲーム開発が専門のゲームエンジニア。breaker（100万DL）、対話型バーチャルヒューマン開発など。カジュアルゲームからAI分野まで幅広く対応。" />
   <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/profile@1x.jpg" />
+  <meta property="og:image:alt" content="Unityゲームエンジニア かわぐちのポートフォリオ" />
   <meta property="og:image:width" content="365" />
   <meta property="og:image:height" content="365" />
   <meta property="og:url" content="https://isa130pull.github.io/portrait-site/" />
@@ -694,7 +698,13 @@
       "https://github.com/isa130pull",
       "https://www.facebook.com/isao.kawaguchi.9",
       "https://qiita.com/isa130pull"
-    ]
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "business inquiries",
+      "url": "https://isa130pull.github.io/portrait-site/pages/contact.html",
+      "email": "isa130pull@gmail.com"
+    }
   }
   </script>
 
@@ -1071,32 +1081,43 @@
       }
     });
 
-    // YouTube Lite Embed - load iframe on click
+    // YouTube Lite Embed - load iframe on click/keyboard
+    function activateLiteYt(el){
+      var id = el.dataset.ytId;
+      var title = el.dataset.ytTitle || '';
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+      iframe.title = title;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      el.textContent = '';
+      el.style.cursor = 'default';
+      el.removeAttribute('tabindex');
+      el.removeAttribute('role');
+      el.appendChild(iframe);
+    }
     document.querySelectorAll('.lite-yt').forEach(function(el){
-      el.addEventListener('click', function(){
-        var id = this.dataset.ytId;
-        var title = this.dataset.ytTitle || '';
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
-        iframe.title = title;
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-        iframe.allowFullscreen = true;
-        this.textContent = '';
-        this.style.cursor = 'default';
-        this.appendChild(iframe);
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', (el.dataset.ytTitle || '動画') + ' を再生');
+      el.addEventListener('click', function(){ activateLiteYt(this); }, { once: true });
+      el.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          activateLiteYt(this);
+        }
       }, { once: true });
     });
 
     // Scroll detection for header
-    let lastScroll = 0;
+    const headerEl = document.querySelector('header');
     window.addEventListener('scroll', () => {
-      const header = document.querySelector('header');
       if (window.scrollY > 20) {
-        header.classList.add('scrolled');
+        headerEl.classList.add('scrolled');
       } else {
-        header.classList.remove('scrolled');
+        headerEl.classList.remove('scrolled');
       }
-    });
+    }, { passive: true });
   </script>
 </body>
 </html>

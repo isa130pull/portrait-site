@@ -3,12 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="cache-control" content="no-cache" />
-  <meta http-equiv="expires" content="0" />
-
   <title>クリアタイムランキング - POPONG | ブラウザPONGゲーム</title>
-  <meta name="description" content="POPONGのクリアタイムランキング" />
+  <meta name="description" content="POPONGのクリアタイムランキング。NORMAL・HARDの2難易度でクリアタイムを競おう。世界中のプレイヤーとスコアを比較できます。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/pong/ranking.html" />
 
   <!-- Open Graph -->
@@ -17,13 +13,16 @@
   <meta property="og:title" content="ランキング - POPONG" />
   <meta property="og:description" content="POPONGのクリアタイムランキング" />
   <meta property="og:site_name" content="かわぐち（isa130pull）ポートフォリオ" />
+  <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/profile@1x.jpg" />
+  <meta property="og:image:alt" content="POPONGクリアタイムランキング" />
   <meta property="og:locale" content="ja_JP" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@isa130pull" />
   <meta name="twitter:title" content="ランキング - POPONG" />
-  <meta name="twitter:description" content="POPONGのクリアタイムランキング" />
+  <meta name="twitter:description" content="POPONGのクリアタイムランキング。NORMAL・HARDの2難易度でスコアを競おう。" />
+  <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/profile@1x.jpg" />
 
   <!-- JSON-LD removed: BreadcrumbList is sufficient for ranking page -->
 
@@ -55,17 +54,21 @@
   }
   </script>
 
+  <meta name="robots" content="max-image-preview:large" />
+
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="../images/bingo/favicon.ico">
-  <link rel="icon" type="image/png" sizes="96x96" href="../images/bingo/favicon-96x96.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="../images/bingo/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="../../images/index/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="../../images/index/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../images/index/apple-touch-icon.png">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
 
   <!-- PlayFab SDK -->
-  <script src="https://download.playfab.com/PlayFabClientApi.js"></script>
-  <script src="playfab-manager.js?v=3"></script>
+  <script src="https://download.playfab.com/PlayFabClientApi.js" defer></script>
+  <script src="playfab-manager.js?v=3" defer></script>
 
   <style>
     :root{
