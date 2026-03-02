@@ -6,6 +6,7 @@
   <title>セトリビンゴ - ビンゴカード作成・共有ツール【無料】</title>
   <meta name="description" content="3×3のビンゴカードを作成・共有できるツール。編集モード・ビンゴモード搭載。画像保存、リンク共有に対応。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/bingo.html" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -14,6 +15,8 @@
   <meta property="og:description" content="3×3のビンゴカードを作成・共有できるツール。編集モード・ビンゴモード搭載。画像保存、リンク共有に対応。" />
   <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/bingo/web-app-manifest-512x512.png" />
   <meta property="og:image:alt" content="セトリビンゴ - ビンゴカード作成ツール" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
   <meta property="og:site_name" content="かわぐち（isa130pull）ポートフォリオ" />
   <meta property="og:locale" content="ja_JP" />
 
@@ -44,6 +47,42 @@
       "@type": "Person",
       "name": "かわぐち (isa130pull)"
     }
+  }
+  </script>
+
+  <!-- JSON-LD HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "セトリビンゴの使い方",
+    "description": "ライブのセットリスト予想ビンゴカードを作成・共有する手順",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "曲名を入力",
+        "text": "編集モードで9マスに予想曲名を入力します"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "友達に共有",
+        "text": "「共有URL」ボタンでリンクをコピーして友達に送信します"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "ビンゴモードでマーク",
+        "text": "ライブ当日にビンゴモードに切り替えて的中した曲をマークします"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "結果を共有",
+        "text": "「画像保存」で結果をSNSに投稿します"
+      }
+    ]
   }
   </script>
 
@@ -122,7 +161,7 @@
     .mark{position:absolute;inset:0;opacity:0;transition:.2s ease;display:flex;align-items:center;justify-content:center;pointer-events:none}
     .cell.marked .mark{opacity:1}
     .mark::before{content:'';position:absolute;width:auto;height:70%;aspect-ratio:1;background:transparent;border:6px solid #ff3b3b;border-radius:50%;transform:rotate(-12deg);box-shadow:0 4px 12px rgba(255,59,59,0.4)}
-    .cell .tick{display:none}
+
     .footer{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:16px;color:var(--muted);font-size:13px}
     .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--card);color:var(--fg);border:1px solid var(--border);padding:12px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;box-shadow:0 4px 12px rgba(0,0,0,.3)}
     .toast.show{opacity:1}
@@ -532,9 +571,6 @@ function render(){
 
       const mark = document.createElement('div');
       mark.className = 'mark';
-      const tick = document.createElement('div'); tick.className='tick'; tick.textContent='✓';
-      mark.appendChild(tick);
-
       cell.appendChild(input); cell.appendChild(mark);
 
       cell.addEventListener('click', (e)=>{
@@ -617,7 +653,13 @@ function updateProgress(){
 
 // ===== Local persistence =====
 const LS_KEY = 'bingo.saved.v1';
-function saveLocal(){ try{ localStorage.setItem(LS_KEY, serialize()); }catch(e){} }
+let _saveTimer = null;
+function saveLocal(){
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(()=>{
+    try{ localStorage.setItem(LS_KEY, serialize()); }catch(e){}
+  }, 250);
+}
 function loadLocal(){ try{ const j = localStorage.getItem(LS_KEY); if(j){ loadFrom(JSON.parse(j)); } }catch(e){} }
 
 // ===== PNG export (Canvas 2D) =====

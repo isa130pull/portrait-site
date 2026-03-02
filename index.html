@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unityゲームエンジニア かわぐち | モバイルゲーム・AI開発 ポートフォリオ</title>
   <meta name="description" content="Unityを使ったモバイルゲーム開発が専門のゲームエンジニア、かわぐち（isa130pull）のポートフォリオサイト。breaker（100万DL）、対話型バーチャルヒューマン開発など。カジュアルゲームからAI分野まで幅広く対応。" />
-  <meta name="keywords" content="Unity,ゲームエンジニア,モバイルゲーム開発,カジュアルゲーム,AI,バーチャルヒューマン,breaker,いえばく,Cocos2d-x,フリーランス" />
   <meta name="author" content="かわぐち (isa130pull)" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/" />
 
   <meta name="robots" content="max-image-preview:large" />
@@ -1041,7 +1041,7 @@
     <footer>
       <div class="wrap" style="padding:0">
         <p style="margin:0 0 8px">© <span id="y"></span> かわぐち (isa130pull)</p>
-        <p style="margin:0; font-size:12px;"><a href="pages/privacy.html" style="color:var(--muted)">プライバシーポリシー</a></p>
+        <p style="margin:0; font-size:12px;"><a href="pages/privacy.html" style="color:var(--fg-muted)">プライバシーポリシー</a></p>
       </div>
     </footer>
   </main>
@@ -1118,6 +1118,11 @@
         headerEl.classList.remove('scrolled');
       }
     }, { passive: true });
+
+    // Service Worker registration
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(function(){});
+    }
   </script>
 </body>
 </html>

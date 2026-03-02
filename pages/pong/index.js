@@ -103,7 +103,6 @@ function loadAudioFile(name, url) {
         })
         .then(function(audioBuffer) {
             audioBuffers[name] = audioBuffer;
-            console.log('Loaded audio:', name);
         })
         .catch(function(error) {
             console.warn('Error loading audio ' + name + ':', error);
@@ -130,7 +129,6 @@ function preloadAllAudio() {
 
     return Promise.all(promises).then(function() {
         isAudioReady = true;
-        console.log('All audio files loaded');
     });
 }
 
@@ -371,11 +369,7 @@ function init(){
 
     // Web Audio APIの初期化（iOS対応）
     if (initAudioContext() && audioContext) {
-        console.log('AudioContext initialized, state:', audioContext.state);
         // iOSでsuspended状態の場合、最初のユーザーインタラクションでresumeする
-        if (audioContext.state === 'suspended') {
-            console.log('AudioContext is suspended, will resume on first user interaction');
-        }
     } else {
         console.warn('AudioContext initialization failed');
     }
@@ -419,14 +413,11 @@ function TouchEventStart(e) {
         if (audioContext && !isAudioReady) {
             // AudioContextがsuspendedの場合はresume（iOS対応）
             if (audioContext.state === 'suspended') {
-                audioContext.resume().then(function() {
-                    console.log('AudioContext resumed');
-                });
+                audioContext.resume();
             }
 
             // 音声プリロード完了後に再生
             preloadAllAudio().then(function() {
-                console.log('Audio preload completed');
                 playSound('start', 1.0);
             });
         } else if (isAudioReady) {
@@ -520,8 +511,6 @@ function TouchEventEnd(e) {
 }
 
 function drawPlayer(){
-//    ctx.beginPath();
-
     //プレイヤーの位置を計算
     var adjustTouchX = touchX - player.w / 10 * 6;
     var dx = adjustTouchX - player.x;
@@ -574,12 +563,11 @@ function drawEnemy() {
             if (adjustEnemySpeed < Math.abs(ball.dx)) adjustEnemySpeed *= 1.05;
             
             //敵移動速度分移動させる
-            enemy.x = (enemy.x + enemy.w / 2 < ball.x) ? enemy.x + adjustEnemySpeed / 2 : enemy.x - adjustEnemySpeed / 2; 
-            if (Math.abs( (enemy.x + enemy.w / 2) - ball.x) < adjustEnemySpeed) {            
-                enemy.x = ball.x + ball.w / 2 - enemy.w / 2; 
+            if (Math.abs( (enemy.x + enemy.w / 2) - ball.x) < adjustEnemySpeed) {
+                enemy.x = ball.x + ball.w / 2 - enemy.w / 2;
             }
             else {
-                enemy.x = (enemy.x + enemy.w / 2 < ball.x) ? enemy.x + adjustEnemySpeed / 2 : enemy.x - adjustEnemySpeed / 2;            
+                enemy.x = (enemy.x + enemy.w / 2 < ball.x) ? enemy.x + adjustEnemySpeed / 2 : enemy.x - adjustEnemySpeed / 2;
             }
             //画面外に出ないように
             if(enemy.x < 0) enemy.x = 0;
@@ -601,12 +589,11 @@ function drawEnemy() {
 
 //敵バーを中央付近に移動させる
 function moveEnemyCenter() {
-    enemy.x = (enemy.x + enemy.w / 2 < screenW / 2) ? enemy.x + enemy.speed / 2 : enemy.x - enemy.speed / 2;
-    if (Math.abs( (enemy.x + enemy.w / 2) - screenW) < enemy.speed) {
-        enemy.x = screenW - enemy.w / 2; 
+    if (Math.abs( (enemy.x + enemy.w / 2) - screenW / 2) < enemy.speed) {
+        enemy.x = screenW / 2 - enemy.w / 2;
     }
     else {
-        enemy.x = (enemy.x + enemy.w / 2 < screenW / 2) ? enemy.x + enemy.speed / 2 : enemy.x - enemy.speed / 2;            
+        enemy.x = (enemy.x + enemy.w / 2 < screenW / 2) ? enemy.x + enemy.speed / 2 : enemy.x - enemy.speed / 2;
     }
 }
 
@@ -891,9 +878,6 @@ function drawBall() {
 
         //rad 1.25〜1.75の範囲
         var rad = Math.PI * 1.25 + (Math.PI * hitXRate);
-//        alert("rad..." + rad + " ball.rad..." + ball.rad + " hitXRate..." + hitXRate);
-//        alert("radacos..." + Math.acos(rad) + " radasin" + Math.asinh(rad));
-        
         if (ball.rad >= 0.1 && ball.rad <= 0.5) rad -= 0.1 * Math.PI;
         else if (ball.rad >= 0.6 && ball.rad <= 0.9) rad += 0.1 * Math.PI;
         
@@ -980,7 +964,6 @@ function fireBall() {
 
 
     var initSpeed,initRange,enemySpeed,hdp;
-    var initRange = 80;
 
     var totalPoint = player.point * 1.3 + enemy.point;
 
@@ -1124,9 +1107,6 @@ function render() {
     drawGameOver();
     drawGameClear();
     
-    //デバッグ用 タッチ座標を表示
-    // ctx.font = "40px Orbitron";
-    // ctx.fillText("touchpoint...x=" + touchX + "  y=" + touchY,screenW / 3, screenH / 8);    
 }
 
 var gameEndStrY = 0;
@@ -1296,7 +1276,6 @@ function handleSubmitScore() {
         }
 
         if (result.success) {
-            console.log('Score submitted successfully!');
             hideNameInputUI();
             // PlayFab側での反映を待ってからランキングページへ遷移
             var difficultyParam = currentDifficulty === 0 ? 'normal' : 'hard';

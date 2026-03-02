@@ -40,7 +40,6 @@ function initPlayFab() {
     }
 
     PlayFab.settings.titleId = PLAYFAB_CONFIG.TITLE_ID;
-    console.log('PlayFab initialized with Title ID:', PLAYFAB_CONFIG.TITLE_ID);
     return true;
 }
 
@@ -50,7 +49,6 @@ function initPlayFab() {
 function loginToPlayFab(callback) {
     // すでにログイン済みの場合
     if (isPlayFabLoggedIn && playfabPlayerId) {
-        console.log('Already logged in to PlayFab');
         if (callback) callback({ success: true, playFabId: playfabPlayerId });
         return;
     }
@@ -60,7 +58,6 @@ function loginToPlayFab(callback) {
     if (!customId) {
         customId = generateUUID();
         localStorage.setItem(PLAYFAB_CONFIG.CUSTOM_ID_KEY, customId);
-        console.log('Generated new Custom ID:', customId);
     }
 
     var loginRequest = {
@@ -73,8 +70,6 @@ function loginToPlayFab(callback) {
         function(result) {
             isPlayFabLoggedIn = true;
             playfabPlayerId = result.data.PlayFabId;
-            console.log('Logged in to PlayFab! PlayFabId:', playfabPlayerId);
-
             if (callback) callback({ success: true, playFabId: playfabPlayerId });
         },
         function(error) {
@@ -124,7 +119,6 @@ function updateDisplayName(playerName, callback) {
 
     PlayFab.ClientApi.UpdateUserTitleDisplayName(request,
         function(result) {
-            console.log('Display name updated:', validation.name);
             // ローカルストレージに保存（次回自動入力用）
             localStorage.setItem(PLAYFAB_CONFIG.PLAYER_NAME_KEY, validation.name);
             if (callback) callback({ success: true, name: validation.name });
@@ -144,8 +138,6 @@ function updateDisplayName(playerName, callback) {
 // スコアを送信
 // ============================================
 function submitScore(playerName, clearTime, difficulty, callback) {
-    console.log('Submitting score:', playerName, clearTime, difficulty);
-
     // ログインしていない場合はログイン
     loginToPlayFab(function(loginResult) {
         if (!loginResult.success) {
@@ -174,8 +166,7 @@ function submitScore(playerName, clearTime, difficulty, callback) {
 
             PlayFab.ClientApi.UpdatePlayerStatistics(request,
                 function(result) {
-                    console.log('Score submitted successfully!');
-                    // Firebase Analyticsにも記録
+                    // Analyticsにも記録
                     logGameEvent('pong_score_submitted', {
                         difficulty: difficulty === 0 ? 'normal' : 'hard',
                         clear_time_ms: clearTime,
@@ -220,7 +211,6 @@ function getLeaderboard(difficulty, maxResults, callback) {
 
         PlayFab.ClientApi.GetLeaderboard(request,
             function(result) {
-                console.log('Leaderboard retrieved:', result.data.Leaderboard.length, 'entries');
                 if (callback) callback({
                     success: true,
                     leaderboard: result.data.Leaderboard,
@@ -259,7 +249,6 @@ function getPlayerRank(difficulty, callback) {
             function(result) {
                 if (result.data.Leaderboard && result.data.Leaderboard.length > 0) {
                     var entry = result.data.Leaderboard[0];
-                    console.log('Player rank:', entry.Position + 1, 'Score:', entry.StatValue);
                     if (callback) callback({
                         success: true,
                         rank: entry.Position + 1,
