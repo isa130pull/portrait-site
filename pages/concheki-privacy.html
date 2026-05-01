@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>プライバシーポリシー | Concheki</title>
+  <meta name="description" content="スマートフォンアプリ Concheki のプライバシーポリシー（外部送信に関する公表を含む）" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/concheki-privacy.html" />
+  <link rel="icon" type="image/x-icon" href="../images/index/favicon.ico">
+
+  <style>
+    :root{
+      --bg: #0b0c0f;
+      --fg: #e8eaed;
+      --muted: #a1a7b3;
+      --accent: #6ee7ff;
+      --card: #14161a;
+      --border: #1f2329;
+      --maxw: 800px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#ffffff; --fg:#111318; --muted:#5a6472; --card:#f7f8fa; --border:#e5e7eb; --accent:#0ea5e9; }
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans JP, "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif; background:var(--bg); color:var(--fg); line-height:1.8; }
+    a{ color:var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    .wrap{ max-width:var(--maxw); margin-inline:auto; padding:24px; }
+    header{ padding:24px 0; border-bottom:1px solid var(--border); }
+    h1{ font-size: clamp(24px, 4vw, 32px); margin:0; }
+    h2{ font-size: clamp(20px, 3vw, 24px); margin:48px 0 16px; border-bottom:1px solid var(--border); padding-bottom:8px; }
+    h3{ font-size: clamp(18px, 2.5vw, 20px); margin:32px 0 12px; }
+    p{ margin:16px 0; }
+    ul, ol{ margin:16px 0; padding-left:24px; }
+    li{ margin:8px 0; }
+    strong{ color:var(--fg); font-weight:700; }
+    table{ width:100%; border-collapse:collapse; margin:16px 0; font-size:14px; }
+    th, td{ border:1px solid var(--border); padding:8px 12px; text-align:left; vertical-align:top; }
+    th{ background:var(--card); }
+    .meta{ color:var(--muted); font-size:14px; margin-top:8px; }
+    .note{ background:var(--card); border-left:3px solid var(--accent); padding:12px 16px; margin:16px 0; font-size:14px; color:var(--muted); border-radius:4px; }
+    footer{ margin-top:64px; padding:24px 0; border-top:1px solid var(--border); color:var(--muted); font-size:14px; text-align:center; }
+    .back-link{ display:inline-block; margin-bottom:24px; padding:8px 16px; border:1px solid var(--border); border-radius:8px; }
+  </style>
+
+  <!-- Google Analytics (gtag.js) - lazy loaded -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CF20TVK6DP');
+    (function(){
+      function loadGtag(){
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag);
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a href="../index.html" class="back-link">← トップページに戻る</a>
+      <h1>Concheki プライバシーポリシー</h1>
+      <p class="meta">最終更新日: 2026年5月1日</p>
+    </header>
+
+    <main>
+      <section>
+        <p>かわぐち（isa130pull）（以下「運営者」といいます）は、スマートフォンアプリ「Concheki」（以下「本アプリ」といいます）におけるユーザーのプライバシーを尊重し、以下のとおり個人情報を適切に取り扱います。</p>
+      </section>
+
+      <section>
+        <h2>1. 取得する情報</h2>
+        <p>本アプリでは、以下の情報を取得します。</p>
+        <ol>
+          <li><strong>ユーザー識別子</strong>: 認証サービス（Firebase Authentication）が発行する匿名 UID</li>
+          <li><strong>ユーザー入力情報</strong>: ユーザーがアプリ内で任意に設定する表示名（最大 16 文字）</li>
+          <li><strong>位置情報</strong>: チェックインの正当性確認のために、QR コード読み取り時にのみ取得する端末の位置情報(GPS)</li>
+          <li><strong>利用ログ</strong>: チェックイン履歴、ポイント残高、ガチャ履歴、所持アバター</li>
+          <li><strong>端末情報</strong>: OS バージョン、端末モデル、アプリのバージョン、言語設定</li>
+          <li><strong>利用解析情報</strong>: アプリ内の画面遷移、機能の利用頻度等(Firebase Analytics により自動取得)</li>
+        </ol>
+        <p>本アプリは、氏名、電話番号、メールアドレス、住所、生年月日、クレジットカード情報を取得しません。</p>
+      </section>
+
+      <section>
+        <h2>2. 利用目的</h2>
+        <p>取得した情報は以下の目的に利用します。</p>
+        <ol>
+          <li>本アプリの機能提供（チェックイン、ポイント付与、ガチャ、アバター管理）</li>
+          <li>チェックインの正当性確認（位置情報）</li>
+          <li>不正利用の検知および防止</li>
+          <li>本アプリの品質改善および新機能の検討</li>
+          <li>法令に基づく対応</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>3. 第三者提供</h2>
+        <p>運営者は、以下の場合を除き、取得した情報を第三者に提供しません。</p>
+        <ol>
+          <li>法令に基づく場合</li>
+          <li>人の生命、身体または財産の保護のために必要であり、本人の同意を得ることが困難な場合</li>
+          <li>第 4 項に定める業務委託先に、利用目的の達成に必要な範囲で提供する場合</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>4. 業務委託（外部サービスの利用）</h2>
+        <p>運営者は、本アプリの提供にあたり、以下の外部サービスを利用しています。各サービスのプライバシーポリシーは各社のページをご確認ください。</p>
+        <table>
+          <thead>
+            <tr>
+              <th>サービス名</th>
+              <th>提供事業者</th>
+              <th>利用目的</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Firebase Authentication / Firestore / Cloud Messaging / Analytics / Crashlytics</td>
+              <td>Google LLC</td>
+              <td>認証、データ保存、通知配信、利用解析、不具合検知</td>
+            </tr>
+            <tr>
+              <td>PlayFab</td>
+              <td>Microsoft Corporation</td>
+              <td>ゲームサービス基盤（ポイント・ガチャ抽選・アバター管理）</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>各社のプライバシーポリシー：</p>
+        <ul>
+          <li>Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
+          <li>Microsoft: <a href="https://privacy.microsoft.com/ja-jp/privacystatement" target="_blank" rel="noopener">https://privacy.microsoft.com/ja-jp/privacystatement</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>5. Cookie および同等の技術</h2>
+        <p>本アプリは Web ブラウザを介した Cookie の発行は行いませんが、上記第 4 項の外部サービスは、ユーザーの端末上に識別子（広告識別子を含みます）を保存・参照する場合があります。ユーザーは、iOS / Android の各端末設定により、広告識別子のリセットおよびトラッキング許可の制御が可能です。</p>
+      </section>
+
+      <section>
+        <h2>6. 開示・訂正・削除</h2>
+        <p>ユーザーは、運営者に対して、自身の個人情報の開示、訂正、利用停止、削除を求めることができます。本アプリ内の設定画面からアカウント削除を行うことで、保存された情報は速やかに削除されます。これに加えて手続を希望する場合は、第 9 項のお問い合わせ先までご連絡ください。</p>
+      </section>
+
+      <section>
+        <h2>7. 安全管理</h2>
+        <p>運営者は、取得した情報の漏えい、滅失、改ざんを防止するため、合理的な安全管理措置を講じます。</p>
+      </section>
+
+      <section>
+        <h2>8. ポリシーの変更</h2>
+        <p>本ポリシーは、必要に応じて改定されることがあります。改定後のポリシーは、本ページに掲載した時点で効力を生じます。重要な変更がある場合は、本アプリ内で通知します。</p>
+      </section>
+
+      <section>
+        <h2>9. お問い合わせ</h2>
+        <p>本ポリシーに関するお問い合わせは、以下までご連絡ください。</p>
+        <p>メールアドレス: <a href="mailto:isa130pull@gmail.com">isa130pull@gmail.com</a></p>
+      </section>
+
+      <hr style="margin:64px 0; border:none; border-top:1px solid var(--border);">
+
+      <section>
+        <h2>10. 外部送信に関する公表（電気通信事業法第 27 条の 12）</h2>
+        <p>本アプリは、ユーザーの利便性向上およびサービスの品質改善のため、ユーザーの端末から外部の事業者へ次の情報を送信しています。</p>
+
+        <h3>10.1 Firebase Authentication / Firestore / Cloud Messaging（Google LLC）</h3>
+        <ul>
+          <li><strong>送信される情報</strong>: 匿名 UID、認証トークン、アプリ内データ（表示名、ポイント残高、チェックイン履歴、所持アバター）、デバイストークン</li>
+          <li><strong>送信目的</strong>: ユーザー認証、データの永続化、プッシュ通知配信</li>
+          <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
+          <li><strong>設定変更方法</strong>: アプリ内のアカウント削除機能、または端末の通知設定からプッシュ通知をオフにできます</li>
+        </ul>
+
+        <h3>10.2 Firebase Analytics（Google LLC）</h3>
+        <ul>
+          <li><strong>送信される情報</strong>: アプリ内イベント（画面表示、ボタン押下、チェックイン回数、ガチャ実行回数）、端末情報（OS バージョン、端末モデル、言語設定）、広告識別子（IDFA / AAID。ユーザーが端末設定で許可した場合のみ）</li>
+          <li><strong>送信目的</strong>: アプリの利用状況の解析、品質改善</li>
+          <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
+          <li><strong>オプトアウト方法</strong>:
+            <ul>
+              <li>iOS: 設定 &gt; プライバシーとセキュリティ &gt; トラッキング から本アプリのトラッキングをオフ</li>
+              <li>Android: 設定 &gt; Google &gt; 広告 から「広告のカスタマイズをオプトアウト」を有効化</li>
+              <li>アプリ内のアカウント削除機能でも送信を停止できます</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>10.3 Firebase Crashlytics（Google LLC）</h3>
+        <ul>
+          <li><strong>送信される情報</strong>: アプリのクラッシュ発生時のスタックトレース、端末情報、アプリのバージョン</li>
+          <li><strong>送信目的</strong>: アプリの不具合検知および修正</li>
+          <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
+        </ul>
+
+        <h3>10.4 PlayFab（Microsoft Corporation）</h3>
+        <ul>
+          <li><strong>送信される情報</strong>: 匿名 UID、ポイント残高、ガチャ抽選リクエスト、所持アバター ID</li>
+          <li><strong>送信目的</strong>: ポイント・アバターのサーバー管理、ガチャ抽選処理の実行、不正利用の検知</li>
+          <li><strong>プライバシーポリシー</strong>: <a href="https://privacy.microsoft.com/ja-jp/privacystatement" target="_blank" rel="noopener">https://privacy.microsoft.com/ja-jp/privacystatement</a></li>
+        </ul>
+
+        <h3>10.5 公表の更新</h3>
+        <p>本公表内容は、外部送信先または送信内容に変更があった場合、速やかに更新します。</p>
+      </section>
+
+      <section>
+        <h2>関連リンク</h2>
+        <ul>
+          <li><a href="./concheki-terms.html">Concheki 利用規約</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="y"></span> かわぐち (isa130pull)</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
