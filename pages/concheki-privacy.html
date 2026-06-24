@@ -72,7 +72,7 @@
     <header>
       <a href="../index.html" class="back-link">← トップページに戻る</a>
       <h1>Concheki プライバシーポリシー</h1>
-      <p class="meta">最終更新日: 2026年5月1日</p>
+      <p class="meta">最終更新日: 2026年6月24日</p>
     </header>
 
     <main>
@@ -85,7 +85,6 @@
         <p>本アプリでは、以下の情報を取得します。</p>
         <ol>
           <li><strong>ユーザー識別子</strong>: 認証サービス（Firebase Authentication）が発行する匿名 UID</li>
-          <li><strong>ユーザー入力情報</strong>: ユーザーがアプリ内で任意に設定する表示名（最大 16 文字）</li>
           <li><strong>位置情報</strong>: チェックインの正当性確認のために、QR コード読み取り時にのみ取得する端末の位置情報(GPS)</li>
           <li><strong>利用ログ</strong>: チェックイン履歴、ポイント残高、ガチャ履歴、所持アバター</li>
           <li><strong>端末情報</strong>: OS バージョン、端末モデル、アプリのバージョン、言語設定</li>
@@ -136,7 +135,7 @@
             <tr>
               <td>PlayFab</td>
               <td>Microsoft Corporation</td>
-              <td>ゲームサービス基盤（ポイント・ガチャ抽選・アバター管理）</td>
+              <td>全国ランキング（リーダーボード）の集計・表示</td>
             </tr>
           </tbody>
         </table>
@@ -181,7 +180,7 @@
 
         <h3>10.1 Firebase Authentication / Firestore / Cloud Messaging（Google LLC）</h3>
         <ul>
-          <li><strong>送信される情報</strong>: 匿名 UID、認証トークン、アプリ内データ（表示名、ポイント残高、チェックイン履歴、所持アバター）、デバイストークン</li>
+          <li><strong>送信される情報</strong>: 匿名 UID、認証トークン、アプリ内データ（ポイント残高、チェックイン履歴、所持アバター）、デバイストークン</li>
           <li><strong>送信目的</strong>: ユーザー認証、データの永続化、プッシュ通知配信</li>
           <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
           <li><strong>設定変更方法</strong>: アプリ内のアカウント削除機能、または端末の通知設定からプッシュ通知をオフにできます</li>
@@ -210,8 +209,8 @@
 
         <h3>10.4 PlayFab（Microsoft Corporation）</h3>
         <ul>
-          <li><strong>送信される情報</strong>: 匿名 UID、ポイント残高、ガチャ抽選リクエスト、所持アバター ID</li>
-          <li><strong>送信目的</strong>: ポイント・アバターのサーバー管理、ガチャ抽選処理の実行、不正利用の検知</li>
+          <li><strong>送信される情報</strong>: 匿名 UID（PlayFab タイトルプレイヤー）、ランキング集計用の統計値（トロフィー獲得数等）、ランキング表示用のアバター ID</li>
+          <li><strong>送信目的</strong>: 全国ランキング（リーダーボード）の集計・表示</li>
           <li><strong>プライバシーポリシー</strong>: <a href="https://privacy.microsoft.com/ja-jp/privacystatement" target="_blank" rel="noopener">https://privacy.microsoft.com/ja-jp/privacystatement</a></li>
         </ul>
 
