@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>地下アイドルPV垂れ流しプレーヤー - 偏りなく永久ループ再生【無料】</title>
+<meta name="description" content="地下アイドルのPVを自分のYouTube Data APIキーで偏りなく・永久ループで垂れ流せる無料プレーヤー。フェス出演者199組のリストを内蔵、キーワード検索での新規発掘にも対応。" />
+<link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/idol-pv-player.html" />
+<link rel="icon" href="../images/index/favicon.ico" />
+<meta name="robots" content="max-image-preview:large" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+
+<!-- OGP -->
+<meta property="og:title" content="地下アイドルPV垂れ流しプレーヤー" />
+<meta property="og:description" content="地下アイドルのPVを偏りなく・永久ループで垂れ流せる無料プレーヤー。フェス出演者199組のリストを内蔵。" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://isa130pull.github.io/portrait-site/pages/idol-pv-player.html" />
+<meta property="og:site_name" content="かわぐち（isa130pull）" />
+<meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/profile@1x.jpg" />
+<meta property="og:image:alt" content="地下アイドルPV垂れ流しプレーヤー" />
+<meta property="og:image:width" content="365" />
+<meta property="og:image:height" content="365" />
+<meta property="og:locale" content="ja_JP" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="地下アイドルPV垂れ流しプレーヤー" />
+<meta name="twitter:description" content="地下アイドルのPVを偏りなく・永久ループで垂れ流せる無料プレーヤー。" />
+<meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/profile@1x.jpg" />
+
+<!-- JSON-LD WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "地下アイドルPV垂れ流しプレーヤー",
+  "url": "https://isa130pull.github.io/portrait-site/pages/idol-pv-player.html",
+  "description": "地下アイドルのPVを自分のYouTube Data APIキーで偏りなく・永久ループで垂れ流せる無料プレーヤー。フェス出演者199組のリストを内蔵。",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "かわぐち (isa130pull)"
+  }
+}
+</script>
+
+<!-- JSON-LD BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://isa130pull.github.io/portrait-site/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "地下アイドルPV垂れ流しプレーヤー",
+      "item": "https://isa130pull.github.io/portrait-site/pages/idol-pv-player.html"
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0b0c0f;
+    --fg: #e8eaed;
+    --muted: #a1a7b3;
+    --accent: #6ee7ff;
+    --card: #14161a;
+    --border: #1f2329;
+    --ok: #4ade80;
+    --warn: #fbbf24;
+    --err: #ff6b6b;
+    --maxw: 1200px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --bg:#ffffff; --fg:#111318; --muted:#5a6472; --card:#f7f8fa; --border:#e5e7eb; --accent:#0ea5e9; --ok:#16a34a; --warn:#b45309; --err:#dc2626; }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: var(--maxw); margin-inline: auto; padding: 24px; }
+  header { padding: 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+  h1 { font-size: clamp(22px, 3.6vw, 30px); margin: 0 0 8px; }
+  h2 { font-size: clamp(16px, 3vw, 18px); margin: 0 0 12px; font-weight: 600; }
+  .back-link { display: inline-block; margin-bottom: 16px; padding: 8px 16px; border: 1px solid var(--border); border-radius: 8px; color: var(--fg); font-size: 14px; }
+  .back-link:hover { border-color: var(--accent); text-decoration: none; }
+  .badge { display: inline-block; font-size: 12px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 3px 12px; }
+
+  /* Section Card */
+  .section { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+
+  /* Player layout */
+  .player-grid { display: grid; grid-template-columns: 1fr 360px; gap: 16px; }
+  @media (max-width: 900px) { .player-grid { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
+  .player-box { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; }
+  #player { width: 100%; height: 100%; }
+  .nowtitle { font-size: 16px; font-weight: 600; margin: 12px 0 4px; line-height: 1.4; }
+  .nowmeta { font-size: 13px; color: var(--muted); }
+  .nowmeta a { color: var(--accent); }
+  .controls { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+
+  button { appearance: none; border: 1px solid var(--border); background: var(--bg); color: var(--fg); padding: 9px 14px; border-radius: 10px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; font-family: inherit; }
+  button:hover { border-color: var(--accent); }
+  button.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+  button.primary:hover { opacity: 0.9; }
+  button.on { border-color: var(--accent); color: var(--accent); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  label { display: block; font-weight: 600; margin: 10px 0 4px; font-size: 12px; color: var(--muted); }
+  input[type="text"], input[type="password"], input[type="number"], textarea {
+    width: 100%; padding: 9px 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 9px;
+    color: var(--fg); font-size: 13px; font-family: inherit; transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
+  .row { display: flex; gap: 10px; } .row > div { flex: 1; }
+  .hint { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+  details { margin-top: 10px; } summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+
+  .status { font-size: 13px; margin-top: 10px; min-height: 20px; }
+  .status.err { color: var(--err); } .status.ok { color: var(--ok); } .status.work, .status.warn { color: var(--warn); }
+
+  .queue { margin-top: 8px; max-height: 320px; overflow: auto; }
+  .qitem { display: flex; gap: 8px; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 12.5px; align-items: flex-start; }
+  .qitem:hover { background: var(--bg); }
+  .qitem.active { background: var(--bg); border-left: 3px solid var(--accent); }
+  .qitem .idx { color: var(--muted); min-width: 24px; }
+  .qitem .qt { flex: 1; line-height: 1.35; }
+  .qitem .qv { color: var(--muted); white-space: nowrap; }
+  .qch { color: var(--muted); font-size: 11px; }
+  .kv { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  /* モード表示切替: 既定はフェス出演者(chmode) */
+  .mode-ch { display: none; } .mode-kw { display: block; }
+  body.chmode .mode-ch { display: block; } body.chmode .mode-kw { display: none; }
+  .chrow { display: flex; gap: 8px; padding: 6px 8px; border-radius: 8px; font-size: 12px; align-items: center; }
+  .chrow:hover { background: var(--bg); }
+  .chrow .cn { flex: 1; line-height: 1.3; } .chrow .cg { color: var(--muted); }
+  .chrow .del { color: var(--accent); cursor: pointer; border: 1px solid var(--border); border-radius: 6px; padding: 2px 7px; }
+  .chrow .un { color: var(--warn); }
+
+  /* 大画面(シアター)モード */
+  body.theater .player-grid { grid-template-columns: 1fr; }
+  body.theater .card.side { display: none; }
+  body.theater .card { padding: 8px; }
+  body.theater .player-box { aspect-ratio: 16/9; max-height: calc(100vh - 220px); width: min(100%, calc((100vh - 220px) * 16 / 9)); margin: 0 auto; }
+  body.theater #btnTheater { border-color: var(--accent); color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .row { flex-direction: column; }
+    .controls button { flex: 1 1 auto; }
+  }
+</style>
+
+<!-- Google Identity Services (アカウント保存用) -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<!-- Google Analytics (gtag.js) - lazy loaded -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CF20TVK6DP');
+  (function(){
+    function loadGtag(){
+      var s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
+      s.async = true;
+      document.head.appendChild(s);
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadGtag);
+    } else {
+      setTimeout(loadGtag, 2000);
+    }
+  })();
+</script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a href="../index.html" class="back-link">← トップページに戻る</a>
+    <h1>🎤 地下アイドルPV垂れ流しプレーヤー</h1>
+    <span class="badge">自前キュー方式 / 偏りなし / 永久ループ</span>
+  </header>
+
+  <div class="player-grid">
+    <!-- 左: プレーヤー -->
+    <div class="card">
+      <div class="player-box"><div id="player"></div></div>
+      <div class="nowtitle" id="nowTitle">▶ 「動画を集める」で開始してください</div>
+      <div class="nowmeta" id="nowMeta"></div>
+      <div class="controls">
+        <button id="btnPrev">⏮ 前へ</button>
+        <button id="btnPlay" class="primary">▶ 再生</button>
+        <button id="btnNext">⏭ 次へ</button>
+        <button id="btnShuffle" class="on">🔀 シャッフル</button>
+        <button id="btnAutoRefill" class="on">♾ 自動補充</button>
+        <button id="btnTheater">🖥 大画面</button>
+      </div>
+      <div class="kv" id="poolInfo"></div>
+      <div class="controls" style="margin-top:10px;">
+        <button id="btnYouTube">▶ YouTubeで連続再生</button>
+        <button id="btnSavePl">＋ アカウントのプレイリストに保存</button>
+      </div>
+      <div class="hint">「連続再生」＝YouTube上の一時プレイリストで開く（最大50本／YouTube側の「保存」で自分のプレイリストに追加可）。「保存」＝OAuth認証で自分のアカウントに新規プレイリストを作成。</div>
+    </div>
+
+    <!-- 右: 設定＆キュー -->
+    <div class="card side">
+      <h2>設定</h2>
+      <label>YouTube Data API キー</label>
+      <input id="apiKey" type="password" placeholder="AIza... (自分のキーを貼り付け)">
+      <div class="hint">読み取り専用。ブラウザ内 localStorage に保存され外部送信しません。</div>
+
+      <div class="hint" style="margin-top:8px;">「アカウントのプレイリストに保存」は isa130pull@gmail.com のみ利用可能です（OAuth同意画面をテストモードに限定し、テストユーザーとして登録済み）。</div>
+
+      <div style="display:flex; gap:8px; margin-top:10px;">
+        <button id="btnModeCh" style="flex:1;">🎯 フェス出演者から</button>
+        <button id="btnModeKw" style="flex:1;">🔍 キーワード検索</button>
+      </div>
+
+      <div class="row" style="margin-top:8px;">
+        <div><label>1グループ最大（キュー内）</label><input id="maxPerCh" type="number" value="2"></div>
+        <div class="mode-ch"><label>1組の最新PV取得数</label><input id="perGroup" type="number" value="1"></div>
+        <div class="mode-kw"><label>何日以内(検索)</label><input id="withinDays" type="number" value="365"></div>
+      </div>
+
+      <!-- ▼ フェス出演者(チャンネル)方式 -->
+      <div class="mode-ch">
+        <details open>
+          <summary>出演者リスト（1行1組）<span id="grpCount" class="kv"></span></summary>
+          <textarea id="groups" placeholder="1行に1組"></textarea>
+          <div class="hint">各組の公式チャンネルを1回だけ検索して紐付け、以降はキャッシュ利用。誤紐付けは下の一覧から削除できます。</div>
+          <button id="btnResetGrp" style="width:100%; margin-top:8px;">🔄 出演者リストを既定(TIF2025)に戻す</button>
+        </details>
+        <div class="row" style="margin-top:8px;">
+          <div><label>1回の解決上限(クォータ保護)</label><input id="resolveBudget" type="number" value="40"></div>
+        </div>
+        <button id="btnResolve" style="width:100%; margin-top:8px;">🔗 チャンネルを解決（未解決のみ）</button>
+        <button id="btnFetchCh" class="primary" style="width:100%; margin-top:8px;">🎬 最新PVを集める</button>
+        <details style="margin-top:8px;">
+          <summary>紐付け済みチャンネル <span id="chCount" class="kv"></span></summary>
+          <div id="chList" class="queue" style="max-height:220px;"></div>
+        </details>
+      </div>
+
+      <!-- ▼ キーワード検索方式（新規発掘用） -->
+      <div class="mode-kw">
+        <div class="row" style="margin-top:8px;">
+          <div><label>再生数 下限</label><input id="minViews" type="number" value="2000"></div>
+          <div><label>再生数 上限</label><input id="maxViews" type="number" value="100000"></div>
+        </div>
+        <details>
+          <summary>検索キーワード（1行1件）</summary>
+          <textarea id="queries">地下アイドル MV
+ライブアイドル MV
+地下アイドル 新曲 MV
+ライブアイドル 新曲 MV
+インディーズアイドル MV
+地下アイドル デビュー曲 MV
+ライブアイドル ミュージックビデオ
+地下アイドル リリックビデオ</textarea>
+          <div class="hint">長さ1〜8分・音楽PV系・埋め込み可のみ自動採用。ゲーム二次創作/VTuber/ボカロ/歌ってみた等は自動除外。</div>
+          <button id="btnResetKw" style="width:100%; margin-top:8px;">🔄 キーワードを既定値に戻す</button>
+        </details>
+        <button id="btnFetch" class="primary" style="width:100%; margin-top:12px;">🔍 動画を集める</button>
+      </div>
+
+      <div class="status" id="status"></div>
+
+      <h2 style="margin-top:16px;">キュー <span id="qCount" class="kv"></span></h2>
+      <div class="queue" id="queue"></div>
+    </div>
+  </div>
+
+  <section class="section" style="margin-top:24px;">
+    <h2>地下アイドルPV垂れ流しプレーヤーとは？</h2>
+    <p style="margin:0 0 16px;color:var(--muted)">YouTube上の地下アイドルのPVを「偏りなく・永久ループ」で流し続けられる無料ツールです。サーバー不要のフロントエンド完結アプリで、ご自身のYouTube Data APIキーを使って動作します。</p>
+    <h2>2つの収集モード</h2>
+    <ul style="margin:0 0 16px;padding-left:20px;color:var(--muted)">
+      <li><strong style="color:var(--fg)">フェス出演者から（既定）</strong> — 内蔵の出演者リスト199組の公式チャンネルを1回だけ紐付け、以降は最新PVをキャッシュ経由で低コスト取得。ノイズが原理的に入りません。</li>
+      <li><strong style="color:var(--fg)">キーワード検索</strong> — 新規発掘用。除外リストでゲーム二次創作・VTuber・歌ってみた等のノイズを自動除去します。</li>
+    </ul>
+    <h2>特徴</h2>
+    <ul style="margin:0;padding-left:20px;color:var(--muted)">
+      <li>登録不要・完全無料（自分のAPIキーを使用）</li>
+      <li>1組の連続再生を抑制する公平キュー生成</li>
+      <li>YouTube上の一時プレイリストで連続再生 or 自分のアカウントに保存（OAuth）</li>
+      <li>大画面（シアター）表示に対応</li>
+    </ul>
+  </section>
+</div>
+
+<footer style="margin-top:48px;padding:24px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;text-align:center">
+  <p style="margin:0">&copy; <script>document.write(new Date().getFullYear())</script> かわぐち (isa130pull)</p>
+</footer>
+
+<script>
+// ============================ 状態 ============================
+const LS = "idolpv.settings";
+let player, ytReady=false, wantPlay=false;
+let pool=[];        // フィルタ通過した全候補 {id,title,channelId,channelTitle,views}
+let queue=[];       // 再生順（poolの並べ替え）
+let idx=-1;
+let shuffle=true, autoRefill=true, theater=false;
+let failStreak=0;   // 連続再生失敗カウンタ（無限ループ防止）
+let tokenClient=null, ytAccessToken=null, pendingSave=false;   // OAuth(アカウント保存)用
+
+const $=id=>document.getElementById(id);
+const OAUTH_CLIENT_ID="812251443384-nngtvtprh069u9gf7obkk40o5hiodh5h.apps.googleusercontent.com"; // isa130pull@gmail.com専用（OAuth同意画面はテストユーザー限定）
+const MUSIC="10";
+const QVER=2;   // キーワード既定値のバージョン。上げると旧保存キーワードを自動で新既定に置換
+const DEFAULT_QUERIES=`地下アイドル MV
+ライブアイドル MV
+地下アイドル 新曲 MV
+ライブアイドル 新曲 MV
+インディーズアイドル MV
+地下アイドル デビュー曲 MV
+ライブアイドル ミュージックビデオ
+地下アイドル リリックビデオ`;
+
+// ---------- チャンネル(フェス)方式 ----------
+const LS_CH="idolpv.channels";     // 名前→チャンネル紐付けキャッシュ
+const GVER=1;                       // 出演者既定リストのバージョン
+let mode="ch";                      // "ch"=フェス出演者 / "kw"=キーワード
+let chMap={};                       // { 名前: {id:"UC...", title:"..."} }  id="" は該当なし確定
+const DEFAULT_GROUPS=`iON!
+i-COL
+ideal peco
+アイテムはてるてるのみ
+アイドリング!!!
+アイドル革命
+アイドルカレッジ
+iLiFE!
+i☆Ris
+AOAO
+アキシブproject
+AsIs
+Appare!
+アップアップガールズ（2）
+ANA®KIE
+AVAM
+あまいものつめあわせ
+amini
+Amuse Dolce
+雨のち、ハレーション
+AMEFURASSHI
+アルテミスの翼
+THE ENCORE
+アンスリューム
+ambitious
+いぎなり東北産
+ExWHYZ
+＝LOVE
+いちごみるく色に染まりたい。
+INUWASI
+IHOTEU
+UtaGe!
+ukka
+ASP
+AKB48
+衛星とカラテア
+HKT48
+éclatcia
+SKE48
+STU48
+NMB48
+NGT48
+THE ORCHESTRA TOKYO
+OCHA NORMA
+かすみ草とステラ
+カラフルスクリーム
+可憐なアイボリー
+KiSS KiSS
+君と見るそら
+君に、胸キュン。
+GANG PARADE
+CANDY TUNE
+CUTIE STREET
+Quubi
+きゅるりんってしてみて
+GILTY x GILTY
+キングサリ
+クマリデパート
+Gran☆Ciel
+群青の世界
+KRD8
+こみっきゅおん！
+Kolokol
+最終未来少女
+さとりモンスター
+さよならステイチューン
+zanka
+CiON
+ジエメイ
+SITUASION
+シャニムニ＝パレード
+Jams Collection
+シャルロット
+Juice=Juice
+シュレーディンガーの犬
+純情のアフィリア
+私立恵比寿中学
+シンデレラ宣言！
+Sweet Alley
+SWEET STEADY
+CYNHN
+SUPER☆GiRLS
+SUPER JYAPON
+すーぱーぷーばぁー!!
+透色ドロップ
+SCRAMBLE SMILE
+StarWinK
+STAiNY
+すてねこキャッツ
+ストロボグリッター
+SAY-LA
+selfish
+DIALOGUE＋
+太陽と踊れ月夜に唄え
+高嶺のなでしこ
+Task have Fun
+W.ダブルヴィー
+TEAM SHACHI
+chuLa
+超ときめき♡宣伝部
+つばきファクトリー
+TEAR DROP!
+ティラミス
+Devil ANTHEM.
+テラテラ
+点染テンセイ少女。
+Toi Toi Toi
+東京女子流
+Tohkei
+ドラマチックレコード
+ドレスコード
+ナナコロビヤオキ
+22/7
+NANIMONO
+なみだ色の消しごむ
+≒JOY
+#2i2
+ニコルポップ
+虹のコンキスタドール
+二丁目の魁カミングアウト
+name:CMH
+NEO JAPONISM
+Negicco
+ネコプラpixx.
+≠ME
+ノルニル
+のんふぃく！
+ばってん少女隊
+Honey Devil
+#ババババンビ
+ハルニシオン
+Palette Parade
+バンドじゃないもん! MAXX NAKAYOSHI
+PPE41
+Peel the Apple
+PIGGS
+Pixel Ribbon
+himawari 船橋
+BEYOOOOONDS
+fav me
+femme fatale
+ファントムシータ
+feelNEO
+fishbowl
+フィロソフィーのダンス
+FES☆TIVE
+福を架ける少女
+フューチャーサイダー
+PRSMIN
+Primulav
+ポラリスマイル
+僕が見たかった青空 青空組
+僕が見たかった青空 雲組
+WHITE SCORPION
+ポンコツコンポ
+My_Stage
+MyDearDarlin'
+my fav
+前橋ウィッチーズ
+MAGICAL SPEC
+マジカル・パンチライン
+Ma'Scar'Piece
+まねきケチャ
+豆柴の大群
+ミームトーキョー
+Mirror,Mirror
+みらくらんど
+#Mooove!
+め〜ぴよ
+MEGAFON
+Maison de Queen
+メノニューイヤー
+Merry BAD TUNE.
+モノクローム
+夜光性アミューズ
+#よーよーよー
+yosugala
+ラナキュラ
+RAViDAVi
+ラフ×ラフ
+愛乙女★DOLL
+lyrical school
+LinQ
+LINKL PLANET
+Ringwanderung
+RiNCENT♯
+ROOKEY♡ROOKEYS
+ルージュブック
+Luce Twinkle Wink☆
+Root mimi
+LumiUnion
+REIRIE
+Rain Tree
+ロージークロニクル
+Lolly Talk
+わーすた
+ワッツ◎さーくる
+@onefive
+Onephony`;
+
+// ---------- 設定の保存/復元 ----------
+function saveSettings(){
+  const s={apiKey:$("apiKey").value.trim(),
+    minViews:$("minViews").value, maxViews:$("maxViews").value,
+    maxPerCh:$("maxPerCh").value, withinDays:$("withinDays").value, queries:$("queries").value,
+    groups:$("groups").value, perGroup:$("perGroup").value, resolveBudget:$("resolveBudget").value,
+    mode, shuffle, autoRefill, theater, qver:QVER, gver:GVER};
+  try{localStorage.setItem(LS, JSON.stringify(s));}catch(e){}
+}
+function loadSettings(){
+  try{
+    const s=JSON.parse(localStorage.getItem(LS)||"{}");
+    if(s.apiKey)$("apiKey").value=s.apiKey;
+    if(s.minViews)$("minViews").value=s.minViews;
+    if(s.maxViews)$("maxViews").value=s.maxViews;
+    if(s.maxPerCh)$("maxPerCh").value=s.maxPerCh;
+    if(s.withinDays)$("withinDays").value=s.withinDays;
+    if(s.perGroup)$("perGroup").value=s.perGroup;
+    if(s.resolveBudget)$("resolveBudget").value=s.resolveBudget;
+    // キーワードは保存版のバージョンが最新の時のみ復元。旧版は新しい既定値に自動置換。
+    if(s.queries && s.qver===QVER)$("queries").value=s.queries;
+    else $("queries").value=DEFAULT_QUERIES;
+    // 出演者リストも同様にバージョン管理
+    if(s.groups && s.gver===GVER)$("groups").value=s.groups;
+    else $("groups").value=DEFAULT_GROUPS;
+    if(s.mode==="kw"||s.mode==="ch")mode=s.mode;
+    if(typeof s.shuffle==="boolean")shuffle=s.shuffle;
+    if(typeof s.autoRefill==="boolean")autoRefill=s.autoRefill;
+    if(typeof s.theater==="boolean")theater=s.theater;
+  }catch(e){ $("queries").value=DEFAULT_QUERIES; $("groups").value=DEFAULT_GROUPS; }
+  try{ chMap=JSON.parse(localStorage.getItem(LS_CH)||"{}"); }catch(e){ chMap={}; }
+  $("btnShuffle").classList.toggle("on",shuffle);
+  $("btnAutoRefill").classList.toggle("on",autoRefill);
+  applyMode();
+  applyTheater();
+  renderChList();
+}
+function applyTheater(){
+  document.body.classList.toggle("theater", theater);
+  $("btnTheater").textContent = theater ? "🗕 標準表示" : "🖥 大画面";
+  $("btnTheater").classList.toggle("on", theater);
+}
+function saveChannels(){ try{localStorage.setItem(LS_CH, JSON.stringify(chMap));}catch(e){} }
+function applyMode(){
+  document.body.classList.toggle("chmode", mode==="ch");
+  $("btnModeCh").classList.toggle("primary", mode==="ch");
+  $("btnModeKw").classList.toggle("primary", mode==="kw");
+  updateGrpCount();
+}
+function groupNames(){ return $("groups").value.split("\n").map(s=>s.trim()).filter(Boolean); }
+function updateGrpCount(){
+  const names=groupNames();
+  const resolved=names.filter(n=>chMap[n]&&chMap[n].id).length;
+  $("grpCount").textContent=`(${resolved}/${names.length}組 紐付け済)`;
+}
+
+function setStatus(msg,cls=""){const el=$("status"); el.textContent=msg; el.className="status "+cls;}
+
+// ============================ IFrame Player ============================
+function onYouTubeIframeAPIReady(){
+  player=new YT.Player("player",{
+    width:"100%", height:"100%",
+    host:"https://www.youtube.com",
+    playerVars:{autoplay:0, rel:0, modestbranding:1, playsinline:1,
+      origin: location.origin && location.origin!=="null" ? location.origin : undefined},
+    events:{onReady:()=>{ytReady=true;}, onStateChange:onState, onError:onErr}
+  });
+}
+function onState(e){
+  if(e.data===YT.PlayerState.PLAYING){ failStreak=0; $("btnPlay").textContent="⏸ 一時停止"; } // 再生成功でリセット
+  if(e.data===YT.PlayerState.ENDED){ playNext(); }
+  if(e.data===YT.PlayerState.PAUSED){ $("btnPlay").textContent="▶ 再生"; }
+}
+function onErr(e){
+  // 2:パラメータ不正 5:HTML5エラー 100:削除/非公開 101/150:埋め込み不可
+  console.warn("player error",e.data);
+  failStreak++;
+  // キューを一周ぶん連続失敗したら、無限スキップを止めて原因を提示
+  if(failStreak>=Math.max(3, queue.length)){
+    failStreak=0;
+    const fileScheme = location.protocol==="file:";
+    setStatus(
+      "全動画が再生不可でループを停止しました。"+
+      (fileScheme
+        ? "原因: file:// で開いています。YouTube埋め込みは file:// では再生できません。フォルダで『python3 -m http.server』を実行し http://localhost:8000/ から開いてください。"
+        : "埋め込み不可（コード"+(e&&e.data)+"）が続いています。view数バンドやキーワードを見直してください。"),
+      "err");
+    return;
+  }
+  setStatus("再生不可の動画をスキップ（"+failStreak+"連続 / コード"+(e&&e.data)+"）","warn");
+  setTimeout(playNext, 400);  // 猛スピードの無限ループを避けるため少し待つ
+}
+
+// ============================ 発掘 ============================
+async function api(path,params){
+  const key=$("apiKey").value.trim();
+  const usp=new URLSearchParams({...params,key});
+  const r=await fetch(`https://www.googleapis.com/youtube/v3/${path}?${usp}`);
+  if(!r.ok){
+    let msg=r.status;
+    try{const j=await r.json(); msg=j.error?.message||msg;}catch(e){}
+    throw new Error(msg);
+  }
+  return r.json();
+}
+
+function parseDur(iso){
+  const m=/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/.exec(iso||"");
+  if(!m)return 0;
+  return (+m[1]||0)*3600+(+m[2]||0)*60+(+m[3]||0);
+}
+
+const EXCLUDE=[
+  // 映像タイプ系
+  "ライブ映像","live映像","切り抜き","reaction","リアクション","歌ってみた","踊ってみた",
+  "弾いてみた","叩いてみた","描いてみた","レッスン","vlog","teaser","予告","ダイジェスト",
+  "メイキング","cover","カバー","remix","リミックス","mad","#shorts","shorts","short ver","ショートver",
+  // ゲーム/版権アイドル（二次創作の温床）
+  "デレステ","デレマス","シンデレラガールズ","ミリシタ","ミリオンライブ","アイマス","アイドルマスター",
+  "バンドリ","ガルパ","プロセカ","プロジェクトセカイ","ラブライブ","スクスタ","蓮ノ空","ウマ娘",
+  "ヨスタ","ブルアカ","学マス","gakumas",
+  // VTuber / 配信者
+  "vtuber","ホロライブ","hololive","にじさんじ","nijisanji","ぶいすぽ","vスポ","voms",
+  // ボカロ/AI音声/合成
+  "ボカロ","vocaloid","初音ミク","ボーカロイド","aiシンガー","ai singer","aiシンガーmunoshake",
+  "synthesizer v","synthv","cevio","utau","音声合成","可不","kafu","adachi rei",
+  // コスプレ/モデル/その他二次
+  "コスプレ","cosplay","二次創作","fanmade","fan made","雨穴"
+];
+const INCLUDE=["mv","m/v","pv","music video","ミュージックビデオ","リリックビデオ","lyric video","official mv","official music video"];
+
+function passes(v,minV,maxV){
+  const st=v.status||{}, sn=v.snippet||{}, stat=v.statistics||{};
+  if(st.embeddable===false)return false;
+  if((sn.liveBroadcastContent||"none")!=="none")return false;
+  if(stat.viewCount==null)return false;
+  const views=+stat.viewCount;
+  if(views<minV||views>maxV)return false;
+  const dur=parseDur(v.contentDetails?.duration);
+  if(dur<60||dur>480)return false;
+  const t=(sn.title||"").toLowerCase();
+  if(EXCLUDE.some(x=>t.includes(x)))return false;
+  if(sn.categoryId!==MUSIC && !INCLUDE.some(x=>t.includes(x)))return false;
+  return true;
+}
+
+// チャンネル方式の判定（再生数は問わない。PV/音楽カテゴリのみ採用）
+function passesCh(v){
+  const st=v.status||{}, sn=v.snippet||{};
+  if(st.embeddable===false)return false;
+  if((sn.liveBroadcastContent||"none")!=="none")return false;
+  const dur=parseDur(v.contentDetails&&v.contentDetails.duration);
+  if(dur<60||dur>600)return false;              // 1〜10分
+  const t=(sn.title||"").toLowerCase();
+  if(EXCLUDE.some(x=>t.includes(x)))return false;
+  if(sn.categoryId!==MUSIC && !INCLUDE.some(x=>t.includes(x)))return false;
+  return true;
+}
+
+// 名前→公式チャンネルを解決（1組=search 100ユニット / キャッシュ / 予算上限つき）
+async function resolveChannels(){
+  const key=$("apiKey").value.trim();
+  if(!key){setStatus("APIキーを入力してください","err");return;}
+  saveSettings();
+  const names=groupNames();
+  const todo=names.filter(n=>!(n in chMap));    // 未解決のみ（該当なし確定は再検索しない）
+  if(todo.length===0){setStatus("未解決の組はありません（全て紐付け済/確定済）","ok");renderChList();return;}
+  const budget=Math.max(1,+$("resolveBudget").value||40);
+  $("btnResolve").disabled=true;
+  let done=0, hit=0;
+  try{
+    for(const n of todo){
+      if(done>=budget)break;
+      try{
+        const r=await api("search",{part:"snippet",q:n,type:"channel",maxResults:"1",regionCode:"JP",relevanceLanguage:"ja"});
+        const it=(r.items||[])[0];
+        if(it){ const cid=(it.id&&it.id.channelId)||it.snippet.channelId;
+          chMap[n]={id:cid||"", title:it.snippet.channelTitle||it.snippet.title||""}; if(cid)hit++; }
+        else { chMap[n]={id:"",title:""}; }       // 該当なし確定
+      }catch(e){ if(String(e.message).toLowerCase().includes("quota")){throw e;} chMap[n]={id:"",title:"(エラー)"}; }
+      done++; saveChannels(); updateGrpCount();
+      setStatus(`チャンネル解決中... ${done}/${Math.min(budget,todo.length)}（新規紐付け${hit}）`,"work");
+    }
+    const remain=names.filter(n=>!(n in chMap)).length;
+    setStatus(`✅ 解決 ${done}組（新規紐付け${hit}）。未解決 残り${remain}組。`+(remain?" もう一度押すと続きを解決します。":""),"ok");
+  }catch(e){
+    setStatus("解決中断: "+e.message+(String(e.message).toLowerCase().includes("quota")?"（本日のクォータ上限）":""),"err");
+  }finally{ $("btnResolve").disabled=false; renderChList(); updateGrpCount(); }
+}
+
+// 各公式チャンネルのアップロードから最新PVを収集（1ユニット/ch＝激安）
+async function fetchPoolByChannels(){
+  const key=$("apiKey").value.trim();
+  if(!key){setStatus("APIキーを入力してください","err");return;}
+  saveSettings();
+  const names=groupNames();
+  const resolved=names.filter(n=>chMap[n]&&chMap[n].id);
+  if(resolved.length===0){setStatus("紐付け済みチャンネルがありません。先に『チャンネルを解決』を実行してください。","err");return;}
+  const perGroup=Math.max(1,+$("perGroup").value||1);
+  $("btnFetchCh").disabled=true;
+  try{
+    setStatus(`最新PV収集中... 0/${resolved.length}組`,"work");
+    const idToGroup={}; const allIds=[]; let ci=0;
+    for(const n of resolved){
+      const cid=chMap[n].id, uploads="UU"+cid.slice(2);   // UC... → UU...(アップロード用プレイリスト)
+      try{
+        const r=await api("playlistItems",{part:"contentDetails",playlistId:uploads,maxResults:"15"});
+        (r.items||[]).forEach(it=>{ const vid=it.contentDetails&&it.contentDetails.videoId;
+          if(vid && !(vid in idToGroup)){ idToGroup[vid]=n; allIds.push(vid); } });
+      }catch(e){ if(String(e.message).toLowerCase().includes("quota")){throw e;} console.warn("uploads fail",n,e.message); }
+      if(++ci%10===0)setStatus(`最新PV収集中... ${ci}/${resolved.length}組`,"work");
+    }
+    if(allIds.length===0){setStatus("動画を取得できませんでした。紐付けを見直してください。","err");return;}
+    setStatus(`判定中... (${allIds.length}本)`,"work");
+    const byGroup={};
+    for(let i=0;i<allIds.length;i+=50){
+      const r=await api("videos",{part:"snippet,contentDetails,status,statistics",id:allIds.slice(i,i+50).join(",")});
+      for(const v of (r.items||[])){
+        if(!passesCh(v))continue;
+        const g=idToGroup[v.id]||v.snippet.channelTitle||"";
+        (byGroup[g]=byGroup[g]||[]).push({id:v.id,title:v.snippet.title,channelId:v.snippet.channelId,
+          channelTitle:v.snippet.channelTitle||"",published:v.snippet.publishedAt||"",
+          views:+((v.statistics&&v.statistics.viewCount)||0)});
+      }
+    }
+    const kept=[];
+    for(const g in byGroup){
+      byGroup[g].sort((a,b)=>(b.published).localeCompare(a.published));   // 新しい順
+      kept.push(...byGroup[g].slice(0,perGroup));
+    }
+    if(kept.length===0){setStatus("PVと判定できる動画がありませんでした。","err");return;}
+    pool=kept; buildQueue();
+    setStatus(`✅ ${pool.length}本を採用（${Object.keys(byGroup).length}組）`,"ok");
+    if(idx<0){ idx=0; loadCurrent(true); }
+    renderQueue(); updatePoolInfo();
+  }catch(e){
+    setStatus("エラー: "+e.message+(String(e.message).toLowerCase().includes("quota")?"（本日のクォータ上限の可能性）":""),"err");
+  }finally{ $("btnFetchCh").disabled=false; }
+}
+
+// 紐付け一覧の描画
+function renderChList(){
+  const el=$("chList"); if(!el)return; el.innerHTML="";
+  groupNames().forEach(n=>{
+    const m=chMap[n];
+    let right;
+    if(m&&m.id) right=`<span class="cg">${esc(m.title)}</span>`;
+    else if(m)  right=`<span class="un">該当なし</span>`;
+    else        right=`<span class="cg">未解決</span>`;
+    const d=document.createElement("div"); d.className="chrow";
+    d.innerHTML=`<span class="cn">${esc(n)}</span>${right}<span class="del" data-n="${esc(n)}">×</span>`;
+    el.appendChild(d);
+  });
+  el.querySelectorAll(".del").forEach(b=>b.onclick=()=>{
+    const n=b.getAttribute("data-n"); delete chMap[n]; saveChannels(); renderChList(); updateGrpCount();
+  });
+  $("chCount").textContent=`(${Object.values(chMap).filter(x=>x&&x.id).length}件)`;
+}
+
+async function fetchPool(){
+  const key=$("apiKey").value.trim();
+  if(!key){setStatus("APIキーを入力してください","err"); return;}
+  saveSettings();
+  const minV=+$("minViews").value, maxV=+$("maxViews").value;
+  const days=+$("withinDays").value;
+  const qs=$("queries").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  const after=new Date(Date.now()-days*864e5).toISOString().replace(/\.\d+Z$/,"Z");
+
+  $("btnFetch").disabled=true;
+  try{
+    // 1) 検索で候補ID収集
+    //   ※ videoCategoryId(音楽=10)は付けない。地下アイドルの動画は投稿カテゴリが
+    //     エンタメ/people&blogs等になっている事が多く、付けると検索で全滅するため。
+    //     カテゴリ/タイトル判定は後段の passes() で行う。
+    setStatus("発掘中... (検索)","work");
+    const ids=new Set();
+    let errCount=0, lastErr="";
+    for(const q of qs){
+      try{
+        const r=await api("search",{part:"id",q,type:"video",order:"date",maxResults:"50",
+          publishedAfter:after,regionCode:"JP",relevanceLanguage:"ja",safeSearch:"none"});
+        (r.items||[]).forEach(it=>it.id?.videoId&&ids.add(it.id.videoId));
+        setStatus(`発掘中... 「${q}」 候補${ids.size}件`,"work");
+      }catch(e){ errCount++; lastErr=e.message; console.warn("search fail",q,e.message);
+        if(String(e.message).toLowerCase().includes("quota")){throw e;} }
+    }
+    if(ids.size===0){
+      if(errCount===qs.length){
+        setStatus("全キーワードでAPIエラー: "+lastErr+" ／ キーの制限（HTTPリファラー/API制限）やYouTube Data API v3の有効化を確認してください。","err");
+      }else{
+        setStatus("検索は成功しましたが候補0件でした。期間(日数)を延ばすかキーワードを見直してください。","err");
+      }
+      return;
+    }
+
+    // 2) 統計取得＆フィルタ
+    setStatus(`統計取得中... (${ids.size}件)`,"work");
+    const arr=[...ids]; const kept=[];
+    for(let i=0;i<arr.length;i+=50){
+      const r=await api("videos",{part:"snippet,statistics,contentDetails,status",id:arr.slice(i,i+50).join(",")});
+      for(const v of (r.items||[])){
+        if(passes(v,minV,maxV)){
+          kept.push({id:v.id,title:v.snippet.title,channelId:v.snippet.channelId,
+            channelTitle:v.snippet.channelTitle||"",views:+v.statistics.viewCount});
+        }
+      }
+    }
+    if(kept.length===0){setStatus("条件を満たす動画がありませんでした。view数バンドを調整してください。","err"); return;}
+
+    pool=kept;
+    buildQueue();
+    setStatus(`✅ ${pool.length}件を採用（${new Set(pool.map(x=>x.channelId)).size}チャンネル）`,"ok");
+    if(idx<0){ idx=0; loadCurrent(true); }
+    renderQueue(); updatePoolInfo();
+  }catch(e){
+    setStatus("エラー: "+e.message+(String(e.message).toLowerCase().includes("quota")?"（本日のクォータ上限の可能性）":""),"err");
+  }finally{ $("btnFetch").disabled=false; }
+}
+
+// ============================ キュー生成（公平化） ============================
+function buildQueue(){
+  const maxPer=Math.max(1,+$("maxPerCh").value||2);
+  const byCh={};
+  pool.forEach(v=>(byCh[v.channelId]=byCh[v.channelId]||[]).push(v));
+  let chs=Object.keys(byCh);
+  if(shuffle){ for(const k in byCh)shuf(byCh[k]); shuf(chs); }
+  const picked=[], used={};
+  let prog=true;
+  while(prog){
+    prog=false;
+    for(const ch of chs){
+      if((used[ch]||0)>=maxPer)continue;
+      const b=byCh[ch];
+      if((used[ch]||0)<b.length){ picked.push(b[used[ch]||0]); used[ch]=(used[ch]||0)+1; prog=true; }
+    }
+  }
+  if(shuffle)shuf(picked);
+  queue=picked;
+}
+function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}}
+
+// ============================ 再生制御 ============================
+function loadCurrent(autoplay){
+  const v=queue[idx]; if(!v)return;
+  const go=()=>{ autoplay?player.loadVideoById(v.id):player.cueVideoById(v.id); };
+  if(ytReady && player && player.loadVideoById){ go(); }
+  else { wantPlay=autoplay; const t=setInterval(()=>{ if(ytReady&&player.loadVideoById){clearInterval(t); go();} },200); }
+  $("nowTitle").textContent=v.title;
+  $("nowMeta").innerHTML=`<a href="https://www.youtube.com/channel/${v.channelId}" target="_blank">${esc(v.channelTitle)}</a> ・ ${v.views.toLocaleString()} 回再生`;
+  renderQueue();
+}
+function playNext(){
+  if(queue.length===0)return;
+  if(idx>=queue.length-1){
+    if(autoRefill){ buildQueue(); idx=0; }   // 使い切ったら再構築（順番を変えて継続）
+    else { idx=0; }
+  } else idx++;
+  loadCurrent(true);
+}
+function playPrev(){ if(queue.length===0)return; idx=(idx-1+queue.length)%queue.length; loadCurrent(true); }
+
+// ============================ 描画 ============================
+function esc(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function renderQueue(){
+  const el=$("queue"); el.innerHTML="";
+  queue.forEach((v,i)=>{
+    const d=document.createElement("div");
+    d.className="qitem"+(i===idx?" active":"");
+    d.innerHTML=`<div class="idx">${i+1}</div><div class="qt">${esc(v.title)}<div class="qch">${esc(v.channelTitle)}</div></div><div class="qv">${(v.views/1000).toFixed(0)}k</div>`;
+    d.onclick=()=>{idx=i; loadCurrent(true);};
+    el.appendChild(d);
+  });
+  $("qCount").textContent=queue.length?`(${idx+1}/${queue.length})`:"";
+}
+function updatePoolInfo(){
+  $("poolInfo").textContent=pool.length?`プール ${pool.length}本 / ${new Set(pool.map(x=>x.channelId)).size}チャンネル`:"";
+}
+
+// ============================ YouTubeへ書き出し ============================
+// (A) 一時プレイリストでYouTubeを開く（認証不要・最大50本）
+function openOnYouTube(){
+  if(!queue.length){setStatus("キューが空です。先に動画を集めてください。","err");return;}
+  const ids=queue.slice(0,50).map(v=>v.id);
+  window.open("https://www.youtube.com/watch_videos?video_ids="+ids.join(","),"_blank");
+  if(queue.length>50)setStatus("YouTubeの一時プレイリストは最大50本。先頭50本で開きました（YouTube側の『保存』で自分のリストに追加可）。","warn");
+  else setStatus("YouTubeで開きました（YouTube側の『保存』で自分のリストに追加できます）。","ok");
+}
+
+// (B) OAuthで自分のアカウントに新規プレイリストを作成して全曲登録
+async function apiAuth(path,query,body){
+  const r=await fetch(`https://www.googleapis.com/youtube/v3/${path}?${query}`,{
+    method:"POST",
+    headers:{Authorization:"Bearer "+ytAccessToken, "Content-Type":"application/json"},
+    body:JSON.stringify(body)});
+  if(!r.ok){ let msg=r.status; try{const j=await r.json(); msg=j.error?.message||msg;}catch(e){} throw new Error(msg); }
+  return r.json();
+}
+function ensureTokenClient(){
+  if(tokenClient)return true;
+  if(!(window.google&&google.accounts&&google.accounts.oauth2))return false;
+  tokenClient=google.accounts.oauth2.initTokenClient({
+    client_id:OAUTH_CLIENT_ID, scope:"https://www.googleapis.com/auth/youtube",
+    callback:(resp)=>{
+      if(resp&&resp.access_token){ ytAccessToken=resp.access_token; if(pendingSave)doSave(); }
+      else { pendingSave=false; setStatus("認証がキャンセルされました","err"); }
+    }
+  });
+  return true;
+}
+function saveQueueToAccount(){
+  if(!queue.length){setStatus("キューが空です。先に動画を集めてください。","err");return;}
+  if(location.protocol==="file:"){setStatus("アカウント保存は file:// では使えません。http://localhost で開いてください。","err");return;}
+  if(!ensureTokenClient()){setStatus("Google認証を初期化できません。読込直後は数秒待つか、時間をおいて再試行してください。","err");return;}
+  pendingSave=true;
+  try{ tokenClient.requestAccessToken({prompt: ytAccessToken?"":"consent"}); }
+  catch(e){ pendingSave=false; setStatus("認証開始に失敗: "+e.message,"err"); }
+}
+async function doSave(){
+  pendingSave=false;
+  const items=queue.slice();
+  $("btnSavePl").disabled=true;
+  try{
+    setStatus("プレイリスト作成中...","work");
+    const title="PV垂れ流し "+(mode==="ch"?"(フェス) ":"")+new Date().toLocaleString("ja-JP");
+    const pl=await apiAuth("playlists","part=snippet,status",
+      {snippet:{title,description:"PV垂れ流しプレーヤーで生成"}, status:{privacyStatus:"private"}});
+    let ok=0,ng=0;
+    for(const v of items){
+      try{ await apiAuth("playlistItems","part=snippet",
+        {snippet:{playlistId:pl.id, resourceId:{kind:"youtube#video", videoId:v.id}}}); ok++; }
+      catch(e){ ng++; console.warn("add fail",v.id,e.message); }
+      setStatus(`追加中... ${ok+ng}/${items.length}（成功${ok}）`,"work");
+    }
+    setStatus(`✅ プレイリスト作成完了: ${ok}本${ng?`（${ng}本は失敗）`:""}。YouTubeで開きます。`,"ok");
+    window.open("https://www.youtube.com/playlist?list="+pl.id,"_blank");
+  }catch(e){ setStatus("保存エラー: "+e.message,"err"); }
+  finally{ $("btnSavePl").disabled=false; }
+}
+
+// ============================ イベント ============================
+$("btnFetch").onclick=fetchPool;
+$("btnYouTube").onclick=openOnYouTube;
+$("btnSavePl").onclick=saveQueueToAccount;
+$("btnNext").onclick=playNext;
+$("btnPrev").onclick=playPrev;
+$("btnPlay").onclick=()=>{
+  if(!player||!queue.length)return;
+  const s=player.getPlayerState();
+  if(s===YT.PlayerState.PLAYING)player.pauseVideo(); else player.playVideo();
+};
+$("btnShuffle").onclick=e=>{ shuffle=!shuffle; e.target.classList.toggle("on",shuffle);
+  if(pool.length){buildQueue(); idx=0; loadCurrent(true); renderQueue();} saveSettings(); };
+$("btnAutoRefill").onclick=e=>{ autoRefill=!autoRefill; e.target.classList.toggle("on",autoRefill); saveSettings(); };
+$("btnTheater").onclick=()=>{ theater=!theater; applyTheater(); saveSettings(); };
+$("btnResetKw").onclick=()=>{ $("queries").value=DEFAULT_QUERIES; saveSettings(); setStatus("キーワードを既定値に戻しました","ok"); };
+// モード切替
+$("btnModeCh").onclick=()=>{ mode="ch"; applyMode(); saveSettings(); };
+$("btnModeKw").onclick=()=>{ mode="kw"; applyMode(); saveSettings(); };
+// チャンネル方式
+$("btnResolve").onclick=resolveChannels;
+$("btnFetchCh").onclick=fetchPoolByChannels;
+$("btnResetGrp").onclick=()=>{ $("groups").value=DEFAULT_GROUPS; saveSettings(); updateGrpCount(); renderChList(); setStatus("出演者リストを既定(TIF2025)に戻しました","ok"); };
+$("groups").addEventListener("change",()=>{ saveSettings(); updateGrpCount(); renderChList(); });
+["apiKey","minViews","maxViews","maxPerCh","withinDays","queries","perGroup","resolveBudget"].forEach(id=>$(id).addEventListener("change",saveSettings));
+
+// ============================ 起動 ============================
+loadSettings();
+if(location.protocol==="file:"){
+  setStatus("⚠ file:// で開いています。YouTube埋め込みが再生できません。フォルダで『python3 -m http.server』を実行し http://localhost:8000/idol-pv-player.html から開いてください。","warn");
+}
+(function loadYT(){ const s=document.createElement("script"); s.src="https://www.youtube.com/iframe_api"; document.head.appendChild(s); })();
+</script>
+</body>
+</html>
