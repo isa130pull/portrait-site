@@ -405,6 +405,15 @@
       transform: translateY(-2px);
     }
 
+    .app-icon{
+      display: block;
+      width: min(100%, 180px);
+      height: auto;
+      margin-inline: auto;
+      border-radius: 22%;
+      box-shadow: 0 8px 20px var(--shadow);
+    }
+
     @media (max-width: 767px){
       .card{
         padding: var(--space-4);
@@ -893,6 +902,16 @@
         <h3 id="mobile-apps-title" class="subsection-title">📱 スマホアプリ</h3>
         <p class="subsection-desc">すべて企画・開発を単独で実施。</p>
         <div class="cards">
+          <article class="card">
+            <h3>ヒトコマ</h3>
+            <img class="app-icon" src="images/hitokoma-app-icon.png" alt="ヒトコマのアプリアイコン" loading="lazy" width="1024" height="1024">
+            <p class="muted">写真に写っている「人」で選んで流せる、顔認識フォトスライドショーアプリ。<br>
+            <a href="https://apps.apple.com/jp/app/id6780748272" target="_blank" rel="noopener">App Store</a></p>
+            <div class="tags">
+              <div class="tag">SwiftUI</div>
+              <div class="tag">Core ML</div>
+            </div>
+          </article>
           <article class="card">
             <h3>いえばく!</h3>
             <div class="lite-yt" data-yt-id="XoXWpOk2fl4" data-yt-title="いえばく!">
