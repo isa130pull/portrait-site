@@ -114,7 +114,16 @@ portrait-site/
 
 数分後、`https://isa130pull.github.io/portrait-site/` でサイトが公開されます。
 
-### 3. app-ads.txt の更新
+### 3. 公開手順
+
+このサイトはローカルでファイルを変更しただけでは公開されません。GitHub Pages は `main` ブランチの内容を配信するため、変更後は必ずコミットして `origin/main` へ push します。
+
+1. 変更内容を確認する
+2. 対象ファイルをステージングしてコミットする
+3. `git push origin main` を実行する
+4. 数分後に公開URLで反映を確認する
+
+### 4. app-ads.txt の更新
 
 1. 本リポジトリの `app-ads.txt` を編集
 2. `isa130pull.github.io` リポジトリの `app-ads.txt` にも同じ内容をコピー
