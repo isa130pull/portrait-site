@@ -46,7 +46,7 @@
   <meta name="twitter:image:alt" content="Unityゲームエンジニア かわぐちのポートフォリオ" />
 
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="styles/editorial.css?v=20260724e">
+  <link rel="stylesheet" href="styles/editorial.css?v=20260724f">
 
   <!-- JSON-LD (Person) -->
   <script type="application/ld+json">
@@ -492,6 +492,18 @@
     </footer>
   </main>
 
+  <dialog class="video-modal" id="video-modal" aria-labelledby="video-modal-title">
+    <div class="video-modal-shell">
+      <div class="video-modal-header">
+        <h2 class="video-modal-title" id="video-modal-title">動画</h2>
+        <button class="video-modal-close" type="button" aria-label="動画を閉じる">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="video-modal-player" id="video-modal-player"></div>
+    </div>
+  </dialog>
+
   <script>
     // Place selected professional work before the independent app index.
     const mainContent = document.querySelector('main');
@@ -542,33 +554,72 @@
       }
     });
 
-    // YouTube Lite Embed - load iframe on click/keyboard
+    // YouTube Lite Embed - load the selected video in a shared modal
+    const videoModal = document.getElementById('video-modal');
+    const videoModalTitle = document.getElementById('video-modal-title');
+    const videoModalPlayer = document.getElementById('video-modal-player');
+    const videoModalClose = videoModal?.querySelector('.video-modal-close');
+    let activeVideoTrigger = null;
+
+    function resizeVideoModal(){
+      if(!videoModal?.open) return;
+      const isMobile = window.innerWidth <= 720;
+      const gutter = isMobile ? 24 : 48;
+      const headerHeight = isMobile ? 52 : 62;
+      const maxWidth = Math.min(
+        1200,
+        window.innerWidth - gutter,
+        (window.innerHeight - gutter - headerHeight) * 16 / 9
+      );
+      videoModal.style.width = Math.max(240, Math.floor(maxWidth)) + 'px';
+    }
+
     function activateLiteYt(el){
       var id = el.dataset.ytId;
-      var title = el.dataset.ytTitle || '';
+      var title = el.dataset.ytTitle || '動画';
       var iframe = document.createElement('iframe');
       iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
-      iframe.title = title;
+      iframe.title = title + ' の動画プレーヤー';
       iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
       iframe.allowFullscreen = true;
-      el.textContent = '';
-      el.style.cursor = 'default';
-      el.removeAttribute('tabindex');
-      el.removeAttribute('role');
-      el.appendChild(iframe);
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      activeVideoTrigger = el;
+      videoModalTitle.textContent = title;
+      videoModalPlayer.replaceChildren(iframe);
+      document.documentElement.classList.add('video-modal-open');
+      videoModal.showModal();
+      resizeVideoModal();
     }
+
+    function closeVideoModal(){
+      if(videoModal?.open) videoModal.close();
+    }
+
     document.querySelectorAll('.lite-yt').forEach(function(el){
       el.setAttribute('tabindex', '0');
       el.setAttribute('role', 'button');
       el.setAttribute('aria-label', (el.dataset.ytTitle || '動画') + ' を再生');
-      el.addEventListener('click', function(){ activateLiteYt(this); }, { once: true });
+      el.addEventListener('click', function(){ activateLiteYt(this); });
       el.addEventListener('keydown', function(e){
         if(e.key === 'Enter' || e.key === ' '){
           e.preventDefault();
           activateLiteYt(this);
         }
-      }, { once: true });
+      });
     });
+
+    videoModalClose?.addEventListener('click', closeVideoModal);
+    videoModal?.addEventListener('click', function(e){
+      if(e.target === videoModal) closeVideoModal();
+    });
+    videoModal?.addEventListener('close', function(){
+      videoModalPlayer.replaceChildren();
+      videoModalTitle.textContent = '動画';
+      document.documentElement.classList.remove('video-modal-open');
+      activeVideoTrigger?.focus({ preventScroll: true });
+      activeVideoTrigger = null;
+    });
+    window.addEventListener('resize', resizeVideoModal, { passive: true });
 
     // Scroll detection for header
     const headerEl = document.querySelector('header');
