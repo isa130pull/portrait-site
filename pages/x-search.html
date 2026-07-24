@@ -94,7 +94,7 @@
     header { padding: 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
     h1 { font-size: clamp(24px, 4vw, 32px); margin: 0; }
     h2 { font-size: clamp(16px, 3vw, 18px); margin: 0 0 12px; font-weight: 600; }
-    .back-link { display: inline-block; margin-bottom: 16px; padding: 8px 16px; border: 1px solid var(--border); border-radius: 8px; color: var(--fg); font-size: 14px; }
+    .back-link { display: inline-flex; min-height: 44px; align-items: center; margin-bottom: 16px; padding: 8px 16px; border: 1px solid var(--border); border-radius: 8px; color: var(--fg); font-size: 14px; }
     .back-link:hover { border-color: var(--accent); text-decoration: none; }
 
     /* Section Card */
@@ -126,12 +126,13 @@
     .form-group { margin-bottom: 12px; }
     .form-group.inline { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
     label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 13px; color: var(--fg); }
-    label.checkbox { display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer; font-size: 13px; }
+    label.checkbox { display: flex; min-height: 44px; align-items: center; gap: 8px; font-weight: 500; cursor: pointer; font-size: 13px; }
     input[type="text"],
     input[type="number"],
     input[type="date"],
     select {
       width: 100%;
+      min-height: 44px;
       padding: 8px 12px;
       background: var(--bg);
       border: 1px solid var(--border);
@@ -158,7 +159,7 @@
     .username-dropdown { position: relative; }
     .username-input-wrapper { display: flex; gap: 0; }
     .username-input-wrapper input { border-radius: 8px 0 0 8px; flex: 1; }
-    .dropdown-toggle { padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-left: none; border-radius: 0 8px 8px 0; color: var(--muted); cursor: pointer; font-size: 12px; transition: all 0.2s; }
+    .dropdown-toggle { display: grid; min-width: 44px; min-height: 44px; place-items: center; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-left: none; border-radius: 0 8px 8px 0; color: var(--muted); cursor: pointer; font-size: 12px; transition: all 0.2s; }
     .dropdown-toggle:hover { color: var(--fg); background: var(--card); }
     .dropdown-menu { position: absolute; top: 100%; left: 0; right: 0; background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-top: 4px; display: none; z-index: 100; max-height: 240px; overflow-y: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
     .dropdown-menu.show { display: block; }
@@ -166,14 +167,14 @@
     .dropdown-item:hover { background: var(--bg); }
     .dropdown-item.selected { color: var(--accent); }
     .dropdown-item .username { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .dropdown-item .delete-btn { padding: 2px 6px; background: transparent; border: none; color: var(--muted); cursor: pointer; font-size: 14px; border-radius: 4px; opacity: 0; transition: all 0.15s; }
+    .dropdown-item .delete-btn { min-width: 28px; min-height: 28px; padding: 2px 6px; background: transparent; border: none; color: var(--muted); cursor: pointer; font-size: 14px; border-radius: 4px; opacity: 0; transition: all 0.15s; }
     .dropdown-item:hover .delete-btn { opacity: 1; }
     .dropdown-item .delete-btn:hover { background: color-mix(in oklab, #ef4444, transparent 80%); color: #ef4444; }
     .dropdown-empty { padding: 12px; color: var(--muted); font-size: 13px; text-align: center; }
 
     /* Collapsible Section */
     .collapsible { margin-top: 12px; }
-    .collapsible-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--muted); font-size: 13px; font-weight: 500; padding: 8px 0; }
+    .collapsible-toggle { display: flex; min-height: 44px; align-items: center; gap: 6px; cursor: pointer; color: var(--muted); font-size: 13px; font-weight: 500; padding: 8px 0; }
     .collapsible-toggle:hover { color: var(--fg); }
     .collapsible-toggle svg { transition: transform 0.2s; width: 14px; height: 14px; }
     .collapsible-toggle.open svg { transform: rotate(90deg); }
@@ -188,7 +189,7 @@
     .query-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
 
     /* Buttons */
-    button { appearance: none; border: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; }
+    button { appearance: none; min-height: 44px; border: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; }
     button:hover { border-color: var(--accent); }
     button.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
     button.primary:hover { opacity: 0.9; }
@@ -201,7 +202,7 @@
 
     /* Reference Section */
     .reference { margin-top: 8px; }
-    .reference-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--muted); font-size: 13px; padding: 8px 0; }
+    .reference-toggle { display: flex; min-height: 44px; align-items: center; gap: 6px; cursor: pointer; color: var(--muted); font-size: 13px; padding: 8px 0; }
     .reference-toggle:hover { color: var(--fg); }
     .reference-toggle svg { transition: transform 0.2s; }
     .reference-toggle.open svg { transform: rotate(90deg); }

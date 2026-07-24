@@ -167,6 +167,7 @@ nav {
 
 .navlinks .btn {
   position: relative;
+  min-width: 44px;
   min-height: 82px;
   white-space: nowrap;
 }
@@ -210,8 +211,8 @@ nav {
 
 .menu-toggle {
   display: none;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 1px solid var(--line-strong);
   border-radius: 50%;
@@ -910,7 +911,7 @@ main.wrap {
 
 #talks .list-item .btn {
   align-self: center;
-  min-height: 42px;
+  min-height: 44px;
   padding: 9px 15px;
   border: 1px solid var(--line-strong);
   color: var(--ink);
@@ -988,6 +989,8 @@ main.wrap {
 }
 
 #contact .socials .btn {
+  min-height: 44px;
+  padding-block: 10px;
   color: var(--muted);
   text-decoration: underline;
   text-decoration-color: var(--line-strong);
@@ -1154,8 +1157,9 @@ footer a {
   }
 
   .hero h1 {
-    font-size: clamp(38px, 11.5vw, 48px);
+    font-size: clamp(25px, 8vw, 44px);
     line-height: 1.1;
+    white-space: nowrap;
   }
 
   .hero h1::before {
@@ -1363,7 +1367,7 @@ footer a {
 
   .socials {
     display: grid;
-    gap: 12px;
+    gap: 0;
   }
 
   #contact .socials .btn {
