@@ -1,2 +1,5 @@
 # Temporary design-review artifacts
 /design-review/
+
+# Firebase CLI logs
+firebase-debug.log
