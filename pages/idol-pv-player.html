@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#071015" />
 <title>地下アイドルPV垂れ流しプレーヤー - 偏りなく永久ループ再生【無料】</title>
 <meta name="description" content="地下アイドルのPVを自分のYouTube Data APIキーで偏りなく・永久ループで垂れ流せる無料プレーヤー。フェス出演者199組のリストを内蔵、キーワード検索での新規発掘にも対応。" />
 <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/idol-pv-player.html" />
@@ -169,7 +170,7 @@
     .controls button { flex: 1 1 auto; }
   }
 </style>
-<link rel="stylesheet" href="../styles/app-shell.css?v=20260725a">
+<link rel="stylesheet" href="../styles/app-shell.css?v=20260725b">
 
 <!-- Google Identity Services (アカウント保存用) -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -246,7 +247,7 @@
     <!-- 右: 設定＆キュー -->
     <div class="card side">
       <h2>設定</h2>
-      <label>YouTube Data API キー</label>
+      <label for="apiKey">YouTube Data API キー</label>
       <input id="apiKey" type="password" placeholder="AIza... (自分のキーを貼り付け)">
       <div class="hint">読み取り専用。ブラウザ内 localStorage に保存され外部送信しません。</div>
 
@@ -258,21 +259,21 @@
       </div>
 
       <div class="row" style="margin-top:8px;">
-        <div><label>1グループ最大（キュー内）</label><input id="maxPerCh" type="number" value="2"></div>
-        <div class="mode-ch"><label>1組の最新PV取得数</label><input id="perGroup" type="number" value="1"></div>
-        <div class="mode-kw"><label>何日以内(検索)</label><input id="withinDays" type="number" value="365"></div>
+        <div><label for="maxPerCh">1グループ最大（キュー内）</label><input id="maxPerCh" type="number" value="2"></div>
+        <div class="mode-ch"><label for="perGroup">1組の最新PV取得数</label><input id="perGroup" type="number" value="1"></div>
+        <div class="mode-kw"><label for="withinDays">何日以内(検索)</label><input id="withinDays" type="number" value="365"></div>
       </div>
 
       <!-- ▼ フェス出演者(チャンネル)方式 -->
       <div class="mode-ch">
         <details open>
           <summary>出演者リスト（1行1組）<span id="grpCount" class="kv"></span></summary>
-          <textarea id="groups" placeholder="1行に1組"></textarea>
+          <textarea id="groups" aria-label="出演者リスト（1行1組）" placeholder="1行に1組"></textarea>
           <div class="hint">各組の公式チャンネルを1回だけ検索して紐付け、以降はキャッシュ利用。誤紐付けは下の一覧から削除できます。</div>
           <button id="btnResetGrp" style="width:100%; margin-top:8px;">🔄 出演者リストを既定(TIF2025)に戻す</button>
         </details>
         <div class="row" style="margin-top:8px;">
-          <div><label>1回の解決上限(クォータ保護)</label><input id="resolveBudget" type="number" value="40"></div>
+          <div><label for="resolveBudget">1回の解決上限(クォータ保護)</label><input id="resolveBudget" type="number" value="40"></div>
         </div>
         <button id="btnResolve" style="width:100%; margin-top:8px;">🔗 チャンネルを解決（未解決のみ）</button>
         <button id="btnFetchCh" class="primary" style="width:100%; margin-top:8px;">🎬 最新PVを集める</button>
@@ -285,12 +286,12 @@
       <!-- ▼ キーワード検索方式（新規発掘用） -->
       <div class="mode-kw">
         <div class="row" style="margin-top:8px;">
-          <div><label>再生数 下限</label><input id="minViews" type="number" value="2000"></div>
-          <div><label>再生数 上限</label><input id="maxViews" type="number" value="100000"></div>
+          <div><label for="minViews">再生数 下限</label><input id="minViews" type="number" value="2000"></div>
+          <div><label for="maxViews">再生数 上限</label><input id="maxViews" type="number" value="100000"></div>
         </div>
         <details>
           <summary>検索キーワード（1行1件）</summary>
-          <textarea id="queries">地下アイドル MV
+          <textarea id="queries" aria-label="検索キーワード（1行1件）">地下アイドル MV
 ライブアイドル MV
 地下アイドル 新曲 MV
 ライブアイドル 新曲 MV
@@ -911,7 +912,7 @@ function loadCurrent(autoplay){
   if(ytReady && player && player.loadVideoById){ go(); }
   else { wantPlay=autoplay; const t=setInterval(()=>{ if(ytReady&&player.loadVideoById){clearInterval(t); go();} },200); }
   $("nowTitle").textContent=v.title;
-  $("nowMeta").innerHTML=`<a href="https://www.youtube.com/channel/${v.channelId}" target="_blank">${esc(v.channelTitle)}</a> ・ ${v.views.toLocaleString()} 回再生`;
+  $("nowMeta").innerHTML=`<a href="https://www.youtube.com/channel/${v.channelId}" target="_blank" rel="noopener noreferrer">${esc(v.channelTitle)}</a> ・ ${v.views.toLocaleString()} 回再生`;
   renderQueue();
 }
 function playNext(){

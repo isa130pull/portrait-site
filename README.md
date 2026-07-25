@@ -31,6 +31,9 @@ portrait-site/
 │   ├── privacy.html            # プライバシーポリシー
 │   ├── bingo.html              # ビンゴゲーム
 │   ├── x-search.html           # X検索ツール
+│   ├── idol-pv-player.html     # 地下アイドルPVプレーヤー
+│   ├── concheki-*.html         # コンチェキ法務文書
+│   ├── dorapiku-privacy.html   # ドラピク プライバシーポリシー
 │   ├── pong/                   # ポンゲーム
 │   │   ├── index.html          # ゲーム本体
 │   │   ├── ranking.html        # ランキング
@@ -39,6 +42,10 @@ portrait-site/
 │   │   ├── playfab-manager.js  # PlayFab連携
 │   │   └── *.mp3               # 効果音
 │   └── CONTACT_SETUP.md        # フォーム設定手順
+├── styles/
+│   ├── editorial.css           # トップページ用スタイル
+│   └── app-shell.css           # ブラウザアプリ共通スタイル
+├── sw.js                       # トップページ用Service Worker
 ├── images/
 │   ├── profile@1x.jpg          # プロフィール写真
 │   ├── index/                  # トップページ用アイコン
@@ -55,7 +62,7 @@ portrait-site/
 - プロフィール: 経歴、専門領域、拠点情報
 - 略歴: 2012年〜2024年のキャリアサマリー
 - 実績/プロジェクト: breaker、Vタビ、Velle（YouTube動画埋め込み）
-- 自作アプリ: いえばく、すしばく、AI美少女1/100、QR美少女1/100
+- 自作アプリ: ヒトコマ、いえばく、すしばく、AI美少女1/100、ろりだま
 - メディア/執筆: App Marketing Labo、Qiita
 - 問い合わせ: SNSリンク、お問い合わせフォームへの導線
 - フッター: コピーライト、プライバシーポリシーリンク
@@ -74,11 +81,16 @@ portrait-site/
 ### ビンゴゲーム（pages/bingo.html）
 
 - ブラウザで遊べるビンゴゲーム
-- PWA対応（専用favicon・アイコン）
+- 専用favicon・ホーム画面用アイコン
 
 ### X検索ツール（pages/x-search.html）
 
 - X (Twitter) の検索補助ツール
+
+### 地下アイドルPVプレーヤー（pages/idol-pv-player.html）
+
+- YouTube Data APIを利用したPV収集・連続再生ツール
+- フェス出演者リストとキーワード検索に対応
 
 ### ポンゲーム（pages/pong/）
 

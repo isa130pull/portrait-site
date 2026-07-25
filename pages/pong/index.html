@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#071015" />
   <title>POPONG - ブラウザで遊べるPONGゲーム【無料・登録不要】</title>
   <meta name="description" content="ブラウザで遊べるクラシックなPONGゲーム。NORMAL・HARDの2つの難易度で7点先取を目指そう。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/pong/" />
@@ -304,7 +305,7 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="../../styles/app-shell.css?v=20260725a">
+  <link rel="stylesheet" href="../../styles/app-shell.css?v=20260725b">
 
   <!-- Google Analytics (gtag.js) - lazy loaded -->
   <script>
@@ -347,9 +348,10 @@
     </div>
   </header>
 
-  <div class="game-container">
-    <canvas id="canvas"></canvas>
-  </div>
+  <main class="game-container">
+    <h1 class="visually-hidden">POPONG - ブラウザで遊べるPONGゲーム</h1>
+    <canvas id="canvas" role="img" aria-label="POPONGのゲーム画面">お使いのブラウザはCanvasに対応していません。</canvas>
+  </main>
 
   <!-- オーバーレイ -->
   <div id="overlay" class="overlay"></div>
@@ -358,6 +360,7 @@
   <div id="nameInputContainer">
     <h2>RANKING</h2>
     <p>ランキングに登録しますか？</p>
+    <label class="visually-hidden" for="playerNameInput">ランキング登録名</label>
     <input type="text" id="playerNameInput" placeholder="名前を入力（3-12文字）" maxlength="12" autocomplete="off">
     <div class="error-message" id="nameErrorMessage"></div>
     <div class="name-input-buttons">

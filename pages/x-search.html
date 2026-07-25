@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#071015" />
   <title>X(旧Twitter)検索コマンドビルダー - 高度な検索を簡単作成【無料】</title>
   <meta name="description" content="X(旧Twitter)の高度な検索クエリを簡単に作成できるツール。プリセットコマンドとクエリビルダーで複雑な検索も楽々。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/x-search.html" />
@@ -250,7 +251,7 @@
     .modal-buttons { display: flex; gap: 10px; justify-content: flex-end; }
     .modal-buttons button { min-width: 80px; }
   </style>
-  <link rel="stylesheet" href="../styles/app-shell.css?v=20260725a">
+  <link rel="stylesheet" href="../styles/app-shell.css?v=20260725b">
 
   <!-- Google Analytics (gtag.js) - lazy loaded -->
   <script>
@@ -295,20 +296,20 @@
   <!-- Main Section -->
   <section class="section">
     <!-- Mode Tabs -->
-    <div class="mode-tabs">
-      <button class="mode-tab active" data-mode="basic">基本</button>
-      <button class="mode-tab" data-mode="advanced">詳細</button>
+    <div class="mode-tabs" role="tablist" aria-label="検索モード">
+      <button id="basicModeTab" class="mode-tab active" type="button" role="tab" aria-controls="basicMode" aria-selected="true" data-mode="basic">基本</button>
+      <button id="advancedModeTab" class="mode-tab" type="button" role="tab" aria-controls="advancedMode" aria-selected="false" tabindex="-1" data-mode="advanced">詳細</button>
     </div>
 
     <!-- Basic Mode -->
-    <div class="mode-content active" id="basicMode">
+    <div class="mode-content active" id="basicMode" role="tabpanel" aria-labelledby="basicModeTab">
       <!-- 対象ユーザーID -->
       <div class="form-group" style="margin-bottom: 16px;">
         <label for="targetUsername">対象ユーザーID(必須)</label>
         <div class="username-dropdown" id="usernameDropdownContainer">
           <div class="username-input-wrapper">
             <input type="text" id="targetUsername" placeholder="@なしで入力" autocomplete="off">
-            <button type="button" class="dropdown-toggle" id="dropdownToggle">▼</button>
+            <button type="button" class="dropdown-toggle" id="dropdownToggle" aria-label="保存済みユーザーIDを表示" aria-controls="usernameDropdown" aria-expanded="false">▼</button>
           </div>
           <div class="dropdown-menu" id="usernameDropdown"></div>
         </div>
@@ -319,7 +320,7 @@
       <!-- 過去の今日 -->
       <div class="past-today">
         <div class="past-today-header">
-          <span class="past-today-title">過去の今日</span>
+          <label class="past-today-title" for="yearSelect">過去の今日</label>
           <span class="past-today-date" id="todayDate"></span>
         </div>
         <select id="yearSelect"></select>
@@ -328,13 +329,13 @@
       <!-- 相手ユーザーID -->
       <div class="past-today">
         <div class="past-today-header">
-          <span class="past-today-title">相手ユーザーID</span>
+          <label class="past-today-title" for="specificUsername">相手ユーザーID</label>
         </div>
         <div class="form-group" style="margin-bottom: 12px;">
           <div class="username-dropdown" id="specificUsernameDropdownContainer">
             <div class="username-input-wrapper">
               <input type="text" id="specificUsername" placeholder="@なしで入力" autocomplete="off">
-              <button type="button" class="dropdown-toggle" id="specificDropdownToggle">▼</button>
+              <button type="button" class="dropdown-toggle" id="specificDropdownToggle" aria-label="保存済み相手ユーザーIDを表示" aria-controls="specificUsernameDropdown" aria-expanded="false">▼</button>
             </div>
             <div class="dropdown-menu" id="specificUsernameDropdown"></div>
           </div>
@@ -344,7 +345,7 @@
     </div>
 
     <!-- Advanced Mode -->
-    <div class="mode-content" id="advancedMode">
+    <div class="mode-content" id="advancedMode" role="tabpanel" aria-labelledby="advancedModeTab" hidden>
       <form id="queryBuilder">
         <!-- Keywords -->
         <div class="form-row" style="align-items: flex-end;">
@@ -353,7 +354,7 @@
             <div class="username-dropdown" id="keywordDropdownContainer">
               <div class="username-input-wrapper">
                 <input type="text" id="keyword" placeholder="例: 推しメン かわいい" autocomplete="off">
-                <button type="button" class="dropdown-toggle" id="keywordDropdownToggle">▼</button>
+                <button type="button" class="dropdown-toggle" id="keywordDropdownToggle" aria-label="検索キーワード履歴を表示" aria-controls="keywordDropdown" aria-expanded="false">▼</button>
               </div>
               <div class="dropdown-menu" id="keywordDropdown"></div>
             </div>
@@ -370,7 +371,7 @@
           <div class="username-dropdown" id="excludeKeywordDropdownContainer">
             <div class="username-input-wrapper">
               <input type="text" id="excludeKeyword" placeholder="スペース区切りで複数指定" autocomplete="off">
-              <button type="button" class="dropdown-toggle" id="excludeKeywordDropdownToggle">▼</button>
+              <button type="button" class="dropdown-toggle" id="excludeKeywordDropdownToggle" aria-label="除外キーワード履歴を表示" aria-controls="excludeKeywordDropdown" aria-expanded="false">▼</button>
             </div>
             <div class="dropdown-menu" id="excludeKeywordDropdown"></div>
           </div>
@@ -383,7 +384,7 @@
             <div class="username-dropdown" id="fromUserDropdownContainer">
               <div class="username-input-wrapper">
                 <input type="text" id="fromUser" placeholder="@なしで入力" autocomplete="off">
-                <button type="button" class="dropdown-toggle" id="fromUserDropdownToggle">▼</button>
+                <button type="button" class="dropdown-toggle" id="fromUserDropdownToggle" aria-label="投稿者履歴を表示" aria-controls="fromUserDropdown" aria-expanded="false">▼</button>
               </div>
               <div class="dropdown-menu" id="fromUserDropdown"></div>
             </div>
@@ -393,7 +394,7 @@
             <div class="username-dropdown" id="toUserDropdownContainer">
               <div class="username-input-wrapper">
                 <input type="text" id="toUser" placeholder="@なしで入力" autocomplete="off">
-                <button type="button" class="dropdown-toggle" id="toUserDropdownToggle">▼</button>
+                <button type="button" class="dropdown-toggle" id="toUserDropdownToggle" aria-label="宛先履歴を表示" aria-controls="toUserDropdown" aria-expanded="false">▼</button>
               </div>
               <div class="dropdown-menu" id="toUserDropdown"></div>
             </div>
@@ -521,13 +522,13 @@
   <p style="margin:0">&copy; <script>document.write(new Date().getFullYear())</script> かわぐち (isa130pull)</p>
 </footer>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- Custom Prompt Modal -->
-<div class="modal-overlay" id="promptModal">
-  <div class="modal-box">
+<div class="modal-overlay" id="promptModal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="promptTitle">
     <div class="modal-title" id="promptTitle">ユーザーIDを入力（@なし）</div>
-    <input type="text" class="modal-input" id="promptInput" placeholder="@なしで入力">
+    <input type="text" class="modal-input" id="promptInput" aria-labelledby="promptTitle" placeholder="@なしで入力">
     <div class="modal-buttons">
       <button type="button" id="promptCancel">キャンセル</button>
       <button type="button" class="primary" id="promptOk">OK</button>
@@ -617,7 +618,7 @@ function createDropdownManager(config) {
       return `
         <div class="dropdown-item${isSelected ? ' selected' : ''}" data-value="${escapeHtml(item)}">
           <span class="username">${escapeHtml(item)}</span>
-          <button class="delete-btn" data-delete="${escapeHtml(item)}">×</button>
+          <button type="button" class="delete-btn" data-delete="${escapeHtml(item)}" aria-label="履歴から削除">×</button>
         </div>
       `;
     }).join('');
@@ -645,11 +646,13 @@ function createDropdownManager(config) {
   }
 
   function toggleDropdown() {
-    dropdown.classList.toggle('show');
+    const isOpen = dropdown.classList.toggle('show');
+    toggle?.setAttribute('aria-expanded', String(isOpen));
   }
 
   function close() {
     dropdown.classList.remove('show');
+    toggle?.setAttribute('aria-expanded', 'false');
   }
 
   function clear() {
@@ -700,6 +703,7 @@ function customPrompt(title) {
     promptResolve = resolve;
     promptTitle.textContent = title;
     promptInput.value = '';
+    promptModal.setAttribute('aria-hidden', 'false');
     promptModal.classList.add('show');
     setTimeout(() => promptInput.focus(), 100);
   });
@@ -708,11 +712,13 @@ function customPrompt(title) {
 promptOkBtn.addEventListener('click', () => {
   const value = promptInput.value.trim().replace(/^@/, '');
   promptModal.classList.remove('show');
+  promptModal.setAttribute('aria-hidden', 'true');
   if (promptResolve) promptResolve(value || null);
 });
 
 promptCancelBtn.addEventListener('click', () => {
   promptModal.classList.remove('show');
+  promptModal.setAttribute('aria-hidden', 'true');
   if (promptResolve) promptResolve(null);
 });
 
@@ -880,7 +886,7 @@ function renderDropdown() {
     return `
       <div class="dropdown-item${isSelected ? ' selected' : ''}" data-username="${escapeHtml(u)}">
         <span class="username">${escapeHtml(u)}</span>
-        <button class="delete-btn" data-delete="${escapeHtml(u)}">×</button>
+        <button type="button" class="delete-btn" data-delete="${escapeHtml(u)}" aria-label="履歴から削除">×</button>
       </div>
     `;
   }).join('');
@@ -902,11 +908,13 @@ function renderDropdown() {
 }
 
 function toggleDropdown() {
-  usernameDropdown.classList.toggle('show');
+  const isOpen = usernameDropdown.classList.toggle('show');
+  dropdownToggle.setAttribute('aria-expanded', String(isOpen));
 }
 
 function closeDropdown() {
   usernameDropdown.classList.remove('show');
+  dropdownToggle.setAttribute('aria-expanded', 'false');
 }
 
 function selectUsername(username) {
@@ -979,10 +987,15 @@ function setMode(mode) {
   try { localStorage.setItem(LS_MODE_KEY, mode); } catch (e) {}
 
   $$('.mode-tab').forEach(tab => {
-    tab.classList.toggle('active', tab.dataset.mode === mode);
+    const isActive = tab.dataset.mode === mode;
+    tab.classList.toggle('active', isActive);
+    tab.setAttribute('aria-selected', String(isActive));
+    tab.tabIndex = isActive ? 0 : -1;
   });
   $$('.mode-content').forEach(content => {
-    content.classList.toggle('active', content.id === (mode === 'basic' ? 'basicMode' : 'advancedMode'));
+    const isActive = content.id === (mode === 'basic' ? 'basicMode' : 'advancedMode');
+    content.classList.toggle('active', isActive);
+    content.hidden = !isActive;
   });
 
   // Update query preview based on mode
@@ -1111,7 +1124,7 @@ function renderSpecificDropdown() {
     return `
       <div class="dropdown-item${isSelected ? ' selected' : ''}" data-username="${escapeHtml(u)}">
         <span class="username">${escapeHtml(u)}</span>
-        <button class="delete-btn" data-delete="${escapeHtml(u)}">×</button>
+        <button type="button" class="delete-btn" data-delete="${escapeHtml(u)}" aria-label="履歴から削除">×</button>
       </div>
     `;
   }).join('');
@@ -1132,11 +1145,13 @@ function renderSpecificDropdown() {
 }
 
 function toggleSpecificDropdown() {
-  specificUsernameDropdown.classList.toggle('show');
+  const isOpen = specificUsernameDropdown.classList.toggle('show');
+  specificDropdownToggle.setAttribute('aria-expanded', String(isOpen));
 }
 
 function closeSpecificDropdown() {
   specificUsernameDropdown.classList.remove('show');
+  specificDropdownToggle.setAttribute('aria-expanded', 'false');
 }
 
 function selectSpecificUsername(username) {

@@ -190,7 +190,7 @@
 
     <main>
       <!-- Success/Error Message -->
-      <div id="message" class="message"></div>
+      <div id="formStatus" class="message" role="status" aria-live="polite"></div>
 
       <!-- Contact Form -->
       <form id="contact-form">
@@ -234,7 +234,7 @@
 
     const form = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
-    const messageDiv = document.getElementById('message');
+    const messageDiv = document.getElementById('formStatus');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();

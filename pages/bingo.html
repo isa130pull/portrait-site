@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#071015" />
   <title>セトリビンゴ - ビンゴカード作成・共有ツール【無料】</title>
   <meta name="description" content="3×3のビンゴカードを作成・共有できるツール。編集モード・ビンゴモード搭載。画像保存、リンク共有に対応。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/bingo.html" />
@@ -185,7 +186,7 @@
       .grid{gap:6px}
     }
   </style>
-  <link rel="stylesheet" href="../styles/app-shell.css?v=20260725a">
+  <link rel="stylesheet" href="../styles/app-shell.css?v=20260725b">
 
   <!-- Google Analytics (gtag.js) - lazy loaded -->
   <script>
@@ -262,14 +263,14 @@
         <button id="shareLink">共有URL</button>
         <button id="exportPng" class="primary">画像保存</button>
       </div>
-      <small id="status" style="color:var(--muted)"></small>
+      <small id="status" style="color:var(--muted)" role="status" aria-live="polite"></small>
     </div>
   </section>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- カスタム確認ダイアログ -->
 <div class="modal-overlay" id="confirmModal">
-  <div class="modal-dialog">
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalMessage">
     <div class="modal-header">
       <h3 id="modalTitle">確認</h3>
     </div>
@@ -531,6 +532,7 @@ function render(){
       input.maxLength = 40;
       input.dataset.index = r * n + c;  // インデックスを保存
       input.rows = 1;
+      input.setAttribute('aria-label', `ビンゴ${r + 1}行${c + 1}列の曲名`);
 
       // textareaの高さを自動調整
       function adjustHeight(textarea){
