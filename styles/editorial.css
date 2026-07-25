@@ -145,8 +145,7 @@ nav {
   gap: clamp(18px, 2vw, 34px);
 }
 
-.btn,
-.play-btn {
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -834,18 +833,20 @@ html.video-modal-open body {
   position: relative;
   display: grid;
   min-height: 126px;
-  grid-template-columns: 48px minmax(180px, 0.8fr) minmax(280px, 1.55fr) 150px;
+  grid-template-columns: 48px minmax(180px, 0.8fr) minmax(280px, 1.55fr) 36px;
   align-items: center;
   gap: 24px;
   padding: 22px 0;
   border-bottom: 1px solid var(--line);
+  cursor: pointer;
   counter-increment: browser-app;
   transition:
     background-color 180ms ease,
     padding 180ms ease;
 }
 
-#personal .browser-app:hover {
+#personal .browser-app:hover,
+#personal .browser-app:focus-visible {
   padding-inline: 14px;
   background: rgba(90, 169, 255, 0.045);
 }
@@ -869,28 +870,35 @@ html.video-modal-open body {
   line-height: 1.7;
 }
 
-#personal .browser-app .play-btn {
-  min-height: 44px;
-  padding: 10px 14px;
+#personal .browser-app .card-link-indicator {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  grid-column: 4;
+  grid-row: 1 / span 2;
+  place-items: center;
+  justify-self: end;
   border: 1px solid var(--line-strong);
+  border-radius: 50%;
   color: var(--ink);
+  font-size: 16px;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
-#personal .browser-app .play-btn:hover,
-#personal .browser-app .play-btn:focus-visible {
+#personal .browser-app:hover .card-link-indicator,
+#personal .browser-app:focus-visible .card-link-indicator {
   border-color: var(--mint);
   background: rgba(120, 246, 207, 0.08);
-  transform: translateY(-2px);
-}
-
-#personal .browser-app .play-icon {
-  margin-right: 8px;
   color: var(--mint);
-  font-size: 9px;
+  transform: translateX(2px);
 }
 
 #personal .browser-app .tags {
-  grid-column: 2 / -1;
+  grid-column: 2 / 4;
   margin-top: -14px;
 }
 
@@ -937,6 +945,28 @@ html.video-modal-open body {
   border-radius: 24%;
   box-shadow: 0 22px 46px rgba(0, 0, 0, 0.28);
   filter: saturate(0.86);
+}
+
+.app-icon-link {
+  display: block;
+  width: min(100%, 220px);
+  border-radius: 24%;
+}
+
+.app-icon-link .app-icon {
+  width: 100%;
+  margin: 0;
+  transition:
+    border-color 180ms ease,
+    filter 180ms ease,
+    transform 180ms ease;
+}
+
+.app-icon-link:hover .app-icon,
+.app-icon-link:focus-visible .app-icon {
+  border-color: var(--mint);
+  filter: saturate(1);
+  transform: translateY(-3px);
 }
 
 #about {
@@ -1194,13 +1224,7 @@ footer a {
   }
 
   #personal .browser-app {
-    grid-template-columns: 42px minmax(180px, 0.9fr) minmax(0, 1.3fr);
-  }
-
-  #personal .browser-app .play-btn {
-    grid-column: 2 / -1;
-    justify-self: start;
-    width: 150px;
+    grid-template-columns: 42px minmax(180px, 0.9fr) minmax(0, 1.3fr) 34px;
   }
 
   #personal .browser-app .tags {
@@ -1390,30 +1414,31 @@ footer a {
   }
 
   #personal .browser-app {
-    grid-template-columns: 36px minmax(0, 1fr);
+    grid-template-columns: 36px minmax(0, 1fr) 34px;
     gap: 10px 12px;
     padding: 22px 0 25px;
   }
 
   #personal .browser-app::before {
-    grid-row: 1 / span 2;
+    grid-row: 1 / span 3;
   }
 
-  #personal .browser-app h3,
-  #personal .browser-app .muted,
-  #personal .browser-app .play-btn,
-  #personal .browser-app .tags {
+  #personal .browser-app h3 {
     grid-column: 2;
+  }
+
+  #personal .browser-app .muted,
+  #personal .browser-app .tags {
+    grid-column: 2 / -1;
+  }
+
+  #personal .browser-app .card-link-indicator {
+    grid-column: 3;
+    grid-row: 1;
   }
 
   #personal .browser-app h3 {
     font-size: 21px;
-  }
-
-  #personal .browser-app .play-btn {
-    width: 100%;
-    justify-self: stretch;
-    margin-top: 6px;
   }
 
   #personal .browser-app .tags {
@@ -1433,8 +1458,13 @@ footer a {
     min-height: 0;
   }
 
-  .app-icon {
+  .app-icon,
+  .app-icon-link {
     width: min(60%, 210px);
+  }
+
+  .app-icon-link .app-icon {
+    width: 100%;
   }
 
   #about {
