@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#071015" />
+  <title>breaker:ブロック崩し ケーススタディ | かわぐち（isa130pull）</title>
+  <meta name="description" content="100万ダウンロードを達成したカジュアルゲーム「breaker:ブロック崩し」の企画、ゲーム設計、開発、マネタイズに関するケーススタディ。" />
+  <meta name="author" content="かわぐち (isa130pull)" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/case-study-breaker.html" />
+
+  <link rel="icon" type="image/x-icon" href="../images/index/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/index/apple-touch-icon.png">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="breaker:ブロック崩し ケーススタディ" />
+  <meta property="og:description" content="100万DLを達成したカジュアルゲームの企画、ゲーム設計、開発、マネタイズ。" />
+  <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/ogp-top.jpg?v=20260725" />
+  <meta property="og:image:alt" content="Unityゲームエンジニア かわぐちのポートフォリオ" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://isa130pull.github.io/portrait-site/pages/case-study-breaker.html" />
+  <meta property="og:site_name" content="かわぐち（isa130pull）ポートフォリオ" />
+  <meta property="og:locale" content="ja_JP" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:creator" content="@isa130pull" />
+  <meta name="twitter:title" content="breaker:ブロック崩し ケーススタディ" />
+  <meta name="twitter:description" content="100万DLを達成したカジュアルゲームの企画、ゲーム設計、開発、マネタイズ。" />
+  <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-top.jpg?v=20260725" />
+  <meta name="twitter:image:alt" content="Unityゲームエンジニア かわぐちのポートフォリオ" />
+
+  <link rel="preconnect" href="https://i.ytimg.com">
+  <link rel="stylesheet" href="../styles/case-study.css?v=20260725">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "breaker:ブロック崩し ケーススタディ",
+    "description": "100万ダウンロードを達成したカジュアルゲーム「breaker:ブロック崩し」の企画、ゲーム設計、開発、マネタイズに関するケーススタディ。",
+    "url": "https://isa130pull.github.io/portrait-site/pages/case-study-breaker.html",
+    "image": "https://isa130pull.github.io/portrait-site/images/ogp-top.jpg",
+    "author": {
+      "@type": "Person",
+      "@id": "https://isa130pull.github.io/portrait-site/#person",
+      "name": "かわぐち (isa130pull)"
+    },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "breaker:ブロック崩し",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "iOS, Android"
+    }
+  }
+  </script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CF20TVK6DP');
+
+    (function(){
+      function loadGtag(){
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag);
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">本文へ移動</a>
+
+  <header class="site-header">
+    <div class="header-wrap">
+      <a class="brand" href="../index.html" aria-label="かわぐちのポートフォリオへ戻る">
+        <span class="brand-mark" aria-hidden="true">IK</span>
+        <span>かわぐち <small>/ isa130pull</small></span>
+      </a>
+      <a class="header-contact" href="contact.html">仕事を相談する</a>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <article>
+      <header class="case-hero">
+        <div class="case-hero-copy">
+          <p class="eyebrow">CASE STUDY / MOBILE GAME</p>
+          <h1>breaker:<br>ブロック崩し</h1>
+          <p class="lead">30秒という短いプレイの中に、成長と発見が続く体験を設計。エンジニア兼プロデューサーとして企画・開発を担当したカジュアルゲームです。</p>
+          <div class="case-actions">
+            <a class="primary-action" href="https://apps.apple.com/jp/app/id997366267" target="_blank" rel="noopener">App Storeで見る ↗</a>
+            <a class="secondary-action" href="../index.html#works">実績一覧へ戻る</a>
+          </div>
+        </div>
+
+        <a class="case-visual" href="https://www.youtube.com/watch?v=qQq5J-pr2Tc" target="_blank" rel="noopener" aria-label="breaker:ブロック崩しの動画をYouTubeで見る（新しいタブ）">
+          <img src="https://i.ytimg.com/vi/qQq5J-pr2Tc/hqdefault.jpg" alt="breaker:ブロック崩しのゲーム画面" width="480" height="360" fetchpriority="high">
+          <span class="play-mark" aria-hidden="true">▶</span>
+          <span class="visual-label">PLAY MOVIE ↗</span>
+        </a>
+      </header>
+
+      <dl class="fact-grid" aria-label="プロジェクト概要">
+        <div>
+          <dt>成果</dt>
+          <dd>100万DL</dd>
+        </div>
+        <div>
+          <dt>役割</dt>
+          <dd>エンジニア /<br>プロデューサー</dd>
+        </div>
+        <div>
+          <dt>開発期間</dt>
+          <dd>3〜4か月</dd>
+        </div>
+        <div>
+          <dt>開発体制</dt>
+          <dd>2名</dd>
+        </div>
+        <div>
+          <dt>技術</dt>
+          <dd>Cocos2d-x</dd>
+        </div>
+      </dl>
+
+      <section class="case-section overview" aria-labelledby="overview-title">
+        <div class="section-label">
+          <span>01</span>
+          <h2 id="overview-title">プロジェクト概要</h2>
+        </div>
+        <div class="section-copy">
+          <p class="large-copy">誰でも理解できるブロック崩しを、短時間でも成長を実感できるモバイルゲームとして再設計しました。</p>
+          <p>30秒間にブロックを壊し、得たコインでバーやボールを強化しながら、より大きなブロックが待つ世界へ進みます。最初の企画段階からプロトタイプを作り、遊びの核を検証したうえで開発を進めました。</p>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="responsibility-title">
+        <div class="section-label">
+          <span>02</span>
+          <h2 id="responsibility-title">担当したこと</h2>
+        </div>
+        <div class="responsibility-grid">
+          <article>
+            <h3>企画・プロトタイプ</h3>
+            <p>アイデアを短期間で遊べる形にし、従来のブロック崩しとの差分となる「世界が広がる」体験を検証。</p>
+          </article>
+          <article>
+            <h3>ゲーム設計・実装</h3>
+            <p>アイテム獲得型から、レベルを少しずつ上げて強くなる構造へ変更。ボスブロックや周回後のループも設計。</p>
+          </article>
+          <article>
+            <h3>バランス調整</h3>
+            <p>特に最初の数分を重視し、繰り返しプレイしながら難易度と成長速度を調整。</p>
+          </article>
+          <article>
+            <h3>マネタイズ体験</h3>
+            <p>課金と広告をゲーム体験に組み込み、動画広告は強制感を抑えたプレゼント型の導線として設計。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="design-title">
+        <div class="section-label">
+          <span>03</span>
+          <h2 id="design-title">設計で重視したこと</h2>
+        </div>
+        <div class="design-points">
+          <article>
+            <strong>30 SEC.</strong>
+            <h3>すぐ理解でき、すぐ再挑戦できる</h3>
+            <p>1プレイ30秒の明快なルールで入口を軽くしつつ、強化と新しいブロックによって継続する理由を作りました。</p>
+          </article>
+          <article>
+            <strong>GROWTH</strong>
+            <h3>過去の苦戦を成長実感に変える</h3>
+            <p>再登場するボスブロックを以前より簡単に壊せることで、数値だけでなくプレイ中にも成長が伝わる構造にしました。</p>
+          </article>
+          <article>
+            <strong>ENDLESS</strong>
+            <h3>終わりを作らず、世界を広げ続ける</h3>
+            <p>1周目の後も背景がループし、強化とスコア更新を続けられる設計で長期プレイにつなげました。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section results" aria-labelledby="results-title">
+        <div class="section-label">
+          <span>04</span>
+          <h2 id="results-title">成果</h2>
+        </div>
+        <div class="result-copy">
+          <p class="result-number">1,000,000<span>DOWNLOADS</span></p>
+          <p>100万ダウンロードを達成。2015年の公開インタビュー時点では、翌日継続率約70％、7日後継続率約25％と紹介されました。課金・動画広告・静止画広告を組み合わせた収益設計についても取材で公開されています。</p>
+          <p class="note">継続率・収益構成は2015年9月公開の取材記事に記載された当時の概算値です。</p>
+        </div>
+      </section>
+
+      <section class="references" aria-labelledby="references-title">
+        <p class="eyebrow">REFERENCES</p>
+        <h2 id="references-title">外部資料</h2>
+        <div class="reference-links">
+          <a href="https://appmarketinglabo.net/breaker/" target="_blank" rel="noopener">
+            <span>企画・開発・マネタイズのインタビュー</span>
+            <strong>App Marketing Labo ↗</strong>
+          </a>
+          <a href="https://gamebiz.jp/news/146448" target="_blank" rel="noopener">
+            <span>iOS版リリース記事</span>
+            <strong>GameBiz ↗</strong>
+          </a>
+        </div>
+      </section>
+
+      <aside class="contact-panel" aria-labelledby="contact-panel-title">
+        <p class="eyebrow">CONTACT</p>
+        <h2 id="contact-panel-title">ゲーム／アプリ開発について相談する</h2>
+        <p>企画段階の相談から、プロトタイプ、実装、運用改善までお問い合わせいただけます。</p>
+        <a href="contact.html">お問い合わせフォームへ →</a>
+      </aside>
+    </article>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> かわぐち (isa130pull)</p>
+    <a href="../index.html">ポートフォリオへ戻る</a>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

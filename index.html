@@ -46,13 +46,14 @@
   <meta name="twitter:image:alt" content="Unityゲームエンジニア かわぐちのポートフォリオ" />
 
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="styles/editorial.css?v=20260725b">
+  <link rel="stylesheet" href="styles/editorial.css?v=20260725c">
 
   <!-- JSON-LD (Person) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://isa130pull.github.io/portrait-site/#person",
     "name": "かわぐち (isa130pull)",
     "alternateName": "isa130pull",
     "url": "https://isa130pull.github.io/portrait-site/",
@@ -83,6 +84,20 @@
   }
   </script>
 
+  <!-- JSON-LD (ProfilePage) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": "https://isa130pull.github.io/portrait-site/#profile",
+    "url": "https://isa130pull.github.io/portrait-site/",
+    "name": "Unityゲームエンジニア かわぐちのポートフォリオ",
+    "mainEntity": {
+      "@id": "https://isa130pull.github.io/portrait-site/#person"
+    }
+  }
+  </script>
+
   <!-- JSON-LD (WebSite) -->
   <script type="application/ld+json">
   {
@@ -92,50 +107,7 @@
     "name": "かわぐち（isa130pull）ポートフォリオ",
     "description": "Unityゲームエンジニア かわぐち（isa130pull）のポートフォリオサイト",
     "author": {
-      "@type": "Person",
-      "name": "かわぐち (isa130pull)"
-    }
-  }
-  </script>
-
-  <!-- JSON-LD (SoftwareApplication - breaker) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "breaker:ブロック崩し",
-    "applicationCategory": "GameApplication",
-    "operatingSystem": "iOS, Android",
-    "description": "30秒でブロックを壊し続けるカジュアルゲーム。100万DL達成。",
-    "author": {
-      "@type": "Person",
-      "name": "かわぐち (isa130pull)"
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "JPY"
-    }
-  }
-  </script>
-
-  <!-- JSON-LD (SoftwareApplication - いえばく!) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "いえばく!",
-    "applicationCategory": "GameApplication",
-    "operatingSystem": "iOS, Android",
-    "description": "30秒で家を破壊するカジュアル破壊ゲーム。",
-    "author": {
-      "@type": "Person",
-      "name": "かわぐち (isa130pull)"
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "JPY"
+      "@id": "https://isa130pull.github.io/portrait-site/#person"
     }
   }
   </script>
@@ -164,6 +136,7 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">本文へ移動</a>
   <header>
     <div class="wrap">
       <nav>
@@ -176,6 +149,7 @@
         </button>
         <div id="primary-navigation" class="navlinks" data-state="closed">
           <a class="btn" href="#works">実績</a>
+          <a class="btn" href="#services">対応領域</a>
           <a class="btn" href="#personal">自作アプリ</a>
           <a class="btn" href="#about">プロフィール</a>
           <a class="btn" href="#career">略歴</a>
@@ -186,11 +160,15 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main id="main-content" class="wrap" tabindex="-1">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
         <h1 id="hero-title">かわぐち / isa130pull</h1>
         <p class="muted">Unity を使ったモバイルゲーム開発が専門。カジュアルゲームからマネタイズ設計まで幅広く対応します。</p>
+        <div class="hero-actions" aria-label="主要なページ内リンク">
+          <a class="hero-cta hero-cta-primary" href="#works">実績を見る</a>
+          <a class="hero-cta hero-cta-secondary" href="pages/contact.html">仕事を相談する</a>
+        </div>
         <div class="hero-facts" aria-label="主な実績と専門領域">
           <div class="hero-fact">
             <strong>100万DL</strong>
@@ -210,6 +188,101 @@
         <img class="avatar" src="images/profile@1x.jpg" alt="かわぐちのポートレート写真" width="220" height="220" fetchpriority="high" />
         <figcaption class="portrait-note">ISAO KAWAGUCHI / GAME ENGINEER &amp; INDEPENDENT MAKER</figcaption>
       </figure>
+    </section>
+
+    <section id="works" class="section" aria-labelledby="works-title">
+      <h2 id="works-title">実績 / プロジェクト</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>breaker:ブロック崩し</h3>
+          <button class="lite-yt" type="button" data-yt-id="qQq5J-pr2Tc" data-yt-title="breaker:ブロック崩し" aria-label="breaker:ブロック崩し を再生">
+            <img src="https://i.ytimg.com/vi/qQq5J-pr2Tc/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="lite-yt-play" aria-hidden="true"></span>
+          </button>
+          <p class="muted">30秒でブロックを壊し続けるカジュアルゲーム。企画・開発を担当。100万DL、課金売上30%を達成。<br>
+          <a href="pages/case-study-breaker.html">ケーススタディ</a> / <a href="https://apps.apple.com/jp/app/id997366267" target="_blank" rel="noopener">App Store</a> / <a href="https://gamebiz.jp/news/146448" target="_blank" rel="noopener">GameBiz記事</a></p>
+          <div class="tags">
+            <div class="tag">Cocos2d-x</div>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Vタビ 日本横断旅情アドベンチャーゲーム</h3>
+          <button class="lite-yt" type="button" data-yt-id="gJ0-bvgUu1A" data-yt-title="Vタビ 日本横断旅情アドベンチャーゲーム" aria-label="Vタビ 日本横断旅情アドベンチャーゲーム を再生">
+            <img src="https://i.ytimg.com/vi/gJ0-bvgUu1A/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="lite-yt-play" aria-hidden="true"></span>
+          </button>
+          <p class="muted">日本を横断する旅をバーチャル体験できるアドベンチャーゲーム。開発、企画、運用を担当。<br>
+          配信終了 / <a href="https://www.infiniteloop.co.jp/works/v%E3%82%BF%E3%83%93-%E6%97%A5%E6%9C%AC%E6%A8%AA%E6%96%AD%E6%97%85%E6%83%85%E3%82%A2%E3%83%89%E3%83%99%E3%83%B3%E3%83%81%E3%83%A3%E3%83%BC%E3%82%B2%E3%83%BC%E3%83%A0/" target="_blank" rel="noopener">制作実績</a></p>
+          <div class="tags">
+            <div class="tag">Unity</div>
+          </div>
+        </article>
+        <article class="card">
+          <h3>対話型バーチャルヒューマン「Velle/SDSali」</h3>
+          <button class="lite-yt" type="button" data-yt-id="p4ydRSVih_U" data-yt-title="対話型バーチャルヒューマン「Velle/SDSali」" aria-label="対話型バーチャルヒューマン「Velle/SDSali」 を再生">
+            <img src="https://i.ytimg.com/vi/p4ydRSVih_U/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="lite-yt-play" aria-hidden="true"></span>
+          </button>
+          <p class="muted">LLMプロンプト組み込み、音声認識・合成システム連携、Unityによるキャラクターアニメーションを実装。<br>
+          <a href="https://aihub.co.jp/news/zZRdt7uW" target="_blank" rel="noopener">詳細</a></p>
+          <div class="tags">
+            <div class="tag">Unity</div>
+            <div class="tag">AI</div>
+          </div>
+        </article>
+        <article class="card">
+          <h3>対話型ゲーム作品「MiRRor」</h3>
+          <button class="lite-yt" type="button" data-yt-id="861cf2g4V3Y" data-yt-title="対話型ゲーム作品「MiRRor」" aria-label="対話型ゲーム作品「MiRRor」 を再生">
+            <img src="https://i.ytimg.com/vi/861cf2g4V3Y/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="lite-yt-play" aria-hidden="true"></span>
+          </button>
+          <p class="muted">対話型バーチャルヒューマンと会話しながら進行し、プレイヤーの入力（選択式・自由記述）に応じて体験が変化するゲーム。開発・プロンプトエンジニアとして参加。<br>
+          <a href="https://www.youtube.com/watch?v=861cf2g4V3Y" target="_blank" rel="noopener">YouTube</a> / <a href="https://aihub.co.jp/news/oKbw_Bcw" target="_blank" rel="noopener">詳細</a></p>
+          <div class="tags">
+            <div class="tag">Unity</div>
+            <div class="tag">AI</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="services" class="section" aria-labelledby="services-title">
+      <div class="section-intro">
+        <h2 id="services-title">対応領域</h2>
+        <p>企画の整理から実装・運用まで、ゲームとインタラクティブコンテンツの開発を一貫して支援します。</p>
+      </div>
+      <div class="service-grid">
+        <article class="service-card">
+          <span class="service-number" aria-hidden="true">01</span>
+          <h3>Unityモバイル開発</h3>
+          <p>iOS・Android向けゲーム／アプリの企画設計、プロトタイプ、機能実装、運用改善。</p>
+          <div class="tags">
+            <div class="tag">Unity</div>
+            <div class="tag">iOS</div>
+            <div class="tag">Android</div>
+          </div>
+        </article>
+        <article class="service-card">
+          <span class="service-number" aria-hidden="true">02</span>
+          <h3>ゲーム設計・マネタイズ</h3>
+          <p>短時間で伝わる遊びの設計、ゲームバランス調整、広告・課金を含む体験設計。</p>
+          <div class="tags">
+            <div class="tag">Game Design</div>
+            <div class="tag">Monetization</div>
+          </div>
+        </article>
+        <article class="service-card">
+          <span class="service-number" aria-hidden="true">03</span>
+          <h3>AI・対話型体験</h3>
+          <p>LLMプロンプト、音声認識・音声合成、Unityキャラクターを組み合わせた体験開発。</p>
+          <div class="tags">
+            <div class="tag">LLM</div>
+            <div class="tag">Voice</div>
+            <div class="tag">Virtual Human</div>
+          </div>
+        </article>
+      </div>
+      <p class="services-cta"><a href="pages/contact.html">プロジェクトについて相談する →</a></p>
     </section>
 
     <section id="personal" class="section" aria-labelledby="personal-title">
@@ -287,10 +360,10 @@
           </article>
           <article class="card">
             <h3>いえばく!</h3>
-            <div class="lite-yt" data-yt-id="XoXWpOk2fl4" data-yt-title="いえばく!">
-              <img src="https://i.ytimg.com/vi/XoXWpOk2fl4/hqdefault.jpg" alt="いえばく!" loading="lazy" width="480" height="360">
-              <div class="lite-yt-play"></div>
-            </div>
+            <button class="lite-yt" type="button" data-yt-id="XoXWpOk2fl4" data-yt-title="いえばく!" aria-label="いえばく! を再生">
+              <img src="https://i.ytimg.com/vi/XoXWpOk2fl4/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+              <span class="lite-yt-play" aria-hidden="true"></span>
+            </button>
             <p class="muted">30秒で家を破壊するカジュアル破壊ゲーム。<br>
             <a href="https://apps.apple.com/jp/app/id1550488323" target="_blank" rel="noopener">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.moco.iebaku" target="_blank" rel="noopener">Google Play</a></p>
             <div class="tags">
@@ -299,10 +372,10 @@
           </article>
           <article class="card">
             <h3>すしばく!</h3>
-            <div class="lite-yt" data-yt-id="NqURL3L-qAw" data-yt-title="すしばく!">
-              <img src="https://i.ytimg.com/vi/NqURL3L-qAw/hqdefault.jpg" alt="すしばく!" loading="lazy" width="480" height="360">
-              <div class="lite-yt-play"></div>
-            </div>
+            <button class="lite-yt" type="button" data-yt-id="NqURL3L-qAw" data-yt-title="すしばく!" aria-label="すしばく! を再生">
+              <img src="https://i.ytimg.com/vi/NqURL3L-qAw/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+              <span class="lite-yt-play" aria-hidden="true"></span>
+            </button>
             <p class="muted">30秒で回転寿司店を爆破するカジュアル破壊ゲーム第2弾。<br>
             <a href="https://apps.apple.com/jp/app/id1632633407" target="_blank" rel="noopener">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.isao.sushi" target="_blank" rel="noopener">Google Play</a></p>
             <div class="tags">
@@ -321,10 +394,10 @@
           </article>
           <article class="card">
             <h3>ろりだま</h3>
-            <div class="lite-yt" data-yt-id="kh-0qSpyHLI" data-yt-title="ろりだま">
-              <img src="https://i.ytimg.com/vi/kh-0qSpyHLI/hqdefault.jpg" alt="ろりだま" loading="lazy" width="480" height="360">
-              <div class="lite-yt-play"></div>
-            </div>
+            <button class="lite-yt" type="button" data-yt-id="kh-0qSpyHLI" data-yt-title="ろりだま" aria-label="ろりだま を再生">
+              <img src="https://i.ytimg.com/vi/kh-0qSpyHLI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+              <span class="lite-yt-play" aria-hidden="true"></span>
+            </button>
             <p class="muted">ローリングアクションゲーム。<br>
             <a href="https://apps.apple.com/jp/app/%E3%82%8D%E3%82%8A%E3%81%A0%E3%81%BE-%E5%A5%B3%E3%81%AE%E5%AD%90%E3%81%8C%E8%BB%A2%E3%81%8C%E3%82%8B%E3%81%8B%E3%82%8F%E3%81%84%E3%81%84%E3%83%9C%E3%83%BC%E3%83%AB%E6%9A%87%E3%81%A4%E3%81%B6%E3%81%97%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/id6759511855" target="_blank" rel="noopener">App Store</a> / <a href="https://play.google.com/store/apps/details?id=com.isao.rollinggirlz" target="_blank" rel="noopener">Google Play</a></p>
             <div class="tags">
@@ -332,62 +405,6 @@
             </div>
           </article>
         </div>
-      </div>
-    </section>
-
-    <section id="works" class="section" aria-labelledby="works-title">
-      <h2 id="works-title">実績 / プロジェクト</h2>
-      <div class="cards">
-        <article class="card">
-          <h3>breaker:ブロック崩し</h3>
-          <div class="lite-yt" data-yt-id="qQq5J-pr2Tc" data-yt-title="breaker:ブロック崩し">
-            <img src="https://i.ytimg.com/vi/qQq5J-pr2Tc/hqdefault.jpg" alt="breaker:ブロック崩し" loading="lazy" width="480" height="360">
-            <div class="lite-yt-play"></div>
-          </div>
-          <p class="muted">30秒でブロックを壊し続けるカジュアルゲーム。企画・開発を担当。100万DL、課金売上30%を達成。<br>
-          <a href="https://apps.apple.com/jp/app/id997366267" target="_blank" rel="noopener">App Store</a> / <a href="https://gamebiz.jp/news/146448" target="_blank" rel="noopener">GameBiz記事</a> / <a href="https://appmarketinglabo.net/breaker/" target="_blank" rel="noopener">App Marketing Labo記事</a></p>
-          <div class="tags">
-            <div class="tag">Cocos2d-x</div>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Vタビ 日本横断旅情アドベンチャーゲーム</h3>
-          <div class="lite-yt" data-yt-id="gJ0-bvgUu1A" data-yt-title="Vタビ 日本横断旅情アドベンチャーゲーム">
-            <img src="https://i.ytimg.com/vi/gJ0-bvgUu1A/hqdefault.jpg" alt="Vタビ 日本横断旅情アドベンチャーゲーム" loading="lazy" width="480" height="360">
-            <div class="lite-yt-play"></div>
-          </div>
-          <p class="muted">日本を横断する旅をバーチャル体験できるアドベンチャーゲーム。開発、企画、運用を担当。<br>
-          配信終了 / <a href="https://www.infiniteloop.co.jp/works/v%E3%82%BF%E3%83%93-%E6%97%A5%E6%9C%AC%E6%A8%AA%E6%96%AD%E6%97%85%E6%83%85%E3%82%A2%E3%83%89%E3%83%99%E3%83%B3%E3%83%81%E3%83%A3%E3%83%BC%E3%82%B2%E3%83%BC%E3%83%A0/" target="_blank" rel="noopener">制作実績</a></p>
-          <div class="tags">
-            <div class="tag">Unity</div>
-          </div>
-        </article>
-        <article class="card">
-          <h3>対話型バーチャルヒューマン「Velle/SDSali」</h3>
-          <div class="lite-yt" data-yt-id="p4ydRSVih_U" data-yt-title="対話型バーチャルヒューマン「Velle/SDSali」">
-            <img src="https://i.ytimg.com/vi/p4ydRSVih_U/hqdefault.jpg" alt="対話型バーチャルヒューマン「Velle/SDSali」" loading="lazy" width="480" height="360">
-            <div class="lite-yt-play"></div>
-          </div>
-          <p class="muted">LLMプロンプト組み込み、音声認識・合成システム連携、Unityによるキャラクターアニメーションを実装。<br>
-          <a href="https://aihub.co.jp/news/zZRdt7uW" target="_blank" rel="noopener">詳細</a></p>
-          <div class="tags">
-            <div class="tag">Unity</div>
-            <div class="tag">AI</div>
-          </div>
-        </article>
-        <article class="card">
-          <h3>対話型ゲーム作品「MiRRor」</h3>
-          <div class="lite-yt" data-yt-id="861cf2g4V3Y" data-yt-title="対話型ゲーム作品「MiRRor」">
-            <img src="https://i.ytimg.com/vi/861cf2g4V3Y/hqdefault.jpg" alt="対話型ゲーム作品「MiRRor」" loading="lazy" width="480" height="360">
-            <div class="lite-yt-play"></div>
-          </div>
-          <p class="muted">対話型バーチャルヒューマンと会話しながら進行し、プレイヤーの入力（選択式・自由記述）に応じて体験が変化するゲーム。開発・プロンプトエンジニアとして参加。<br>
-          <a href="https://www.youtube.com/watch?v=861cf2g4V3Y" target="_blank" rel="noopener">YouTube</a> / <a href="https://aihub.co.jp/news/oKbw_Bcw" target="_blank" rel="noopener">詳細</a></p>
-          <div class="tags">
-            <div class="tag">Unity</div>
-            <div class="tag">AI</div>
-          </div>
-        </article>
       </div>
     </section>
 
@@ -492,52 +509,45 @@
   </dialog>
 
   <script>
-    // Place selected professional work before the independent app index.
-    const mainContent = document.querySelector('main');
-    const worksSection = document.getElementById('works');
-    const personalSection = document.getElementById('personal');
-    if (mainContent && worksSection && personalSection) {
-      mainContent.insertBefore(worksSection, personalSection);
-    }
-    if (window.location.hash) {
-      window.addEventListener('load', () => {
-        requestAnimationFrame(() => {
-          document.querySelector(window.location.hash)?.scrollIntoView({ behavior: 'instant' });
-        });
-      }, { once: true });
-    }
-
     document.getElementById('y').textContent = new Date().getFullYear();
 
     // Hamburger menu control
     const menuToggle = document.querySelector('.menu-toggle');
     const navlinks = document.querySelector('.navlinks');
 
+    function closeMenu(restoreFocus = false) {
+      navlinks?.setAttribute('data-state', 'closed');
+      menuToggle?.setAttribute('aria-expanded', 'false');
+      menuToggle?.setAttribute('aria-label', 'メニューを開く');
+      if (restoreFocus) menuToggle?.focus();
+    }
+
     menuToggle?.addEventListener('click', () => {
       const isOpen = navlinks.getAttribute('data-state') === 'open';
-      navlinks.setAttribute('data-state', isOpen ? 'closed' : 'open');
-      menuToggle.setAttribute('aria-expanded', !isOpen);
-      menuToggle.setAttribute('aria-label', isOpen ? 'メニューを開く' : 'メニューを閉じる');
+      if (isOpen) {
+        closeMenu();
+      } else {
+        navlinks.setAttribute('data-state', 'open');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        menuToggle.setAttribute('aria-label', 'メニューを閉じる');
+      }
     });
 
     // Close menu when clicking nav links
     const navLinks = document.querySelectorAll('.navlinks a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navlinks.setAttribute('data-state', 'closed');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.setAttribute('aria-label', 'メニューを開く');
-      });
-    });
+    navLinks.forEach(link => link.addEventListener('click', () => closeMenu()));
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       if (navlinks.getAttribute('data-state') === 'open' &&
           !navlinks.contains(e.target) &&
           !menuToggle.contains(e.target)) {
-        navlinks.setAttribute('data-state', 'closed');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.setAttribute('aria-label', 'メニューを開く');
+        closeMenu();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navlinks.getAttribute('data-state') === 'open') {
+        closeMenu(true);
       }
     });
 
@@ -583,16 +593,7 @@
     }
 
     document.querySelectorAll('.lite-yt').forEach(function(el){
-      el.setAttribute('tabindex', '0');
-      el.setAttribute('role', 'button');
-      el.setAttribute('aria-label', (el.dataset.ytTitle || '動画') + ' を再生');
       el.addEventListener('click', function(){ activateLiteYt(this); });
-      el.addEventListener('keydown', function(e){
-        if(e.key === 'Enter' || e.key === ' '){
-          e.preventDefault();
-          activateLiteYt(this);
-        }
-      });
     });
 
     videoModalClose?.addEventListener('click', closeVideoModal);

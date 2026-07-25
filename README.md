@@ -29,6 +29,7 @@ portrait-site/
 ├── pages/
 │   ├── contact.html            # お問い合わせフォーム
 │   ├── privacy.html            # プライバシーポリシー
+│   ├── case-study-breaker.html # breaker ケーススタディ
 │   ├── bingo.html              # ビンゴゲーム
 │   ├── x-search.html           # X検索ツール
 │   ├── idol-pv-player.html     # 地下アイドルPVプレーヤー
@@ -44,6 +45,7 @@ portrait-site/
 │   └── CONTACT_SETUP.md        # フォーム設定手順
 ├── styles/
 │   ├── editorial.css           # トップページ用スタイル
+│   ├── case-study.css           # ケーススタディ用スタイル
 │   └── app-shell.css           # ブラウザアプリ共通スタイル
 ├── sw.js                       # トップページ用Service Worker
 ├── images/
@@ -57,8 +59,9 @@ portrait-site/
 
 ### トップページ（index.html）
 
-- ヘッダー: ナビゲーション（プロフィール、実績、お問い合わせ）
-- ヒーロー: 名前、専門分野、プロフィール写真
+- ヘッダー: ナビゲーション（実績、対応領域、プロフィール、お問い合わせ）
+- ヒーロー: 名前、専門分野、プロフィール写真、実績・問い合わせCTA
+- 対応領域: Unityモバイル開発、ゲーム設計・マネタイズ、AI・対話型体験
 - プロフィール: 経歴、専門領域、拠点情報
 - 略歴: 2012年〜2024年のキャリアサマリー
 - 実績/プロジェクト: breaker、Vタビ、Velle（YouTube動画埋め込み）
@@ -66,6 +69,12 @@ portrait-site/
 - メディア/執筆: App Marketing Labo、Qiita
 - 問い合わせ: SNSリンク、お問い合わせフォームへの導線
 - フッター: コピーライト、プライバシーポリシーリンク
+
+### ケーススタディ（pages/case-study-breaker.html）
+
+- 代表作「breaker:ブロック崩し」の企画・設計・開発内容
+- 役割、開発期間、体制、技術、成果を整理
+- 公開インタビュー、リリース記事への参照リンク
 
 ### お問い合わせフォーム（pages/contact.html）
 
@@ -102,7 +111,7 @@ portrait-site/
 
 - ビルド不要: HTML + CSS + JS のシンプル構成
 - レスポンシブデザイン: モバイル・タブレット・デスクトップ対応
-- ダーク/ライトモード: システム設定に自動対応
+- ダークテーマ: ポートフォリオ全体で統一
 - SEO最適化: 構造化データ（JSON-LD）、OGP、sitemap.xml、robots.txt
 - YouTube動画埋め込み: 実績紹介に動画を活用
 - お問い合わせフォーム: Google Apps Script連携
@@ -150,6 +159,9 @@ portrait-site/
 
 ## 更新履歴
 
+- 2026-07-25: ポートフォリオ改善
+  - ヒーローCTA、対応領域、breakerケーススタディを追加
+  - セクション順序とキーボード操作を改善
 - 2026-03-02: app-ads.txt 大幅更新（648エントリ）
 - 2025-11-12: isa130pull.github.io リポジトリ作成（app-ads.txt ドメインルート配信用）
 - 2025-10-13: 初版作成
