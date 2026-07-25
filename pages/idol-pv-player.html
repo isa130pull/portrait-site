@@ -16,17 +16,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://isa130pull.github.io/portrait-site/pages/idol-pv-player.html" />
 <meta property="og:site_name" content="かわぐち（isa130pull）" />
-<meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/profile@1x.jpg" />
+<meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/ogp-idol-pv-player.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:alt" content="地下アイドルPV垂れ流しプレーヤー" />
-<meta property="og:image:width" content="365" />
-<meta property="og:image:height" content="365" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:locale" content="ja_JP" />
 
 <!-- Twitter Card -->
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="地下アイドルPV垂れ流しプレーヤー" />
 <meta name="twitter:description" content="地下アイドルのPVを偏りなく・永久ループで垂れ流せる無料プレーヤー。" />
-<meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/profile@1x.jpg" />
+<meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-idol-pv-player.jpg" />
+<meta name="twitter:image:alt" content="地下アイドルPV垂れ流しプレーヤー" />
 
 <!-- JSON-LD WebApplication -->
 <script type="application/ld+json">
@@ -167,6 +169,7 @@
     .controls button { flex: 1 1 auto; }
   }
 </style>
+<link rel="stylesheet" href="../styles/app-shell.css?v=20260725a">
 
 <!-- Google Identity Services (アカウント保存用) -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -192,13 +195,25 @@
   })();
 </script>
 </head>
-<body>
-<div class="wrap">
-  <header>
-    <a href="../index.html" class="back-link">← トップページに戻る</a>
+<body class="app-page">
+<header class="app-site-header">
+  <div class="app-site-header__inner">
+    <a class="app-brand" href="../index.html" aria-label="かわぐち トップへ">
+      <span class="app-brand-mark" aria-hidden="true">IK</span>
+      <span>かわぐち <small>/ isa130pull</small></span>
+    </a>
+    <a href="../index.html#personal" class="back-link" aria-label="自作アプリ一覧に戻る">
+      <span aria-hidden="true">←</span>
+      <span class="back-link-label">自作アプリ一覧</span>
+    </a>
+  </div>
+</header>
+<main class="wrap app-main">
+  <div class="app-intro">
+    <p class="app-kicker">Browser app / Idol PV player</p>
     <h1>🎤 地下アイドルPV垂れ流しプレーヤー</h1>
     <span class="badge">自前キュー方式 / 偏りなし / 永久ループ</span>
-  </header>
+  </div>
 
   <div class="player-grid">
     <!-- 左: プレーヤー -->
@@ -296,7 +311,7 @@
     </div>
   </div>
 
-  <section class="section" style="margin-top:24px;">
+  <section class="section app-about" style="margin-top:48px;">
     <h2>地下アイドルPV垂れ流しプレーヤーとは？</h2>
     <p style="margin:0 0 16px;color:var(--muted)">YouTube上の地下アイドルのPVを「偏りなく・永久ループ」で流し続けられる無料ツールです。サーバー不要のフロントエンド完結アプリで、ご自身のYouTube Data APIキーを使って動作します。</p>
     <h2>2つの収集モード</h2>
@@ -312,7 +327,7 @@
       <li>大画面（シアター）表示に対応</li>
     </ul>
   </section>
-</div>
+</main>
 
 <footer style="margin-top:48px;padding:24px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;text-align:center">
   <p style="margin:0">&copy; <script>document.write(new Date().getFullYear())</script> かわぐち (isa130pull)</p>

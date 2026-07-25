@@ -13,19 +13,21 @@
   <meta property="og:url" content="https://isa130pull.github.io/portrait-site/pages/bingo.html" />
   <meta property="og:title" content="セトリビンゴ - ビンゴカード作成・共有ツール" />
   <meta property="og:description" content="3×3のビンゴカードを作成・共有できるツール。編集モード・ビンゴモード搭載。画像保存、リンク共有に対応。" />
-  <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/bingo/web-app-manifest-512x512.png" />
+  <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/ogp-bingo.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:alt" content="セトリビンゴ - ビンゴカード作成ツール" />
-  <meta property="og:image:width" content="512" />
-  <meta property="og:image:height" content="512" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="かわぐち（isa130pull）ポートフォリオ" />
   <meta property="og:locale" content="ja_JP" />
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@isa130pull" />
   <meta name="twitter:title" content="セトリビンゴ - ビンゴカード作成・共有ツール" />
   <meta name="twitter:description" content="3×3のビンゴカードを作成・共有できるツール。編集モード・ビンゴモード搭載。" />
-  <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/bingo/web-app-manifest-512x512.png" />
+  <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-bingo.jpg" />
+  <meta name="twitter:image:alt" content="セトリビンゴ - ビンゴカード作成ツール" />
   <meta name="robots" content="max-image-preview:large" />
 
   <!-- JSON-LD WebApplication -->
@@ -183,6 +185,7 @@
       .grid{gap:6px}
     }
   </style>
+  <link rel="stylesheet" href="../styles/app-shell.css?v=20260725a">
 
   <!-- Google Analytics (gtag.js) - lazy loaded -->
   <script>
@@ -205,12 +208,24 @@
     })();
   </script>
 </head>
-<body>
-<div class="wrap">
-  <header>
-    <a href="../index.html" class="back-link">← トップページに戻る</a>
+<body class="app-page">
+<header class="app-site-header">
+  <div class="app-site-header__inner">
+    <a class="app-brand" href="../index.html" aria-label="かわぐち トップへ">
+      <span class="app-brand-mark" aria-hidden="true">IK</span>
+      <span>かわぐち <small>/ isa130pull</small></span>
+    </a>
+    <a href="../index.html#personal" class="back-link" aria-label="自作アプリ一覧に戻る">
+      <span aria-hidden="true">←</span>
+      <span class="back-link-label">自作アプリ一覧</span>
+    </a>
+  </div>
+</header>
+<main class="wrap app-main">
+  <div class="app-intro">
+    <p class="app-kicker">Browser app / Setlist bingo</p>
     <h1>セトリビンゴ</h1>
-  </header>
+  </div>
 
   <section class="card">
     <div class="form-group" style="margin-bottom:20px">
@@ -250,8 +265,6 @@
       <small id="status" style="color:var(--muted)"></small>
     </div>
   </section>
-</div>
-
 <div class="toast" id="toast"></div>
 
 <!-- カスタム確認ダイアログ -->
@@ -272,7 +285,7 @@
 
 <canvas id="off"></canvas>
 
-<section class="wrap" style="margin-top:48px;color:var(--muted);font-size:14px;line-height:1.8">
+<section class="app-about">
   <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">セトリビンゴとは？</h2>
   <p style="margin:0 0 16px">ライブやコンサートのセットリストを予想して楽しむ、3x3ビンゴカード作成・共有ツールです。登録不要・完全無料でお使いいただけます。</p>
   <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">使い方</h2>
@@ -290,6 +303,7 @@
     <li>スマホ・PC両対応のレスポンシブデザイン</li>
   </ul>
 </section>
+</main>
 
 <footer>
   <p>© <span id="y"></span> かわぐち (isa130pull)</p>
