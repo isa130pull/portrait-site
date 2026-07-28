@@ -72,7 +72,7 @@
     <header>
       <a href="../index.html" class="back-link">← トップページに戻る</a>
       <h1>コンチェキ プライバシーポリシー</h1>
-      <p class="meta">最終更新日: 2026年7月22日</p>
+      <p class="meta">最終更新日: 2026年7月28日</p>
     </header>
 
     <main>
@@ -89,6 +89,13 @@
           <li><strong>利用ログ</strong>: チェックイン履歴、ポイント残高、ガチャ履歴、所持アバター</li>
           <li><strong>端末情報</strong>: OS バージョン、端末モデル、アプリのバージョン、言語設定</li>
           <li><strong>利用解析情報</strong>: アプリ内の画面遷移、機能の利用頻度等(Firebase Analytics により自動取得)</li>
+          <li><strong>チェキ情報</strong>: チェキ帳機能に登録されるチェキ画像および付随情報（撮影日、店舗、メモ等）。取り扱いは取得経路により次のとおり異なります。
+            <ul>
+              <li><strong>ユーザーが端末のカメラロール等から手動で登録したチェキ</strong>: 画像および付随情報は端末内（アプリ内のローカルデータベースおよびアプリ専用領域）にのみ保存され、運営者のサーバーには送信されません。運営者はこれらを取得しません。</li>
+              <li><strong>店舗から送付されたチェキ</strong>: 店舗（管理者）が送付した画像および付随情報（送信元キャスト、店舗、撮影日、メモ）は、運営者が利用する Firebase（Cloud Storage / Firestore）に保持され、ユーザー端末がこれをダウンロードして端末内にも保存します。</li>
+            </ul>
+          </li>
+          <li><strong>購入履歴</strong>: アプリ内課金（5 連召喚）を購入した際の商品種別、支払金額、購入日時、および購入時点でアイコンに設定していたキャストの情報。決済処理は Apple / Google の各ストアが行い、運営者がクレジットカード番号等の決済情報を取得することはありません。</li>
         </ol>
         <p>本アプリは、氏名、電話番号、メールアドレス、住所、生年月日、クレジットカード情報を取得しません。</p>
       </section>
@@ -99,6 +106,7 @@
         <ol>
           <li>本アプリの機能提供（チェックイン、ポイント付与、ガチャ、アバター管理）</li>
           <li>チェックインの正当性確認（位置情報）</li>
+          <li>アプリ内課金の購入内容の記録、付与の管理（二重付与・未付与の防止）および購入に関するお問い合わせへの対応（購入履歴）</li>
           <li>不正利用の検知および防止</li>
           <li>本アプリの品質改善および新機能の検討</li>
           <li>法令に基づく対応</li>
@@ -128,9 +136,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>Firebase Authentication / Firestore / Cloud Messaging / Analytics / Crashlytics</td>
+              <td>Firebase Authentication / Firestore / Cloud Storage / Cloud Messaging / Analytics / Crashlytics</td>
               <td>Google LLC</td>
-              <td>認証、データ保存、通知配信、利用解析、不具合検知</td>
+              <td>認証、データ保存、店舗からのチェキ送付（画像保管）、通知配信、利用解析、不具合検知</td>
             </tr>
             <tr>
               <td>PlayFab</td>
@@ -178,12 +186,13 @@
         <h2>10. 外部送信に関する公表（電気通信事業法第 27 条の 12）</h2>
         <p>本アプリは、ユーザーの利便性向上およびサービスの品質改善のため、ユーザーの端末から外部の事業者へ次の情報を送信しています。</p>
 
-        <h3>10.1 Firebase Authentication / Firestore / Cloud Messaging（Google LLC）</h3>
+        <h3>10.1 Firebase Authentication / Firestore / Cloud Storage / Cloud Messaging（Google LLC）</h3>
         <ul>
-          <li><strong>送信される情報</strong>: 匿名 UID、認証トークン、アプリ内データ（ポイント残高、チェックイン履歴、所持アバター）、デバイストークン</li>
-          <li><strong>送信目的</strong>: ユーザー認証、データの永続化、プッシュ通知配信</li>
+          <li><strong>送信される情報</strong>: 匿名 UID、認証トークン、アプリ内データ（ポイント残高、チェックイン履歴、所持アバター）、アプリ内課金の購入記録（商品種別、支払金額、購入日時、購入時点でアイコンに設定していたキャスト）、デバイストークン、店舗から送付されたチェキの画像および付随情報（送信元キャスト、店舗、撮影日、メモ）</li>
+          <li><strong>送信目的</strong>: ユーザー認証、データの永続化、店舗からのチェキ送付、プッシュ通知配信</li>
           <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
           <li><strong>設定変更方法</strong>: アプリ内のアカウント削除機能、または端末の通知設定からプッシュ通知をオフにできます</li>
+          <li><strong>注</strong>: ユーザーが手動で登録したチェキの画像および付随情報は端末内にのみ保存され、外部へ送信されません。</li>
         </ul>
 
         <h3>10.2 Firebase Analytics（Google LLC）</h3>
@@ -209,7 +218,7 @@
 
         <h3>10.4 PlayFab（Microsoft Corporation）</h3>
         <ul>
-          <li><strong>送信される情報</strong>: 匿名 UID（PlayFab タイトルプレイヤー）、ランキング集計用の統計値（トロフィー獲得数等）、ランキング表示用のアバター ID</li>
+          <li><strong>送信される情報</strong>: 匿名 UID に紐づく PlayFab タイトルプレイヤー、ランキング集計用の統計値（トロフィー獲得数・月間チャレンジ値）、ランキング行に表示するアバター ID</li>
           <li><strong>送信目的</strong>: 全国ランキング（リーダーボード）の集計・表示</li>
           <li><strong>プライバシーポリシー</strong>: <a href="https://privacy.microsoft.com/ja-jp/privacystatement" target="_blank" rel="noopener">https://privacy.microsoft.com/ja-jp/privacystatement</a></li>
         </ul>
