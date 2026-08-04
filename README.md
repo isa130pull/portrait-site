@@ -34,7 +34,7 @@ portrait-site/
 │   ├── x-search.html           # X検索ツール
 │   ├── idol-pv-player.html     # 地下アイドルPVプレーヤー
 │   ├── concheki-*.html         # コンチェキ法務文書
-│   ├── dorapiku-privacy.html   # ドラピク プライバシーポリシー
+│   ├── dorapiku-privacy.html   # ヒトコマ プライバシーポリシー（旧名称のURLを維持）
 │   ├── pong/                   # ポンゲーム
 │   │   ├── index.html          # ゲーム本体
 │   │   ├── ranking.html        # ランキング

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>プライバシーポリシー | ドラピク</title>
-  <meta name="description" content="スマートフォンアプリ ドラピク のプライバシーポリシー（外部送信に関する公表を含む）" />
+  <title>プライバシーポリシー | ヒトコマ</title>
+  <meta name="description" content="iOSアプリ ヒトコマのプライバシーポリシー（外部送信に関する公表を含む）" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/dorapiku-privacy.html" />
@@ -71,87 +71,139 @@
   <div class="wrap">
     <header>
       <a href="../index.html" class="back-link">← トップページに戻る</a>
-      <h1>ドラピク プライバシーポリシー</h1>
-      <p class="meta">最終更新日: 2026年7月6日</p>
+      <h1>ヒトコマ プライバシーポリシー</h1>
+      <p class="meta">最終更新日: 2026年8月4日</p>
     </header>
 
     <main>
       <section>
-        <p>かわぐち（isa130pull）（以下「運営者」といいます）は、スマートフォンアプリ「ドラピク」（以下「本アプリ」といいます）は、写真の中の人物を見分けてスライドショーを再生するアプリです。運営者は、本アプリにおけるユーザーのプライバシーを尊重し、以下のとおり個人情報を適切に取り扱います。</p>
-        <p><strong>写真・顔の特徴量・人物情報といったセンシティブなデータは、すべて利用者のデバイス内のみで処理・保存し、外部のサーバーへ送信することはありません（完全オンデバイス処理）。</strong></p>
+        <p>本プライバシーポリシーは、iOS アプリ「ヒトコマ」（以下「本アプリ」）における利用者情報の取り扱いについて定めるものです。</p>
       </section>
 
       <section>
-        <h2>1. 取得する情報</h2>
-        <p>本アプリでは、以下の情報を取得します。</p>
-        <ol>
-          <li><strong>写真・ビデオ（写真ライブラリ）</strong>: 利用者が許可した写真のみにアクセスします。スライドショーの再生、および写真に写る人物を見分けるための顔の検出・分類に使用します。写真そのもの、および写真から生成した顔の特徴量（フェイスプリント）はデバイス内のデータベースに保存され、外部へ送信されることはありません。顔の検出・特徴量の生成・人物のグループ化は、すべて Apple の Vision フレームワークおよび同梱の機械学習モデルによりデバイス上で実行されます。</li>
-          <li><strong>顔の特徴量・人物情報</strong>: 同じ人物の写真をまとめ、人物ごとのスライドショーを作るために、顔の特徴量・利用者が付けた人物名・人物のグループ分けをデバイス内にのみ保存します。人物の識別は推定であり誤りを含み得るため、本アプリ内で手動修正・除外ができます。</li>
-          <li><strong>位置情報</strong>: 写真に記録された撮影位置（地名表示・場所による絞り込みに使用。地名への変換に Apple の逆ジオコーディング（CLGeocoder）を利用）。設定で「現在地」「地図」の表示を有効にした場合に限り、利用中の位置情報（WhenInUse）も取得し、Apple の地図サービス（MapKit）で簡易マップを表示します。</li>
-          <li><strong>利用状況データ</strong>: アプリの起動・再生・スキャン完了などのイベントと、その粗い件数・所要時間・端末/OS の一般的な情報（Firebase Analytics により自動取得）。</li>
-          <li><strong>広告識別子等</strong>: 広告の配信・最適化のための広告識別子（IDFA。ユーザーが端末設定で許可した場合のみ）、端末・ネットワークに関する一般的な情報。</li>
-        </ol>
-        <p>本アプリは、氏名、電話番号、メールアドレス、住所、生年月日、クレジットカード情報を取得しません。アカウント登録・サインインの機能自体がありません。</p>
+        <h2>1. 基本方針</h2>
+        <p>本アプリは、写真の中の人物を見分けてスライドショーを再生するアプリです。</p>
+        <p><strong>写真・顔の特徴量・人物情報といったセンシティブなデータは、すべて利用者のデバイス内のみで処理・保存し、外部のサーバーへ送信しません（完全オンデバイス処理）。</strong></p>
       </section>
 
       <section>
-        <h2>2. 利用目的</h2>
-        <p>取得した情報は以下の目的に利用します。</p>
-        <ol>
-          <li>本アプリの機能提供（スライドショーの再生、人物・アルバム・期間・場所・お気に入りによる絞り込み）</li>
-          <li>顔の特徴量に基づく人物のグループ化・人物での絞り込み</li>
-          <li>撮影地名の表示、現在地の地名・簡易マップの表示（設定でON時のみ）</li>
-          <li>不具合の把握および品質改善</li>
-          <li>広告の配信および最適化</li>
-          <li>広告除去（アプリ内課金）の提供</li>
-          <li>法令に基づく対応</li>
-        </ol>
+        <h2>2. 取得・処理する情報と利用目的</h2>
+
+        <h3>2-1. 写真・ビデオ（写真ライブラリ）</h3>
+        <ul>
+          <li><strong>目的</strong>: スライドショーの再生、および写真に写る人物を見分けるための顔の検出・分類。</li>
+          <li><strong>取り扱い</strong>: 利用者が許可した写真のみにアクセスします。写真そのもの、および写真から生成した顔の特徴量（フェイスプリント）はデバイス内のデータベースに保存され、外部へ送信されることはありません。顔の検出・特徴量の生成・人物のグループ化は、すべて Apple の Vision フレームワークおよび同梱の機械学習モデルによりデバイス上で実行されます。</li>
+          <li><strong>Apple Watch との同期</strong>: 利用者がアプリ内で明示的に同期を実行した場合に限り、現在のクイック再生条件から最大48枚の圧縮した縮小コピーと、表示用の撮影日・命名済み人物名を、ペアリング済み Apple Watch 内の「ヒトコマ」へ保存します。元の高解像度写真、写真ライブラリ内の識別子、位置情報、顔の特徴量は Apple Watch へ転送しません。転送は iPhone と Apple Watch の間で Apple の WatchConnectivity を通じて行われ、当方のサーバーを経由しません。</li>
+        </ul>
+
+        <h3>2-2. 顔の特徴量・人物情報（生体情報に相当）</h3>
+        <ul>
+          <li><strong>目的</strong>: 同じ人物の写真をまとめ、人物ごとのスライドショーを作るため。</li>
+          <li><strong>性質</strong>: 写真から生成する顔の特徴量（フェイスプリント）は、個人を識別しうる生体情報に相当する情報です。本アプリは初回のご案内画面でこの点をお伝えしたうえで、同意（スキャンの開始）を得てから生成します。</li>
+          <li><strong>取り扱い</strong>: 顔の特徴量、利用者が付けた人物名、人物のグループ分けはデバイス内にのみ保存します。外部送信・第三者提供は一切行いません（広告事業者・解析事業者を含みます）。人物の識別は推定であり誤りを含み得るため、本アプリ内で手動修正・除外ができます。</li>
+          <li><strong>削除</strong>: 本アプリの「設定」タブ →「プライバシー」→「顔・人物データをすべて削除」から、検出済みの顔・登録した人物・スキャンの進捗をいつでもすべて削除できます（写真そのものには影響しません）。</li>
+        </ul>
+
+        <h3>2-3. 位置情報</h3>
+        <ul>
+          <li><strong>写真の位置情報</strong>: 写真に記録された撮影位置を、地名（都道府県・地名）の表示や場所による絞り込みに利用します。地名への変換には Apple の逆ジオコーディング（CLGeocoder）を利用するため、この処理の範囲で座標が Apple に送信されます。</li>
+          <li><strong>現在地</strong>: 設定で「現在地」「地図」の表示を有効にした場合に限り、利用中の位置情報（WhenInUse）を取得します。</li>
+          <li><strong>地図の表示</strong>: 設定で「地図（現在地）」の表示を有効にした場合に限り、再生画面に現在地のミニマップを表示します。地図の描画には Apple の地図サービス（MapKit）を利用するため、地図タイルの取得にあたり表示範囲（現在地周辺の座標）が Apple に送信されます。</li>
+        </ul>
+        <p>これらの位置情報を当方が収集・保存・第三者提供することはありません。</p>
+
+        <h3>2-4. 利用状況データ（アクセス解析）</h3>
+        <ul>
+          <li><strong>目的</strong>: 不具合の把握と機能改善のための、利用状況の統計的な把握。</li>
+          <li><strong>取り扱い</strong>: Google の「Google アナリティクス for Firebase（Firebase Analytics）」を利用し、アプリの起動・再生・スキャン完了などのイベントと、その粗い件数・所要時間・端末／OS の一般的な情報を送信します。</li>
+          <li><strong>送信しない情報</strong>: 写真、顔の特徴量、人物名、位置情報、その他個人を特定し得る情報は Firebase Analytics に一切含めません。送信する件数はおおまかな区分（例:「50〜199」）に丸めており、個人の特定には用いません。</li>
+        </ul>
+        <p>Firebase Analytics の詳細は、<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google のプライバシーポリシー</a>をご参照ください。</p>
+
+        <h3>2-5. 不具合情報（クラッシュレポート）</h3>
+        <ul>
+          <li><strong>目的</strong>: アプリが強制終了した場合や、内部で処理に失敗した場合の原因調査と修正。</li>
+          <li><strong>取り扱い</strong>: Google の「Firebase Crashlytics」を利用し、強制終了時の記録（クラッシュの発生箇所を示すプログラム上の位置情報であるスタックトレース）、端末の機種・OS バージョン・アプリのバージョン、および処理に失敗した箇所のあらかじめ定めた区分名（例:「写真の読み込み」「顔のスキャン」）を送信します。</li>
+          <li><strong>送信しない情報</strong>: 写真、顔の特徴量、人物名、位置情報、ファイル名や写真の識別子は一切含めません。エラー情報は、内部の分類コードだけを残すよう加工したうえで送信しており、自由入力の文字列や写真に関する情報が混入しない仕組みにしています。</li>
+        </ul>
+        <p>Firebase Crashlytics の詳細は、<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google のプライバシーポリシー</a>をご参照ください。</p>
+
+        <h3>2-6. 表示設定の遠隔切り替え（リモート設定）</h3>
+        <ul>
+          <li><strong>目的</strong>: 不適切な広告が報告された場合などに、アプリの更新（審査）を待たずに広告の表示を停止するなど、表示に関する設定を安全に切り替えるため。</li>
+          <li><strong>取り扱い</strong>: Google の「Firebase Remote Config」を利用し、当方が設定した表示用の設定値をアプリが受け取ります。この機能で利用者の情報を送信することはありません。設定値を受け取れない場合も、アプリに内蔵された既定の設定でそのまま動作します。</li>
+        </ul>
+
+        <h3>2-7. 広告</h3>
+        <ul>
+          <li><strong>目的</strong>: 本アプリの運営費用をまかなうための広告の表示。</li>
+          <li><strong>取り扱い</strong>: 広告の配信・最適化に Unity Technologies の「Unity LevelPlay（ironSource）」を利用します。広告の表示・計測のため、広告識別子（IDFA）や端末・ネットワークに関する一般的な情報が広告事業者に送信される場合があります。</li>
+          <li><strong>トラッキングの許可</strong>: IDFA を用いたパーソナライズ広告には、iOS の「トラッキングの透明性（ATT）」による許可が必要です。許可しない場合も広告は表示されますが、利用者に最適化されない広告になります。許可は iOS の「設定」アプリからいつでも変更できます。</li>
+          <li><strong>オンデバイス処理との関係</strong>: 写真・顔の特徴量・人物名・撮影位置といったセンシティブなデータを広告事業者へ渡すことはありません。</li>
+        </ul>
+        <p>Unity LevelPlay の詳細は、<a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener">Unity のプライバシーポリシー</a>をご参照ください。</p>
+
+        <h3>2-8. 広告の除去（アプリ内課金）</h3>
+        <ul>
+          <li><strong>目的</strong>: 広告を非表示にするための、買い切り（一度きり・サブスクリプションではありません）のアプリ内購入の提供。</li>
+          <li><strong>取り扱い</strong>: 購入・決済は Apple（App Store）が処理し、当方はクレジットカード番号などの決済情報や、利用者個人を特定する情報を取得・保存しません。広告除去を購入済みかどうかの判定は、Apple の StoreKit を通じてデバイス内で行います。</li>
+        </ul>
+
+        <h3>2-9. お問い合わせ</h3>
+        <ul>
+          <li><strong>目的</strong>: ご質問、不具合の報告、ご意見・ご要望への対応、および本アプリの改善。</li>
+          <li><strong>取り扱い</strong>: アプリ内のお問い合わせフォームから、利用者が入力した本文・お問い合わせの種類・任意の返信先メールアドレスを Google の Firebase Cloud Functions 経由で Cloud Firestore へ送信します。返信先を入力しない場合、個別の返信は行いません。</li>
+          <li><strong>任意の端末情報</strong>: 不具合のお問い合わせでは、利用者がフォーム上のスイッチを有効にしている場合に限り、アプリのバージョン、iOS のバージョン、端末の機種、アプリの表示言語を添付します。</li>
+          <li><strong>送信しない情報</strong>: 写真、顔の特徴量、人物名、位置情報、写真の識別子、アプリの操作ログは自動的に添付しません。これらの情報を本文へ入力しないよう、送信画面でも案内します。</li>
+          <li><strong>保存期間</strong>: 送信されたお問い合わせは受付から180日間保存し、その後 Cloud Firestore の TTL により自動削除します。広告配信、トラッキング、利用状況の分析には使用しません。</li>
+          <li><strong>下書き</strong>: 入力途中または送信に失敗した内容は利用者のデバイス内だけに保存し、送信成功時に削除します。未送信の下書きは7日後に失効します。</li>
+        </ul>
       </section>
 
       <section>
-        <h2>3. 第三者提供</h2>
-        <p>運営者は、以下の場合を除き、取得した情報を第三者に提供しません。写真・顔の特徴量・人物名・撮影位置などのセンシティブなデータは、広告を含むいずれの第三者へも提供しません。</p>
-        <ol>
-          <li>法令に基づく場合</li>
-          <li>人の生命、身体または財産の保護のために必要であり、本人の同意を得ることが困難な場合</li>
-          <li>第 4 項に定める業務委託先に、利用目的の達成に必要な範囲で提供する場合</li>
-        </ol>
-      </section>
-
-      <section>
-        <h2>4. 業務委託（外部サービスの利用）</h2>
-        <p>運営者は、本アプリの提供にあたり、以下の外部サービスを利用しています。各サービスのプライバシーポリシーは各社のページをご確認ください。</p>
+        <h2>3. 第三者提供・データの送信先</h2>
         <table>
           <thead>
             <tr>
-              <th>サービス名</th>
-              <th>提供事業者</th>
-              <th>利用目的</th>
+              <th>送信先</th>
+              <th>送信される情報</th>
+              <th>目的</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Firebase Analytics</td>
-              <td>Google LLC</td>
-              <td>匿名の利用状況の分析、品質改善</td>
+              <td>Google（Firebase Analytics）</td>
+              <td>匿名の利用状況イベント・粗い統計・端末／OS 情報</td>
+              <td>利用状況の分析・機能改善</td>
             </tr>
             <tr>
-              <td>CLGeocoder / MapKit</td>
-              <td>Apple Inc.</td>
-              <td>撮影地・現在地の地名への変換、簡易マップの表示</td>
+              <td>Google（Firebase Crashlytics）</td>
+              <td>強制終了時の記録（スタックトレース）・端末／OS／アプリのバージョン・失敗箇所の区分名</td>
+              <td>不具合の原因調査と修正</td>
             </tr>
             <tr>
-              <td>Unity LevelPlay（ironSource）</td>
-              <td>Unity Technologies</td>
-              <td>広告の配信・最適化</td>
+              <td>Google（Firebase Remote Config）</td>
+              <td>設定値の受信に必要な端末・アプリの一般的な情報</td>
+              <td>広告表示の停止など、表示設定の遠隔切り替え</td>
             </tr>
             <tr>
-              <td>App Store（StoreKit）</td>
-              <td>Apple Inc.</td>
-              <td>広告除去（アプリ内課金）の決済処理</td>
+              <td>Google（Firebase Cloud Functions / Cloud Firestore / App Check）</td>
+              <td>お問い合わせ本文・種類・任意の返信先メールアドレス・利用者が添付を選んだ端末情報</td>
+              <td>お問い合わせの受付・対応、不正送信の防止</td>
+            </tr>
+            <tr>
+              <td>Apple（CLGeocoder / MapKit）</td>
+              <td>現在地または写真の座標</td>
+              <td>地名への変換・地図の表示</td>
+            </tr>
+            <tr>
+              <td>Unity（Unity LevelPlay / ironSource 広告）</td>
+              <td>広告識別子（IDFA）・端末／ネットワークに関する一般的な情報・広告の表示／操作データ</td>
+              <td>広告の配信・計測</td>
             </tr>
           </tbody>
         </table>
+        <p>上記以外に、利用者の情報を第三者へ提供・販売することはありません。写真・顔の特徴量・人物名・撮影位置などのセンシティブなデータを、広告を含むいずれの第三者へも提供することはありません。</p>
         <p>各社のプライバシーポリシー：</p>
         <ul>
           <li>Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
@@ -161,67 +213,91 @@
       </section>
 
       <section>
-        <h2>5. Cookie および同等の技術</h2>
-        <p>本アプリは Web ブラウザを介した Cookie の発行は行いませんが、上記第 4 項の外部サービスは、ユーザーの端末上に識別子（広告識別子を含みます）を保存・参照する場合があります。ユーザーは、iOS の端末設定により、広告識別子のリセットおよびトラッキング許可の制御が可能です。</p>
+        <h2>4. データの保存と削除</h2>
+        <ul>
+          <li>顔の特徴量（生体情報に相当）・人物情報・各種設定はデバイス内にのみ保存され、当方のサーバーには一切保管されません。</li>
+          <li><strong>顔・人物データはいつでも全部削除できます</strong>: 本アプリの「設定」タブ →「プライバシー」→「顔・人物データをすべて削除」。写真ライブラリへのアクセスを保ったまま、スキャン結果だけを消せます。</li>
+          <li>Apple Watch に同期した縮小写真は、iPhone の「再生」タブ →「Apple Watch」→「Apple Watchから写真を削除」から削除できます。iPhone 上の元写真には影響しません。</li>
+          <li>本アプリを削除すると、これらのデバイス内データも削除されます。</li>
+          <li>お問い合わせの下書きは端末内に最大7日間保存し、送信成功時または期限到来時に削除します。</li>
+          <li>送信済みのお問い合わせは Google Cloud 上に180日間保存し、期限到来後に自動削除します。</li>
+          <li>写真ライブラリへのアクセス許可は、iOS の「設定」アプリからいつでも変更・取り消しできます。</li>
+        </ul>
       </section>
 
       <section>
-        <h2>6. 開示・訂正・削除</h2>
-        <p>本アプリはサーバー側のアカウントを持たないため、本アプリを削除すると、デバイス内に保存された写真アクセス許可・顔の特徴量・人物名・スキャン結果などのデータもあわせて削除されます。写真ライブラリへのアクセス許可は、iOS の「設定」アプリからいつでも変更・取り消しできます。人物の名前や振り分けの誤りは、本アプリ内の人物管理画面からいつでも手動で修正・除外できます。これに加えてお問い合わせを希望する場合は、第 10 項の連絡先までご連絡ください。</p>
-      </section>
-
-      <section>
-        <h2>7. 安全管理</h2>
-        <p>運営者は、取得した情報の漏えい、滅失、改ざんを防止するため、合理的な安全管理措置を講じます。</p>
-      </section>
-
-      <section>
-        <h2>8. 子どものプライバシー</h2>
+        <h2>5. 子どものプライバシー</h2>
         <p>本アプリは特定の年齢層を対象としたものではなく、年齢に関する情報を収集しません。</p>
       </section>
 
       <section>
-        <h2>9. ポリシーの変更</h2>
-        <p>本ポリシーは、必要に応じて改定されることがあります。改定後のポリシーは、本ページに掲載した時点で効力を生じます。重要な変更がある場合は、本アプリ内で通知します。</p>
+        <h2>6. 本ポリシーの改定</h2>
+        <p>本ポリシーは、必要に応じて改定することがあります。重要な変更がある場合は、本ページ上で告知します。</p>
       </section>
 
       <section>
-        <h2>10. お問い合わせ</h2>
-        <p>本ポリシーに関するお問い合わせは、以下までご連絡ください。</p>
+        <h2>7. お問い合わせ</h2>
+        <p>本アプリの「設定」タブ →「サポート」→「お問い合わせ」から、アプリ内フォームをご利用ください。アプリを起動できない場合や、本ポリシーに関するご連絡には、以下のメールアドレスも利用できます。</p>
         <p>メールアドレス: <a href="mailto:isa130pull@gmail.com">isa130pull@gmail.com</a></p>
       </section>
 
       <hr style="margin:64px 0; border:none; border-top:1px solid var(--border);">
 
       <section>
-        <h2>11. 外部送信に関する公表（電気通信事業法第 27 条の 12）</h2>
-        <p>本アプリは、ユーザーの利便性向上およびサービスの品質改善のため、ユーザーの端末から外部の事業者へ次の情報を送信しています。</p>
+        <h2>8. 外部送信に関する公表（電気通信事業法第 27 条の 12）</h2>
+        <p>本アプリは、機能提供、品質改善、広告表示およびお問い合わせ対応のため、利用者の端末から外部の事業者へ次の情報を送信します。</p>
 
-        <h3>11.1 Firebase Analytics（Google LLC）</h3>
+        <h3>8.1 Firebase Analytics（Google LLC）</h3>
         <ul>
           <li><strong>送信される情報</strong>: アプリ内イベント（起動・再生・スキャン完了等）、その粗い件数・所要時間、端末情報（OS バージョン、端末モデル、言語設定）</li>
           <li><strong>送信目的</strong>: アプリの利用状況の解析、品質改善</li>
-          <li><strong>送信しない情報</strong>: 写真、顔の特徴量、人物名、位置情報その他個人を特定し得る情報は一切含めません</li>
-          <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
-          <li><strong>オプトアウト方法</strong>: 本アプリの設定画面にある「匿名利用状況データ共有」のトグルをオフにすることで送信を停止できます</li>
+          <li><strong>送信しない情報</strong>: 写真、顔の特徴量、人物名、位置情報その他個人を特定し得る情報</li>
+          <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google のプライバシーポリシー</a></li>
+          <li><strong>送信の停止方法</strong>: 本アプリの設定画面にある「匿名利用状況データ共有」をオフにすることで送信を停止できます</li>
         </ul>
 
-        <h3>11.2 Unity LevelPlay（ironSource）（Unity Technologies）</h3>
+        <h3>8.2 Firebase Crashlytics（Google LLC）</h3>
+        <ul>
+          <li><strong>送信される情報</strong>: スタックトレース、端末の機種・OS バージョン・アプリのバージョン、処理に失敗した箇所のあらかじめ定めた区分名</li>
+          <li><strong>送信目的</strong>: 強制終了や処理失敗の原因調査と修正</li>
+          <li><strong>送信しない情報</strong>: 写真、顔の特徴量、人物名、位置情報、ファイル名、写真の識別子、自由入力の文字列</li>
+          <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google のプライバシーポリシー</a></li>
+        </ul>
+
+        <h3>8.3 Firebase Remote Config（Google LLC）</h3>
+        <ul>
+          <li><strong>送信される情報</strong>: 設定値の受信に必要な端末・アプリの一般的な情報</li>
+          <li><strong>送信目的</strong>: 広告表示の停止など、表示設定の遠隔切り替え</li>
+          <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google のプライバシーポリシー</a></li>
+        </ul>
+
+        <h3>8.4 Firebase Cloud Functions / Cloud Firestore / App Check（Google LLC）</h3>
+        <ul>
+          <li><strong>送信される情報</strong>: お問い合わせ本文・種類・任意の返信先メールアドレス、および利用者が添付を選んだ場合のアプリ／OS バージョン・端末機種・表示言語</li>
+          <li><strong>送信目的</strong>: お問い合わせの受付・対応、不正送信の防止</li>
+          <li><strong>保存期間</strong>: 送信されたお問い合わせは受付から180日間</li>
+          <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google のプライバシーポリシー</a></li>
+        </ul>
+
+        <h3>8.5 Unity LevelPlay（ironSource）（Unity Technologies）</h3>
         <ul>
           <li><strong>送信される情報</strong>: 広告識別子（IDFA。ATT で許可した場合のみ）、端末・ネットワークに関する一般的な情報、広告の表示・操作データ</li>
-          <li><strong>送信目的</strong>: 広告の配信・最適化</li>
-          <li><strong>プライバシーポリシー</strong>: <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener">https://unity.com/legal/privacy-policy</a></li>
-          <li><strong>オプトアウト方法</strong>: iOS の設定 &gt; プライバシーとセキュリティ &gt; トラッキング から本アプリのトラッキングをオフにできます。トラッキングを許可しない場合も広告自体は表示されますが、パーソナライズされません</li>
+          <li><strong>送信目的</strong>: 広告の配信・計測・最適化</li>
+          <li><strong>プライバシーポリシー</strong>: <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener">Unity のプライバシーポリシー</a></li>
+          <li><strong>送信の制御方法</strong>: iOS の「設定」→「プライバシーとセキュリティ」→「トラッキング」から本アプリのトラッキングをオフにできます。トラッキングを許可しない場合も広告自体は表示されますが、パーソナライズされません</li>
         </ul>
 
-        <h3>11.3 Apple（CLGeocoder / MapKit）</h3>
+        <h3>8.6 Apple（CLGeocoder / MapKit）</h3>
         <ul>
           <li><strong>送信される情報</strong>: 現在地または写真の撮影座標</li>
           <li><strong>送信目的</strong>: 地名への変換、簡易マップの表示</li>
-          <li><strong>プライバシーポリシー</strong>: <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">https://www.apple.com/legal/privacy/</a></li>
+          <li><strong>プライバシーポリシー</strong>: <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple のプライバシーポリシー</a></li>
         </ul>
 
-        <h3>11.4 公表の更新</h3>
+        <h3>8.7 本ページのアクセス解析</h3>
+        <p>本ページの閲覧時には、サイトの利用状況を把握するため Google Analytics を使用し、閲覧ページ、アクセス日時、端末・ブラウザの一般的な情報等を Google LLC へ送信する場合があります。本アプリ内の写真、顔の特徴量、人物名、位置情報は含まれません。詳細は、<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google のプライバシーポリシー</a>をご参照ください。</p>
+
+        <h3>8.8 公表の更新</h3>
         <p>本公表内容は、外部送信先または送信内容に変更があった場合、速やかに更新します。</p>
       </section>
     </main>
