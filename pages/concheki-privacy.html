@@ -72,7 +72,7 @@
     <header>
       <a href="../index.html" class="back-link">← トップページに戻る</a>
       <h1>コンチェキ プライバシーポリシー</h1>
-      <p class="meta">最終更新日: 2026年7月28日</p>
+      <p class="meta">最終更新日: 2026年8月7日</p>
     </header>
 
     <main>
@@ -84,10 +84,11 @@
         <h2>1. 取得する情報</h2>
         <p>本アプリでは、以下の情報を取得します。</p>
         <ol>
-          <li><strong>ユーザー識別子</strong>: 認証サービス（Firebase Authentication）が発行する匿名 UID</li>
+          <li><strong>ユーザー識別子</strong>: 認証サービス（Firebase Authentication）が発行する UID、およびアカウント連携に使用する認証プロバイダのユーザー識別子</li>
+          <li><strong>アカウント情報</strong>: Google アカウントとの連携をユーザーが選択した場合に、Google から提供される氏名およびメールアドレス。本人認証とアカウント連携にのみ使用し、公開プロフィール、ランキング表示、広告には使用しません。Apple アカウントとの連携では氏名およびメールアドレスを要求しません。</li>
           <li><strong>位置情報</strong>: チェックインの正当性確認のために、QR コード読み取り時にのみ取得する端末の位置情報(GPS)</li>
           <li><strong>利用ログ</strong>: チェックイン履歴、ポイント残高、ガチャ履歴、所持アバター</li>
-          <li><strong>端末情報</strong>: OS バージョン、端末モデル、アプリのバージョン、言語設定</li>
+          <li><strong>端末情報</strong>: OS バージョン、端末モデル、アプリのバージョン、言語設定、アプリインスタンス識別子</li>
           <li><strong>利用解析情報</strong>: アプリ内の画面遷移、機能の利用頻度等(Firebase Analytics により自動取得)</li>
           <li><strong>チェキ情報</strong>: チェキ帳機能に登録されるチェキ画像および付随情報（撮影日、店舗、メモ等）。取り扱いは取得経路により次のとおり異なります。
             <ul>
@@ -97,14 +98,14 @@
           </li>
           <li><strong>購入履歴</strong>: アプリ内課金（5 連召喚）を購入した際の商品種別、支払金額、購入日時、および購入時点でアイコンに設定していたキャストの情報。決済処理は Apple / Google の各ストアが行い、運営者がクレジットカード番号等の決済情報を取得することはありません。</li>
         </ol>
-        <p>本アプリは、氏名、電話番号、メールアドレス、住所、生年月日、クレジットカード情報を取得しません。</p>
+        <p>Google アカウント連携時を除き、本アプリは氏名およびメールアドレスを取得しません。また、電話番号、住所、生年月日、クレジットカード情報は取得しません。</p>
       </section>
 
       <section>
         <h2>2. 利用目的</h2>
         <p>取得した情報は以下の目的に利用します。</p>
         <ol>
-          <li>本アプリの機能提供（チェックイン、ポイント付与、ガチャ、アバター管理）</li>
+          <li>本人認証、アカウント連携および本アプリの機能提供（チェックイン、ポイント付与、ガチャ、アバター管理）</li>
           <li>チェックインの正当性確認（位置情報）</li>
           <li>アプリ内課金の購入内容の記録、付与の管理（二重付与・未付与の防止）および購入に関するお問い合わせへの対応（購入履歴）</li>
           <li>不正利用の検知および防止</li>
@@ -136,9 +137,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>Firebase Authentication / Firestore / Cloud Storage / Cloud Messaging / Analytics / Crashlytics</td>
+              <td>Google Sign-In / Firebase Authentication / Firestore / Cloud Storage / Cloud Messaging / Analytics / Crashlytics</td>
               <td>Google LLC</td>
-              <td>認証、データ保存、店舗からのチェキ送付（画像保管）、通知配信、利用解析、不具合検知</td>
+              <td>Google アカウント連携、認証、データ保存、店舗からのチェキ送付（画像保管）、通知配信、利用解析、不具合検知</td>
             </tr>
             <tr>
               <td>PlayFab</td>
@@ -156,7 +157,7 @@
 
       <section>
         <h2>5. Cookie および同等の技術</h2>
-        <p>本アプリは Web ブラウザを介した Cookie の発行は行いませんが、上記第 4 項の外部サービスは、ユーザーの端末上に識別子（広告識別子を含みます）を保存・参照する場合があります。ユーザーは、iOS / Android の各端末設定により、広告識別子のリセットおよびトラッキング許可の制御が可能です。</p>
+        <p>本アプリは Web ブラウザを介した Cookie の発行を行いません。上記第 4 項の外部サービスは、認証、通知配信、利用解析および不具合検知のため、アプリインスタンス識別子やデバイストークン等を保存・参照する場合があります。本アプリは広告識別子（IDFA / AAID）を取得せず、他社のアプリやウェブサイトを横断したトラッキングを行いません。</p>
       </section>
 
       <section>
@@ -188,7 +189,7 @@
 
         <h3>10.1 Firebase Authentication / Firestore / Cloud Storage / Cloud Messaging（Google LLC）</h3>
         <ul>
-          <li><strong>送信される情報</strong>: 匿名 UID、認証トークン、アプリ内データ（ポイント残高、チェックイン履歴、所持アバター）、アプリ内課金の購入記録（商品種別、支払金額、購入日時、購入時点でアイコンに設定していたキャスト）、デバイストークン、店舗から送付されたチェキの画像および付随情報（送信元キャスト、店舗、撮影日、メモ）</li>
+          <li><strong>送信される情報</strong>: UID、認証トークン、認証プロバイダのユーザー識別子、Google アカウント連携時の氏名およびメールアドレス、アプリ内データ（ポイント残高、チェックイン履歴、所持アバター）、アプリ内課金の購入記録（商品種別、支払金額、購入日時、購入時点でアイコンに設定していたキャスト）、デバイストークン、店舗から送付されたチェキの画像および付随情報（送信元キャスト、店舗、撮影日、メモ）</li>
           <li><strong>送信目的</strong>: ユーザー認証、データの永続化、店舗からのチェキ送付、プッシュ通知配信</li>
           <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
           <li><strong>設定変更方法</strong>: アプリ内のアカウント削除機能、または端末の通知設定からプッシュ通知をオフにできます</li>
@@ -197,22 +198,17 @@
 
         <h3>10.2 Firebase Analytics（Google LLC）</h3>
         <ul>
-          <li><strong>送信される情報</strong>: アプリ内イベント（画面表示、ボタン押下、チェックイン回数、ガチャ実行回数）、端末情報（OS バージョン、端末モデル、言語設定）、広告識別子（IDFA / AAID。ユーザーが端末設定で許可した場合のみ）</li>
+          <li><strong>送信される情報</strong>: アプリ内イベント（画面表示、ボタン押下、チェックイン回数、ガチャ実行回数）、端末情報（OS バージョン、端末モデル、言語設定）、アプリインスタンス識別子</li>
           <li><strong>送信目的</strong>: アプリの利用状況の解析、品質改善</li>
           <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
-          <li><strong>オプトアウト方法</strong>:
-            <ul>
-              <li>iOS: 設定 &gt; プライバシーとセキュリティ &gt; トラッキング から本アプリのトラッキングをオフ</li>
-              <li>Android: 設定 &gt; Google &gt; 広告 から「広告のカスタマイズをオプトアウト」を有効化</li>
-              <li>アプリ内のアカウント削除機能でも送信を停止できます</li>
-            </ul>
-          </li>
+          <li><strong>設定変更方法</strong>: アプリ内のアカウント削除機能により、以後の送信を停止できます</li>
         </ul>
 
         <h3>10.3 Firebase Crashlytics（Google LLC）</h3>
         <ul>
           <li><strong>送信される情報</strong>: アプリのクラッシュ発生時のスタックトレース、端末情報、アプリのバージョン</li>
           <li><strong>送信目的</strong>: アプリの不具合検知および修正</li>
+          <li><strong>識別情報の取扱い</strong>: UID、氏名、メールアドレス、表示名その他のユーザー識別情報をクラッシュレポートに設定または送信しません。独自に記録するエラーは、固定のイベント名、例外の型およびスタックトレースに限定します</li>
           <li><strong>プライバシーポリシー</strong>: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></li>
         </ul>
 
