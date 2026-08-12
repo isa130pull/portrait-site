@@ -660,6 +660,7 @@ footer > p {
 
 @media (max-width: 760px) {
   body { padding-bottom: 78px; }
+  .desktop-heading-break { display: none; }
   .header-inner { min-height: 62px; }
   .site-header nav,
   .header-cta { display: none; }
