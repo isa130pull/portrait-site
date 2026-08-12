@@ -22,6 +22,8 @@ Unityゲームエンジニアのポートフォリオサイト
 ```
 portrait-site/
 ├── index.html                  # トップページ
+├── apps/
+│   └── hitokoma/               # ヒトコマ マーケティングページ
 ├── app-ads.txt                 # 広告認定デジタル販売者リスト
 ├── sitemap.xml                 # サイトマップ
 ├── robots.txt                  # クローラー制御
@@ -45,11 +47,13 @@ portrait-site/
 │   └── CONTACT_SETUP.md        # フォーム設定手順
 ├── styles/
 │   ├── editorial.css           # トップページ用スタイル
-│   ├── case-study.css           # ケーススタディ用スタイル
+│   ├── case-study.css          # ケーススタディ用スタイル
+│   ├── hitokoma.css            # ヒトコマ用スタイル
 │   └── app-shell.css           # ブラウザアプリ共通スタイル
 ├── sw.js                       # トップページ用Service Worker
 ├── images/
 │   ├── profile@1x.jpg          # プロフィール写真
+│   ├── hitokoma/               # ヒトコマ用スクリーンショット・OGP
 │   ├── index/                  # トップページ用アイコン
 │   └── bingo/                  # ビンゴ用アイコン
 └── README.md
@@ -75,6 +79,12 @@ portrait-site/
 - 代表作「breaker:ブロック崩し」の企画・設計・開発内容
 - 役割、開発期間、体制、技術、成果を整理
 - 公開インタビュー、リリース記事への参照リンク
+
+### ヒトコマ（apps/hitokoma/）
+
+- 顔認識フォトスライドショー「ヒトコマ」の機能・安心設計を紹介
+- App Storeへのインストール導線とクリック計測
+- アプリ固有のOGP・SoftwareApplication構造化データ
 
 ### お問い合わせフォーム（pages/contact.html）
 

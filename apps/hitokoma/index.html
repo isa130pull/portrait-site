@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ef8264">
+  <title>ヒトコマ｜顔認識で人を選べる写真スライドショーアプリ</title>
+  <meta name="description" content="ヒトコマは、子どもや家族など写真に写る人を顔認識で選び、思い出を自動再生できる無料のiPhone・iPad用フォトスライドショーアプリです。写真と顔データは端末内で処理します。">
+  <meta name="author" content="かわぐち (isa130pull)">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://isa130pull.github.io/portrait-site/apps/hitokoma/">
+
+  <link rel="icon" type="image/png" href="../../images/hitokoma/app-icon.png">
+  <link rel="apple-touch-icon" href="../../images/hitokoma/app-icon.png">
+  <link rel="preload" href="../../images/hitokoma/01-playback.png" as="image">
+  <link rel="stylesheet" href="../../styles/hitokoma.css?v=20260812">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ヒトコマ｜顔で選んで、思い出を流す。">
+  <meta property="og:description" content="子どもや家族など、写真に写る人を選んで流せる顔認識フォトスライドショー。写真も顔データも端末内で処理します。">
+  <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/hitokoma/ogp-hitokoma.png?v=20260812">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ヒトコマ 顔で選んで、思い出を流す。">
+  <meta property="og:url" content="https://isa130pull.github.io/portrait-site/apps/hitokoma/">
+  <meta property="og:site_name" content="ヒトコマ">
+  <meta property="og:locale" content="ja_JP">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@isa130pull">
+  <meta name="twitter:title" content="ヒトコマ｜顔で選んで、思い出を流す。">
+  <meta name="twitter:description" content="写真に写る人を選んで流せる、顔認識フォトスライドショーアプリ。">
+  <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/hitokoma/ogp-hitokoma.png?v=20260812">
+  <meta name="twitter:image:alt" content="ヒトコマ 顔で選んで、思い出を流す。">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://isa130pull.github.io/portrait-site/apps/hitokoma/#app",
+    "name": "ヒトコマ 顔認識フォトスライドショー",
+    "alternateName": "Hitokoma",
+    "url": "https://isa130pull.github.io/portrait-site/apps/hitokoma/",
+    "downloadUrl": "https://apps.apple.com/jp/app/id6780748272",
+    "image": "https://isa130pull.github.io/portrait-site/images/hitokoma/app-icon.png",
+    "screenshot": [
+      "https://isa130pull.github.io/portrait-site/images/hitokoma/01-playback.png",
+      "https://isa130pull.github.io/portrait-site/images/hitokoma/02-people.png",
+      "https://isa130pull.github.io/portrait-site/images/hitokoma/03-filters.png",
+      "https://isa130pull.github.io/portrait-site/images/hitokoma/04-privacy.png"
+    ],
+    "applicationCategory": "MultimediaApplication",
+    "applicationSubCategory": "写真／ビデオ",
+    "operatingSystem": "iOS 18.0以降、iPadOS 18.0以降",
+    "inLanguage": ["ja", "en"],
+    "description": "写真に写る人をオンデバイスの顔認識で選び、人物ごとの思い出を自動再生できるフォトスライドショーアプリ。",
+    "featureList": [
+      "顔認識による人物ごとの写真分類",
+      "人物・アルバム・場所・期間・お気に入りによる絞り込み",
+      "顔を中心にしたKen Burnsズーム",
+      "写真と顔データのオンデバイス処理",
+      "ショートカットとCarPlay接続を使った自動再生"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY",
+      "availability": "https://schema.org/InStock"
+    },
+    "author": {
+      "@type": "Person",
+      "@id": "https://isa130pull.github.io/portrait-site/#person",
+      "name": "かわぐち (isa130pull)"
+    }
+  }
+  </script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CF20TVK6DP');
+
+    (function(){
+      function loadGtag(){
+        var script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
+        script.async = true;
+        document.head.appendChild(script);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag);
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">本文へ移動</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="ヒトコマ ページ先頭へ">
+        <img src="../../images/hitokoma/app-icon.png" alt="" width="48" height="48">
+        <span>ヒトコマ</span>
+      </a>
+      <nav aria-label="ページ内ナビゲーション">
+        <a href="#features">特徴</a>
+        <a href="#privacy">安心設計</a>
+        <a href="#faq">よくある質問</a>
+      </nav>
+      <a class="header-cta" href="https://apps.apple.com/jp/app/id6780748272" target="_blank" rel="noopener" data-store-cta="header" aria-label="App Storeでヒトコマを無料ダウンロード（新しいタブ）">無料で始める</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">顔認識フォトスライドショー</p>
+        <h1 id="hero-title">大切な人の写真だけ、<br><span>すぐそばに。</span></h1>
+        <p class="hero-lead">ヒトコマは、写真に写る「人」を選んで流せるフォトフレームアプリ。子どもだけ、家族みんなだけ。増え続ける思い出を、探す時間なしでゆっくり眺められます。</p>
+        <div class="hero-actions">
+          <a class="store-cta" href="https://apps.apple.com/jp/app/id6780748272" target="_blank" rel="noopener" data-store-cta="hero" aria-label="App Storeでヒトコマを無料ダウンロード（新しいタブ）">
+            <span class="store-cta-label">App Storeで</span>
+            <strong>無料ダウンロード</strong>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <p>iPhone・iPad対応<br>iOS / iPadOS 18.0以降</p>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="ヒトコマの再生画面">
+        <div class="hero-orbit" aria-hidden="true"></div>
+        <img class="hero-screen" src="../../images/hitokoma/01-playback.png" alt="人物の顔を中心に写真を再生するヒトコマの画面" width="832" height="1800" fetchpriority="high">
+        <img class="hero-icon" src="../../images/hitokoma/app-icon.png" alt="ヒトコマのアプリアイコン" width="1024" height="1024">
+      </div>
+    </section>
+
+    <ul class="trust-strip" aria-label="ヒトコマの概要">
+      <li><strong>無料</strong><span>今すぐ試せる</span></li>
+      <li><strong>端末内</strong><span>写真と顔データを処理</span></li>
+      <li><strong>操作はシンプル</strong><span>選んで、置いて、眺める</span></li>
+    </ul>
+
+    <section class="problem-section section-shell" aria-labelledby="problem-title">
+      <div class="section-kicker">WHY HITOKOMA</div>
+      <div class="problem-grid">
+        <h2 id="problem-title">写真は増えたのに、<br>見返す時間は<br>減っていませんか。</h2>
+        <div class="problem-copy">
+          <p>カメラロールを何度もスクロールして、見たい人の写真を探す。アルバムを作る前に、また新しい写真が増えていく。</p>
+          <p class="large-copy">ヒトコマなら、写真に写る人を自動で見分けて整理。今日見たい人を選ぶだけで、思い出が自然に流れ始めます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-section section-shell" id="features" aria-labelledby="features-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">FEATURES</p>
+          <h2 id="features-title">思い出を見るための、<br>3つの仕組み。</h2>
+        </div>
+        <p>写真整理を目的にせず、見返す体験を心地よくするために。顔認識から再生演出までをひとつにつなげました。</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-number">01</span>
+          <h3>人で選ぶ</h3>
+          <p>写真に写る顔を端末内で見分け、人物ごとに整理。「この子だけ」「家族全員」など、見たい人を選べます。</p>
+        </article>
+        <article class="feature-card featured">
+          <span class="feature-number">02</span>
+          <h3>思い出を絞る</h3>
+          <p>人物に加えて、アルバム、撮影期間、場所、お気に入りを組み合わせ、今日流したい写真だけに絞り込めます。</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-number">03</span>
+          <h3>心地よく流す</h3>
+          <p>顔の位置を中心にゆっくり寄るズームと穏やかな切り替え。撮影日や場所、人物名も写真の上に表示できます。</p>
+        </article>
+      </div>
+
+      <div class="screenshots" aria-label="ヒトコマの画面紹介">
+        <figure>
+          <img src="../../images/hitokoma/01-playback.png" alt="顔を中心に写真を再生するスライドショー画面" width="832" height="1800" loading="lazy">
+          <figcaption><span>01</span> 顔を中心に、ゆっくり再生</figcaption>
+        </figure>
+        <figure>
+          <img src="../../images/hitokoma/02-people.png" alt="顔認識で写真を人物ごとに整理した人物画面" width="832" height="1800" loading="lazy">
+          <figcaption><span>02</span> 写真の人を自動で見分ける</figcaption>
+        </figure>
+        <figure>
+          <img src="../../images/hitokoma/03-filters.png" alt="人物、アルバム、場所、期間などを選べる再生条件画面" width="832" height="1800" loading="lazy">
+          <figcaption><span>03</span> 見たい条件だけに絞り込む</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="privacy-section" id="privacy" aria-labelledby="privacy-title">
+      <div class="privacy-copy">
+        <p class="section-kicker">PRIVATE BY DESIGN</p>
+        <h2 id="privacy-title">大切な写真を、<br>外へ出さない。</h2>
+        <p>顔の検出と人物の分類は、すべてiPhone・iPadの中で完結します。写真、顔の特徴量、登録した人物名を、開発者や外部サーバーへ送信することはありません。</p>
+        <a href="../../pages/dorapiku-privacy.html">プライバシーポリシーを確認する →</a>
+      </div>
+      <div class="privacy-diagram" aria-label="写真から再生まで端末内で処理する流れ">
+        <div><span aria-hidden="true">▧</span><strong>写真</strong></div>
+        <i aria-hidden="true">→</i>
+        <div><span aria-hidden="true">◎</span><strong>顔を検出</strong></div>
+        <i aria-hidden="true">→</i>
+        <div><span aria-hidden="true">●●</span><strong>人物を選択</strong></div>
+        <i aria-hidden="true">→</i>
+        <div><span aria-hidden="true">▶</span><strong>再生</strong></div>
+        <p>すべて端末内で処理</p>
+      </div>
+    </section>
+
+    <section class="use-section section-shell" aria-labelledby="use-title">
+      <div class="section-heading compact">
+        <div>
+          <p class="section-kicker">EVERYDAY MOMENTS</p>
+          <h2 id="use-title">暮らしの中に、<br>思い出が流れる時間を。</h2>
+        </div>
+      </div>
+      <div class="use-grid">
+        <article>
+          <span aria-hidden="true">01</span>
+          <h3>充電スタンドで</h3>
+          <p>使っていないiPhoneやiPadをフォトフレームに。再生中は画面がスリープせず、タップすると操作できます。</p>
+        </article>
+        <article>
+          <span aria-hidden="true">02</span>
+          <h3>家族と一緒に</h3>
+          <p>子どもの成長、家族旅行、遠くに住む大切な人。名前を選ぶだけで、その人との時間を振り返れます。</p>
+        </article>
+        <article>
+          <span aria-hidden="true">03</span>
+          <h3>ドライブのBGMと</h3>
+          <p>ショートカットとCarPlay接続を使った自動再生に対応。音楽を止めず、同乗者と写真を楽しめます。</p>
+          <small>運転者は走行中に画面を見たり操作したりしないでください。</small>
+        </article>
+      </div>
+    </section>
+
+    <section class="steps-section section-shell" aria-labelledby="steps-title">
+      <p class="section-kicker">GET STARTED</p>
+      <h2 id="steps-title">3ステップで、<br>すぐに再生。</h2>
+      <ol class="steps-list">
+        <li>
+          <span>1</span>
+          <div><h3>写真へのアクセスを許可</h3><p>直近の写真から人物のスキャンを始めます。処理は端末内で行われます。</p></div>
+        </li>
+        <li>
+          <span>2</span>
+          <div><h3>見たい人を選ぶ</h3><p>見つかった人物に名前を付け、必要に応じて認識結果を手動で整えられます。</p></div>
+        </li>
+        <li>
+          <span>3</span>
+          <div><h3>再生ボタンを押す</h3><p>スキャン中でも再生できます。あとは置いたまま、思い出を眺めるだけです。</p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="download-section" aria-labelledby="download-title">
+      <img src="../../images/hitokoma/app-icon.png" alt="ヒトコマのアプリアイコン" width="1024" height="1024" loading="lazy">
+      <div>
+        <p class="section-kicker">FREE DOWNLOAD</p>
+        <h2 id="download-title">眠っている写真を、<br>今日の思い出に。</h2>
+        <p>ヒトコマは無料で始められます。アカウント登録は必要ありません。</p>
+      </div>
+      <a class="store-cta dark" href="https://apps.apple.com/jp/app/id6780748272" target="_blank" rel="noopener" data-store-cta="closing" aria-label="App Storeでヒトコマを無料ダウンロード（新しいタブ）">
+        <span class="store-cta-label">App Storeで</span>
+        <strong>無料ダウンロード</strong>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <section class="faq-section section-shell" id="faq" aria-labelledby="faq-title">
+      <div class="faq-heading">
+        <p class="section-kicker">FAQ</p>
+        <h2 id="faq-title">よくある質問</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>写真や顔データは外部へ送信されますか？</summary>
+          <p>いいえ。写真、顔の特徴量、登録した人物名は端末内だけで処理・保存し、開発者や外部サーバーへは送信しません。</p>
+        </details>
+        <details>
+          <summary>無料で使えますか？</summary>
+          <p>アプリ本体は無料です。アプリ内に広告が表示され、広告を非表示にする買い切りオプションも用意しています。</p>
+        </details>
+        <details>
+          <summary>どの端末で使えますか？</summary>
+          <p>iOS 18.0以降のiPhoneと、iPadOS 18.0以降のiPadに対応しています。Android版はありません。</p>
+        </details>
+        <details>
+          <summary>顔認識が間違うことはありますか？</summary>
+          <p>人物識別の精度には限界があります。人物画面から、名前の登録、別の人物への移動、同じ人物の統合などを手動で行えます。</p>
+        </details>
+        <details>
+          <summary>最初のスキャンにはどれくらいかかりますか？</summary>
+          <p>写真の枚数や端末によって数分以上かかる場合があります。直近の写真から始め、スキャン中でもスライドショーを再生できます。</p>
+        </details>
+        <details>
+          <summary>音楽を流しながら使えますか？</summary>
+          <p>はい。ヒトコマのスライドショーは、ほかのアプリで再生している音楽を止めずに楽しめます。</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <img src="../../images/hitokoma/app-icon.png" alt="" width="44" height="44" loading="lazy">
+      <div><strong>ヒトコマ</strong><span>顔認識フォトスライドショー</span></div>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="../../pages/dorapiku-privacy.html">プライバシーポリシー</a>
+      <a href="../../pages/contact.html">お問い合わせ</a>
+      <a href="../../index.html#personal">制作アプリ一覧</a>
+      <a href="../../index.html">開発者ポートフォリオ</a>
+    </nav>
+    <p>© <span id="year"></span> かわぐち (isa130pull)</p>
+  </footer>
+
+  <aside class="mobile-download" aria-label="App Storeへの固定リンク">
+    <div><strong>ヒトコマ</strong><span>無料・iPhone / iPad</span></div>
+    <a href="https://apps.apple.com/jp/app/id6780748272" target="_blank" rel="noopener" data-store-cta="mobile_sticky" aria-label="App Storeでヒトコマを無料ダウンロード（新しいタブ）">入手する</a>
+  </aside>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.querySelectorAll('[data-store-cta]').forEach(function(link) {
+      link.addEventListener('click', function() {
+        gtag('event', 'app_store_click', {
+          app_name: 'hitokoma',
+          link_position: this.dataset.storeCta,
+          link_url: this.href,
+          transport_type: 'beacon'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
