@@ -23,7 +23,11 @@ Unityゲームエンジニアのポートフォリオサイト
 portrait-site/
 ├── index.html                  # トップページ
 ├── apps/
-│   └── hitokoma/               # ヒトコマ マーケティングページ
+│   ├── hitokoma/               # ヒトコマ マーケティングページ
+│   ├── iebaku/                 # いえばく! マーケティングページ
+│   ├── sushibaku/              # すしばく! マーケティングページ
+│   ├── ai-girl/                # AI美少女1/100 マーケティングページ
+│   └── loridama/               # ろりだま マーケティングページ
 ├── app-ads.txt                 # 広告認定デジタル販売者リスト
 ├── sitemap.xml                 # サイトマップ
 ├── robots.txt                  # クローラー制御
@@ -49,11 +53,18 @@ portrait-site/
 │   ├── editorial.css           # トップページ用スタイル
 │   ├── case-study.css          # ケーススタディ用スタイル
 │   ├── hitokoma.css            # ヒトコマ用スタイル
+│   ├── game-app.css            # カジュアルゲーム紹介ページ共通スタイル
 │   └── app-shell.css           # ブラウザアプリ共通スタイル
+├── scripts/
+│   └── app-marketing.js        # アプリ紹介ページ用ストア導線計測
 ├── sw.js                       # トップページ用Service Worker
 ├── images/
 │   ├── profile@1x.jpg          # プロフィール写真
 │   ├── hitokoma/               # ヒトコマ用スクリーンショット・OGP
+│   ├── iebaku/                 # いえばく!用アイコン・スクリーンショット
+│   ├── sushibaku/              # すしばく!用アイコン・スクリーンショット
+│   ├── ai-girl/                # AI美少女1/100用アイコン・スクリーンショット
+│   ├── loridama/               # ろりだま用アイコン・スクリーンショット
 │   ├── index/                  # トップページ用アイコン
 │   └── bingo/                  # ビンゴ用アイコン
 └── README.md
@@ -84,6 +95,13 @@ portrait-site/
 
 - 顔認識フォトスライドショー「ヒトコマ」の機能・安心設計を紹介
 - App Storeへのインストール導線とクリック計測
+- アプリ固有のOGP・SoftwareApplication構造化データ
+
+### カジュアルゲーム紹介（apps/iebaku/・sushibaku/・ai-girl/・loridama/）
+
+- いえばく!、すしばく!、AI美少女1/100、ろりだまの機能と遊び方を紹介
+- App Store・Google Playへのインストール導線とクリック計測
+- 各作品の世界観に合わせたレスポンシブデザイン
 - アプリ固有のOGP・SoftwareApplication構造化データ
 
 ### お問い合わせフォーム（pages/contact.html）
