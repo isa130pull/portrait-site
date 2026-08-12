@@ -65,6 +65,7 @@ portrait-site/
 │   ├── sushibaku/              # すしばく!用アイコン・スクリーンショット
 │   ├── ai-girl/                # AI美少女1/100用アイコン・スクリーンショット
 │   ├── loridama/               # ろりだま用アイコン・スクリーンショット
+│   ├── store-badges/           # Apple・Google公式ストアバッジ
 │   ├── index/                  # トップページ用アイコン
 │   └── bingo/                  # ビンゴ用アイコン
 └── README.md
