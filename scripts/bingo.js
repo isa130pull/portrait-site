@@ -138,6 +138,7 @@
   var offscreenCanvas = $('#off');
   var firstInputTracked = false;
   var saveTimer = null;
+  var alignmentFrame = null;
 
   function createMatrix(size, value) {
     return Array.from({ length: size }, function () {
@@ -432,6 +433,31 @@
     if (firstEnabled) firstEnabled.focus();
   }
 
+  function alignTextarea(input) {
+    var mirror = input.parentElement.querySelector('.cell-input-mirror');
+    if (!mirror || !input.clientHeight) return;
+
+    mirror.textContent = input.value || '\u200b';
+    var contentHeight = mirror.getBoundingClientRect().height;
+    var minimumPadding = state.size === 5 ? 4 : 7;
+    var centeredPadding = Math.max(minimumPadding, (input.clientHeight - contentHeight) / 2);
+    input.style.paddingTop = centeredPadding + 'px';
+    input.style.paddingBottom = centeredPadding + 'px';
+    input.scrollTop = 0;
+  }
+
+  function alignAllTextareas() {
+    boardEl.querySelectorAll('textarea').forEach(alignTextarea);
+  }
+
+  function scheduleTextareaAlignment() {
+    if (alignmentFrame !== null) window.cancelAnimationFrame(alignmentFrame);
+    alignmentFrame = window.requestAnimationFrame(function () {
+      alignmentFrame = null;
+      alignAllTextareas();
+    });
+  }
+
   function toggleMark(row, column) {
     if (isFreeCell(row, column)) return;
     var before = countCompletedLines();
@@ -518,6 +544,7 @@
               }
               saveLocal();
               updateStatus();
+              scheduleTextareaAlignment();
             });
             input.addEventListener('keydown', function (event) {
               if (event.key === 'Enter' && !composing) {
@@ -528,6 +555,11 @@
             input.addEventListener('focus', function () { cell.classList.add('focused'); });
             input.addEventListener('blur', function () { cell.classList.remove('focused'); });
             cell.appendChild(input);
+
+            var inputMirror = document.createElement('span');
+            inputMirror.className = 'cell-input-mirror';
+            inputMirror.setAttribute('aria-hidden', 'true');
+            cell.appendChild(inputMirror);
           }
 
           var mark = document.createElement('span');
@@ -555,6 +587,7 @@
     }
 
     updateStatus();
+    scheduleTextareaAlignment();
   }
 
   function setMode(mode) {
@@ -905,6 +938,7 @@
   render();
   tryLoadFromUrl();
   window.addEventListener('hashchange', tryLoadFromUrl);
+  window.addEventListener('resize', scheduleTextareaAlignment);
   window.setTimeout(focusFirstEmptyCell, 100);
   $('#y').textContent = String(new Date().getFullYear());
 })();

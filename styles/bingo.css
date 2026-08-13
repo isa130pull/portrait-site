@@ -93,11 +93,18 @@ button:disabled {
 }
 
 .app-intro .lead {
-  max-width: 720px;
+  max-width: 900px;
   margin: 18px 0 0;
   color: var(--muted);
   font-size: clamp(14px, 2vw, 17px);
+  line-break: strict;
   line-height: 1.8;
+  text-wrap: pretty;
+  word-break: normal;
+}
+
+.lead-sentence {
+  display: block;
 }
 
 .card {
@@ -350,7 +357,29 @@ button:disabled {
   line-height: 1.35;
   padding: 10px;
   text-align: center;
-  word-break: break-word;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.cell-input-mirror {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: 10px;
+  display: block;
+  visibility: hidden;
+  color: transparent;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 650;
+  line-break: strict;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+  text-align: center;
+  white-space: pre-wrap;
+  word-break: normal;
 }
 
 .grid[data-size="5"] .cell {
@@ -359,6 +388,13 @@ button:disabled {
 
 .grid[data-size="5"] .cell textarea {
   padding: 7px;
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.grid[data-size="5"] .cell-input-mirror {
+  right: 7px;
+  left: 7px;
   font-size: 11px;
   line-height: 1.25;
 }
@@ -639,12 +675,24 @@ canvas {
     font-size: 12px;
   }
 
+  .cell-input-mirror {
+    right: 5px;
+    left: 5px;
+    font-size: 12px;
+  }
+
   .grid[data-size="5"] {
     gap: 4px;
   }
 
   .grid[data-size="5"] .cell textarea {
     padding: 4px 2px;
+    font-size: 8px;
+  }
+
+  .grid[data-size="5"] .cell-input-mirror {
+    right: 2px;
+    left: 2px;
     font-size: 8px;
   }
 
