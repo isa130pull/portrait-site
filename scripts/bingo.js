@@ -132,6 +132,166 @@
     }
   };
 
+  var promotionPools = locale === 'en' ? {
+    mobile: [
+      {
+        id: 'sanin_event_map',
+        category: 'Event guide',
+        title: "Find live events in San'in",
+        description: 'Explore concerts and events across Tottori and Shimane on a map.',
+        cta: "Open San'in Event Map ↗",
+        href: 'https://sanin-map.com/',
+        external: true
+      },
+      {
+        id: 'hitokoma',
+        category: 'iPhone & iPad app',
+        title: 'Enjoy photos by choosing the people in them',
+        description: 'Hitokoma creates private, face-aware photo slideshows on your device.',
+        cta: 'See Hitokoma →',
+        href: '../apps/hitokoma/'
+      },
+      {
+        id: 'iebaku',
+        category: 'Mobile game',
+        title: 'Smash a whole house in 30 seconds',
+        description: 'Tap, upgrade your shots, and chase the rankings in House Breaker!!',
+        cta: 'See House Breaker!! →',
+        href: '../apps/iebaku/'
+      },
+      {
+        id: 'sushibaku',
+        category: 'Mobile game',
+        title: 'Launch sushi and wreck the town',
+        description: 'Unlock 36 kinds of sushi in the free action game SushiBomb.',
+        cta: 'See SushiBomb →',
+        href: '../apps/sushibaku/'
+      },
+      {
+        id: 'ai_girl',
+        category: 'Mobile game',
+        title: 'Find your favorite character in 10 choices',
+        description: 'AI Girl 1/100 matches you with one character from a cast of 100.',
+        cta: 'See AI Girl 1/100 →',
+        href: '../apps/ai-girl/'
+      },
+      {
+        id: 'loridama',
+        category: 'Mobile game',
+        title: 'Roll through the city with one-tap controls',
+        description: 'Dodge obstacles and collect items in the casual action game RollingGirlz.',
+        cta: 'See RollingGirlz →',
+        href: '../apps/loridama/'
+      }
+    ],
+    desktop: [
+      {
+        id: 'sanin_event_map',
+        category: 'Event guide',
+        title: "Find live events in San'in",
+        description: 'Explore concerts and events across Tottori and Shimane on a map.',
+        cta: "Open San'in Event Map ↗",
+        href: 'https://sanin-map.com/',
+        external: true
+      },
+      {
+        id: 'x_search',
+        category: 'Browser tool · Japanese',
+        title: 'Build advanced searches for X',
+        description: 'Combine filters and create an X search query without memorizing commands.',
+        cta: 'Open X Search Builder →',
+        href: '../../pages/x-search.html'
+      },
+      {
+        id: 'popong',
+        category: 'Browser game · Japanese',
+        title: 'Play the free PONG game POPONG',
+        description: 'Choose a difficulty and race the computer to seven points—no sign-up needed.',
+        cta: 'Play now →',
+        href: '../../pages/pong/'
+      }
+    ]
+  } : {
+    mobile: [
+      {
+        id: 'sanin_event_map',
+        category: 'イベント情報',
+        title: '山陰のライブ・イベントを探す',
+        description: '鳥取・島根のライブやイベントを地図から探せます。',
+        cta: '山陰イベントマップを見る ↗',
+        href: 'https://sanin-map.com/',
+        external: true
+      },
+      {
+        id: 'hitokoma',
+        category: 'iPhone・iPadアプリ',
+        title: '写真を「人」で選んで楽しむヒトコマ',
+        description: '顔認識を端末内で行い、大切な人の写真だけをスライドショーにできます。',
+        cta: 'ヒトコマを見る →',
+        href: '../apps/hitokoma/'
+      },
+      {
+        id: 'iebaku',
+        category: 'スマホゲーム',
+        title: '30秒で家ごと壊す「いえばく!」',
+        description: '家具や家電をタップで壊し、ショットを強化してランキングに挑戦できます。',
+        cta: 'いえばく!を見る →',
+        href: '../apps/iebaku/'
+      },
+      {
+        id: 'sushibaku',
+        category: 'スマホゲーム',
+        title: '寿司で街を壊す「すしばく!」',
+        description: '36種類の寿司を飛ばして建物を壊す、無料の爽快アクションゲームです。',
+        cta: 'すしばく!を見る →',
+        href: '../apps/sushibaku/'
+      },
+      {
+        id: 'ai_girl',
+        category: 'スマホゲーム',
+        title: '10回の二択で好みを診断「AI美少女1/100」',
+        description: '100人のキャラクターから好みのひとりを見つけ、図鑑に集められます。',
+        cta: 'AI美少女1/100を見る →',
+        href: '../apps/ai-girl/'
+      },
+      {
+        id: 'loridama',
+        category: 'スマホゲーム',
+        title: '女の子を転がす「ろりだま」',
+        description: '左右タップで障害物をよけ、アイテムを集めてゴールを目指します。',
+        cta: 'ろりだまを見る →',
+        href: '../apps/loridama/'
+      }
+    ],
+    desktop: [
+      {
+        id: 'sanin_event_map',
+        category: 'イベント情報',
+        title: '山陰のライブ・イベントを探す',
+        description: '鳥取・島根のライブやイベントを地図から探せます。',
+        cta: '山陰イベントマップを見る ↗',
+        href: 'https://sanin-map.com/',
+        external: true
+      },
+      {
+        id: 'x_search',
+        category: 'ブラウザツール',
+        title: 'Xの高度な検索をかんたんに作る',
+        description: '検索コマンドを覚えなくても、条件を組み合わせて検索URLを作成できます。',
+        cta: 'X検索ビルダーを開く →',
+        href: 'x-search.html'
+      },
+      {
+        id: 'popong',
+        category: 'ブラウザゲーム',
+        title: '無料PONGゲーム「POPONG」',
+        description: '難易度を選び、登録なしですぐにCPUとの7点先取ゲームを遊べます。',
+        cta: '今すぐ遊ぶ →',
+        href: 'pong/'
+      }
+    ]
+  };
+
   function $(selector) {
     return document.querySelector(selector);
   }
@@ -240,6 +400,70 @@
   function trackEvent(name, parameters) {
     if (typeof window.gtag !== 'function') return;
     window.gtag('event', name, parameters || {});
+  }
+
+  function getPromotionAudience() {
+    if (navigator.userAgentData && navigator.userAgentData.mobile === true) return 'mobile';
+    if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) return 'mobile';
+    if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) return 'mobile';
+    return 'desktop';
+  }
+
+  function getRandomPromotion(pool, audience) {
+    var storageKey = 'bingo.promotion.last.v1.' + locale + '.' + audience;
+    var previousId = null;
+    try {
+      previousId = window.sessionStorage.getItem(storageKey);
+    } catch (error) {
+      // Random selection remains available when browser storage is unavailable.
+    }
+
+    var candidates = pool.filter(function (promotion) {
+      return promotion.id !== previousId;
+    });
+    if (!candidates.length) candidates = pool;
+
+    var randomValue = Math.random();
+    if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+      var randomValues = new Uint32Array(1);
+      window.crypto.getRandomValues(randomValues);
+      randomValue = randomValues[0] / 4294967296;
+    }
+    var selected = candidates[Math.floor(randomValue * candidates.length)];
+
+    try {
+      window.sessionStorage.setItem(storageKey, selected.id);
+    } catch (error) {
+      // Do not block the recommendation when browser storage is unavailable.
+    }
+    return selected;
+  }
+
+  function renderRelatedPromotion() {
+    var relatedService = $('#relatedService');
+    var relatedExternal = $('#relatedExternal');
+    if (!relatedService || !relatedExternal) return;
+
+    var audience = getPromotionAudience();
+    if (relatedService.dataset.audience === audience) return;
+
+    var promotion = getRandomPromotion(promotionPools[audience], audience);
+    $('#relatedServiceCategory').textContent = promotion.category;
+    $('#related-service-title').textContent = promotion.title;
+    $('#relatedServiceDescription').textContent = promotion.description;
+    relatedExternal.textContent = promotion.cta;
+    relatedExternal.setAttribute('href', promotion.href);
+    relatedExternal.dataset.destination = promotion.id;
+    relatedService.dataset.audience = audience;
+    relatedService.dataset.promotion = promotion.id;
+
+    if (promotion.external) {
+      relatedExternal.setAttribute('target', '_blank');
+      relatedExternal.setAttribute('rel', 'noopener');
+    } else {
+      relatedExternal.removeAttribute('target');
+      relatedExternal.removeAttribute('rel');
+    }
   }
 
   function showToast(message) {
@@ -1010,10 +1234,15 @@
     });
   });
 
+  renderRelatedPromotion();
+  var relatedService = $('#relatedService');
   var relatedExternal = $('#relatedExternal');
   if (relatedExternal) {
     relatedExternal.addEventListener('click', function () {
-      trackEvent('bingo_related_service_clicked', { destination: 'sanin_event_map' });
+      trackEvent('bingo_related_service_clicked', {
+        destination: relatedExternal.dataset.destination || 'unknown',
+        audience: relatedService ? relatedService.dataset.audience : getPromotionAudience()
+      });
     });
   }
 
@@ -1022,6 +1251,7 @@
   tryLoadFromUrl();
   window.addEventListener('hashchange', tryLoadFromUrl);
   window.addEventListener('resize', scheduleTextareaAlignment);
+  window.addEventListener('resize', renderRelatedPromotion);
   window.setTimeout(focusFirstEmptyCell, 100);
   $('#y').textContent = String(new Date().getFullYear());
 })();

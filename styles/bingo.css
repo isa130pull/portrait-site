@@ -546,6 +546,19 @@ button:disabled {
   font-size: 13px;
 }
 
+.related-service__category {
+  display: inline-block;
+  margin-bottom: 7px;
+  padding: 3px 7px;
+  border: 1px solid rgba(120, 246, 207, 0.28);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+}
+
 .related-service strong {
   display: block;
   margin-bottom: 3px;
@@ -568,8 +581,7 @@ button:disabled {
 
 .app-about p,
 .app-about ol,
-.app-about ul,
-.app-about dl {
+.app-about ul {
   margin: 0 0 20px;
 }
 
@@ -580,30 +592,6 @@ button:disabled {
 
 .app-about li + li {
   margin-top: 6px;
-}
-
-.app-about a {
-  color: var(--accent);
-}
-
-.faq-list {
-  display: grid;
-  gap: 14px;
-}
-
-.faq-list > div {
-  padding: 16px 18px;
-  border-left: 2px solid var(--border-strong);
-  background: rgba(11, 23, 30, 0.48);
-}
-
-.faq-list dt {
-  color: var(--fg);
-  font-weight: 700;
-}
-
-.faq-list dd {
-  margin: 6px 0 0;
 }
 
 canvas {

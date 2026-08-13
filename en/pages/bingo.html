@@ -97,9 +97,9 @@
   <link rel="icon" type="image/png" sizes="512x512" href="../../images/bingo/web-app-manifest-512x512.png">
   <link rel="stylesheet" href="../../styles/app-shell.css?v=20260813">
   <link rel="stylesheet" href="../../styles/language-switcher.css?v=20260813">
-  <link rel="stylesheet" href="../../styles/bingo.css?v=20260813-6">
+  <link rel="stylesheet" href="../../styles/bingo.css?v=20260813-7">
   <script src="../../scripts/language-preference.js?v=20260813-4" defer></script>
-  <script src="../../scripts/bingo.js?v=20260813-7" defer></script>
+  <script src="../../scripts/bingo.js?v=20260813-8" defer></script>
 
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -211,8 +211,12 @@
       </div>
     </section>
 
-    <aside class="related-service" aria-labelledby="related-service-title">
-      <p><strong id="related-service-title">Find live events in San'in</strong>Explore concerts and events across Tottori and Shimane on a map.</p>
+    <aside id="relatedService" class="related-service" aria-labelledby="related-service-title">
+      <p>
+        <span id="relatedServiceCategory" class="related-service__category">Event guide</span>
+        <strong id="related-service-title">Find live events in San'in</strong>
+        <span id="relatedServiceDescription">Explore concerts and events across Tottori and Shimane on a map.</span>
+      </p>
       <a id="relatedExternal" href="https://sanin-map.com/" target="_blank" rel="noopener">Open San'in Event Map ↗</a>
     </aside>
 
@@ -239,23 +243,6 @@
       <h2>Saving and sharing</h2>
       <p>Your entries are saved in this browser. A share link contains the card data, so do not enter personal or private information. Recipients can open the same shared card in either the English or Japanese version.</p>
 
-      <h2>Frequently asked questions</h2>
-      <dl class="faq-list">
-        <div>
-          <dt>Do I need an account or subscription?</dt>
-          <dd>No. The bingo card maker is free and does not require registration.</dd>
-        </div>
-        <div>
-          <dt>Does it work on phones?</dt>
-          <dd>Yes. It works on phones, tablets, and desktop browsers. Supported devices can open the system share menu when saving an image.</dd>
-        </div>
-        <div>
-          <dt>Are bingo lines checked automatically?</dt>
-          <dd>Yes. In Play mode, the tool counts completed horizontal, vertical, and diagonal lines as you mark spaces.</dd>
-        </div>
-      </dl>
-
-      <p>The Japanese <a href="../../pages/idol-pv-player.html" hreflang="ja">underground idol PV player</a> lets you play music videos from participating artists continuously.</p>
     </section>
   </main>
 

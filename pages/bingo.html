@@ -97,9 +97,9 @@
   <link rel="icon" type="image/png" sizes="512x512" href="../images/bingo/web-app-manifest-512x512.png">
   <link rel="stylesheet" href="../styles/app-shell.css?v=20260813">
   <link rel="stylesheet" href="../styles/language-switcher.css?v=20260813">
-  <link rel="stylesheet" href="../styles/bingo.css?v=20260813-6">
+  <link rel="stylesheet" href="../styles/bingo.css?v=20260813-7">
   <script src="../scripts/language-preference.js?v=20260813-4" defer></script>
-  <script src="../scripts/bingo.js?v=20260813-7" defer></script>
+  <script src="../scripts/bingo.js?v=20260813-8" defer></script>
 
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -211,8 +211,12 @@
       </div>
     </section>
 
-    <aside class="related-service" aria-labelledby="related-service-title">
-      <p><strong id="related-service-title">山陰のライブ・イベントを探す</strong>鳥取・島根のライブやイベントを地図から探せます。</p>
+    <aside id="relatedService" class="related-service" aria-labelledby="related-service-title">
+      <p>
+        <span id="relatedServiceCategory" class="related-service__category">イベント情報</span>
+        <strong id="related-service-title">山陰のライブ・イベントを探す</strong>
+        <span id="relatedServiceDescription">鳥取・島根のライブやイベントを地図から探せます。</span>
+      </p>
       <a id="relatedExternal" href="https://sanin-map.com/" target="_blank" rel="noopener">山陰イベントマップを見る ↗</a>
     </aside>
 
@@ -239,23 +243,6 @@
       <h2>保存と共有について</h2>
       <p>入力内容はこのブラウザ内に保存されます。共有URLにはカードの内容が含まれるため、個人情報や公開したくない内容は入力しないでください。共有URLを開いた相手は、同じカードを日本語版・英語版のどちらでも表示できます。</p>
 
-      <h2>よくある質問</h2>
-      <dl class="faq-list">
-        <div>
-          <dt>登録や料金は必要ですか？</dt>
-          <dd>登録不要・無料で利用できます。</dd>
-        </div>
-        <div>
-          <dt>スマートフォンでも使えますか？</dt>
-          <dd>スマートフォン、タブレット、PCに対応しています。対応端末では画像保存時に共有メニューを開けます。</dd>
-        </div>
-        <div>
-          <dt>ビンゴは自動で判定されますか？</dt>
-          <dd>ビンゴモードでマスを選ぶと、縦・横・斜めの完成列数を自動で表示します。</dd>
-        </div>
-      </dl>
-
-      <p><a href="idol-pv-player.html">地下アイドルPVプレーヤー</a>では、出演者の楽曲をYouTubeで続けてチェックできます。</p>
     </section>
   </main>
 
