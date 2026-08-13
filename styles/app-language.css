@@ -15,38 +15,6 @@
   color: var(--ink, var(--cocoa, #101a28));
 }
 
-.store-badge-text {
-  display: flex;
-  min-width: 174px;
-  min-height: 52px;
-  flex-direction: column;
-  justify-content: center;
-  padding: 7px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 9px;
-  background: #050505;
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.05;
-}
-
-.store-badge-text small {
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-}
-
-.store-badge-text strong {
-  margin-top: 3px;
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.025em;
-}
-
-.store-badge-text-google {
-  min-width: 190px;
-}
-
 html[lang="en"] .heading-line {
   white-space: normal;
 }
