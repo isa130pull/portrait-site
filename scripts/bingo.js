@@ -20,6 +20,7 @@
     shuffled: 'Entries shuffled',
     inputComplete: 'All spaces are filled',
     editStatus: function (filled, total) { return filled + '/' + total + ' filled · Edit mode'; },
+    previewStatus: function (filled, total) { return 'Preview · ' + filled + '/' + total + ' filled'; },
     playStatus: function (lines, marked, total) {
       var label = lines === 1 ? 'line' : 'lines';
       return lines + ' bingo ' + label + ' · ' + marked + '/' + total + ' marked';
@@ -34,6 +35,7 @@
     imageShared: 'Image shared',
     imageSaved: 'Image saved',
     exportFailed: 'The image could not be created',
+    previewRegion: 'Finished bingo card preview',
     sample3: [
       'Opening song', 'New song', 'Solo',
       'Unit song', 'MC', 'Ballad',
@@ -64,6 +66,7 @@
     shuffled: 'シャッフルしました',
     inputComplete: 'すべて入力できました',
     editStatus: function (filled, total) { return filled + '/' + total + ' 入力済み · 編集モード'; },
+    previewStatus: function (filled, total) { return '完成イメージ · ' + filled + '/' + total + ' 入力済み'; },
     playStatus: function (lines, marked, total) {
       return 'ビンゴ ' + lines + '列 · ' + marked + '/' + total + ' マーク済み';
     },
@@ -75,6 +78,7 @@
     imageShared: '画像を共有しました',
     imageSaved: '画像を保存しました',
     exportFailed: '画像を作成できませんでした',
+    previewRegion: '完成したビンゴカードのプレビュー',
     sample3: [
       'オープニング曲', '新曲', 'ソロ曲',
       'ユニット曲', 'MC', 'バラード',
@@ -123,6 +127,8 @@
   }
 
   var boardEl = $('#board');
+  var boardFrame = $('#boardFrame');
+  var previewTitle = $('#previewTitle');
   var statusEl = $('#status');
   var titleInput = $('#title');
   var sizeSelect = $('#sizeSelect');
@@ -289,6 +295,7 @@
     fontSelect.value = state.font;
     freeCenterInput.checked = state.freeCenter;
     $('#edit').checked = true;
+    $('#preview').checked = false;
     $('#play').checked = false;
     render();
     return true;
@@ -390,6 +397,12 @@
       return;
     }
 
+    if (state.mode === 'preview') {
+      statusEl.textContent = copy.previewStatus(filled, total);
+      statusEl.classList.remove('has-bingo');
+      return;
+    }
+
     var lines = countCompletedLines();
     statusEl.textContent = copy.playStatus(lines, marked, total);
     statusEl.classList.toggle('has-bingo', lines > 0);
@@ -438,6 +451,19 @@
 
   function render() {
     var size = state.size;
+    var previewing = state.mode === 'preview';
+    var fontConfig = fontMap[state.font] || fontMap.pop;
+    boardFrame.classList.toggle('is-preview', previewing);
+    boardFrame.style.fontFamily = previewing ? fontConfig.fallback : '';
+    previewTitle.textContent = state.title || copy.defaultTitle;
+    previewTitle.setAttribute('aria-hidden', previewing ? 'false' : 'true');
+    if (previewing) {
+      boardFrame.setAttribute('role', 'img');
+      boardFrame.setAttribute('aria-label', copy.previewRegion + ': ' + previewTitle.textContent);
+    } else {
+      boardFrame.removeAttribute('role');
+      boardFrame.removeAttribute('aria-label');
+    }
     boardEl.style.setProperty('--board-size', size);
     boardEl.dataset.size = String(size);
     boardEl.innerHTML = '';
@@ -461,49 +487,57 @@
             cell.setAttribute('aria-label', copy.cellLabel(cellRow + 1, cellColumn + 1));
           }
 
-          var input = document.createElement('textarea');
-          input.value = free ? copy.free : cellValue;
-          input.maxLength = MAX_CELL_LENGTH;
-          input.rows = 1;
-          input.disabled = state.mode === 'play' || free;
-          input.setAttribute('aria-label', free ? copy.freeCellLabel : copy.cellLabel(cellRow + 1, cellColumn + 1));
-          if (state.mode === 'play') {
-            input.setAttribute('aria-hidden', 'true');
-            input.tabIndex = -1;
-          }
+          var input = null;
+          if (previewing) {
+            var previewLabel = document.createElement('span');
+            previewLabel.className = 'preview-cell-label';
+            previewLabel.textContent = free ? copy.free : cellValue;
+            cell.appendChild(previewLabel);
+          } else {
+            input = document.createElement('textarea');
+            input.value = free ? copy.free : cellValue;
+            input.maxLength = MAX_CELL_LENGTH;
+            input.rows = 1;
+            input.disabled = state.mode === 'play' || free;
+            input.setAttribute('aria-label', free ? copy.freeCellLabel : copy.cellLabel(cellRow + 1, cellColumn + 1));
+            if (state.mode === 'play') {
+              input.setAttribute('aria-hidden', 'true');
+              input.tabIndex = -1;
+            }
 
-          var composing = false;
-          input.addEventListener('compositionstart', function () { composing = true; });
-          input.addEventListener('compositionend', function () { composing = false; });
-          input.addEventListener('input', function (event) {
-            state.cells[cellRow][cellColumn] = event.target.value;
-            cell.classList.toggle('filled', event.target.value.trim() !== '');
-            if (!firstInputTracked && event.target.value.trim()) {
-              firstInputTracked = true;
-              trackEvent('bingo_first_input', { board_size: state.size });
-            }
-            saveLocal();
-            updateStatus();
-          });
-          input.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter' && !composing) {
-              event.preventDefault();
-              focusNextCell(input);
-            }
-          });
-          input.addEventListener('focus', function () { cell.classList.add('focused'); });
-          input.addEventListener('blur', function () { cell.classList.remove('focused'); });
+            var composing = false;
+            input.addEventListener('compositionstart', function () { composing = true; });
+            input.addEventListener('compositionend', function () { composing = false; });
+            input.addEventListener('input', function (event) {
+              state.cells[cellRow][cellColumn] = event.target.value;
+              cell.classList.toggle('filled', event.target.value.trim() !== '');
+              if (!firstInputTracked && event.target.value.trim()) {
+                firstInputTracked = true;
+                trackEvent('bingo_first_input', { board_size: state.size });
+              }
+              saveLocal();
+              updateStatus();
+            });
+            input.addEventListener('keydown', function (event) {
+              if (event.key === 'Enter' && !composing) {
+                event.preventDefault();
+                focusNextCell(input);
+              }
+            });
+            input.addEventListener('focus', function () { cell.classList.add('focused'); });
+            input.addEventListener('blur', function () { cell.classList.remove('focused'); });
+            cell.appendChild(input);
+          }
 
           var mark = document.createElement('span');
           mark.className = 'mark';
           mark.setAttribute('aria-hidden', 'true');
-          cell.appendChild(input);
           cell.appendChild(mark);
 
           cell.addEventListener('click', function () {
             if (state.mode === 'edit') {
               if (!free) input.focus();
-            } else {
+            } else if (state.mode === 'play') {
               toggleMark(cellRow, cellColumn);
             }
           });
@@ -528,6 +562,8 @@
     saveLocal();
     if (mode === 'edit') {
       window.setTimeout(focusFirstEmptyCell, 80);
+    } else if (mode === 'preview') {
+      trackEvent('bingo_preview_opened', { board_size: state.size, font: state.font });
     } else {
       trackEvent('bingo_play_mode', { board_size: state.size, free_center: state.freeCenter });
       var firstPlayableCell = boardEl.querySelector('.cell[role="button"]');
@@ -824,6 +860,7 @@
   }
 
   $('#edit').addEventListener('change', function () { setMode('edit'); });
+  $('#preview').addEventListener('change', function () { setMode('preview'); });
   $('#play').addEventListener('change', function () { setMode('play'); });
   $('#sampleBtn').addEventListener('click', fillSample);
   $('#shuffleBtn').addEventListener('click', shuffleCells);
@@ -833,6 +870,7 @@
 
   titleInput.addEventListener('input', function (event) {
     state.title = event.target.value || copy.defaultTitle;
+    previewTitle.textContent = state.title;
     state.id = null;
     saveLocal();
   });
@@ -841,6 +879,7 @@
   });
   fontSelect.addEventListener('change', function (event) {
     state.font = VALID_FONTS.includes(event.target.value) ? event.target.value : 'pop';
+    if (state.mode === 'preview') render();
     saveLocal();
   });
   freeCenterInput.addEventListener('change', function (event) {

@@ -100,9 +100,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&amp;family=Yusei+Magic&amp;family=Zen+Kurenaido&amp;family=Hachi+Maru+Pop&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="../../styles/app-shell.css?v=20260813">
   <link rel="stylesheet" href="../../styles/language-switcher.css?v=20260813">
-  <link rel="stylesheet" href="../../styles/bingo.css?v=20260813">
+  <link rel="stylesheet" href="../../styles/bingo.css?v=20260813-2">
   <script src="../../scripts/language-preference.js?v=20260813-4" defer></script>
-  <script src="../../scripts/bingo.js?v=20260813-3" defer></script>
+  <script src="../../scripts/bingo.js?v=20260813-4" defer></script>
 
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -193,12 +193,17 @@
           <legend class="visually-hidden">Interaction mode</legend>
           <input class="visually-hidden" type="radio" name="mode" id="edit" checked>
           <label for="edit">Edit</label>
+          <input class="visually-hidden" type="radio" name="mode" id="preview">
+          <label for="preview">Preview</label>
           <input class="visually-hidden" type="radio" name="mode" id="play">
           <label for="play">Play</label>
         </fieldset>
       </div>
 
-      <div id="board" class="grid" aria-label="Bingo card"></div>
+      <div id="boardFrame" class="board-frame">
+        <p id="previewTitle" class="preview-title" aria-hidden="true"></p>
+        <div id="board" class="grid" aria-label="Bingo card"></div>
+      </div>
 
       <div class="board-actions">
         <div class="board-action-buttons">
@@ -223,6 +228,7 @@
       <ol>
         <li>Choose a 3×3 or 5×5 card and enter songs or prediction prompts.</li>
         <li>Optionally enable the free center space, then shuffle the entries.</li>
+        <li>Use Preview to check the finished card with its title and selected font.</li>
         <li>Use “Copy share link” for friends or “Save image” for social media.</li>
         <li>Switch to Play mode during the event and mark matching spaces. Completed bingo lines are counted automatically.</li>
       </ol>

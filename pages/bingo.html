@@ -100,9 +100,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&amp;family=Yusei+Magic&amp;family=Zen+Kurenaido&amp;family=Hachi+Maru+Pop&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="../styles/app-shell.css?v=20260813">
   <link rel="stylesheet" href="../styles/language-switcher.css?v=20260813">
-  <link rel="stylesheet" href="../styles/bingo.css?v=20260813">
+  <link rel="stylesheet" href="../styles/bingo.css?v=20260813-2">
   <script src="../scripts/language-preference.js?v=20260813-4" defer></script>
-  <script src="../scripts/bingo.js?v=20260813-3" defer></script>
+  <script src="../scripts/bingo.js?v=20260813-4" defer></script>
 
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -193,12 +193,17 @@
           <legend class="visually-hidden">操作モード</legend>
           <input class="visually-hidden" type="radio" name="mode" id="edit" checked>
           <label for="edit">編集</label>
+          <input class="visually-hidden" type="radio" name="mode" id="preview">
+          <label for="preview">完成イメージ</label>
           <input class="visually-hidden" type="radio" name="mode" id="play">
           <label for="play">ビンゴ</label>
         </fieldset>
       </div>
 
-      <div id="board" class="grid" aria-label="ビンゴカード"></div>
+      <div id="boardFrame" class="board-frame">
+        <p id="previewTitle" class="preview-title" aria-hidden="true"></p>
+        <div id="board" class="grid" aria-label="ビンゴカード"></div>
+      </div>
 
       <div class="board-actions">
         <div class="board-action-buttons">
@@ -223,6 +228,7 @@
       <ol>
         <li>3×3または5×5を選び、予想する曲名や項目を入力します。</li>
         <li>必要に応じて中央FREEマスを有効にし、「シャッフル」で順番を入れ替えます。</li>
+        <li>「完成イメージ」で、タイトルや選択したフォントを含む仕上がりを確認します。</li>
         <li>友達には「共有URLをコピー」、SNSには「画像保存」でカードを共有します。</li>
         <li>当日はビンゴモードに切り替え、的中したマスを選びます。完成した列数は自動で判定されます。</li>
       </ol>
