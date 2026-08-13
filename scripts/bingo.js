@@ -464,6 +464,7 @@
       boardFrame.removeAttribute('role');
       boardFrame.removeAttribute('aria-label');
     }
+    boardFrame.dataset.size = String(size);
     boardEl.style.setProperty('--board-size', size);
     boardEl.dataset.size = String(size);
     boardEl.innerHTML = '';

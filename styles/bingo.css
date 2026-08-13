@@ -221,9 +221,17 @@ button:disabled {
 }
 
 .board-frame {
-  width: min(100%, 760px);
+  width: min(100%, 680px);
   margin-inline: auto;
   outline: 0;
+}
+
+.board-frame[data-size="3"]:not(.is-preview) {
+  width: min(100%, 560px);
+}
+
+.board-frame[data-size="5"]:not(.is-preview) {
+  width: min(100%, 680px);
 }
 
 .preview-title {
@@ -337,7 +345,7 @@ button:disabled {
   background: transparent;
   color: var(--fg);
   font-family: inherit;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 650;
   line-height: 1.35;
   padding: 10px;
@@ -351,7 +359,7 @@ button:disabled {
 
 .grid[data-size="5"] .cell textarea {
   padding: 7px;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.25;
 }
 
