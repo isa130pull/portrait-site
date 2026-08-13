@@ -37,7 +37,7 @@ portrait-site/
 │   ├── contact.html            # お問い合わせフォーム
 │   ├── privacy.html            # プライバシーポリシー
 │   ├── case-study-breaker.html # breaker ケーススタディ
-│   ├── bingo.html              # ビンゴゲーム
+│   ├── bingo.html              # セトリビンゴ（日本語版）
 │   ├── x-search.html           # X検索ツール
 │   ├── idol-pv-player.html     # 地下アイドルPVプレーヤー
 │   ├── concheki-*.html         # コンチェキ法務文書
@@ -122,8 +122,14 @@ portrait-site/
 
 ### ビンゴゲーム（pages/bingo.html）
 
-- ブラウザで遊べるビンゴゲーム
+- 3×3・5×5のビンゴカードを作成・共有できる日本語版Webツール
+- 中央FREEマス、ビンゴ成立の自動判定、画像保存、リンク共有に対応
 - 専用favicon・ホーム画面用アイコン
+
+### Setlist Bingo（en/pages/bingo.html）
+
+- セトリビンゴの英語版
+- 日本語 / English切り替え、選択言語の自動継承、共有カードを保った言語切り替えに対応
 
 ### X検索ツール（pages/x-search.html）
 
@@ -194,6 +200,8 @@ portrait-site/
 
 ## 更新履歴
 
+- 2026-08-13: セトリビンゴを多言語・多サイズ化
+  - 3×3 / 5×5、中央FREEマス、ビンゴ自動判定、英語版、関連サービス導線を追加
 - 2026-08-13: 英語版を追加
   - トップ、breakerケーススタディ、お問い合わせ、Mobile apps 5作品の特設ページを英語化
   - 日本語 / English切り替え、トップ由来の言語設定継承、hreflangを追加

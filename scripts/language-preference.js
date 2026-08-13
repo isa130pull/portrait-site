@@ -24,6 +24,11 @@
   document.querySelectorAll('[data-language-choice]').forEach(function (link) {
     link.addEventListener('click', function () {
       savePreference(this.dataset.languageChoice);
+
+      if (!window.location.hash) return;
+      var target = new URL(this.href);
+      target.hash = window.location.hash;
+      this.href = target.href;
     });
   });
 
