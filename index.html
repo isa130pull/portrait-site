@@ -52,6 +52,7 @@
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="styles/editorial.css?v=20260813">
   <link rel="stylesheet" href="styles/language-switcher.css?v=20260813">
+  <script src="scripts/language-preference.js?v=20260813-3" defer></script>
 
   <!-- JSON-LD (Person) -->
   <script type="application/ld+json">
@@ -140,7 +141,7 @@
     })();
   </script>
 </head>
-<body>
+<body data-language-source="top">
   <a class="skip-link" href="#main-content">本文へ移動</a>
   <header>
     <div class="wrap">
@@ -162,7 +163,7 @@
           <span class="language-switcher" aria-label="言語を選択">
             <span lang="ja" aria-current="page">日本語</span>
             <span class="language-separator" aria-hidden="true">/</span>
-            <a lang="en" hreflang="en" href="en/">English</a>
+            <a lang="en" hreflang="en" href="en/" data-language-choice="en">English</a>
           </span>
           <a class="btn" href="pages/contact.html">お問い合わせ</a>
         </div>

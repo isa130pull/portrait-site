@@ -10,11 +10,16 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/apps/ai-girl/">
+  <link rel="alternate" hreflang="ja" href="https://isa130pull.github.io/portrait-site/apps/ai-girl/">
+  <link rel="alternate" hreflang="en" href="https://isa130pull.github.io/portrait-site/en/apps/ai-girl/">
+  <link rel="alternate" hreflang="x-default" href="https://isa130pull.github.io/portrait-site/apps/ai-girl/">
 
   <link rel="icon" type="image/jpeg" href="../../images/ai-girl/app-icon.jpg">
   <link rel="apple-touch-icon" href="../../images/ai-girl/app-icon.jpg">
   <link rel="preload" href="../../images/ai-girl/screen-01.jpg" as="image">
   <link rel="stylesheet" href="../../styles/game-app.css?v=20260812-3">
+  <link rel="stylesheet" href="../../styles/language-switcher.css?v=20260813">
+  <link rel="stylesheet" href="../../styles/app-language.css?v=20260813">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="AI美少女1/100｜二択で見つける、運命のひとり。">
@@ -27,6 +32,7 @@
   <meta property="og:url" content="https://isa130pull.github.io/portrait-site/apps/ai-girl/">
   <meta property="og:site_name" content="AI美少女1/100">
   <meta property="og:locale" content="ja_JP">
+  <meta property="og:locale:alternate" content="en_US">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:creator" content="@isa130pull">
@@ -79,15 +85,19 @@
   }
   </script>
   <script src="../../scripts/app-marketing.js" defer></script>
+  <script src="../../scripts/language-preference.js?v=20260813-3" defer></script>
 </head>
-<body class="theme-aigirl" data-app="ai-girl">
+<body class="theme-aigirl" data-app="ai-girl" data-inherit-language="true">
   <a class="skip-link" href="#main-content">本文へ移動</a>
 
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="AI美少女1/100 ページ先頭へ"><img src="../../images/ai-girl/app-icon.jpg" alt="" width="512" height="512"><span>AI美少女1/100</span></a>
       <nav aria-label="ページ内ナビゲーション"><a href="#features">特徴</a><a href="#screens">診断画面</a><a href="#faq">よくある質問</a></nav>
-      <a class="header-cta" href="https://apps.apple.com/jp/app/id6451026485" target="_blank" rel="noopener" data-store="app-store" data-store-cta="header" aria-label="App StoreでAI美少女1/100をダウンロード（新しいタブ）">無料で診断</a>
+      <div class="header-language-actions">
+        <span class="language-switcher" aria-label="言語を選択"><span lang="ja" aria-current="page">日本語</span><span class="language-separator" aria-hidden="true">/</span><a lang="en" hreflang="en" href="../../en/apps/ai-girl/" data-language-choice="en">English</a></span>
+        <a class="header-cta" href="https://apps.apple.com/jp/app/id6451026485" target="_blank" rel="noopener" data-store="app-store" data-store-cta="header" aria-label="App StoreでAI美少女1/100をダウンロード（新しいタブ）">無料で診断</a>
+      </div>
     </div>
   </header>
 

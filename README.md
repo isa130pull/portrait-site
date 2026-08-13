@@ -22,7 +22,7 @@ Unityゲームエンジニアのポートフォリオサイト
 ```
 portrait-site/
 ├── index.html                  # トップページ
-├── en/                         # 英語版（トップ、ケーススタディ、問い合わせ）
+├── en/                         # 英語版（トップ、ケーススタディ、問い合わせ、アプリ特設ページ）
 ├── apps/
 │   ├── hitokoma/               # ヒトコマ マーケティングページ
 │   ├── iebaku/                 # いえばく! マーケティングページ
@@ -55,9 +55,12 @@ portrait-site/
 │   ├── case-study.css          # ケーススタディ用スタイル
 │   ├── hitokoma.css            # ヒトコマ用スタイル
 │   ├── game-app.css            # カジュアルゲーム紹介ページ共通スタイル
+│   ├── language-switcher.css    # 言語切り替え共通スタイル
+│   ├── app-language.css         # アプリ英語版・言語切り替え補助スタイル
 │   └── app-shell.css           # ブラウザアプリ共通スタイル
 ├── scripts/
-│   └── app-marketing.js        # アプリ紹介ページ用ストア導線計測
+│   ├── app-marketing.js        # アプリ紹介ページ用ストア導線計測
+│   └── language-preference.js  # トップ由来の言語設定をアプリページへ継承
 ├── sw.js                       # トップページ用Service Worker
 ├── images/
 │   ├── profile@1x.jpg          # プロフィール写真
@@ -144,6 +147,7 @@ portrait-site/
 - ダークテーマ: ポートフォリオ全体で統一
 - SEO最適化: 構造化データ（JSON-LD）、OGP、sitemap.xml、robots.txt
 - 日本語・英語対応: 言語別URL、手動言語切り替え、hreflang
+- 言語設定の継承: トップページで選んだ言語をアプリ特設ページへ引き継ぎ
 - YouTube動画埋め込み: 実績紹介に動画を活用
 - お問い合わせフォーム: Google Apps Script連携
 - 広告マネタイゼーション: app-ads.txt による広告認定
@@ -191,8 +195,8 @@ portrait-site/
 ## 更新履歴
 
 - 2026-08-13: 英語版を追加
-  - トップ、breakerケーススタディ、お問い合わせを英語化
-  - 日本語 / English切り替えとhreflangを追加
+  - トップ、breakerケーススタディ、お問い合わせ、Mobile apps 5作品の特設ページを英語化
+  - 日本語 / English切り替え、トップ由来の言語設定継承、hreflangを追加
 - 2026-07-25: ポートフォリオ改善
   - ヒーローCTA、対応領域、breakerケーススタディを追加
   - セクション順序とキーボード操作を改善
