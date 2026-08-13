@@ -95,14 +95,11 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../images/bingo/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="../images/bingo/web-app-manifest-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="../images/bingo/web-app-manifest-512x512.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&amp;family=Yusei+Magic&amp;family=Zen+Kurenaido&amp;family=Hachi+Maru+Pop&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="../styles/app-shell.css?v=20260813">
   <link rel="stylesheet" href="../styles/language-switcher.css?v=20260813">
-  <link rel="stylesheet" href="../styles/bingo.css?v=20260813-5">
+  <link rel="stylesheet" href="../styles/bingo.css?v=20260813-6">
   <script src="../scripts/language-preference.js?v=20260813-4" defer></script>
-  <script src="../scripts/bingo.js?v=20260813-6" defer></script>
+  <script src="../scripts/bingo.js?v=20260813-7" defer></script>
 
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -169,13 +166,12 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="fontSelect">画像保存時のフォント</label>
+          <label for="fontSelect">カードのフォント</label>
           <select id="fontSelect">
-            <option value="system">システム標準</option>
-            <option value="pop" selected>ポップ体〔油性マジック〕</option>
-            <option value="maru">丸ゴシック〔こすぎまる〕</option>
-            <option value="zen">ペン書き風〔ZEN紅道〕</option>
-            <option value="hachi">丸文字風〔はちまるポップ〕</option>
+            <option value="system">端末標準（最軽量）</option>
+            <option value="gothic">モダンゴシック（IBM Plex Sans JP）</option>
+            <option value="marker" selected>手書きマーカー（Yusei Magic）</option>
+            <option value="impact">極太インパクト（Dela Gothic One）</option>
           </select>
         </div>
       </div>

@@ -97,28 +97,38 @@
   var MAX_CELL_LENGTH = 40;
   var MAX_TITLE_LENGTH = 60;
   var STORAGE_KEY = 'bingo.saved.v1';
-  var VALID_FONTS = ['system', 'pop', 'maru', 'zen', 'hachi'];
+  var VALID_FONTS = ['system', 'gothic', 'marker', 'impact'];
+  var LEGACY_FONT_MAP = {
+    pop: 'marker',
+    maru: 'gothic',
+    zen: 'marker',
+    hachi: 'marker'
+  };
 
   var fontMap = {
     system: {
       primary: 'system-ui',
-      fallback: 'system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif'
+      fallback: 'system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif',
+      weight: 600,
+      cssFamily: null
     },
-    maru: {
-      primary: 'Kosugi Maru',
-      fallback: '"Kosugi Maru", "Hiragino Maru Gothic ProN", "Yu Gothic UI", sans-serif'
+    gothic: {
+      primary: 'IBM Plex Sans JP',
+      fallback: '"IBM Plex Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif',
+      weight: 500,
+      cssFamily: 'IBM+Plex+Sans+JP:wght@500'
     },
-    pop: {
+    marker: {
       primary: 'Yusei Magic',
-      fallback: '"Yusei Magic", "Hiragino Sans", "Yu Gothic", sans-serif'
+      fallback: '"Yusei Magic", "Hiragino Sans", "Yu Gothic", sans-serif',
+      weight: 400,
+      cssFamily: 'Yusei+Magic'
     },
-    zen: {
-      primary: 'Zen Kurenaido',
-      fallback: '"Zen Kurenaido", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif'
-    },
-    hachi: {
-      primary: 'Hachi Maru Pop',
-      fallback: '"Hachi Maru Pop", "Hiragino Maru Gothic ProN", "Yu Gothic UI", cursive'
+    impact: {
+      primary: 'Dela Gothic One',
+      fallback: '"Dela Gothic One", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif',
+      weight: 400,
+      cssFamily: 'Dela+Gothic+One'
     }
   };
 
@@ -139,6 +149,8 @@
   var firstInputTracked = false;
   var saveTimer = null;
   var alignmentFrame = null;
+  var fontLoadTimer = null;
+  var fontStylesheetPromises = {};
 
   function createMatrix(size, value) {
     return Array.from({ length: size }, function () {
@@ -153,7 +165,7 @@
       cells: createMatrix(3, ''),
       marked: createMatrix(3, false),
       title: copy.defaultTitle,
-      font: 'pop',
+      font: 'marker',
       freeCenter: false,
       version: 2,
       mode: 'edit'
@@ -161,6 +173,69 @@
   }
 
   var state = createInitialState();
+
+  function normalizeFont(value) {
+    var migrated = LEGACY_FONT_MAP[value] || value;
+    return VALID_FONTS.includes(migrated) ? migrated : 'marker';
+  }
+
+  function getFontLoadText() {
+    var values = [state.title || copy.defaultTitle];
+    state.cells.forEach(function (row) {
+      row.forEach(function (cell) {
+        if (cell.trim()) values.push(cell);
+      });
+    });
+    if (state.freeCenter) values.push(copy.free);
+    return values.join(' ');
+  }
+
+  function ensureFontStylesheet(fontConfig) {
+    if (!fontConfig.cssFamily) return Promise.resolve();
+    if (fontStylesheetPromises[fontConfig.primary]) {
+      return fontStylesheetPromises[fontConfig.primary];
+    }
+
+    fontStylesheetPromises[fontConfig.primary] = new Promise(function (resolve, reject) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=' + fontConfig.cssFamily + '&display=swap';
+      link.dataset.bingoFont = fontConfig.primary;
+      link.addEventListener('load', resolve, { once: true });
+      link.addEventListener('error', function () {
+        link.remove();
+        delete fontStylesheetPromises[fontConfig.primary];
+        reject(new Error('Font stylesheet failed to load'));
+      }, { once: true });
+      document.head.appendChild(link);
+    });
+
+    return fontStylesheetPromises[fontConfig.primary];
+  }
+
+  function loadSelectedFont(fontConfig) {
+    if (!fontConfig.cssFamily) return Promise.resolve();
+
+    var loading = ensureFontStylesheet(fontConfig).then(function () {
+      return document.fonts.load(
+        fontConfig.weight + ' 80px "' + fontConfig.primary + '"',
+        getFontLoadText()
+      );
+    });
+    var timeout = new Promise(function (resolve) {
+      window.setTimeout(resolve, 4000);
+    });
+    return Promise.race([loading, timeout]);
+  }
+
+  function scheduleSelectedFontLoad() {
+    window.clearTimeout(fontLoadTimer);
+    fontLoadTimer = window.setTimeout(function () {
+      loadSelectedFont(fontMap[state.font] || fontMap.marker).catch(function () {
+        // Keep the preview usable with its fallback font when the network is unavailable.
+      });
+    }, 180);
+  }
 
   function trackEvent(name, parameters) {
     if (typeof window.gtag !== 'function') return;
@@ -280,7 +355,7 @@
       title: typeof value.title === 'string' && value.title.trim()
         ? value.title.slice(0, MAX_TITLE_LENGTH)
         : copy.defaultTitle,
-      font: VALID_FONTS.includes(value.font) ? value.font : 'pop',
+      font: normalizeFont(value.font),
       freeCenter: value.freeCenter === true,
       version: 2,
       mode: 'edit'
@@ -478,9 +553,10 @@
   function render() {
     var size = state.size;
     var previewing = state.mode === 'preview';
-    var fontConfig = fontMap[state.font] || fontMap.pop;
+    var fontConfig = fontMap[state.font] || fontMap.marker;
     boardFrame.classList.toggle('is-preview', previewing);
     boardFrame.style.fontFamily = previewing ? fontConfig.fallback : '';
+    boardFrame.style.setProperty('--preview-font-weight', fontConfig.weight);
     previewTitle.textContent = state.title || copy.defaultTitle;
     previewTitle.setAttribute('aria-hidden', previewing ? 'false' : 'true');
     if (previewing) {
@@ -597,6 +673,9 @@
     if (mode === 'edit') {
       window.setTimeout(focusFirstEmptyCell, 80);
     } else if (mode === 'preview') {
+      loadSelectedFont(fontMap[state.font] || fontMap.marker).catch(function () {
+        // Keep the preview usable with its fallback font when the network is unavailable.
+      });
       trackEvent('bingo_preview_opened', { board_size: state.size, font: state.font });
     } else {
       trackEvent('bingo_play_mode', { board_size: state.size, free_center: state.freeCenter });
@@ -710,12 +789,9 @@
   async function exportPng() {
     trackEvent('bingo_image_exported', { board_size: state.size, completed_lines: countCompletedLines() });
 
-    var fontConfig = fontMap[state.font] || fontMap.pop;
+    var fontConfig = fontMap[state.font] || fontMap.marker;
     try {
-      await Promise.race([
-        document.fonts.load('80px "' + fontConfig.primary + '"'),
-        new Promise(function (resolve) { window.setTimeout(resolve, 2500); })
-      ]);
+      await loadSelectedFont(fontConfig);
       await new Promise(function (resolve) { window.setTimeout(resolve, 100); });
     } catch (error) {
       // Canvas falls back to the local font stack.
@@ -737,7 +813,7 @@
     context.fillStyle = '#ffffff';
     context.fillRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
     context.fillStyle = '#111111';
-    context.font = 'bold 120px ' + fontConfig.fallback;
+    context.font = fontConfig.weight + ' 120px ' + fontConfig.fallback;
     context.textAlign = 'center';
     context.textBaseline = 'middle';
     context.fillText(state.title || copy.defaultTitle, canvasSize / 2, topMargin / 2);
@@ -772,7 +848,8 @@
             cellSize,
             size === 5 ? 70 : 100,
             size === 5 ? 30 : 46,
-            fontConfig.fallback
+            fontConfig.fallback,
+            fontConfig.weight
           );
         }
         if (isEffectivelyMarked(row, column)) drawMark(context, x, y, cellSize);
@@ -840,11 +917,11 @@
     return lines;
   }
 
-  function drawWrappedText(context, text, x, y, width, height, baseSize, minimumSize, fontFamily) {
+  function drawWrappedText(context, text, x, y, width, height, baseSize, minimumSize, fontFamily, fontWeight) {
     var fontSize = baseSize;
     var lines = [];
     do {
-      context.font = fontSize + 'px ' + fontFamily;
+      context.font = fontWeight + ' ' + fontSize + 'px ' + fontFamily;
       lines = wrapLines(context, text, width * 0.88);
       if (lines.length * fontSize * 1.18 <= height * 0.88) break;
       fontSize -= 2;
@@ -905,6 +982,7 @@
   titleInput.addEventListener('input', function (event) {
     state.title = event.target.value || copy.defaultTitle;
     previewTitle.textContent = state.title;
+    if (state.mode === 'preview') scheduleSelectedFontLoad();
     state.id = null;
     saveLocal();
   });
@@ -912,8 +990,13 @@
     setBoardSize(Number(event.target.value));
   });
   fontSelect.addEventListener('change', function (event) {
-    state.font = VALID_FONTS.includes(event.target.value) ? event.target.value : 'pop';
-    if (state.mode === 'preview') render();
+    state.font = normalizeFont(event.target.value);
+    if (state.mode === 'preview') {
+      render();
+      loadSelectedFont(fontMap[state.font] || fontMap.marker).catch(function () {
+        // Keep the preview usable with its fallback font when the network is unavailable.
+      });
+    }
     saveLocal();
   });
   freeCenterInput.addEventListener('change', function (event) {

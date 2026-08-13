@@ -259,7 +259,7 @@ button:disabled {
   overflow-wrap: anywhere;
   color: #111;
   font-size: clamp(22px, 4.5vw, 38px);
-  font-weight: 700;
+  font-weight: var(--preview-font-weight, 600);
   line-height: 1.25;
   text-align: center;
 }
@@ -294,7 +294,7 @@ button:disabled {
   overflow: hidden;
   color: #111;
   font-size: clamp(13px, 2.4vw, 22px);
-  font-weight: 600;
+  font-weight: var(--preview-font-weight, 600);
   line-height: 1.25;
   overflow-wrap: anywhere;
   text-align: center;
