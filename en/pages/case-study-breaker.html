@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#071015" />
+  <title>breaker: Block-Breaking Game Case Study | Isao Kawaguchi</title>
+  <meta name="description" content="A case study of breaker, a casual mobile game that reached one million downloads, covering product planning, game design, development, retention, and monetization." />
+  <meta name="author" content="Isao Kawaguchi (isa130pull)" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://isa130pull.github.io/portrait-site/en/pages/case-study-breaker.html" />
+  <link rel="alternate" hreflang="ja" href="https://isa130pull.github.io/portrait-site/pages/case-study-breaker.html" />
+  <link rel="alternate" hreflang="en" href="https://isa130pull.github.io/portrait-site/en/pages/case-study-breaker.html" />
+  <link rel="alternate" hreflang="x-default" href="https://isa130pull.github.io/portrait-site/pages/case-study-breaker.html" />
+
+  <link rel="icon" type="image/x-icon" href="../../images/index/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../images/index/apple-touch-icon.png">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="breaker: Block-Breaking Game Case Study" />
+  <meta property="og:description" content="How a 30-second casual mobile game reached one million downloads through focused game design, progression, and monetization." />
+  <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/ogp-top.jpg?v=20260725" />
+  <meta property="og:image:alt" content="Portfolio of Unity game developer Isao Kawaguchi" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://isa130pull.github.io/portrait-site/en/pages/case-study-breaker.html" />
+  <meta property="og:site_name" content="Isao Kawaguchi (isa130pull) Portfolio" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:creator" content="@isa130pull" />
+  <meta name="twitter:title" content="breaker: Block-Breaking Game Case Study" />
+  <meta name="twitter:description" content="How a 30-second casual mobile game reached one million downloads through focused game design, progression, and monetization." />
+  <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-top.jpg?v=20260725" />
+  <meta name="twitter:image:alt" content="Portfolio of Unity game developer Isao Kawaguchi" />
+
+  <link rel="preconnect" href="https://i.ytimg.com">
+  <link rel="stylesheet" href="../../styles/case-study.css?v=20260813b">
+  <link rel="stylesheet" href="../../styles/language-switcher.css?v=20260813">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "breaker: Block-Breaking Game Case Study",
+    "description": "A case study of breaker, a casual mobile game that reached one million downloads, covering product planning, game design, development, retention, and monetization.",
+    "url": "https://isa130pull.github.io/portrait-site/en/pages/case-study-breaker.html",
+    "inLanguage": "en",
+    "image": "https://isa130pull.github.io/portrait-site/images/ogp-top.jpg",
+    "author": {
+      "@type": "Person",
+      "@id": "https://isa130pull.github.io/portrait-site/#person",
+      "name": "Isao Kawaguchi (isa130pull)"
+    },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "breaker",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "iOS, Android"
+    }
+  }
+  </script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CF20TVK6DP');
+    (function(){
+      function loadGtag(){
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag);
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-wrap">
+      <a class="brand" href="../index.html" aria-label="Back to Isao Kawaguchi's portfolio">
+        <span class="brand-mark" aria-hidden="true">IK</span>
+        <span>Isao Kawaguchi <small>/ isa130pull</small></span>
+      </a>
+      <div class="header-actions">
+        <span class="language-switcher" aria-label="Choose language">
+          <a lang="ja" hreflang="ja" href="../../pages/case-study-breaker.html">日本語</a>
+          <span class="language-separator" aria-hidden="true">/</span>
+          <span lang="en" aria-current="page">English</span>
+        </span>
+        <a class="header-contact" href="contact.html">Discuss a project</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <article>
+      <header class="case-hero">
+        <div class="case-hero-copy">
+          <p class="eyebrow">CASE STUDY / MOBILE GAME</p>
+          <h1>breaker:<br>Block Breaking</h1>
+          <p class="lead">A casual mobile game built around a 30-second session, with progression and discovery designed into every run. I led its planning and development as both engineer and producer.</p>
+          <div class="case-actions">
+            <a class="primary-action" href="https://apps.apple.com/jp/app/id997366267" target="_blank" rel="noopener">View on the App Store ↗</a>
+            <a class="secondary-action" href="../index.html#works">Back to selected work</a>
+          </div>
+        </div>
+
+        <a class="case-visual" href="https://www.youtube.com/watch?v=qQq5J-pr2Tc" target="_blank" rel="noopener" aria-label="Watch the breaker gameplay video on YouTube (opens in a new tab)">
+          <img src="https://i.ytimg.com/vi/qQq5J-pr2Tc/hqdefault.jpg" alt="Gameplay from the mobile game breaker" width="480" height="360" fetchpriority="high">
+          <span class="play-mark" aria-hidden="true">▶</span>
+          <span class="visual-label">PLAY MOVIE ↗</span>
+        </a>
+      </header>
+
+      <dl class="fact-grid" aria-label="Project overview">
+        <div>
+          <dt>Result</dt>
+          <dd>1M downloads</dd>
+        </div>
+        <div>
+          <dt>Role</dt>
+          <dd>Engineer /<br>Producer</dd>
+        </div>
+        <div>
+          <dt>Development</dt>
+          <dd>3–4 months</dd>
+        </div>
+        <div>
+          <dt>Team</dt>
+          <dd>2 people</dd>
+        </div>
+        <div>
+          <dt>Technology</dt>
+          <dd>Cocos2d-x</dd>
+        </div>
+      </dl>
+
+      <section class="case-section overview" aria-labelledby="overview-title">
+        <div class="section-label">
+          <span>01</span>
+          <h2 id="overview-title">Project overview</h2>
+        </div>
+        <div class="section-copy">
+          <p class="large-copy">I reimagined the familiar block-breaking format as a mobile game where players can feel meaningful progress even in a short session.</p>
+          <p>Players break blocks for 30 seconds, spend the coins they earn to upgrade the paddle and ball, and advance into new worlds with larger targets. I built a prototype at the earliest planning stage, validated the core experience, and used those findings to guide production.</p>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="responsibility-title">
+        <div class="section-label">
+          <span>02</span>
+          <h2 id="responsibility-title">My responsibilities</h2>
+        </div>
+        <div class="responsibility-grid">
+          <article>
+            <h3>Concept and prototype</h3>
+            <p>Turned the idea into a playable prototype quickly and tested the expanding-world experience that set it apart from traditional block-breaking games.</p>
+          </article>
+          <article>
+            <h3>Game design and development</h3>
+            <p>Replaced an item-based progression system with gradual level upgrades, then designed boss blocks and a post-completion gameplay loop.</p>
+          </article>
+          <article>
+            <h3>Game balance</h3>
+            <p>Focused especially on the opening minutes, repeatedly playtesting and tuning difficulty and progression speed.</p>
+          </article>
+          <article>
+            <h3>Monetization experience</h3>
+            <p>Integrated in-app purchases and advertising into the experience, presenting rewarded video as an optional gift rather than a forced interruption.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="design-title">
+        <div class="section-label">
+          <span>03</span>
+          <h2 id="design-title">Design priorities</h2>
+        </div>
+        <div class="design-points">
+          <article>
+            <strong>30 SEC.</strong>
+            <h3>Easy to understand, quick to replay</h3>
+            <p>A clear 30-second rule lowers the barrier to entry, while upgrades and new block types give players a reason to continue.</p>
+          </article>
+          <article>
+            <strong>GROWTH</strong>
+            <h3>Turn earlier struggles into visible progress</h3>
+            <p>Boss blocks return later and become easier to break, communicating growth through play rather than through numbers alone.</p>
+          </article>
+          <article>
+            <strong>ENDLESS</strong>
+            <h3>Keep the world expanding</h3>
+            <p>After the first completion, backgrounds loop while upgrades and high-score challenges continue, supporting longer-term play.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section results" aria-labelledby="results-title">
+        <div class="section-label">
+          <span>04</span>
+          <h2 id="results-title">Results</h2>
+        </div>
+        <div class="result-copy">
+          <p class="result-number">1,000,000<span>DOWNLOADS</span></p>
+          <p>The game reached one million downloads. In an interview published in 2015, its approximate next-day retention was reported at 70%, with seven-day retention at roughly 25%. The interview also covered its revenue design across in-app purchases, rewarded video, and display advertising.</p>
+          <p class="note">The retention and revenue figures are historical estimates reported in the September 2015 interview.</p>
+        </div>
+      </section>
+
+      <section class="references" aria-labelledby="references-title">
+        <p class="eyebrow">REFERENCES</p>
+        <h2 id="references-title">External coverage</h2>
+        <div class="reference-links">
+          <a href="https://appmarketinglabo.net/breaker/" target="_blank" rel="noopener">
+            <span>Interview about planning, development, and monetization (Japanese)</span>
+            <strong>App Marketing Labo ↗</strong>
+          </a>
+          <a href="https://gamebiz.jp/news/146448" target="_blank" rel="noopener">
+            <span>iOS launch coverage (Japanese)</span>
+            <strong>GameBiz ↗</strong>
+          </a>
+        </div>
+      </section>
+
+      <aside class="contact-panel" aria-labelledby="contact-panel-title">
+        <p class="eyebrow">CONTACT</p>
+        <h2 id="contact-panel-title">Discuss a game or app project</h2>
+        <p>I can help from early product planning and prototyping through implementation and post-launch improvements.</p>
+        <a href="contact.html">Open the contact form →</a>
+      </aside>
+    </article>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Isao Kawaguchi (isa130pull)</p>
+    <a href="../index.html">Back to portfolio</a>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

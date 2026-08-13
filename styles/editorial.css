@@ -164,6 +164,10 @@ nav {
   gap: clamp(18px, 2vw, 34px);
 }
 
+.navlinks .language-switcher {
+  flex: 0 0 auto;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -1391,6 +1395,12 @@ footer a {
     border-bottom: 1px solid var(--line);
   }
 
+  .navlinks .language-switcher {
+    min-height: 46px;
+    justify-content: flex-start;
+    border-bottom: 1px solid var(--line);
+  }
+
   .navlinks .btn:last-child {
     border-bottom: 0;
   }
@@ -1480,6 +1490,10 @@ footer a {
     font-size: clamp(25px, 8vw, 44px);
     line-height: 1.1;
     white-space: nowrap;
+  }
+
+  html[lang="en"] .hero h1 {
+    white-space: normal;
   }
 
   .hero h1::before {

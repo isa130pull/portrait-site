@@ -135,6 +135,12 @@ a {
   font-weight: 450;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .header-contact {
   display: inline-flex;
   min-height: 44px;
@@ -607,6 +613,14 @@ footer a {
     font-size: 11px;
   }
 
+  .header-actions {
+    gap: 9px;
+  }
+
+  .header-actions .language-switcher {
+    padding-inline: 9px;
+  }
+
   .case-hero {
     min-height: 0;
     gap: 42px;
@@ -703,6 +717,12 @@ footer a {
   footer a {
     display: inline-block;
     margin-top: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .header-contact {
+    display: none;
   }
 }
 
