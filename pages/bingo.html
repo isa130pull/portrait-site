@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#071015">
-  <title>セトリビンゴ｜無料の3×3・5×5ビンゴカード作成ツール</title>
-  <meta name="description" content="ライブのセットリスト予想やイベントに使える無料のビンゴカード作成ツール。登録不要で3×3・5×5、中央FREEマス、ビンゴ自動判定、画像保存、URL共有に対応。">
+  <title>セトリビンゴ｜無料テンプレート・印刷対応のビンゴカード作成</title>
+  <meta name="description" content="セトリ予想、配信、パーティー、学習に使える無料ビンゴカード作成ツール。3×3・5×5のテンプレート、複数カード生成、印刷・PDF保存、画像・URL共有に登録不要で対応。">
   <meta name="author" content="かわぐち (isa130pull)">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="robots" content="index,follow,max-image-preview:large">
@@ -16,8 +16,8 @@
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://isa130pull.github.io/portrait-site/pages/bingo.html">
-  <meta property="og:title" content="セトリビンゴ｜無料ビンゴカード作成・共有ツール">
-  <meta property="og:description" content="3×3・5×5のビンゴカードを登録不要で作成。中央FREEマス、ビンゴ自動判定、画像保存、URL共有に対応。">
+  <meta property="og:title" content="セトリビンゴ｜テンプレート・印刷対応の無料ビンゴカード作成">
+  <meta property="og:description" content="3×3・5×5の用途別テンプレート、複数カード生成、印刷・PDF保存、画像・URL共有に登録不要で対応。">
   <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/ogp-bingo.jpg?v=20260813">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:alt" content="セトリビンゴ 3×3のビンゴカード作成・共有ツール">
@@ -29,8 +29,8 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@isa130pull">
-  <meta name="twitter:title" content="セトリビンゴ｜無料ビンゴカード作成・共有ツール">
-  <meta name="twitter:description" content="3×3・5×5、中央FREEマス、ビンゴ自動判定、画像保存、URL共有に対応。">
+  <meta name="twitter:title" content="セトリビンゴ｜テンプレート・印刷対応の無料ビンゴカード作成">
+  <meta name="twitter:description" content="用途別テンプレートから3×3・5×5のカードを作成。複数カードの印刷・PDF保存、画像・URL共有に対応。">
   <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-bingo.jpg?v=20260813">
   <meta name="twitter:image:alt" content="セトリビンゴ 3×3のビンゴカード作成・共有ツール">
 
@@ -44,7 +44,7 @@
         "name": "セトリビンゴ",
         "alternateName": "Setlist Bingo",
         "url": "https://isa130pull.github.io/portrait-site/pages/bingo.html",
-        "description": "ライブのセットリスト予想やイベント向けの3×3・5×5ビンゴカードを無料で作成・共有できるWebアプリ。",
+        "description": "セトリ予想、配信、パーティー、学習向けの3×3・5×5ビンゴカードを、テンプレートから無料で作成・印刷・共有できるWebアプリ。",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "All",
         "browserRequirements": "JavaScriptを有効にした最新のWebブラウザ",
@@ -53,6 +53,9 @@
         "featureList": [
           "3×3・5×5ビンゴカード作成",
           "中央FREEマス",
+          "4種類の用途別テンプレート",
+          "複数のシャッフル済みカード生成",
+          "A4印刷・PDF保存",
           "ビンゴ成立の自動判定",
           "PNG画像保存",
           "URL共有"
@@ -97,9 +100,9 @@
   <link rel="icon" type="image/png" sizes="512x512" href="../images/bingo/web-app-manifest-512x512.png">
   <link rel="stylesheet" href="../styles/app-shell.css?v=20260813">
   <link rel="stylesheet" href="../styles/language-switcher.css?v=20260813">
-  <link rel="stylesheet" href="../styles/bingo.css?v=20260814-1">
+  <link rel="stylesheet" href="../styles/bingo.css?v=20260814-2">
   <script src="../scripts/language-preference.js?v=20260813-4" defer></script>
-  <script src="../scripts/bingo.js?v=20260814-1" defer></script>
+  <script src="../scripts/bingo.js?v=20260814-2" defer></script>
 
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -148,11 +151,25 @@
     <div class="app-intro">
       <p class="app-kicker">Browser app / Setlist bingo</p>
       <h1>セトリビンゴ</h1>
-      <p class="lead"><span class="lead-sentence">ライブのセットリスト予想やイベントで使える、登録不要の無料ビンゴカード作成ツールです。</span><span class="lead-sentence">3×3・5×5のカードを作り、友達へのURL共有や画像保存ができます。</span></p>
+      <p class="lead"><span class="lead-sentence">ライブのセットリスト予想、配信、パーティー、学習に使える、登録不要の無料ビンゴカード作成ツールです。</span><span class="lead-sentence">テンプレートから3×3・5×5のカードを作り、複数カードの印刷・PDF保存、URL共有、画像保存ができます。</span></p>
     </div>
 
     <section class="card" aria-labelledby="builder-title">
       <h2 id="builder-title" class="visually-hidden">ビンゴカードを作成</h2>
+
+      <div class="template-picker">
+        <div class="form-group">
+          <label for="templateSelect">用途別テンプレート</label>
+          <select id="templateSelect">
+            <option value="setlist">セトリ予想</option>
+            <option value="watch_party">配信・ライブ視聴</option>
+            <option value="party">パーティー交流</option>
+            <option value="learning">学習・復習</option>
+          </select>
+        </div>
+        <button id="sampleBtn" type="button" class="ghost">テンプレートを反映</button>
+        <p>選んだ用途の例文をカードに入力します。反映後はすべて自由に編集できます。</p>
+      </div>
 
       <div class="control-grid">
         <div class="form-group">
@@ -179,7 +196,6 @@
 
       <div class="board-toolbar">
         <div class="board-action-buttons">
-          <button id="sampleBtn" type="button" class="ghost">サンプルを入力</button>
           <button id="shuffleBtn" type="button" class="ghost">シャッフル</button>
           <label class="free-toggle" for="freeCenter">
             <input type="checkbox" id="freeCenter">
@@ -209,6 +225,22 @@
           <button id="exportPng" type="button" class="primary">画像保存</button>
         </div>
         <p id="status" class="board-status" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="print-tools" aria-labelledby="print-tools-title">
+        <div>
+          <h3 id="print-tools-title">複数カードを印刷・PDF保存</h3>
+          <p>2枚・4枚を選ぶと、入力項目をカードごとに別の順番へシャッフルします。印刷画面で「PDFとして保存」も選べます。</p>
+        </div>
+        <div class="print-controls">
+          <label for="printCount">作成枚数</label>
+          <select id="printCount">
+            <option value="1">1枚（現在の並び）</option>
+            <option value="2">2枚（別の並び）</option>
+            <option value="4">4枚（別の並び）</option>
+          </select>
+          <button id="printCards" type="button" class="primary">印刷・PDF</button>
+        </div>
       </div>
     </section>
 
@@ -253,12 +285,21 @@
       <h2 id="about-title">セトリビンゴとは？</h2>
       <p>ライブやコンサートで演奏されそうな曲を予想し、当日に答え合わせをしながら楽しむビンゴです。曲名以外にも、演出、衣装、MC、ゲスト出演など自由な項目を入れられます。ライブ以外のイベント、配信、パーティー、学習用カードとしても利用できます。</p>
 
+      <h2>用途別ビンゴテンプレート</h2>
+      <p>入力欄の上にあるテンプレートを選ぶと、すぐに使える25項目が入ります。3×3では先頭の9項目、5×5では全25項目を利用でき、反映後の書き換えやシャッフルも自由です。</p>
+      <ul class="use-case-list">
+        <li><strong>セトリ予想：</strong>曲、MC、演出、アンコールなどライブで起こりそうな内容を予想します。</li>
+        <li><strong>配信・ライブ視聴：</strong>ゲスト、発表、衣装チェンジなどを視聴者同士で楽しめます。</li>
+        <li><strong>パーティー交流：</strong>参加者に当てはまる特徴を探すアイスブレイクに使えます。</li>
+        <li><strong>学習・復習：</strong>説明、要約、問題演習などの達成項目をゲーム感覚で進められます。</li>
+      </ul>
+
       <h2>使い方</h2>
       <ol>
         <li>3×3または5×5を選び、予想する曲名や項目を入力します。</li>
         <li>必要に応じて中央FREEマスを有効にし、「シャッフル」で順番を入れ替えます。</li>
         <li>「完成イメージ」で、タイトルや選択したフォントを含む仕上がりを確認します。</li>
-        <li>友達には「共有URLをコピー」、SNSには「画像保存」でカードを共有します。</li>
+        <li>友達には「共有URLをコピー」、SNSには「画像保存」、紙やPDFには「印刷・PDF」でカードを共有します。</li>
         <li>当日はビンゴモードに切り替え、的中したマスを選びます。完成した列数は自動で判定されます。</li>
       </ol>
 
@@ -270,7 +311,7 @@
       </ul>
 
       <h2>保存と共有について</h2>
-      <p>入力内容はこのブラウザ内に保存されます。共有URLにはカードの内容が含まれるため、個人情報や公開したくない内容は入力しないでください。共有URLを開いた相手は、同じカードを日本語版・英語版のどちらでも表示できます。</p>
+      <p>入力内容はこのブラウザ内に保存されます。共有URLにはカードの内容が含まれるため、個人情報や公開したくない内容は入力しないでください。共有URLを開いた相手は、同じカードを日本語版・英語版のどちらでも表示できます。印刷・PDF用の複数カードは端末内で生成され、入力内容がサーバーへ送信されることはありません。</p>
 
     </section>
   </main>
@@ -287,6 +328,8 @@
       </div>
     </div>
   </div>
+
+  <div id="printSheets" class="print-sheets" aria-hidden="true"></div>
 
   <canvas id="off"></canvas>
 

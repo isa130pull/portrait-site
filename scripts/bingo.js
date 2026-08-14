@@ -12,10 +12,15 @@
     resetMessage: 'This will remove every entry and mark. Continue?',
     sampleTitleDialog: 'Fill with a sample',
     sampleMessage: 'This will replace the current entries with a sample card. Continue?',
+    templateTitleDialog: 'Apply a template',
+    templateMessage: function (name) {
+      return 'This will replace the current entries with the “' + name + '” template. Continue?';
+    },
     cancel: 'Cancel',
     confirm: 'OK',
     resetDone: 'Card reset',
     sampleDone: 'Sample card added',
+    templateDone: function (name) { return '“' + name + '” template applied'; },
     nothingToShuffle: 'There are no entries to shuffle',
     shuffled: 'Entries shuffled',
     inputComplete: 'All spaces are filled',
@@ -35,6 +40,10 @@
     imageShared: 'Image shared',
     imageSaved: 'Image saved',
     exportFailed: 'The image could not be created',
+    printReady: function (count) {
+      return count === 1 ? 'Print preview opened' : count + ' shuffled cards prepared for printing';
+    },
+    printCardNumber: function (number, total) { return total > 1 ? 'Card ' + number + ' of ' + total : ''; },
     previewRegion: 'Finished bingo card preview',
     sample3: [
       'Opening song', 'New song', 'Solo',
@@ -58,10 +67,15 @@
     resetMessage: '入力内容とマークがすべて削除されます。よろしいですか？',
     sampleTitleDialog: 'サンプルを入力',
     sampleMessage: '現在の入力内容をサンプルカードに置き換えます。よろしいですか？',
+    templateTitleDialog: 'テンプレートを反映',
+    templateMessage: function (name) {
+      return '現在の入力内容を「' + name + '」テンプレートに置き換えます。よろしいですか？';
+    },
     cancel: 'キャンセル',
     confirm: 'OK',
     resetDone: 'リセットしました',
     sampleDone: 'サンプルを入力しました',
+    templateDone: function (name) { return '「' + name + '」テンプレートを反映しました'; },
     nothingToShuffle: 'シャッフルする内容がありません',
     shuffled: 'シャッフルしました',
     inputComplete: 'すべて入力できました',
@@ -78,6 +92,10 @@
     imageShared: '画像を共有しました',
     imageSaved: '画像を保存しました',
     exportFailed: '画像を作成できませんでした',
+    printReady: function (count) {
+      return count === 1 ? '印刷プレビューを開きました' : count + '種類のカードを印刷用に作成しました';
+    },
+    printCardNumber: function (number, total) { return total > 1 ? total + '枚中 ' + number + '枚目' : ''; },
     previewRegion: '完成したビンゴカードのプレビュー',
     sample3: [
       'オープニング曲', '新曲', 'ソロ曲',
@@ -91,6 +109,86 @@
       'レア曲', 'デビュー曲', '最新シングル', 'テーマ曲', '長めのMC',
       '本編ラスト', 'アンコール', 'ダブルアンコール', '撮影タイム', '告知'
     ]
+  };
+
+  var bingoTemplates = locale === 'en' ? {
+    setlist: {
+      name: 'Setlist predictions',
+      title: 'Setlist Bingo',
+      entries: copy.sample5
+    },
+    watch_party: {
+      name: 'Watch party',
+      title: 'Watch Party Bingo',
+      entries: [
+        'Opening countdown', 'Favorite appears', 'Big announcement', 'Costume change', 'Audience reaction',
+        'Unexpected guest', 'Behind-the-scenes clip', 'Technical trouble', 'Live performance', 'Funny comment',
+        'Fan question', 'New visual', 'Everyone cheers', 'Throwback moment', 'Emotional speech',
+        'Merchandise reveal', 'Camera close-up', 'Running joke', 'Surprise challenge', 'Special effect',
+        'Encore request', 'Group photo', 'Next event tease', 'Closing message', 'Bonus scene'
+      ]
+    },
+    party: {
+      name: 'Party icebreaker',
+      title: 'Party Bingo',
+      entries: [
+        'Has a pet', 'Loves spicy food', 'Has traveled abroad', 'Can play an instrument', 'Is an early bird',
+        'Likes cooking', 'Has the same hobby', 'Wears glasses', 'Prefers tea to coffee', 'Has seen a musical',
+        'Speaks two languages', 'Has met a celebrity', 'Likes camping', 'Can whistle loudly', 'Has a hidden talent',
+        'Enjoys board games', 'Has run a marathon', 'Likes karaoke', 'Was born in summer', 'Has read 20 books this year',
+        'Can bake bread', 'Likes roller coasters', 'Has the same favorite color', 'Collects something', 'Knows a magic trick'
+      ]
+    },
+    learning: {
+      name: 'Learning review',
+      title: 'Review Bingo',
+      entries: [
+        'Explain a key term', 'Give one example', 'Solve without notes', 'Ask a question', 'Summarize the lesson',
+        'Correct a mistake', 'Teach a partner', 'Draw a diagram', 'Use a new word', 'Compare two ideas',
+        'Find supporting evidence', 'Make a prediction', 'Check your answer', 'Share a shortcut', 'Recall yesterday’s topic',
+        'Write a definition', 'Name three facts', 'Connect to real life', 'Create a quiz question', 'Spot a pattern',
+        'Use the formula', 'Read aloud', 'Complete a challenge', 'Reflect for one minute', 'Set the next goal'
+      ]
+    }
+  } : {
+    setlist: {
+      name: 'セトリ予想',
+      title: 'セトリビンゴ',
+      entries: copy.sample5
+    },
+    watch_party: {
+      name: '配信・ライブ視聴',
+      title: '配信視聴ビンゴ',
+      entries: [
+        'オープニング映像', '推しが登場', '重大発表', '衣装チェンジ', '客席の歓声',
+        'サプライズゲスト', '舞台裏映像', '機材トラブル', '生パフォーマンス', '面白いひと言',
+        '視聴者からの質問', '新ビジュアル', '全員で乾杯', '懐かしい話', '感動のスピーチ',
+        '新グッズ発表', 'カメラ目線', 'おなじみのネタ', '突然のチャレンジ', '特殊演出',
+        'アンコール', '集合写真', '次回予告', '締めのあいさつ', 'おまけ映像'
+      ]
+    },
+    party: {
+      name: 'パーティー交流',
+      title: '交流ビンゴ',
+      entries: [
+        'ペットを飼っている', '辛いものが好き', '海外旅行の経験あり', '楽器を演奏できる', '朝型である',
+        '料理が好き', '同じ趣味がある', 'メガネをかけている', 'コーヒーより紅茶派', 'ミュージカルを見たことがある',
+        '2か国語を話せる', '有名人に会ったことがある', 'キャンプが好き', '大きな口笛ができる', '意外な特技がある',
+        'ボードゲームが好き', 'マラソン経験あり', 'カラオケが好き', '夏生まれ', '今年20冊以上読んだ',
+        'パンを焼ける', '絶叫マシンが好き', '好きな色が同じ', '何かを集めている', '手品ができる'
+      ]
+    },
+    learning: {
+      name: '学習・復習',
+      title: '復習ビンゴ',
+      entries: [
+        '重要語句を説明', '具体例を1つ挙げる', 'ノートなしで解く', '質問を1つする', '授業を要約する',
+        '間違いを直す', '相手に教える', '図にまとめる', '新しい言葉を使う', '2つの考えを比べる',
+        '根拠を見つける', '結果を予想する', '答えを見直す', '解き方のコツを共有', '前回の内容を思い出す',
+        '定義を書く', '事実を3つ挙げる', '生活と結びつける', 'クイズを1問作る', '規則性を見つける',
+        '公式を使う', '声に出して読む', '応用問題に挑戦', '1分で振り返る', '次の目標を決める'
+      ]
+    }
   };
 
   var BOARD_SIZES = [3, 5];
@@ -303,7 +401,10 @@
   var titleInput = $('#title');
   var sizeSelect = $('#sizeSelect');
   var fontSelect = $('#fontSelect');
+  var templateSelect = $('#templateSelect');
   var freeCenterInput = $('#freeCenter');
+  var printCountSelect = $('#printCount');
+  var printSheets = $('#printSheets');
   var toast = $('#toast');
   var offscreenCanvas = $('#off');
   var firstInputTracked = false;
@@ -400,6 +501,27 @@
   function trackEvent(name, parameters) {
     if (typeof window.gtag !== 'function') return;
     window.gtag('event', name, parameters || {});
+  }
+
+  function randomInteger(maximum) {
+    if (maximum <= 1) return 0;
+    if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+      var randomValues = new Uint32Array(1);
+      window.crypto.getRandomValues(randomValues);
+      return Math.floor((randomValues[0] / 4294967296) * maximum);
+    }
+    return Math.floor(Math.random() * maximum);
+  }
+
+  function shuffledCopy(values) {
+    var shuffled = values.slice();
+    for (var index = shuffled.length - 1; index > 0; index -= 1) {
+      var randomIndex = randomInteger(index + 1);
+      var temporary = shuffled[index];
+      shuffled[index] = shuffled[randomIndex];
+      shuffled[randomIndex] = temporary;
+    }
+    return shuffled;
   }
 
   function getPromotionAudience() {
@@ -989,30 +1111,36 @@
     trackEvent('bingo_reset', { board_size: state.size });
   }
 
-  async function fillSample() {
+  async function applyTemplate(templateId) {
+    var template = bingoTemplates[templateId] || bingoTemplates.setlist;
     var hasContent = state.cells.some(function (row) {
       return row.some(function (cell) { return cell.trim() !== ''; });
     });
     if (hasContent) {
-      var confirmed = await showConfirm(copy.sampleTitleDialog, copy.sampleMessage);
+      var confirmed = await showConfirm(
+        copy.templateTitleDialog,
+        copy.templateMessage(template.name)
+      );
       if (!confirmed) return;
     }
 
-    var sample = state.size === 5 ? copy.sample5 : copy.sample3;
     state.cells = createMatrix(state.size, '');
-    sample.forEach(function (value, index) {
+    template.entries.slice(0, state.size * state.size).forEach(function (value, index) {
       var row = Math.floor(index / state.size);
       var column = index % state.size;
       state.cells[row][column] = value;
     });
     state.marked = createMatrix(state.size, false);
-    state.title = copy.sampleTitle;
+    state.title = template.title;
     state.id = null;
     titleInput.value = state.title;
     render();
     saveLocal();
-    showToast(copy.sampleDone);
-    trackEvent('bingo_sample_filled', { board_size: state.size });
+    showToast(copy.templateDone(template.name));
+    trackEvent('bingo_template_applied', {
+      template_id: templateId,
+      board_size: state.size
+    });
   }
 
   function shuffleCells() {
@@ -1033,12 +1161,7 @@
       return;
     }
 
-    for (var index = values.length - 1; index > 0; index -= 1) {
-      var randomIndex = Math.floor(Math.random() * (index + 1));
-      var temporary = values[index];
-      values[index] = values[randomIndex];
-      values[randomIndex] = temporary;
-    }
+    values = shuffledCopy(values);
 
     positions.forEach(function (position, index) {
       state.cells[position[0]][position[1]] = values[index];
@@ -1215,6 +1338,109 @@
     showToast(copy.imageSaved);
   }
 
+  function getPrintableValues() {
+    var values = [];
+    for (var row = 0; row < state.size; row += 1) {
+      for (var column = 0; column < state.size; column += 1) {
+        if (!isFreeCell(row, column)) values.push((state.cells[row][column] || '').trim());
+      }
+    }
+    return values;
+  }
+
+  function createPrintableMatrix(values) {
+    var matrix = createMatrix(state.size, '');
+    var valueIndex = 0;
+    for (var row = 0; row < state.size; row += 1) {
+      for (var column = 0; column < state.size; column += 1) {
+        if (isFreeCell(row, column)) continue;
+        matrix[row][column] = values[valueIndex] || '';
+        valueIndex += 1;
+      }
+    }
+    return matrix;
+  }
+
+  function createUniqueShuffle(values, signatures) {
+    var candidate = values.slice();
+    var signature = candidate.join('\u001f');
+    for (var attempt = 0; attempt < 12; attempt += 1) {
+      candidate = shuffledCopy(values);
+      signature = candidate.join('\u001f');
+      if (!signatures[signature]) break;
+    }
+    signatures[signature] = true;
+    return candidate;
+  }
+
+  function renderPrintCards(count) {
+    if (!printSheets) return;
+    printSheets.innerHTML = '';
+    var values = getPrintableValues();
+    var signatures = {};
+    var fontConfig = fontMap[state.font] || fontMap.marker;
+
+    for (var cardIndex = 0; cardIndex < count; cardIndex += 1) {
+      var cardValues = count === 1
+        ? values.slice()
+        : createUniqueShuffle(values, signatures);
+      var matrix = createPrintableMatrix(cardValues);
+      var article = document.createElement('article');
+      article.className = 'print-card';
+      article.dataset.cardSignature = cardValues.join('|');
+      article.style.fontFamily = fontConfig.fallback;
+
+      var heading = document.createElement('h1');
+      heading.textContent = state.title || copy.defaultTitle;
+      article.appendChild(heading);
+
+      var numberLabel = copy.printCardNumber(cardIndex + 1, count);
+      if (numberLabel) {
+        var cardNumber = document.createElement('p');
+        cardNumber.className = 'print-card__number';
+        cardNumber.textContent = numberLabel;
+        article.appendChild(cardNumber);
+      }
+
+      var grid = document.createElement('div');
+      grid.className = 'print-grid';
+      grid.style.setProperty('--print-board-size', state.size);
+      grid.dataset.size = String(state.size);
+
+      for (var row = 0; row < state.size; row += 1) {
+        for (var column = 0; column < state.size; column += 1) {
+          var cell = document.createElement('div');
+          var free = isFreeCell(row, column);
+          cell.className = 'print-cell' + (free ? ' free-cell' : '');
+          cell.textContent = free ? copy.free : matrix[row][column];
+          grid.appendChild(cell);
+        }
+      }
+
+      article.appendChild(grid);
+      printSheets.appendChild(article);
+    }
+  }
+
+  async function printCards() {
+    var count = printCountSelect ? Number(printCountSelect.value) : 1;
+    if (![1, 2, 4].includes(count)) count = 1;
+    renderPrintCards(count);
+    trackEvent('bingo_print_opened', {
+      board_size: state.size,
+      card_count: count,
+      shuffled_variants: count > 1
+    });
+
+    try {
+      await loadSelectedFont(fontMap[state.font] || fontMap.marker);
+    } catch (error) {
+      // Printing remains available with the configured fallback font.
+    }
+    showToast(copy.printReady(count));
+    window.setTimeout(function () { window.print(); }, 80);
+  }
+
   async function shareLink() {
     var encoded = base64Url.encode(serialize());
     var url = window.location.origin + window.location.pathname + window.location.search + '#b=' + encoded;
@@ -1242,10 +1468,13 @@
   $('#edit').addEventListener('change', function () { setMode('edit'); });
   $('#preview').addEventListener('change', function () { setMode('preview'); });
   $('#play').addEventListener('change', function () { setMode('play'); });
-  $('#sampleBtn').addEventListener('click', fillSample);
+  $('#sampleBtn').addEventListener('click', function () {
+    applyTemplate(templateSelect ? templateSelect.value : 'setlist');
+  });
   $('#shuffleBtn').addEventListener('click', shuffleCells);
   $('#resetBtn').addEventListener('click', resetBoard);
   $('#exportPng').addEventListener('click', exportPng);
+  $('#printCards').addEventListener('click', printCards);
   $('#shareLink').addEventListener('click', shareLink);
 
   titleInput.addEventListener('input', function (event) {
@@ -1298,6 +1527,9 @@
   window.addEventListener('hashchange', tryLoadFromUrl);
   window.addEventListener('resize', scheduleTextareaAlignment);
   window.addEventListener('resize', renderRelatedPromotion);
+  window.addEventListener('beforeprint', function () {
+    if (printSheets && !printSheets.children.length) renderPrintCards(1);
+  });
   window.setTimeout(focusFirstEmptyCell, 100);
   $('#y').textContent = String(new Date().getFullYear());
 })();

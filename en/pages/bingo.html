@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#071015">
-  <title>Setlist Bingo | Free 3×3 and 5×5 Bingo Card Maker</title>
-  <meta name="description" content="Create free 3×3 and 5×5 bingo cards for setlist predictions, concerts, and events. No sign-up. Add a free center, auto-check bingo lines, save an image, or share a link.">
+  <title>Setlist Bingo | Free Templates, Printable Cards and PDF</title>
+  <meta name="description" content="Free 3×3 or 5×5 bingo maker for concerts, watch parties, parties, and learning. Use templates, print shuffled cards or save PDF, export images, and share links.">
   <meta name="author" content="Isao Kawaguchi (isa130pull)">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="robots" content="index,follow,max-image-preview:large">
@@ -16,8 +16,8 @@
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://isa130pull.github.io/portrait-site/en/pages/bingo.html">
-  <meta property="og:title" content="Setlist Bingo | Free Bingo Card Maker">
-  <meta property="og:description" content="Make and share 3×3 or 5×5 bingo cards with a free center, automatic bingo checking, image export, and shareable links.">
+  <meta property="og:title" content="Setlist Bingo | Free Templates and Printable Bingo Cards">
+  <meta property="og:description" content="Make 3×3 or 5×5 cards from templates, generate multiple shuffled versions, print or save PDF, export images, and share links.">
   <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/ogp-bingo-en.jpg?v=20260813">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:alt" content="Setlist Bingo free 3×3 bingo card maker">
@@ -29,8 +29,8 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@isa130pull">
-  <meta name="twitter:title" content="Setlist Bingo | Free Bingo Card Maker">
-  <meta name="twitter:description" content="Create 3×3 or 5×5 bingo cards with a free center, automatic bingo checking, image export, and shareable links.">
+  <meta name="twitter:title" content="Setlist Bingo | Free Templates and Printable Bingo Cards">
+  <meta name="twitter:description" content="Create 3×3 or 5×5 cards from templates, print multiple shuffled versions or save PDF, export images, and share links.">
   <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-bingo-en.jpg?v=20260813">
   <meta name="twitter:image:alt" content="Setlist Bingo free 3×3 bingo card maker">
 
@@ -44,7 +44,7 @@
         "name": "Setlist Bingo",
         "alternateName": "セトリビンゴ",
         "url": "https://isa130pull.github.io/portrait-site/en/pages/bingo.html",
-        "description": "A free web app for creating and sharing 3×3 or 5×5 bingo cards for setlist predictions, concerts, and events.",
+        "description": "A free web app for creating, printing, and sharing 3×3 or 5×5 bingo cards from templates for concerts, watch parties, parties, and learning.",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "All",
         "browserRequirements": "A modern web browser with JavaScript enabled",
@@ -53,6 +53,9 @@
         "featureList": [
           "3×3 and 5×5 bingo card maker",
           "Optional free center space",
+          "Four ready-to-edit templates",
+          "Multiple shuffled card generation",
+          "A4 printing and PDF saving",
           "Automatic bingo line checking",
           "PNG image export",
           "Shareable links"
@@ -97,9 +100,9 @@
   <link rel="icon" type="image/png" sizes="512x512" href="../../images/bingo/web-app-manifest-512x512.png">
   <link rel="stylesheet" href="../../styles/app-shell.css?v=20260813">
   <link rel="stylesheet" href="../../styles/language-switcher.css?v=20260813">
-  <link rel="stylesheet" href="../../styles/bingo.css?v=20260814-1">
+  <link rel="stylesheet" href="../../styles/bingo.css?v=20260814-2">
   <script src="../../scripts/language-preference.js?v=20260813-4" defer></script>
-  <script src="../../scripts/bingo.js?v=20260814-1" defer></script>
+  <script src="../../scripts/bingo.js?v=20260814-2" defer></script>
 
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -148,11 +151,25 @@
     <div class="app-intro">
       <p class="app-kicker">Browser app / Setlist bingo</p>
       <h1>Setlist Bingo</h1>
-      <p class="lead"><span class="lead-sentence">Create free bingo cards for concert setlist predictions, watch parties, and events.</span><span class="lead-sentence">Choose a 3×3 or 5×5 card, then share it with a link or save it as an image—no sign-up required.</span></p>
+      <p class="lead"><span class="lead-sentence">Create free bingo cards for concert predictions, watch parties, parties, and learning—no sign-up required.</span><span class="lead-sentence">Start from a template, build a 3×3 or 5×5 card, then print multiple versions, save a PDF or image, or share a link.</span></p>
     </div>
 
     <section class="card" aria-labelledby="builder-title">
       <h2 id="builder-title" class="visually-hidden">Create a bingo card</h2>
+
+      <div class="template-picker">
+        <div class="form-group">
+          <label for="templateSelect">Use-case template</label>
+          <select id="templateSelect">
+            <option value="setlist">Setlist predictions</option>
+            <option value="watch_party">Watch party</option>
+            <option value="party">Party icebreaker</option>
+            <option value="learning">Learning review</option>
+          </select>
+        </div>
+        <button id="sampleBtn" type="button" class="ghost">Apply template</button>
+        <p>Fill the card with editable prompts for your chosen use case.</p>
+      </div>
 
       <div class="control-grid">
         <div class="form-group">
@@ -179,7 +196,6 @@
 
       <div class="board-toolbar">
         <div class="board-action-buttons">
-          <button id="sampleBtn" type="button" class="ghost">Fill sample</button>
           <button id="shuffleBtn" type="button" class="ghost">Shuffle</button>
           <label class="free-toggle" for="freeCenter">
             <input type="checkbox" id="freeCenter">
@@ -209,6 +225,22 @@
           <button id="exportPng" type="button" class="primary">Save image</button>
         </div>
         <p id="status" class="board-status" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="print-tools" aria-labelledby="print-tools-title">
+        <div>
+          <h3 id="print-tools-title">Print multiple cards or save a PDF</h3>
+          <p>Choose two or four cards to shuffle your entries into a different order on each card. Your print dialog can also save them as a PDF.</p>
+        </div>
+        <div class="print-controls">
+          <label for="printCount">Number of cards</label>
+          <select id="printCount">
+            <option value="1">1 (current order)</option>
+            <option value="2">2 (different orders)</option>
+            <option value="4">4 (different orders)</option>
+          </select>
+          <button id="printCards" type="button" class="primary">Print / PDF</button>
+        </div>
       </div>
     </section>
 
@@ -253,12 +285,21 @@
       <h2 id="about-title">What is setlist bingo?</h2>
       <p>Setlist bingo turns concert predictions into a game. Add songs you expect to hear, then mark them as the show unfolds. You can also use spaces for stage effects, costumes, talk segments, guest appearances, or anything else you want to predict. The same card maker works for streams, parties, classroom activities, and other events.</p>
 
+      <h2>Bingo templates for different uses</h2>
+      <p>Choose a template above the editor to fill the card with 25 ready-to-edit prompts. A 3×3 card uses the first nine prompts, while a 5×5 card uses all 25. You can rewrite or shuffle every prompt after applying it.</p>
+      <ul class="use-case-list">
+        <li><strong>Setlist predictions:</strong> Predict songs, talk segments, effects, and encores during a concert.</li>
+        <li><strong>Watch party:</strong> Look out for guests, announcements, costume changes, and memorable moments together.</li>
+        <li><strong>Party icebreaker:</strong> Find people who match each prompt and help a group start talking.</li>
+        <li><strong>Learning review:</strong> Turn explaining, summarizing, and solving exercises into achievable game prompts.</li>
+      </ul>
+
       <h2>How to play</h2>
       <ol>
         <li>Choose a 3×3 or 5×5 card and enter songs or prediction prompts.</li>
         <li>Optionally enable the free center space, then shuffle the entries.</li>
         <li>Use Preview to check the finished card with its title and selected font.</li>
-        <li>Use “Copy share link” for friends or “Save image” for social media.</li>
+        <li>Use “Copy share link” for friends, “Save image” for social media, or “Print / PDF” for paper and PDF cards.</li>
         <li>Switch to Play mode during the event and mark matching spaces. Completed bingo lines are counted automatically.</li>
       </ol>
 
@@ -270,7 +311,7 @@
       </ul>
 
       <h2>Saving and sharing</h2>
-      <p>Your entries are saved in this browser. A share link contains the card data, so do not enter personal or private information. Recipients can open the same shared card in either the English or Japanese version.</p>
+      <p>Your entries are saved in this browser. A share link contains the card data, so do not enter personal or private information. Recipients can open the same shared card in either the English or Japanese version. Multiple print and PDF cards are generated on your device, and their contents are not sent to a server.</p>
 
     </section>
   </main>
@@ -287,6 +328,8 @@
       </div>
     </div>
   </div>
+
+  <div id="printSheets" class="print-sheets" aria-hidden="true"></div>
 
   <canvas id="off"></canvas>
 
