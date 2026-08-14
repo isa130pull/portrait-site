@@ -117,10 +117,10 @@ function preloadAllAudio() {
     }
 
     var audioFiles = [
-        { name: 'hit', url: 'hit.mp3' },
-        { name: 'start', url: 'start.mp3' },
-        { name: 'scoreUp', url: 'score_up.mp3' },
-        { name: 'clear', url: 'clear.mp3' }
+        { name: 'hit', url: popongAssetUrl('hit.mp3') },
+        { name: 'start', url: popongAssetUrl('start.mp3') },
+        { name: 'scoreUp', url: popongAssetUrl('score_up.mp3') },
+        { name: 'clear', url: popongAssetUrl('clear.mp3') }
     ];
 
     var promises = audioFiles.map(function(file) {
@@ -1059,11 +1059,11 @@ function updateMuteButton() {
     if (isMute) {
         muteBtn.textContent = "🔇";
         muteBtn.classList.add("muted");
-        muteBtn.setAttribute("aria-label", "音声ミュート解除");
+        muteBtn.setAttribute("aria-label", popongText("音声ミュート解除", "Unmute audio"));
     } else {
         muteBtn.textContent = "🔊";
         muteBtn.classList.remove("muted");
-        muteBtn.setAttribute("aria-label", "音声ミュート");
+        muteBtn.setAttribute("aria-label", popongText("音声ミュート", "Mute audio"));
     }
 }
 
@@ -1265,14 +1265,14 @@ function handleSubmitScore() {
     // ボタン無効化（二重送信防止）
     if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.textContent = '送信中...';
+        submitBtn.textContent = popongText('送信中...', 'Submitting...');
     }
 
     // スコアを送信
     submitScore(validation.name, currentClearTime, currentDifficulty, function(result) {
         if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.textContent = '登録する';
+            submitBtn.textContent = popongText('登録する', 'Submit');
         }
 
         if (result.success) {
@@ -1283,7 +1283,7 @@ function handleSubmitScore() {
                 window.location.href = 'ranking.html?difficulty=' + difficultyParam;
             }, 500);
         } else {
-            errorMessage.textContent = result.message || 'スコアの送信に失敗しました';
+            errorMessage.textContent = result.message || popongText('スコアの送信に失敗しました', 'Could not submit the score');
             errorMessage.classList.add('show');
         }
     });

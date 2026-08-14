@@ -414,10 +414,16 @@ body.app-page :focus-visible {
   }
 
   .pong-page .app-site-header__inner {
+    flex-wrap: wrap;
     gap: 10px;
   }
 
   .pong-page .app-header-actions {
     gap: 8px;
+    margin-left: auto;
+  }
+
+  .pong-page .app-brand > span:last-child {
+    display: none;
   }
 }

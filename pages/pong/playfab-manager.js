@@ -15,6 +15,14 @@ var PLAYFAB_CONFIG = {
 var isPlayFabLoggedIn = false;
 var playfabPlayerId = null;
 
+function popongText(japanese, english) {
+    return document.documentElement.lang === 'en' ? english : japanese;
+}
+
+function popongAssetUrl(filename) {
+    return document.documentElement.lang === 'en' ? '../../../pages/pong/' + filename : filename;
+}
+
 // ============================================
 // UUID生成（匿名ログイン用）
 // ============================================
@@ -85,19 +93,19 @@ function loginToPlayFab(callback) {
 function validatePlayerName(name) {
     // 空文字チェック
     if (!name || name.trim().length === 0) {
-        return { valid: false, message: "名前を入力してください" };
+        return { valid: false, message: popongText("名前を入力してください", "Enter a name") };
     }
 
     // 長さチェック（PlayFabの要件：3-25文字）
     var trimmedName = name.trim();
     if (trimmedName.length < 3 || trimmedName.length > 12) {
-        return { valid: false, message: "名前は3~12文字で入力してください" };
+        return { valid: false, message: popongText("名前は3~12文字で入力してください", "Use 3–12 characters") };
     }
 
     // 使用可能文字チェック（英数字、ひらがな、カタカナ、漢字、スペース）
     var pattern = /^[a-zA-Z0-9ぁ-んァ-ヶー一-龯\s]+$/;
     if (!pattern.test(trimmedName)) {
-        return { valid: false, message: "使用できない文字が含まれています" };
+        return { valid: false, message: popongText("使用できない文字が含まれています", "The name contains unsupported characters") };
     }
 
     return { valid: true, name: trimmedName };
@@ -125,7 +133,7 @@ function updateDisplayName(playerName, callback) {
         },
         function(error) {
             console.error('Failed to update display name:', error);
-            var errorMessage = '名前の更新に失敗しました';
+            var errorMessage = popongText('名前の更新に失敗しました', 'Could not update the name');
             if (error && error.errorMessage) {
                 errorMessage = error.errorMessage;
             }
@@ -141,14 +149,14 @@ function submitScore(playerName, clearTime, difficulty, callback) {
     // ログインしていない場合はログイン
     loginToPlayFab(function(loginResult) {
         if (!loginResult.success) {
-            if (callback) callback({ success: false, message: 'ログインに失敗しました' });
+            if (callback) callback({ success: false, message: popongText('ログインに失敗しました', 'Could not sign in') });
             return;
         }
 
         // 表示名を更新
         updateDisplayName(playerName, function(nameResult) {
             if (!nameResult.success) {
-                if (callback) callback({ success: false, message: nameResult.message || '名前の更新に失敗しました' });
+                if (callback) callback({ success: false, message: nameResult.message || popongText('名前の更新に失敗しました', 'Could not update the name') });
                 return;
             }
 
@@ -176,7 +184,7 @@ function submitScore(playerName, clearTime, difficulty, callback) {
                 },
                 function(error) {
                     console.error('Failed to submit score:', error);
-                    if (callback) callback({ success: false, message: 'スコアの送信に失敗しました' });
+                    if (callback) callback({ success: false, message: popongText('スコアの送信に失敗しました', 'Could not submit the score') });
                 }
             );
         });
@@ -192,7 +200,7 @@ function getLeaderboard(difficulty, maxResults, callback) {
     // ログインしていない場合はログイン
     loginToPlayFab(function(loginResult) {
         if (!loginResult.success) {
-            if (callback) callback({ success: false, message: 'ログインに失敗しました' });
+            if (callback) callback({ success: false, message: popongText('ログインに失敗しました', 'Could not sign in') });
             return;
         }
 
@@ -219,7 +227,7 @@ function getLeaderboard(difficulty, maxResults, callback) {
             },
             function(error) {
                 console.error('Failed to get leaderboard:', error);
-                if (callback) callback({ success: false, message: 'ランキングの取得に失敗しました' });
+                if (callback) callback({ success: false, message: popongText('ランキングの取得に失敗しました', 'Could not load the leaderboard') });
             }
         );
     });
@@ -232,7 +240,7 @@ function getPlayerRank(difficulty, callback) {
     // ログインしていない場合はログイン
     loginToPlayFab(function(loginResult) {
         if (!loginResult.success) {
-            if (callback) callback({ success: false, message: 'ログインに失敗しました' });
+            if (callback) callback({ success: false, message: popongText('ログインに失敗しました', 'Could not sign in') });
             return;
         }
 
@@ -256,12 +264,12 @@ function getPlayerRank(difficulty, callback) {
                         displayName: entry.DisplayName
                     });
                 } else {
-                    if (callback) callback({ success: false, message: 'ランキングに登録されていません' });
+                    if (callback) callback({ success: false, message: popongText('ランキングに登録されていません', 'No leaderboard entry was found') });
                 }
             },
             function(error) {
                 console.error('Failed to get player rank:', error);
-                if (callback) callback({ success: false, message: '順位の取得に失敗しました' });
+                if (callback) callback({ success: false, message: popongText('順位の取得に失敗しました', 'Could not load your rank') });
             }
         );
     });

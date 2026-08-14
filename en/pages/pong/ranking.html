@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#071015" />
-  <title>クリアタイムランキング - POPONG | ブラウザPONGゲーム</title>
-  <meta name="description" content="POPONGのクリアタイムランキング。NORMAL・HARDの2難易度でクリアタイムを競おう。世界中のプレイヤーとスコアを比較できます。" />
-  <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/pong/ranking.html" />
+  <title>Clear-Time Leaderboard | POPONG Browser Pong Game</title>
+  <meta name="description" content="Compare POPONG clear times for Normal and Hard mode on the online leaderboard." />
+  <link rel="canonical" href="https://isa130pull.github.io/portrait-site/en/pages/pong/ranking.html" />
   <link rel="alternate" hreflang="ja" href="https://isa130pull.github.io/portrait-site/pages/pong/ranking.html" />
   <link rel="alternate" hreflang="en" href="https://isa130pull.github.io/portrait-site/en/pages/pong/ranking.html" />
   <link rel="alternate" hreflang="x-default" href="https://isa130pull.github.io/portrait-site/pages/pong/ranking.html" />
@@ -14,25 +14,25 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://isa130pull.github.io/portrait-site/pages/pong/ranking.html" />
-  <meta property="og:title" content="ランキング - POPONG" />
-  <meta property="og:description" content="POPONGのクリアタイムランキング。NORMAL・HARDの2難易度でクリアタイムを競おう。世界中のプレイヤーとスコアを比較できます。" />
-  <meta property="og:site_name" content="かわぐち（isa130pull）ポートフォリオ" />
+  <meta property="og:url" content="https://isa130pull.github.io/portrait-site/en/pages/pong/ranking.html" />
+  <meta property="og:title" content="Clear-Time Leaderboard | POPONG" />
+  <meta property="og:description" content="Compare POPONG clear times for Normal and Hard mode." />
+  <meta property="og:site_name" content="Isao Kawaguchi (isa130pull) Portfolio" />
   <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/ogp-popong-ranking.jpg" />
   <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:alt" content="POPONGクリアタイムランキング" />
+  <meta property="og:image:alt" content="POPONG clear-time leaderboard" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:locale" content="ja_JP" />
-  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ja_JP" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@isa130pull" />
-  <meta name="twitter:title" content="ランキング - POPONG" />
-  <meta name="twitter:description" content="POPONGのクリアタイムランキング。NORMAL・HARDの2難易度でスコアを競おう。" />
+  <meta name="twitter:title" content="Clear-Time Leaderboard | POPONG" />
+  <meta name="twitter:description" content="Compare POPONG clear times for Normal and Hard mode." />
   <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-popong-ranking.jpg" />
-  <meta name="twitter:image:alt" content="POPONGクリアタイムランキング" />
+  <meta name="twitter:image:alt" content="POPONG clear-time leaderboard" />
 
   <!-- JSON-LD BreadcrumbList -->
   <script type="application/ld+json">
@@ -43,20 +43,20 @@
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "ホーム",
-        "item": "https://isa130pull.github.io/portrait-site/"
+        "name": "Home",
+        "item": "https://isa130pull.github.io/portrait-site/en/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "POPONG",
-        "item": "https://isa130pull.github.io/portrait-site/pages/pong/"
+        "item": "https://isa130pull.github.io/portrait-site/en/pages/pong/"
       },
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "ランキング",
-        "item": "https://isa130pull.github.io/portrait-site/pages/pong/ranking.html"
+        "name": "Leaderboard",
+        "item": "https://isa130pull.github.io/portrait-site/en/pages/pong/ranking.html"
       }
     ]
   }
@@ -65,9 +65,9 @@
   <meta name="robots" content="noindex, nofollow" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="../../images/index/favicon.ico">
-  <link rel="icon" type="image/png" sizes="96x96" href="../../images/index/favicon-96x96.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="../../images/index/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="../../../images/index/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="../../../images/index/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../images/index/apple-touch-icon.png">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,7 +76,7 @@
 
   <!-- PlayFab SDK -->
   <script src="https://download.playfab.com/PlayFabClientApi.js" defer></script>
-  <script src="playfab-manager.js?v=4" defer></script>
+  <script src="../../../pages/pong/playfab-manager.js?v=4" defer></script>
 
   <style>
     :root{
@@ -266,26 +266,26 @@
       .leaderboard-table .rank{width:60px;font-size:16px}
     }
   </style>
-  <link rel="stylesheet" href="../../styles/app-shell.css?v=20260725b">
-  <link rel="stylesheet" href="../../styles/language-switcher.css?v=20260814">
-  <script src="../../scripts/language-preference.js?v=20260814" defer></script>
+  <link rel="stylesheet" href="../../../styles/app-shell.css?v=20260725b">
+  <link rel="stylesheet" href="../../../styles/language-switcher.css?v=20260814">
+  <script src="../../../scripts/language-preference.js?v=20260814" defer></script>
 </head>
 <body class="app-page ranking-page" data-inherit-language="true" onload="initRanking()">
   <header class="app-site-header">
     <div class="app-site-header__inner">
-      <a class="app-brand" href="../../index.html" aria-label="かわぐち トップへ">
+      <a class="app-brand" href="../../index.html" aria-label="Back to Isao Kawaguchi's home page">
         <span class="app-brand-mark" aria-hidden="true">IK</span>
-        <span>かわぐち <small>/ isa130pull</small></span>
+        <span>Isao Kawaguchi <small>/ isa130pull</small></span>
       </a>
       <div class="app-header-actions">
-        <span class="language-switcher" aria-label="言語を選択">
-          <span lang="ja" aria-current="page">日本語</span>
+        <span class="language-switcher" aria-label="Choose language">
+          <a lang="ja" hreflang="ja" href="../../../pages/pong/ranking.html" data-language-choice="ja">日本語</a>
           <span class="language-separator" aria-hidden="true">/</span>
-          <a lang="en" hreflang="en" href="../../en/pages/pong/ranking.html" data-language-choice="en">English</a>
+          <span lang="en" aria-current="page">English</span>
         </span>
-        <a href="index.html" class="back-link" aria-label="ゲームに戻る">
+        <a href="index.html" class="back-link" aria-label="Back to the game">
           <span aria-hidden="true">←</span>
-          <span class="back-link-label">ゲームに戻る</span>
+          <span class="back-link-label">Back to game</span>
         </a>
       </div>
     </div>
@@ -312,14 +312,14 @@
   </main>
 
   <section class="app-about" style="max-width:800px;margin:48px auto 0;padding:0 24px;color:var(--muted);font-size:14px;line-height:1.8">
-    <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">POPONGについて</h2>
-    <p style="margin:0 0 16px">POPONGは、ブラウザで遊べるクラシックなPONGゲームです。NORMALとHARDの2つの難易度で7点先取を目指してCPUと対戦します。キーボード操作・タッチ操作の両方に対応しており、スマートフォンでもプレイ可能です。</p>
-    <p style="margin:0 0 16px">クリアタイムはオンラインランキングに登録でき、世界中のプレイヤーとスコアを競えます。登録不要・完全無料。</p>
-    <a href="index.html" style="color:var(--accent)">ゲームをプレイする →</a>
+    <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">About POPONG</h2>
+    <p style="margin:0 0 16px">POPONG is a free classic Pong game for your browser. Race to seven points against the CPU in Normal or Hard mode. Keyboard and touch controls make it playable on desktop and mobile.</p>
+    <p style="margin:0 0 16px">Submit your clear time to the online leaderboard and compare it with players around the world. No registration is required.</p>
+    <a href="index.html" style="color:var(--accent)">Play POPONG →</a>
   </section>
 
   <footer style="margin-top:48px;padding:24px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;text-align:center">
-    <p style="margin:0">&copy; <span id="y"></span> かわぐち (isa130pull) | <a href="../../index.html" style="color:var(--accent)">トップページ</a></p>
+    <p style="margin:0">&copy; <span id="y"></span> Isao Kawaguchi (isa130pull) | <a href="../../index.html" style="color:var(--accent)">Home</a></p>
   </footer>
 
   <script>
@@ -388,14 +388,14 @@
 
         getLeaderboard(difficulty, 100, function(result) {
             if (!result.success) {
-                content.innerHTML = '<div class="error">' + (result.message || 'ランキングの読み込みに失敗しました') + '</div>';
+                content.innerHTML = '<div class="error">' + (result.message || 'Could not load the leaderboard') + '</div>';
                 return;
             }
 
             var leaderboard = result.leaderboard;
 
             if (!leaderboard || leaderboard.length === 0) {
-                content.innerHTML = '<div class="empty">まだランキングがありません</div>';
+                content.innerHTML = '<div class="empty">No leaderboard entries yet</div>';
                 return;
             }
 
@@ -412,9 +412,9 @@
             // テーブル作成
             var html = '<table class="leaderboard-table">';
             html += '<thead><tr>';
-            html += '<th class="rank">順位</th>';
-            html += '<th class="name">名前</th>';
-            html += '<th class="time">タイム</th>';
+            html += '<th class="rank">Rank</th>';
+            html += '<th class="name">Name</th>';
+            html += '<th class="time">Time</th>';
             html += '</tr></thead>';
             html += '<tbody>';
 

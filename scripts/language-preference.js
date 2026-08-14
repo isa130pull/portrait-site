@@ -25,8 +25,8 @@
     link.addEventListener('click', function () {
       savePreference(this.dataset.languageChoice);
 
-      if (!window.location.hash) return;
       var target = new URL(this.href);
+      target.search = window.location.search;
       target.hash = window.location.hash;
       this.href = target.href;
     });
@@ -48,6 +48,7 @@
   if (!languageChoice) return;
 
   var target = new URL(languageChoice.href);
+  target.search = window.location.search;
   target.hash = window.location.hash;
   window.location.replace(target.pathname + target.search + target.hash);
 })();
