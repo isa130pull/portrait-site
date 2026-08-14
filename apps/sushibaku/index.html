@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#12253b">
   <title>すしばく!｜寿司を飛ばして建物を壊す爽快アクションゲーム</title>
-  <meta name="description" content="すしばく!は、寿司を飛ばして回転寿司店や建物を30秒で壊す無料のカジュアルアクションゲーム。36種類の寿司、全9ステージ、強化、タイムアタック、全国ランキングを楽しめます。">
+  <meta name="description" content="すしばく!は、寿司を飛ばして建物を30秒で壊す無料アクションゲーム。ページ上の30秒すし飛ばしを試し、本編では36種類の寿司、全9ステージ、強化、タイムアタック、全国ランキングを楽しめます。">
   <meta name="author" content="かわぐち (isa130pull)">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="robots" content="index,follow,max-image-preview:large">
@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="../../styles/game-app.css?v=20260812-3">
   <link rel="stylesheet" href="../../styles/language-switcher.css?v=20260813">
   <link rel="stylesheet" href="../../styles/app-language.css?v=20260813">
+  <link rel="stylesheet" href="../../styles/app-experience.css?v=20260814">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="すしばく!｜寿司で、街ごと大破壊。">
@@ -87,6 +88,7 @@
   }
   </script>
   <script src="../../scripts/app-marketing.js" defer></script>
+  <script src="../../scripts/app-experience.js?v=20260814" defer></script>
   <script src="../../scripts/language-preference.js?v=20260813-4" defer></script>
 </head>
 <body class="theme-sushibaku" data-app="sushibaku" data-inherit-language="true">
@@ -98,7 +100,7 @@
         <img src="../../images/sushibaku/app-icon.png" alt="" width="512" height="512">
         <span>すしばく!</span>
       </a>
-      <nav aria-label="ページ内ナビゲーション"><a href="#features">特徴</a><a href="#screens">ゲーム画面</a><a href="#faq">よくある質問</a></nav>
+      <nav aria-label="ページ内ナビゲーション"><a href="#tap-challenge">30秒チャレンジ</a><a href="#features">特徴</a><a href="#screens">ゲーム画面</a><a href="#faq">よくある質問</a></nav>
       <div class="header-language-actions">
         <span class="language-switcher" aria-label="言語を選択"><span lang="ja" aria-current="page">日本語</span><span class="language-separator" aria-hidden="true">/</span><a lang="en" hreflang="en" href="../../en/apps/sushibaku/" data-language-choice="en">English</a></span>
         <a class="header-cta" href="https://apps.apple.com/jp/app/id1632633407" target="_blank" rel="noopener" data-store="app-store" data-store-cta="header" aria-label="App Storeですしばく!をダウンロード（新しいタブ）">無料で遊ぶ</a>
@@ -131,6 +133,29 @@
       <li><strong>全9ステージ</strong><span>店内から街並みまで大破壊</span></li>
       <li><strong>1 PLAY / 30秒</strong><span>片手でサクッと爽快</span></li>
     </ul>
+
+    <section class="experience-section section-shell" id="tap-challenge" data-mini-experience="tap" data-app-name="sushibaku" data-duration="30" aria-labelledby="tap-challenge-title">
+      <div class="experience-copy">
+        <p class="section-kicker">FREE 30-SECOND WEB CHALLENGE</p>
+        <h2 id="tap-challenge-title">30秒で、<br>寿司を何貫飛ばせる？</h2>
+        <p>動くターゲットを見つけて寿司を飛ばす、無料のブラウザミニゲームです。タップの感覚を試したら、本編で36種類の寿司を集めて建物や街を壊せます。</p>
+      </div>
+      <div class="experience-card">
+        <div class="tap-stats" aria-live="polite">
+          <div class="tap-stat"><span>スコア</span><strong><span data-tap-score>0</span> SUSHI</strong></div>
+          <div class="tap-stat"><span>残り時間</span><strong><span data-tap-time>30</span> SEC</strong></div>
+        </div>
+        <div class="tap-arena" data-tap-arena aria-label="30秒すし飛ばしチャレンジのプレイエリア">
+          <button type="button" class="tap-start" data-tap-start>30秒チャレンジ開始</button>
+          <button type="button" class="tap-target" data-tap-target aria-label="寿司を飛ばす" hidden>🍣</button>
+        </div>
+        <div class="tap-result" data-tap-result hidden aria-live="polite">
+          <p data-tap-result-text tabindex="-1"></p>
+          <div class="experience-actions"><a href="#download-title" data-experience-install>本編を無料で遊ぶ →</a><button type="button" data-tap-share hidden>スコアを共有</button></div>
+        </div>
+        <p class="experience-note">Web版は操作感を試す簡易チャレンジです。アプリ本編のステージやスコアとは連動しません。</p>
+      </div>
+    </section>
 
     <section class="section-shell" aria-labelledby="story-title">
       <p class="section-kicker">TODAY'S SPECIAL</p>

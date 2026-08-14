@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#211832">
   <title>AI美少女1/100｜10回の二択で好みのキャラクターを診断</title>
-  <meta name="description" content="AI美少女1/100は、10回の二択に答えて100人の中から好みのキャラクターを見つける無料の診断ゲーム。選ばれたキャラクターを図鑑に集め、全100人のコンプリートを目指せます。">
+  <meta name="description" content="AI美少女1/100は、10回の二択で100人から好みのキャラクターを見つける無料診断ゲーム。ページ上の5問ミニ診断を試し、本編では結果を図鑑に集めて全100人のコンプリートを目指せます。">
   <meta name="author" content="かわぐち (isa130pull)">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="robots" content="index,follow,max-image-preview:large">
@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="../../styles/game-app.css?v=20260812-3">
   <link rel="stylesheet" href="../../styles/language-switcher.css?v=20260813">
   <link rel="stylesheet" href="../../styles/app-language.css?v=20260813">
+  <link rel="stylesheet" href="../../styles/app-experience.css?v=20260814">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="AI美少女1/100｜二択で見つける、運命のひとり。">
@@ -85,6 +86,7 @@
   }
   </script>
   <script src="../../scripts/app-marketing.js" defer></script>
+  <script src="../../scripts/app-experience.js?v=20260814" defer></script>
   <script src="../../scripts/language-preference.js?v=20260813-4" defer></script>
 </head>
 <body class="theme-aigirl" data-app="ai-girl" data-inherit-language="true">
@@ -93,7 +95,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="AI美少女1/100 ページ先頭へ"><img src="../../images/ai-girl/app-icon.jpg" alt="" width="512" height="512"><span>AI美少女1/100</span></a>
-      <nav aria-label="ページ内ナビゲーション"><a href="#features">特徴</a><a href="#screens">診断画面</a><a href="#faq">よくある質問</a></nav>
+      <nav aria-label="ページ内ナビゲーション"><a href="#mini-quiz">お試し診断</a><a href="#features">特徴</a><a href="#screens">診断画面</a><a href="#faq">よくある質問</a></nav>
       <div class="header-language-actions">
         <span class="language-switcher" aria-label="言語を選択"><span lang="ja" aria-current="page">日本語</span><span class="language-separator" aria-hidden="true">/</span><a lang="en" hreflang="en" href="../../en/apps/ai-girl/" data-language-choice="en">English</a></span>
         <a class="header-cta" href="https://apps.apple.com/jp/app/id6451026485" target="_blank" rel="noopener" data-store="app-store" data-store-cta="header" aria-label="App StoreでAI美少女1/100をダウンロード（新しいタブ）">無料で診断</a>
@@ -126,6 +128,28 @@
       <li><strong>100人</strong><span>それぞれに名前とボイス</span></li>
       <li><strong>図鑑コレクション</strong><span>選ばれたキャラクターを記録</span></li>
     </ul>
+
+    <section class="experience-section section-shell" id="mini-quiz" data-mini-experience="quiz" data-app-name="ai-girl" aria-labelledby="mini-quiz-title">
+      <div class="experience-copy">
+        <p class="section-kicker">FREE WEB MINI QUIZ</p>
+        <h2 id="mini-quiz-title">まずは5問、<br>好みの傾向を診断。</h2>
+        <p>二択を選ぶ感覚をブラウザで試せる無料ミニ診断です。結果は4つのタイプで表示されます。本編アプリでは10回の二択から100人のキャラクターとの出会いを楽しめます。</p>
+      </div>
+      <div class="experience-card">
+        <div data-quiz-panel>
+          <div class="experience-meta"><span data-quiz-progress></span><strong>直感で選択</strong></div>
+          <h3 data-quiz-question tabindex="-1"></h3>
+          <div class="quiz-options"><button type="button" data-quiz-choice="0"></button><button type="button" data-quiz-choice="1"></button></div>
+        </div>
+        <div class="quiz-result" data-quiz-result hidden aria-live="polite">
+          <div class="experience-meta"><span>診断結果</span><strong>YOUR TYPE</strong></div>
+          <h3 data-quiz-result-title tabindex="-1"></h3>
+          <p data-quiz-result-description></p>
+          <div class="experience-actions"><a href="#download-title" data-experience-install>アプリで100人から診断 →</a><button type="button" data-quiz-restart>もう一度診断</button></div>
+        </div>
+        <p class="experience-note">このミニ診断はWeb版の簡易体験です。実際のアプリ内診断結果とは異なります。</p>
+      </div>
+    </section>
 
     <section class="section-shell" aria-labelledby="story-title">
       <p class="section-kicker">FOLLOW YOUR TASTE</p>

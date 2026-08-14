@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#12253b">
   <title>SushiBomb | Launch Sushi and Smash the Town</title>
-  <meta name="description" content="SushiBomb is a free casual action game where you launch sushi to destroy restaurants and buildings in 30 seconds. Unlock 36 kinds of sushi, clear nine stages, upgrade your shots, and challenge the rankings on iPhone and Android.">
+  <meta name="description" content="Try a free 30-second web sushi challenge, then play SushiBomb on iPhone or Android to launch 36 kinds of sushi, clear nine stages, and rank scores.">
   <meta name="author" content="Isao Kawaguchi (isa130pull)">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="robots" content="index,follow,max-image-preview:large">
@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="../../../styles/game-app.css?v=20260812-3">
   <link rel="stylesheet" href="../../../styles/language-switcher.css?v=20260813">
   <link rel="stylesheet" href="../../../styles/app-language.css?v=20260813">
+  <link rel="stylesheet" href="../../../styles/app-experience.css?v=20260814">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="SushiBomb | Launch Sushi. Wreck the Whole Town.">
@@ -87,6 +88,7 @@
   }
   </script>
   <script src="../../../scripts/app-marketing.js" defer></script>
+  <script src="../../../scripts/app-experience.js?v=20260814" defer></script>
   <script src="../../../scripts/language-preference.js?v=20260813-4" defer></script>
 </head>
 <body class="theme-sushibaku" data-app="sushibaku" data-inherit-language="true">
@@ -95,7 +97,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="Back to the top of the SushiBomb page"><img src="../../../images/sushibaku/app-icon.png" alt="" width="512" height="512"><span>SushiBomb</span></a>
-      <nav aria-label="On-page navigation"><a href="#features">Features</a><a href="#screens">Screens</a><a href="#faq">FAQ</a></nav>
+      <nav aria-label="On-page navigation"><a href="#tap-challenge">30-second challenge</a><a href="#features">Features</a><a href="#screens">Screens</a><a href="#faq">FAQ</a></nav>
       <div class="header-language-actions">
         <span class="language-switcher" aria-label="Choose language"><a lang="ja" hreflang="ja" href="../../../apps/sushibaku/" data-language-choice="ja">日本語</a><span class="language-separator" aria-hidden="true">/</span><span lang="en" aria-current="page">English</span></span>
         <a class="header-cta" href="https://apps.apple.com/app/id1632633407" target="_blank" rel="noopener" data-store="app-store" data-store-cta="header" aria-label="Download SushiBomb on the App Store (opens in a new tab)">Play for free</a>
@@ -128,6 +130,29 @@
       <li><strong>9 STAGES</strong><span>Destroy everything from restaurants to city streets</span></li>
       <li><strong>1 PLAY / 30 SEC.</strong><span>Fast one-handed action</span></li>
     </ul>
+
+    <section class="experience-section section-shell" id="tap-challenge" data-mini-experience="tap" data-app-name="sushibaku" data-duration="30" aria-labelledby="tap-challenge-title">
+      <div class="experience-copy">
+        <p class="section-kicker">FREE 30-SECOND WEB CHALLENGE</p>
+        <h2 id="tap-challenge-title">How much sushi<br>can you launch?</h2>
+        <p>Find the moving target and launch sushi in this free browser mini-game. Try the tapping loop here, then collect 36 kinds of sushi and wreck restaurants, buildings, and streets in the full app.</p>
+      </div>
+      <div class="experience-card">
+        <div class="tap-stats" aria-live="polite">
+          <div class="tap-stat"><span>Score</span><strong><span data-tap-score>0</span> SUSHI</strong></div>
+          <div class="tap-stat"><span>Time left</span><strong><span data-tap-time>30</span> SEC</strong></div>
+        </div>
+        <div class="tap-arena" data-tap-arena aria-label="30-second sushi launch challenge play area">
+          <button type="button" class="tap-start" data-tap-start>Start 30-second challenge</button>
+          <button type="button" class="tap-target" data-tap-target aria-label="Launch sushi" hidden>🍣</button>
+        </div>
+        <div class="tap-result" data-tap-result hidden aria-live="polite">
+          <p data-tap-result-text tabindex="-1"></p>
+          <div class="experience-actions"><a href="#download-title" data-experience-install>Play the full game free →</a><button type="button" data-tap-share hidden>Share score</button></div>
+        </div>
+        <p class="experience-note">This web challenge is a simplified taste of the controls. Its stages and score are separate from the full app.</p>
+      </div>
+    </section>
 
     <section class="section-shell" aria-labelledby="story-title">
       <p class="section-kicker">TODAY'S SPECIAL</p>

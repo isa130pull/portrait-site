@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#071a2b">
   <title>House Breaker!! | Smash a House in 30 Seconds</title>
-  <meta name="description" content="House Breaker!! is a free casual destruction game where you tap to smash furniture and appliances in 30 seconds, upgrade your shots, and challenge 11 stages and score rankings on iPhone and Android.">
+  <meta name="description" content="Try a free 30-second web tap challenge, then play House Breaker!! on iPhone or Android to smash furniture, upgrade shots, and clear 11 stages.">
   <meta name="author" content="Isao Kawaguchi (isa130pull)">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="robots" content="index,follow,max-image-preview:large">
@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="../../../styles/game-app.css?v=20260812-3">
   <link rel="stylesheet" href="../../../styles/language-switcher.css?v=20260813">
   <link rel="stylesheet" href="../../../styles/app-language.css?v=20260813">
+  <link rel="stylesheet" href="../../../styles/app-experience.css?v=20260814">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="House Breaker!! | Smash the Whole House in 30 Seconds">
@@ -87,6 +88,7 @@
   }
   </script>
   <script src="../../../scripts/app-marketing.js" defer></script>
+  <script src="../../../scripts/app-experience.js?v=20260814" defer></script>
   <script src="../../../scripts/language-preference.js?v=20260813-4" defer></script>
 </head>
 <body class="theme-iebaku" data-app="iebaku" data-inherit-language="true">
@@ -99,6 +101,7 @@
         <span>House Breaker!!</span>
       </a>
       <nav aria-label="On-page navigation">
+        <a href="#tap-challenge">30-second challenge</a>
         <a href="#features">Features</a>
         <a href="#screens">Screens</a>
         <a href="#faq">FAQ</a>
@@ -135,6 +138,29 @@
       <li><strong>11 STAGES</strong><span>Destroy everything from rooms to outdoor spaces</span></li>
       <li><strong>ONE-TAP PLAY</strong><span>Start smashing with one finger</span></li>
     </ul>
+
+    <section class="experience-section section-shell" id="tap-challenge" data-mini-experience="tap" data-app-name="iebaku" data-duration="30" aria-labelledby="tap-challenge-title">
+      <div class="experience-copy">
+        <p class="section-kicker">FREE 30-SECOND WEB CHALLENGE</p>
+        <h2 id="tap-challenge-title">How many hits<br>in 30 seconds?</h2>
+        <p>Find and tap the moving target in this free browser mini-game. Try the one-finger aiming loop here, then move into the full app to smash furniture, appliances, and whole houses.</p>
+      </div>
+      <div class="experience-card">
+        <div class="tap-stats" aria-live="polite">
+          <div class="tap-stat"><span>Score</span><strong><span data-tap-score>0</span> HIT</strong></div>
+          <div class="tap-stat"><span>Time left</span><strong><span data-tap-time>30</span> SEC</strong></div>
+        </div>
+        <div class="tap-arena" data-tap-arena aria-label="30-second tap challenge play area">
+          <button type="button" class="tap-start" data-tap-start>Start 30-second challenge</button>
+          <button type="button" class="tap-target" data-tap-target aria-label="Smash the target" hidden>🏠</button>
+        </div>
+        <div class="tap-result" data-tap-result hidden aria-live="polite">
+          <p data-tap-result-text tabindex="-1"></p>
+          <div class="experience-actions"><a href="#download-title" data-experience-install>Play the full game free →</a><button type="button" data-tap-share hidden>Share score</button></div>
+        </div>
+        <p class="experience-note">This web challenge is a simplified taste of the controls. Its stages and score are separate from the full app.</p>
+      </div>
+    </section>
 
     <section class="section-shell" aria-labelledby="story-title">
       <p class="section-kicker">BREAK THE ROUTINE</p>

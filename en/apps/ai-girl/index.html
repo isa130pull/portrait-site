@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#211832">
   <title>AI Girl 1/100 | Find Your Favorite in 10 Choices</title>
-  <meta name="description" content="AI Girl 1/100 is a free character quiz game where 10 either-or choices match you with a favorite from 100 characters. Collect every result in your gallery on iPhone and Android.">
+  <meta name="description" content="Try a free five-question web quiz, then find a favorite from 100 characters in AI Girl 1/100. Complete 10 choices and collect every result on iPhone or Android.">
   <meta name="author" content="Isao Kawaguchi (isa130pull)">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="robots" content="index,follow,max-image-preview:large">
@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="../../../styles/game-app.css?v=20260812-3">
   <link rel="stylesheet" href="../../../styles/language-switcher.css?v=20260813">
   <link rel="stylesheet" href="../../../styles/app-language.css?v=20260813">
+  <link rel="stylesheet" href="../../../styles/app-experience.css?v=20260814">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="AI Girl 1/100 | Ten Choices. One Favorite.">
@@ -86,6 +87,7 @@
   }
   </script>
   <script src="../../../scripts/app-marketing.js" defer></script>
+  <script src="../../../scripts/app-experience.js?v=20260814" defer></script>
   <script src="../../../scripts/language-preference.js?v=20260813-4" defer></script>
 </head>
 <body class="theme-aigirl" data-app="ai-girl" data-inherit-language="true">
@@ -94,7 +96,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="Back to the top of the AI Girl 1/100 page"><img src="../../../images/ai-girl/app-icon.jpg" alt="" width="512" height="512"><span>AI Girl 1/100</span></a>
-      <nav aria-label="On-page navigation"><a href="#features">Features</a><a href="#screens">Screens</a><a href="#faq">FAQ</a></nav>
+      <nav aria-label="On-page navigation"><a href="#mini-quiz">Try the quiz</a><a href="#features">Features</a><a href="#screens">Screens</a><a href="#faq">FAQ</a></nav>
       <div class="header-language-actions">
         <span class="language-switcher" aria-label="Choose language"><a lang="ja" hreflang="ja" href="../../../apps/ai-girl/" data-language-choice="ja">日本語</a><span class="language-separator" aria-hidden="true">/</span><span lang="en" aria-current="page">English</span></span>
         <a class="header-cta" href="https://apps.apple.com/app/id6451026485" target="_blank" rel="noopener" data-store="app-store" data-store-cta="header" aria-label="Download AI Girl 1/100 on the App Store (opens in a new tab)">Start the quiz</a>
@@ -127,6 +129,28 @@
       <li><strong>100 CHARACTERS</strong><span>Each with a name and voice</span></li>
       <li><strong>COLLECTION GALLERY</strong><span>Save every character you discover</span></li>
     </ul>
+
+    <section class="experience-section section-shell" id="mini-quiz" data-mini-experience="quiz" data-app-name="ai-girl" aria-labelledby="mini-quiz-title">
+      <div class="experience-copy">
+        <p class="section-kicker">FREE WEB MINI QUIZ</p>
+        <h2 id="mini-quiz-title">Try five choices.<br>See your type.</h2>
+        <p>This free mini quiz lets you try the either-or flow in your browser and returns one of four preference types. The full app uses 10 choices to introduce you to characters from a cast of 100.</p>
+      </div>
+      <div class="experience-card">
+        <div data-quiz-panel>
+          <div class="experience-meta"><span data-quiz-progress></span><strong>Choose by instinct</strong></div>
+          <h3 data-quiz-question tabindex="-1"></h3>
+          <div class="quiz-options"><button type="button" data-quiz-choice="0"></button><button type="button" data-quiz-choice="1"></button></div>
+        </div>
+        <div class="quiz-result" data-quiz-result hidden aria-live="polite">
+          <div class="experience-meta"><span>Your result</span><strong>YOUR TYPE</strong></div>
+          <h3 data-quiz-result-title tabindex="-1"></h3>
+          <p data-quiz-result-description></p>
+          <div class="experience-actions"><a href="#download-title" data-experience-install>Meet all 100 in the app →</a><button type="button" data-quiz-restart>Take it again</button></div>
+        </div>
+        <p class="experience-note">This is a simplified web experience. It does not reproduce the result logic used in the full app.</p>
+      </div>
+    </section>
 
     <section class="section-shell" aria-labelledby="story-title">
       <p class="section-kicker">FOLLOW YOUR TASTE</p>
