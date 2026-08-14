@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#071015" />
-  <title>POPONG | Free Classic Pong Game in Your Browser</title>
-  <meta name="description" content="Play POPONG, a free classic Pong game in your browser. Beat the CPU to seven points in Normal or Hard mode and post your clear time online." />
+  <title>POPONG | Free Browser Pong Game, Controls and Tips</title>
+  <meta name="description" content="Play a free browser Pong game with mouse or touch controls. Learn Normal and Hard differences, race the CPU to five points, read tips, and post a clear time." />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/en/pages/pong/" />
   <link rel="alternate" hreflang="ja" href="https://isa130pull.github.io/portrait-site/pages/pong/" />
   <link rel="alternate" hreflang="en" href="https://isa130pull.github.io/portrait-site/en/pages/pong/" />
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://isa130pull.github.io/portrait-site/en/pages/pong/" />
   <meta property="og:title" content="POPONG | Free Classic Pong Game" />
-  <meta property="og:description" content="Play a free classic Pong game in your browser. Beat the CPU to seven points in Normal or Hard mode." />
+  <meta property="og:description" content="Use mouse or touch controls to beat the CPU to five points in Normal or Hard mode, then challenge the clear-time leaderboard." />
   <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/ogp-popong.jpg" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:alt" content="POPONG classic browser Pong game" />
@@ -30,22 +30,33 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@isa130pull" />
   <meta name="twitter:title" content="POPONG | Free Classic Pong Game" />
-  <meta name="twitter:description" content="Beat the CPU to seven points in Normal or Hard mode." />
+  <meta name="twitter:description" content="Use mouse or touch controls to beat the CPU to five points in Normal or Hard mode." />
   <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-popong.jpg" />
   <meta name="twitter:image:alt" content="POPONG classic browser Pong game" />
 
-  <!-- JSON-LD VideoGame -->
+  <!-- JSON-LD VideoGame / WebApplication -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "VideoGame",
+    "@type": ["VideoGame", "WebApplication"],
     "name": "POPONG - Classic Browser Pong Game",
     "url": "https://isa130pull.github.io/portrait-site/en/pages/pong/",
-    "description": "A free classic Pong game for the browser. Beat the CPU to seven points in Normal or Hard mode and submit your clear time to an online leaderboard.",
+    "description": "A free browser Pong game with mouse and touch controls. Beat the CPU to five points in Normal or Hard mode and optionally submit your clear time to an online leaderboard.",
     "genre": "Arcade",
     "gamePlatform": "Web Browser",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "A modern web browser with Canvas and JavaScript enabled",
     "inLanguage": "en",
+    "isAccessibleForFree": true,
     "playMode": "SinglePlayer",
+    "featureList": [
+      "Mouse and touch controls",
+      "Normal and Hard difficulty modes",
+      "First-to-five CPU matches",
+      "Device-local best time saving",
+      "Online leaderboard"
+    ],
     "numberOfPlayers": {
       "@type": "QuantitativeValue",
       "value": 1
@@ -59,6 +70,48 @@
       "@type": "Person",
       "name": "Isao Kawaguchi (isa130pull)"
     }
+  }
+  </script>
+
+  <!-- JSON-LD FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is POPONG free and playable without an account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The game is free and does not require registration, so you can play immediately in your browser."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I play POPONG on a phone or tablet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Move your finger left and right across the game screen to control the lower paddle on a phone or tablet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many points do I need to win?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Score five points before the CPU to clear the game. Your clear time is saved on your device and can optionally be posted to the leaderboard."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Normal and Hard mode?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Normal starts with gentler ball and CPU movement. Hard uses a faster ball and quicker CPU response, so it requires more precise positioning."
+        }
+      }
+    ]
   }
   </script>
 
@@ -84,7 +137,7 @@
   }
   </script>
 
-  <meta name="robots" content="max-image-preview:large" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="../../../images/index/favicon.ico">
@@ -312,6 +365,7 @@
   </style>
   <link rel="stylesheet" href="../../../styles/app-shell.css?v=20260814">
   <link rel="stylesheet" href="../../../styles/language-switcher.css?v=20260814">
+  <link rel="stylesheet" href="../../../styles/pong-guide.css?v=20260814">
 
   <!-- Google Analytics (gtag.js) - lazy loaded -->
   <script>
@@ -365,6 +419,65 @@
     <h1 class="visually-hidden">POPONG - Free Classic Browser Pong Game</h1>
     <canvas id="canvas" role="img" aria-label="POPONG game screen">Your browser does not support Canvas.</canvas>
   </main>
+
+  <nav class="game-jump" aria-label="Game guide">
+    <a id="howToLink" href="#how-to-play">See controls, rules, and tips ↓</a>
+  </nav>
+
+  <section id="how-to-play" class="game-guide" aria-labelledby="guide-title">
+    <div class="game-guide__intro">
+      <p class="game-guide__eyebrow">How to play / Controls / Tips</p>
+      <h2 id="guide-title">How to play POPONG</h2>
+      <p>POPONG is a free Pong game where you return the ball with the lower paddle and race the CPU to five points. There is nothing to download and no account is required, so you can start playing in a desktop or mobile browser.</p>
+    </div>
+
+    <ol class="guide-steps">
+      <li><strong>Click or tap the game screen</strong><br>Choose Normal or Hard mode.</li>
+      <li><strong>Move the lower paddle left and right</strong><br>Return the ball before it passes the bottom edge.</li>
+      <li><strong>Score five points before the CPU</strong><br>Improve your clear time and challenge the leaderboard.</li>
+    </ol>
+
+    <div class="guide-grid">
+      <article class="guide-card">
+        <h3>Desktop and mobile controls</h3>
+        <p><strong>Desktop:</strong> Move your mouse left and right over the game screen. The lower paddle follows your pointer.</p>
+        <p><strong>Phone or tablet:</strong> Drag your finger left and right on the game screen. Swipes inside the game control the paddle, so use the guide link directly below the game when you want to move to this section.</p>
+      </article>
+
+      <article class="guide-card">
+        <h3>Normal vs. Hard mode</h3>
+        <dl class="difficulty-list">
+          <dt>NORMAL</dt>
+          <dd>The ball and CPU start more gently, making this the best mode for learning the controls.</dd>
+          <dt>HARD</dt>
+          <dd>The ball moves faster and the CPU responds more quickly. Read the return angle early and position the paddle precisely.</dd>
+        </dl>
+      </article>
+    </div>
+
+    <h2>Tips for beating the CPU</h2>
+    <ul class="tips-grid">
+      <li><strong>Recover toward the center:</strong> After a return, move back to a position that can cover either side of the next shot.</li>
+      <li><strong>Use the paddle edges:</strong> The return angle changes with the contact point. Edge hits can send the CPU from side to side.</li>
+      <li><strong>Anticipate acceleration:</strong> The ball speeds up as a rally continues. Watch its direction and move toward the next landing point early.</li>
+    </ul>
+
+    <aside class="ranking-callout" aria-labelledby="ranking-guide-title">
+      <div>
+        <h2 id="ranking-guide-title">Clear-time leaderboard</h2>
+        <p>Winning a first-to-five match saves your clear time on your device. Enter a display name if you want to submit it to the separate Normal or Hard online leaderboard.</p>
+      </div>
+      <a href="ranking.html">View leaderboard →</a>
+    </aside>
+
+    <h2>Frequently asked questions</h2>
+    <dl class="faq-list">
+      <div><dt>Is POPONG free and playable without an account?</dt><dd>Yes. The game is free and does not require registration, so you can play immediately in your browser.</dd></div>
+      <div><dt>Can I play POPONG on a phone or tablet?</dt><dd>Yes. Move your finger left and right across the game screen to control the lower paddle on a phone or tablet.</dd></div>
+      <div><dt>How many points do I need to win?</dt><dd>Score five points before the CPU to clear the game. Your clear time is saved on your device and can optionally be posted to the leaderboard.</dd></div>
+      <div><dt>What is the difference between Normal and Hard mode?</dt><dd>Normal starts with gentler ball and CPU movement. Hard uses a faster ball and quicker CPU response, so it requires more precise positioning.</dd></div>
+    </dl>
+  </section>
 
   <!-- オーバーレイ -->
   <div id="overlay" class="overlay"></div>
