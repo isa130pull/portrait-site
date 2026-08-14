@@ -97,9 +97,9 @@
   <link rel="icon" type="image/png" sizes="512x512" href="../images/bingo/web-app-manifest-512x512.png">
   <link rel="stylesheet" href="../styles/app-shell.css?v=20260813">
   <link rel="stylesheet" href="../styles/language-switcher.css?v=20260813">
-  <link rel="stylesheet" href="../styles/bingo.css?v=20260813-7">
+  <link rel="stylesheet" href="../styles/bingo.css?v=20260814-1">
   <script src="../scripts/language-preference.js?v=20260813-4" defer></script>
-  <script src="../scripts/bingo.js?v=20260813-8" defer></script>
+  <script src="../scripts/bingo.js?v=20260814-1" defer></script>
 
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -110,6 +110,7 @@
     });
     (function(){
       function loadGtag(){
+        if (location.hostname !== 'isa130pull.github.io' || (location.pathname !== '/portrait-site' && location.pathname.indexOf('/portrait-site/') !== 0)) return;
         var script = document.createElement('script');
         script.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
         script.async = true;
@@ -219,6 +220,34 @@
       </p>
       <a id="relatedExternal" href="https://sanin-map.com/" target="_blank" rel="noopener">山陰イベントマップを見る ↗</a>
     </aside>
+
+    <section id="relatedApps" class="related-apps" aria-labelledby="related-apps-title">
+      <div class="related-apps__heading">
+        <p class="related-apps__eyebrow">無料のスマホゲーム</p>
+        <h2 id="related-apps-title">ビンゴの次に遊べるゲーム</h2>
+        <p>ビンゴの合間にも、短時間で気軽に遊べる作品を集めました。</p>
+      </div>
+      <ul class="related-apps__grid">
+        <li>
+          <a class="related-app-card" href="../apps/iebaku/" data-related-app="iebaku" data-related-app-placement="bingo_related_apps">
+            <img src="../images/iebaku/app-icon.png" alt="" width="512" height="512" loading="lazy">
+            <span><strong>いえばく!</strong><small>家を30秒で壊す爽快アクション</small><b>無料で遊ぶ方法を見る →</b></span>
+          </a>
+        </li>
+        <li>
+          <a class="related-app-card" href="../apps/sushibaku/" data-related-app="sushibaku" data-related-app-placement="bingo_related_apps">
+            <img src="../images/sushibaku/app-icon.png" alt="" width="512" height="512" loading="lazy">
+            <span><strong>すしばく!</strong><small>お寿司を飛ばして街を壊す無料ゲーム</small><b>無料で遊ぶ方法を見る →</b></span>
+          </a>
+        </li>
+        <li>
+          <a class="related-app-card" href="../apps/ai-girl/" data-related-app="ai-girl" data-related-app-placement="bingo_related_apps">
+            <img src="../images/ai-girl/app-icon.jpg" alt="" width="512" height="512" loading="lazy">
+            <span><strong>AI美少女1/100</strong><small>10回の選択で推しキャラ診断</small><b>無料で診断する →</b></span>
+          </a>
+        </li>
+      </ul>
+    </section>
 
     <section class="app-about" aria-labelledby="about-title">
       <h2 id="about-title">セトリビンゴとは？</h2>

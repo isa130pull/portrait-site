@@ -92,6 +92,7 @@
 
     (function(){
       function loadGtag(){
+        if (location.hostname !== 'isa130pull.github.io' || (location.pathname !== '/portrait-site' && location.pathname.indexOf('/portrait-site/') !== 0)) return;
         var script = document.createElement('script');
         script.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
         script.async = true;
@@ -348,9 +349,8 @@
       link.addEventListener('click', function() {
         gtag('event', 'app_store_click', {
           app_name: 'hitokoma',
-          link_position: this.dataset.storeCta,
-          link_url: this.href,
-          transport_type: 'beacon'
+          store: 'app-store',
+          placement: this.dataset.storeCta
         });
       });
     });

@@ -10,6 +10,9 @@
   window.gtag('config', 'G-CF20TVK6DP');
 
   function loadAnalytics() {
+    if (window.location.hostname !== 'isa130pull.github.io' ||
+        (window.location.pathname !== '/portrait-site' &&
+         window.location.pathname.indexOf('/portrait-site/') !== 0)) return;
     if (document.querySelector('script[data-analytics-script]')) return;
 
     var script = document.createElement('script');

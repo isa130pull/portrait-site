@@ -191,6 +191,7 @@
   gtag('config', 'G-CF20TVK6DP');
   (function(){
     function loadGtag(){
+      if (location.hostname !== 'isa130pull.github.io' || (location.pathname !== '/portrait-site' && location.pathname.indexOf('/portrait-site/') !== 0)) return;
       var s = document.createElement('script');
       s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
       s.async = true;

@@ -466,6 +466,51 @@
     }
   }
 
+  function setupRelatedAppTracking() {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('[data-related-app]'));
+    if (!cards.length) return;
+
+    var recordedImpressions = {};
+
+    function eventParameters(card) {
+      return {
+        app_name: card.dataset.relatedApp || 'unknown',
+        placement: card.dataset.relatedAppPlacement || 'bingo_related_apps',
+        audience: getPromotionAudience()
+      };
+    }
+
+    function recordImpression(card) {
+      var appName = card.dataset.relatedApp || 'unknown';
+      if (recordedImpressions[appName]) return;
+      recordedImpressions[appName] = true;
+      trackEvent('bingo_related_app_impression', eventParameters(card));
+    }
+
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        trackEvent('bingo_related_app_clicked', eventParameters(card));
+      });
+    });
+
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach(recordImpression);
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.45) return;
+        recordImpression(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: [0.45] });
+
+    cards.forEach(function (card) {
+      observer.observe(card);
+    });
+  }
+
   function showToast(message) {
     toast.textContent = message;
     toast.classList.add('show');
@@ -1235,6 +1280,7 @@
   });
 
   renderRelatedPromotion();
+  setupRelatedAppTracking();
   var relatedService = $('#relatedService');
   var relatedExternal = $('#relatedExternal');
   if (relatedExternal) {
