@@ -76,6 +76,20 @@ body.theme-loridama {
   --radius: 38px;
 }
 
+body.theme-concheki {
+  --paper: #fff8fb;
+  --paper-rgb: 255, 248, 251;
+  --soft: #ffe5ef;
+  --ink: #3b2631;
+  --ink-rgb: 59, 38, 49;
+  --muted: #806b75;
+  --accent: #ee6d9f;
+  --accent-rgb: 238, 109, 159;
+  --accent-2: #a47ad8;
+  --accent-2-rgb: 164, 122, 216;
+  --radius: 34px;
+}
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -248,6 +262,7 @@ main { overflow: hidden; }
 }
 .theme-aigirl .hero h1 { font-size: clamp(45px, 5.2vw, 70px); }
 .theme-loridama .hero h1 { font-size: clamp(44px, 5.1vw, 68px); }
+.theme-concheki .hero h1 { font-size: clamp(43px, 5vw, 68px); }
 .hero-lead {
   max-width: 620px;
   margin: 28px 0 34px;
@@ -418,6 +433,34 @@ main { overflow: hidden; }
 .theme-loridama .device-side { transform: translate(8%, 61%) rotate(3deg); }
 .theme-loridama .hero-app-icon { right: 0; bottom: 1%; }
 .theme-loridama .hero-stamp { top: 3%; left: 1%; color: var(--ink); }
+
+.theme-concheki .hero { grid-template-columns: minmax(0, 0.95fr) minmax(430px, 1.05fr); }
+.theme-concheki .hero-art { min-height: 620px; }
+.theme-concheki .hero-art::before {
+  width: min(43vw, 520px);
+  border-radius: 47% 53% 49% 51% / 54% 44% 56% 46%;
+  background: linear-gradient(145deg, #ffdbe8 0%, #f7dffc 55%, #e4e0ff 100%);
+  clip-path: none;
+}
+.theme-concheki .device {
+  width: 58%;
+  border: 8px solid rgba(255, 255, 255, 0.92);
+  border-radius: 32px;
+  background: #fff;
+}
+.theme-concheki .device-main { transform: translate(3%, -7%) rotate(-4deg); }
+.theme-concheki .device-side { transform: translate(50%, 7%) rotate(5deg); }
+.theme-concheki .hero-app-icon { right: 1%; bottom: 3%; }
+.theme-concheki .hero-stamp {
+  top: 5%;
+  left: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.theme-concheki .screenshots { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.theme-concheki .screenshots img { border-radius: 28px; }
+.theme-concheki .feature-card.featured {
+  background: linear-gradient(145deg, var(--accent), var(--accent-2));
+}
 
 .fact-strip {
   display: grid;
@@ -758,6 +801,8 @@ footer {
     gap: 48px;
     padding-top: 72px;
   }
+  .theme-concheki .hero { grid-template-columns: 1fr; }
+  .theme-concheki .hero-art { width: min(100%, 720px); margin-inline: auto; }
   .hero-copy { max-width: 760px; }
   .hero-art { width: min(100%, 660px); margin-inline: auto; }
   .theme-loridama .hero-art { width: min(100%, 720px); }
@@ -782,7 +827,8 @@ footer {
   .hero { padding-top: 58px; padding-bottom: 66px; }
   .hero h1 { font-size: clamp(40px, 11.3vw, 60px); line-height: 1.1; }
   .theme-aigirl .hero h1,
-  .theme-loridama .hero h1 { font-size: clamp(38px, 10.5vw, 56px); }
+  .theme-loridama .hero h1,
+  .theme-concheki .hero h1 { font-size: clamp(38px, 10.5vw, 56px); }
   .hero-lead { margin-top: 23px; }
   .store-actions { gap-inline: 24px; }
   .hero-art { min-height: 520px; }
@@ -795,6 +841,11 @@ footer {
   .theme-loridama .hero-art::before { width: min(92vw, 560px); clip-path: none; border-radius: 47% 53% 55% 45% / 54% 39% 61% 46%; }
   .theme-loridama .device { width: 92%; border-radius: 20px; }
   .theme-loridama .hero-app-icon { width: 86px; }
+  .theme-concheki .hero-art { min-height: 500px; }
+  .theme-concheki .hero-art::before { width: min(92vw, 540px); }
+  .theme-concheki .device { width: 62%; border-width: 5px; border-radius: 24px; }
+  .theme-concheki .hero-app-icon { width: 86px; }
+  .theme-concheki .screenshots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .fact-strip { grid-template-columns: 1fr; }
   .fact-strip li { min-height: 82px; padding: 16px 8px; text-align: center; }
   .fact-strip li + li { border-top: 1px solid var(--line); border-left: 0; }
@@ -826,10 +877,12 @@ footer {
   .header-cta { font-size: 11px; }
   .hero h1 { font-size: 42px; }
   .theme-aigirl .hero h1,
-  .theme-loridama .hero h1 { font-size: 39px; }
+  .theme-loridama .hero h1,
+  .theme-concheki .hero h1 { font-size: 39px; }
   .hero-art { min-height: 430px; }
   .hero-stamp { left: -4px; }
   .theme-loridama .hero-art { min-height: 340px; }
+  .theme-concheki .hero-art { min-height: 400px; }
   .download-section { display: block; text-align: center; }
   .download-section > img { width: 92px; margin: 0 auto 24px; }
   .download-section .store-actions { justify-content: center; margin-top: 28px; }
