@@ -1,4 +1,5 @@
-const CACHE_NAME = 'portfolio-v3';
+const CACHE_NAME = 'portrait-site-v4';
+const LEGACY_CACHE_NAMES = ['portfolio-v3'];
 const PRECACHE_URLS = [
   './',
   './index.html',
@@ -17,13 +18,16 @@ self.addEventListener('install', function(event) {
   );
 });
 
-// Activate: clean old caches
+// Activate: clean only caches owned by this site.
 self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(names) {
       return Promise.all(
         names.filter(function(name) {
-          return name !== CACHE_NAME;
+          return name !== CACHE_NAME && (
+            name.indexOf('portrait-site-') === 0 ||
+            LEGACY_CACHE_NAMES.indexOf(name) !== -1
+          );
         }).map(function(name) {
           return caches.delete(name);
         })
@@ -34,7 +38,7 @@ self.addEventListener('activate', function(event) {
   );
 });
 
-// Fetch: stale-while-revalidate for same-origin, cache-first for static assets
+// Fetch: network-first for HTML, cache-first for same-origin static assets.
 self.addEventListener('fetch', function(event) {
   var url = new URL(event.request.url);
 

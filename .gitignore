@@ -1,3 +1,6 @@
+# macOS metadata
+.DS_Store
+
 # Temporary design-review artifacts
 /design-review/
 

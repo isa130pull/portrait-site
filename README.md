@@ -56,13 +56,19 @@ portrait-site/
 │   ├── case-study.css          # ケーススタディ用スタイル
 │   ├── hitokoma.css            # ヒトコマ用スタイル
 │   ├── game-app.css            # カジュアルゲーム紹介ページ共通スタイル
-│   ├── language-switcher.css    # 言語切り替え共通スタイル
+│   ├── app-experience.css       # アプリ紹介ページの無料Web体験用スタイル
 │   ├── app-language.css         # アプリ英語版・言語切り替え補助スタイル
-│   └── app-shell.css           # ブラウザアプリ共通スタイル
+│   ├── app-shell.css            # ブラウザアプリ共通スタイル
+│   ├── bingo.css                # セトリビンゴ用スタイル
+│   ├── pong-guide.css           # ポンゲームのガイド用スタイル
+│   └── language-switcher.css    # 言語切り替え共通スタイル
 ├── scripts/
-│   ├── app-marketing.js        # アプリ紹介ページ用ストア導線計測
-│   └── language-preference.js  # トップ由来の言語設定をアプリページへ継承
-├── sw.js                       # トップページ用Service Worker
+│   ├── app-experience.js        # アプリ紹介ページの無料Web体験
+│   ├── app-marketing.js         # アプリ紹介ページ用ストア導線計測
+│   ├── bingo.js                 # セトリビンゴの共通ロジック（日英）
+│   ├── contact-form.js          # お問い合わせフォームの共通ロジック（日英）
+│   └── language-preference.js   # トップ由来の言語設定を各ページへ継承
+├── sw.js                        # トップページ用Service Worker
 ├── images/
 │   ├── profile@1x.jpg          # プロフィール写真
 │   ├── hitokoma/               # ヒトコマ用スクリーンショット・OGP
@@ -176,6 +182,7 @@ portrait-site/
 - YouTube動画埋め込み: 実績紹介に動画を活用
 - お問い合わせフォーム: Google Apps Script連携
 - 広告マネタイゼーション: app-ads.txt による広告認定
+- オフライン補助: Service Workerでトップページと同一オリジンの静的資産をキャッシュ
 
 ## セットアップ手順
 
@@ -185,7 +192,7 @@ portrait-site/
 
 1. Googleスプレッドシート作成
 2. Apps Scriptでウェブアプリをデプロイ
-3. `pages/contact.html` の `SCRIPT_URL` を更新
+3. `scripts/contact-form.js` の `SCRIPT_URL` を更新
 
 ### 2. GitHub Pagesの有効化
 
@@ -210,6 +217,18 @@ portrait-site/
 2. `isa130pull.github.io` リポジトリの `app-ads.txt` にも同じ内容をコピー
 3. 両方のリポジトリにプッシュ
 
+## 保守時の検証
+
+変更後は次の順に確認します。フォームとランキングは、本番送信・本番データ更新を避けて非破壊で確認してください。
+
+1. `git diff --check` で空白エラーを確認
+2. `python3 -m http.server 8000` でリポジトリルートを配信
+3. `http://localhost:8000/` から変更ページ、日英切り替え、画像、リンク、レスポンシブ表示を確認
+4. ブラウザのコンソールにエラーがないことを確認
+5. SEO変更時は canonical / OGP / JSON-LD / `sitemap.xml` のURLと更新日を確認
+
+Service Workerのキャッシュ名は `portrait-site-` で始め、本サイト以外のキャッシュを削除しないようにします。旧版で使用した `portfolio-v3` だけは移行対象として明示的に削除します。
+
 ## 技術スタック
 
 - HTML5 / CSS3 / Vanilla JS
@@ -219,6 +238,10 @@ portrait-site/
 
 ## 更新履歴
 
+- 2026-08-24: 保守構成とドキュメントを整理
+  - 重複していたアプリアイコンをアプリ別フォルダへ統合
+  - Service Workerの削除対象を本サイト所有のキャッシュへ限定
+  - 問い合わせフォーム設定手順、構成表、検証手順を現行実装へ同期
 - 2026-08-19: コンチェキのアプリ紹介ページを追加
   - 日英の特設ページ、トップページ導線、ストア導線、OGP、構造化データ、サイトマップを追加
 - 2026-08-14: アプリ紹介ページに無料Web体験を追加

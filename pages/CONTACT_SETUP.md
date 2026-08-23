@@ -2,6 +2,8 @@
 
 お問い合わせフォームを機能させるために、Google Apps Scriptの設定が必要です。
 
+日本語版・英語版のフォーム処理は `scripts/contact-form.js` で共通化しています。Apps ScriptのウェブアプリURLはHTMLへ重複記載せず、このファイルの `SCRIPT_URL` だけで管理します。
+
 ## 手順1: Googleスプレッドシートの作成
 
 1. [Google Sheets](https://sheets.google.com) にアクセス
@@ -74,7 +76,7 @@ function doPost(e) {
             "https://isa130pull.github.io/portrait-site/"
     });
 
-    // CORS対応の成功レスポンス
+    // 成功レスポンス
     return ContentService
       .createTextOutput(JSON.stringify({
         success: true,
@@ -83,7 +85,7 @@ function doPost(e) {
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch(error) {
-    // CORS対応のエラーレスポンス
+    // エラーレスポンス
     return ContentService
       .createTextOutput(JSON.stringify({
         success: false,
@@ -111,18 +113,18 @@ function testDoPost() {
 }
 ```
 
-4. **重要**: 44行目のメールアドレスを自分のアドレスに変更
+4. **重要**: 管理者向け `MailApp.sendEmail` の `to` を自分のメールアドレスに変更
 5. 上部の「保存」アイコンをクリック
 6. プロジェクト名を「お問い合わせフォーム」などに変更
 
 ### 注意事項
 
-このコードは**CORS対応版**です。以下の機能が含まれています：
+このコードには以下の機能が含まれています：
 - ✅ 正確な成功/失敗判定
 - ✅ エラーメッセージの取得
-- ✅ 送信者への確認メール（オプション、58-75行目）
+- ✅ 送信者への確認メール（オプション）
 
-送信者への確認メールが不要な場合は、58-75行目を削除してください。
+送信者への確認メールが不要な場合は、送信者の `data.email` を宛先にしている `MailApp.sendEmail` ブロックを削除してください。
 
 ## 手順3: デプロイ
 
@@ -156,8 +158,8 @@ function testDoPost() {
 
 ## 手順4: フォームにURLを設定
 
-1. `pages/contact.html` を開く
-2. 60行目付近の以下の行を探す：
+1. `scripts/contact-form.js` を開く
+2. ファイル先頭の以下の行を探す：
    ```javascript
    const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
    ```
@@ -169,7 +171,7 @@ function testDoPost() {
 
 ## 手順5: 動作テスト
 
-1. ブラウザで `pages/contact.html` を開く
+1. リポジトリルートで `python3 -m http.server 8000` を実行し、ブラウザで `http://localhost:8000/pages/contact.html` を開く
 2. フォームに以下のテストデータを入力：
    - お名前: テスト太郎
    - メールアドレス: test@example.com
@@ -186,7 +188,7 @@ function testDoPost() {
 
 **原因1**: Apps ScriptのURLが正しく設定されていない
 **解決策**:
-- `pages/contact.html` の175行目の `SCRIPT_URL` を確認
+- `scripts/contact-form.js` の `SCRIPT_URL` を確認
 - URLの末尾が `/exec` になっているか確認
 
 **原因2**: Apps Scriptが正しくデプロイされていない
@@ -204,9 +206,11 @@ function testDoPost() {
 
 **原因**: Apps Scriptのコードにエラーがある
 **解決策**:
-- Apps Scriptエディタで「実行」→「testDoPost」を選択
+- テスト用のスプレッドシートと通知先を用意したうえで、Apps Scriptエディタから `testDoPost` を実行
 - 実行ログを確認してエラーメッセージを確認
 - スプレッドシートのヘッダー行（A1:E1）が正しいか確認
+
+`testDoPost` はシートへの行追加とメール送信を実行します。運用中の本番データで保守確認だけを行う場合は実行しないでください。
 
 ### メール通知が届かない
 
@@ -214,13 +218,13 @@ function testDoPost() {
 **解決策**:
 - Apps Scriptで「MailApp」の権限が承認されているか確認
 - Gmail のスパムフォルダを確認
-- 送信先メールアドレスが正しいか確認（44行目）
+- 管理者向け `MailApp.sendEmail` の `to` が正しいか確認
 
 ### 送信者への確認メールが届かない
 
 **原因**: 確認メール機能が有効になっていない、または送信先アドレスが間違っている
 **解決策**:
-- Apps Scriptの58-75行目が存在するか確認
+- 送信者の `data.email` を宛先にした `MailApp.sendEmail` ブロックが存在するか確認
 - フォームで入力したメールアドレスが正しいか確認
 - 迷惑メールフォルダを確認
 
@@ -230,41 +234,19 @@ function testDoPost() {
 **解決策**:
 - インターネット接続を確認
 - ブラウザのコンソール（F12）でエラーメッセージを確認
-- Apps ScriptのURLが有効か確認（ブラウザで直接アクセスしてみる）
+- Apps Scriptの「デプロイを管理」で、有効なウェブアプリのデプロイと実行ユーザーを確認
 
 ## セキュリティ対策（推奨）
 
-### スパム対策を追加する場合
+公開フォームの入力値は信用せず、文字数・メール形式・許可する相談種別をApps Script側でも検証してください。フロントエンドだけの検証は直接POSTで回避できます。
 
-Apps Script側で簡易的なスパム対策を追加できます：
+スパムが増えた場合は、Apps Script側へレート制限やハニーポットを追加します。ハニーポットを使う場合は、フォーム要素だけでなく `scripts/contact-form.js` の送信データにも同じ項目を追加し、日英両方で非破壊確認してください。
 
-```javascript
-// doPost関数内の最初に追加
-// ハニーポット（botチェック）
-if (data.honeypot) {
-  return ContentService.createTextOutput(
-    JSON.stringify({success: false, error: "Invalid submission"})
-  ).setMimeType(ContentService.MimeType.JSON);
-}
-
-// レート制限（同じメールアドレスから短時間に複数送信を防ぐ）
-var recentSubmissions = sheet.getRange(2, 3, sheet.getLastRow() - 1, 1).getValues();
-var oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
-for (var i = 0; i < recentSubmissions.length; i++) {
-  if (recentSubmissions[i][0] === data.email) {
-    var timestamp = sheet.getRange(i + 2, 1).getValue();
-    if (timestamp > oneHourAgo) {
-      return ContentService.createTextOutput(
-        JSON.stringify({success: false, error: "Too many requests"})
-      ).setMimeType(ContentService.MimeType.JSON);
-    }
-  }
-}
-```
+ウェブアプリURLはフォーム動作に必要な公開識別子ですが、ログや作業報告へ転載せず、リポジトリ内では `scripts/contact-form.js` の1か所だけで管理します。
 
 ## 完了！
 
-これで、お問い合わせフォームが完全に機能します。
+以上で設定は完了です。
 
 問い合わせがあると：
 1. Googleスプレッドシートに自動保存
