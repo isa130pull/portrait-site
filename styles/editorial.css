@@ -1325,7 +1325,13 @@ html.video-modal-open body {
 }
 
 .cross-promo-footer [data-cross-promo] {
-  min-height: 100px;
+  min-height: 132px;
+}
+
+@media (max-width: 440px) {
+  .cross-promo-footer [data-cross-promo] {
+    min-height: 220px;
+  }
 }
 
 footer {
