@@ -93,10 +93,21 @@ portrait-site/
 - プロフィール: 経歴、専門領域、拠点情報
 - 略歴: 2012年〜2024年のキャリアサマリー
 - 実績/プロジェクト: breaker、Vタビ、Velle（YouTube動画埋め込み）
-- 自作アプリ: コンチェキ、ヒトコマ、いえばく、すしばく、AI美少女1/100、ろりだま
+- 自作アプリ: 代表作「山陰イベントマップ」（Web・iOS・Android）を先頭の専用枠で紹介。続いてブラウザアプリとコンチェキ、ヒトコマ、いえばく、すしばく、AI美少女1/100、ろりだま
 - メディア/執筆: App Marketing Labo、Qiita
 - 問い合わせ: SNSリンク、お問い合わせフォームへの導線
 - フッター: コピーライト、プライバシーポリシーリンク
+
+### 山陰イベントマップの代表作枠
+
+- 日英トップの自作アプリ先頭に配置し、一般のブラウザアプリ一覧とは重複させない。
+- Web・iOS・Androidを同じ作品枠の中で表示。ストアバッジは既存の公式素材を使用。
+- 提供先は各HTMLの `.featured-app-platforms` で管理。`data-platform` に `web` / `ios` / `android`、`data-release-state` に公開状態を記載し、リンク先を `href` に設定する。JavaScriptなしでも全リンクを利用できる。
+- 現在は3種類とも `released`。提供先の追加・変更時は日英両方のリンクと公開状況の文言を更新する。未公開の提供先を予告する場合はリンクなしのテキストにして `planned` を記載し、公開後に実URLのリンクへ置き換える。
+- iOS: https://apps.apple.com/jp/app/id6796542510
+- Android: https://play.google.com/store/apps/details?id=com.isao.sanineventmap
+- Web: https://sanin-map.com/
+- `images/sanin-map/find.webp` と `map.webp` は本人のApp Store掲載スクリーンショット（2026-09-15取得）。素材の出典URLは同ディレクトリの `SOURCES.md` に記録。
 
 ### ケーススタディ（pages/case-study-breaker.html）
 
