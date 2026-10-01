@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ee6d9f">
   <title>ConCheki | Yonago concafes, stamps &amp; cast avatars</title>
   <meta name="description" content="Explore Melty Candy and CheersCruise, supported concafes in Yonago, Japan. ConCheki turns visits into stamps, cast-avatar gacha collections, and cheki photo memories.">
@@ -16,7 +16,7 @@
 
   <link rel="icon" type="image/png" href="../../../images/concheki/app-icon.png">
   <link rel="apple-touch-icon" href="../../../images/concheki/app-icon.png">
-  <link rel="preload" href="../../../images/concheki/screen-01-640.webp" as="image" fetchpriority="high" type="image/webp" imagesrcset="../../../images/concheki/screen-01-640.webp 640w, ../../../images/concheki/screen-01.webp 1242w" imagesizes="(max-width: 720px) 70vw, 400px">
+  <link rel="preload" href="../../../images/concheki/screen-01-640.webp" as="image" fetchpriority="high" type="image/webp" imagesrcset="../../../images/concheki/screen-01-640.webp 640w, ../../../images/concheki/screen-01.webp 1242w" imagesizes="(max-width: 720px) 52vw, 230px">
   <link rel="stylesheet" href="../../../styles/game-app.css?v=20261001-images">
   <link rel="stylesheet" href="../../../styles/language-switcher.css?v=20260813">
   <link rel="stylesheet" href="../../../styles/app-language.css?v=20260813">
@@ -70,6 +70,8 @@
   <script src="../../../scripts/app-marketing.js" defer></script>
   <script src="../../../scripts/language-preference.js?v=20260813-4" defer></script>
   <link rel="stylesheet" href="../../../styles/seo-content.css?v=20261001-images">
+  <link rel="stylesheet" href="../../../styles/concheki-layout.css?v=20261001-layout3">
+  <script src="../../../scripts/concheki-navigation.js?v=20261001-layout3" defer></script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -115,122 +117,87 @@
 
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">CONCAFE × OSHIKATSU</p>
-        <h1 id="hero-title"><span class="hero-product">ConCheki — Concept cafe visits and fandom app</span>
-          <span class="heading-line">Every visit</span><span class="heading-line">makes fandom</span><span class="heading-line"><em>more fun.</em></span></h1>
-        <p class="hero-lead">Turn concafe visits into stamps and points. Collect avatars of your favorite cast members through gacha, then keep your cheki photos and memories together in one app.</p>
-        <p class="language-availability-note">The app interface and participating-store information are currently available in Japanese only.</p>
+        <h1 id="hero-title">ConCheki<span class="concheki-hero-subtitle">Your concafe app</span></h1>
+        <p class="hero-lead">Earn visit stamps, collect cast avatars, and keep your cheki photos in one app.</p>
+        <p class="language-availability-note">The app is available in Japanese.</p>
         <div class="store-actions">
           <a class="store-badge-link" href="https://apps.apple.com/jp/app/concheki/id6772491415" target="_blank" rel="noopener" data-store="app-store" data-store-cta="hero" aria-label="Download ConCheki on the App Store (opens in a new tab)"><img class="store-badge store-badge-app-store" src="../../../images/store-badges/download-on-the-app-store-en.svg" alt="Download on the App Store" width="109" height="40"></a>
           <a class="store-badge-link" href="https://play.google.com/store/apps/details?id=com.isao.concheki" target="_blank" rel="noopener" data-store="google-play" data-store-cta="hero" aria-label="Get ConCheki on Google Play (opens in a new tab)"><img class="store-badge store-badge-google-play" src="../../../images/store-badges/get-it-on-google-play-en.png" alt="Get it on Google Play" width="646" height="250"></a>
         </div>
-        <nav class="seo-jump-links" aria-label="Explore this app"><a href="#stores">Supported cafes</a><a href="#features">Features</a><a href="#faq">FAQ</a><a href="../../index.html#personal">All apps and web tools</a></nav>
+        <nav class="seo-jump-links" aria-label="Cafe information"><a href="#stores">Explore supported cafes →</a></nav>
       </div>
 
       <div class="hero-art" aria-label="ConCheki app screens">
-        <figure class="device device-main"><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/screen-01-640.webp 640w, ../../../images/concheki/screen-01.webp 1242w" sizes="(max-width: 720px) 70vw, 400px"><img src="../../../images/concheki/screen-01.png" alt="ConCheki home screen showing visit stamps and points" width="1242" height="2688" fetchpriority="high"></picture></figure>
-        <figure class="device device-side" aria-hidden="true"><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/screen-02-640.webp 640w, ../../../images/concheki/screen-02.webp 1242w" sizes="(max-width: 720px) 70vw, 400px"><img src="../../../images/concheki/screen-02.png" alt="" width="1242" height="2688"></picture></figure>
-        <picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/app-icon.webp"><img class="hero-app-icon" src="../../../images/concheki/app-icon.png" alt="ConCheki app icon" width="1024" height="1024"></picture>
-        <div class="hero-stamp" aria-label="Visit, draw, collect"><strong>♡</strong><span>VISIT. DRAW. COLLECT.</span></div>
-      </div>
-    </section>
-
-    <ul class="fact-strip" aria-label="ConCheki at a glance">
-      <li><strong>Earn by visiting</strong><span>Stamps and points</span></li>
-      <li><strong>Meet your oshi</strong><span>Collectible avatar gacha</span></li>
-      <li><strong>Keep the memories</strong><span>Cheki book and rankings</span></li>
-    </ul>
-
-    <section class="section-shell" aria-labelledby="story-title">
-      <p class="section-kicker">YOUR OSHIKATSU STORY</p>
-      <div class="story-grid">
-        <h2 id="story-title">Every reunion<br>becomes a memory.</h2>
-        <div class="story-copy">
-          <p>Check in at a participating cafe to earn stamps and points. Use those points in gacha to collect outfit variations of cast-member avatars.</p>
-          <p class="story-emphasis">Visits, collections, and cheki photos become one continuous story of the people and places you support.</p>
-        </div>
+        <figure class="device device-main"><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/screen-01-640.webp 640w, ../../../images/concheki/screen-01.webp 1242w" sizes="(max-width: 720px) 52vw, 230px"><img src="../../../images/concheki/screen-01.png" alt="ConCheki home screen showing visit stamps and points" width="1242" height="2688" fetchpriority="high"></picture></figure>
       </div>
     </section>
 
     <section class="concafe-stores section-shell" id="stores" aria-labelledby="stores-title">
       <div class="section-heading">
-        <div><p class="section-kicker">PARTICIPATING CONCAFES</p><h2 id="stores-title">Supported concafes in Yonago</h2></div>
-        <p>Collect visit stamps and cast avatars at Melty Candy and CheersCruise with ConCheki.</p>
+        <div><h2 id="stores-title">Supported cafes</h2></div>
+        <p>Available at two cafes in Yonago, Japan.</p>
       </div>
       <div class="concafe-definition">
         <h3>What is a concafe?</h3>
-        <p>Short for “concept cafe,” a concafe is a cafe or bar built around a theme, reflected in its costumes and atmosphere. Themes range from maids to cruise ships. ConCheki helps you record visits and memories with your favorite cast members at participating cafes.</p>
+        <p>A concafe, short for concept cafe, is a cafe or bar with its own theme, costumes, and atmosphere.</p>
       </div>
       <div class="concafe-grid">
         <article class="concafe-card" id="melty-candy" aria-labelledby="melty-candy-title">
           <figure class="concafe-visual">
-            <img src="../../../images/concheki/stores/melty-candy-gacha.webp" srcset="../../../images/concheki/stores/melty-candy-gacha-640.webp 640w, ../../../images/concheki/stores/melty-candy-gacha.webp 1000w" sizes="(max-width: 900px) 90vw, 530px" alt="ConCheki promotional artwork featuring Melty Candy cast materials and the app logo" width="1000" height="563" loading="lazy" decoding="async">
-            <figcaption>ConCheki promotional artwork using cast materials</figcaption>
+            <img src="../../../images/concheki/stores/melty-candy-gacha.webp" srcset="../../../images/concheki/stores/melty-candy-gacha-640.webp 640w, ../../../images/concheki/stores/melty-candy-gacha.webp 1000w" sizes="(max-width: 639px) 90vw, (max-width: 980px) 44vw, 510px" alt="ConCheki promotional artwork featuring Melty Candy cast materials and the app logo" width="1000" height="563" loading="lazy" decoding="async">
           </figure>
           <div class="concafe-card-body">
-            <div class="concafe-card-brand"><img src="../../../images/concheki/stores/melty-candy-logo.webp" alt="Maid&amp;Bar Melty Candy store logo" width="240" height="194" loading="lazy" decoding="async"><p class="concafe-status">ConCheki supported</p></div>
+            <div class="concafe-card-brand"><img src="../../../images/concheki/stores/melty-candy-logo.webp" alt="Maid&amp;Bar Melty Candy store logo" width="240" height="194" loading="lazy" decoding="async"><p class="concafe-status">Supported cafe</p></div>
             <h3 id="melty-candy-title">Melty Candy</h3>
             <p class="concafe-location">Maid&amp;Bar <span lang="ja">めるてぃ×きゃんでぃ</span><br>37 Asahimachi, Yonago, Tottori, Japan</p>
-            <p>A maid bar in Yonago offering conversation and live singing and dance performances. Its blue interior sets the scene for enjoying food, drinks, and the maid-themed atmosphere.</p>
-            <p>Use ConCheki to earn stamps and points when you visit, then collect cast avatars through gacha. Scan your cheki prints or add photos to keep those memories in your own photo book.</p>
+            <p>A maid bar with conversation, live singing and dance performances, and food and drinks in a blue-themed interior.</p>
             <a href="https://melty-candy.com/" target="_blank" rel="noopener" aria-label="Melty Candy official website and visitor information (opens in a new tab)">Official website &amp; visitor info ↗</a>
           </div>
         </article>
         <article class="concafe-card" id="cheers-cruise" aria-labelledby="cheers-cruise-title">
           <figure class="concafe-visual">
-            <img src="../../../images/concheki/stores/cheers-cruise-gacha.webp" srcset="../../../images/concheki/stores/cheers-cruise-gacha-640.webp 640w, ../../../images/concheki/stores/cheers-cruise-gacha.webp 1000w" sizes="(max-width: 900px) 90vw, 530px" alt="Gacha promotional artwork with ConCheki and CheersCruise logos and cast avatars" width="1000" height="563" loading="lazy" decoding="async">
-            <figcaption>ConCheki × CheersCruise gacha promotional artwork</figcaption>
+            <img src="../../../images/concheki/stores/cheers-cruise-gacha.webp" srcset="../../../images/concheki/stores/cheers-cruise-gacha-640.webp 640w, ../../../images/concheki/stores/cheers-cruise-gacha.webp 1000w" sizes="(max-width: 639px) 90vw, (max-width: 980px) 44vw, 510px" alt="Gacha promotional artwork with ConCheki and CheersCruise logos and cast avatars" width="1000" height="563" loading="lazy" decoding="async">
           </figure>
           <div class="concafe-card-body">
-            <div class="concafe-card-brand"><img src="../../../images/concheki/stores/cheers-cruise-logo.webp" alt="Cheers Cruise store logo" width="240" height="240" loading="lazy" decoding="async"><p class="concafe-status">ConCheki supported</p></div>
+            <div class="concafe-card-brand"><img src="../../../images/concheki/stores/cheers-cruise-logo.webp" alt="Cheers Cruise store logo" width="240" height="240" loading="lazy" decoding="async"><p class="concafe-status">Supported cafe</p></div>
             <h3 id="cheers-cruise-title">CheersCruise</h3>
             <p class="concafe-location">Cheers Cruise (<span lang="ja">チアーズクルーズ／チアクル</span>)<br>Nogawa Building 2F, 14 Chamachi, Yonago, Tottori, Japan</p>
-            <p>A concafe in Yonago themed around a nighttime cruise ship. Cast members are introduced as the “crew,” and visits as “boarding,” bringing a nautical theme to the experience.</p>
-            <p>Record each visit with ConCheki stamps and use your points to collect cast avatars through gacha. Discover different outfits and illustrations as you build your personal fan collection.</p>
+            <p>A nighttime cruise ship-themed concafe, where cast members are the “crew” and visits are “boarding.”</p>
             <a href="https://x.com/cheers_cruise" target="_blank" rel="noopener" aria-label="CheersCruise official X and boarding updates (opens in a new tab)">Official X &amp; boarding updates ↗</a>
           </div>
         </article>
       </div>
-      <p class="concafe-note">Participating cafes as of October 2026. Check each cafe's official information for current hours, prices, and cast schedules. See <a href="#features">app features</a> for how ConCheki works.</p>
+      <p class="concafe-note">Supported cafes as of October 2026. See each cafe’s official information for hours, prices, and cast schedules.</p>
     </section>
 
     <section class="features-section section-shell" id="features" aria-labelledby="features-title">
       <div class="section-heading">
-        <div><p class="section-kicker">FEATURES</p><h2 id="features-title">Visit. Collect.<br>Remember.</h2></div>
-        <p>ConCheki connects the moment you arrive at a cafe with the memories you revisit later.</p>
+        <div><h2 id="features-title">What you can do</h2></div>
+        <p>Visit, collect, and keep your memories.</p>
       </div>
       <div class="feature-grid">
-        <article class="feature-card"><span class="feature-number">01 / CHECK IN</span><h3>Stamp every visit</h3><p>Scan the shared QR code and confirm the cafe by GPS to earn visit stamps and points.</p></article>
-        <article class="feature-card featured"><span class="feature-number">02 / COLLECT</span><h3>Collect your oshi</h3><p>Use points in gacha to discover cast avatars in different outfits and set a favorite as your profile icon.</p></article>
-        <article class="feature-card"><span class="feature-number">03 / REMEMBER</span><h3>Build a cheki book</h3><p>Scan your cheki prints or add photos. Organize them by date, cast member, and cafe in a photo book stored on your device.</p></article>
+        <article class="feature-card"><span class="feature-number">01</span><h3>Visit stamps</h3><p>Scan the QR code and confirm the cafe by GPS to earn stamps and points.</p></article>
+        <article class="feature-card featured"><span class="feature-number">02</span><h3>Cast avatar gacha</h3><p>Use points to collect cast avatars and choose your favorite profile icon.</p></article>
+        <article class="feature-card"><span class="feature-number">03</span><h3>Cheki photo book</h3><p>Scan prints or add photos, then organize them by date, cast member, and cafe on your device.</p></article>
       </div>
     </section>
 
     <section class="screens-section section-shell" id="screens" aria-labelledby="screens-title">
       <div class="section-heading">
-        <div><p class="section-kicker">APP SCREENS</p><h2 id="screens-title">See your fan journey<br>grow over time.</h2></div>
-        <p>Visits, avatar pulls, cheki memories, and trophies all become part of a collection unique to you.</p>
+        <div><h2 id="screens-title">App screens</h2></div>
+        <p class="concheki-swipe-hint">Swipe through the screens.</p>
       </div>
       <div class="screenshots">
-        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/screen-01-640.webp 640w, ../../../images/concheki/screen-01.webp 1242w" sizes="(max-width: 720px) 70vw, 400px"><img src="../../../images/concheki/screen-01.png" alt="Home screen with a stamp card and visit history" width="1242" height="2688" loading="lazy"></picture><figcaption><span>01</span> Earn stamps and points</figcaption></figure>
-        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/screen-02-640.webp 640w, ../../../images/concheki/screen-02.webp 1242w" sizes="(max-width: 720px) 70vw, 400px"><img src="../../../images/concheki/screen-02.png" alt="Gacha result screen with collectible cast avatars" width="1242" height="2688" loading="lazy"></picture><figcaption><span>02</span> Collect cast avatars</figcaption></figure>
-        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/screen-03-640.webp 640w, ../../../images/concheki/screen-03.webp 1242w" sizes="(max-width: 720px) 70vw, 400px"><img src="../../../images/concheki/screen-03.png" alt="Cheki book screen organizing photo memories" width="1242" height="2688" loading="lazy"></picture><figcaption><span>03</span> Keep cheki memories together</figcaption></figure>
-        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/screen-04-640.webp 640w, ../../../images/concheki/screen-04.webp 1242w" sizes="(max-width: 720px) 70vw, 400px"><img src="../../../images/concheki/screen-04.png" alt="National trophy ranking screen" width="1242" height="2688" loading="lazy"></picture><figcaption><span>04</span> Track trophies and rankings</figcaption></figure>
+        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/screen-01-640.webp 640w, ../../../images/concheki/screen-01.webp 1242w" sizes="(max-width: 639px) 66vw, (max-width: 720px) 40vw, 230px"><img src="../../../images/concheki/screen-01.png" alt="Home screen with a stamp card and visit history" width="1242" height="2688" loading="lazy"></picture><figcaption>Visit stamps</figcaption></figure>
+        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/screen-02-640.webp 640w, ../../../images/concheki/screen-02.webp 1242w" sizes="(max-width: 639px) 66vw, (max-width: 720px) 40vw, 230px"><img src="../../../images/concheki/screen-02.png" alt="Gacha result screen with collectible cast avatars" width="1242" height="2688" loading="lazy"></picture><figcaption>Cast gacha</figcaption></figure>
+        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/screen-03-640.webp 640w, ../../../images/concheki/screen-03.webp 1242w" sizes="(max-width: 639px) 66vw, (max-width: 720px) 40vw, 230px"><img src="../../../images/concheki/screen-03.png" alt="Cheki book screen organizing photo memories" width="1242" height="2688" loading="lazy"></picture><figcaption>Cheki book</figcaption></figure>
+        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/screen-04-640.webp 640w, ../../../images/concheki/screen-04.webp 1242w" sizes="(max-width: 639px) 66vw, (max-width: 720px) 40vw, 230px"><img src="../../../images/concheki/screen-04.png" alt="National trophy ranking screen" width="1242" height="2688" loading="lazy"></picture><figcaption>Rankings</figcaption></figure>
       </div>
     </section>
 
-    <section class="loop-section section-shell" aria-labelledby="loop-title">
-      <div class="loop-copy"><p class="section-kicker">HOW IT WORKS</p><h2 id="loop-title">Today's visit becomes<br>tomorrow's excitement.</h2><p>A simple loop turns each check-in into another reason to support your favorite cast and cafe.</p></div>
-      <ol class="loop-list">
-        <li><span>1</span><div><h3>Check in at the cafe</h3><p>Use the shared QR code and GPS to confirm a participating location and record your visit.</p></div></li>
-        <li><span>2</span><div><h3>Spend points on gacha</h3><p>Use points earned from visits to add more cast avatars to your collection.</p></div></li>
-        <li><span>3</span><div><h3>Grow your fan history</h3><p>Look back on cheki photos and trophies as your personal oshikatsu record grows.</p></div></li>
-      </ol>
-    </section>
-
-    <section class="download-section" aria-labelledby="download-title">
+    <section class="download-section" id="download" aria-labelledby="download-title">
       <picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/app-icon.webp"><img src="../../../images/concheki/app-icon.png" alt="ConCheki app icon" width="1024" height="1024" loading="lazy"></picture>
-      <div><p class="section-kicker">START YOUR COLLECTION</p><h2 id="download-title">Make today's visit<br>part of your story.</h2><p>Available on iPhone and Android. The app is free to download and currently supports <a href="#stores">Melty Candy and CheersCruise</a> in Yonago, Tottori, Japan.</p></div>
+      <div><h2 id="download-title">Get ConCheki</h2><p>Free for iPhone and Android. Optional in-app purchases.</p></div>
       <div class="store-actions">
         <a class="store-badge-link" href="https://apps.apple.com/jp/app/concheki/id6772491415" target="_blank" rel="noopener" data-store="app-store" data-store-cta="download" aria-label="Download ConCheki on the App Store (opens in a new tab)"><img class="store-badge store-badge-app-store" src="../../../images/store-badges/download-on-the-app-store-en.svg" alt="Download on the App Store" width="109" height="40" loading="lazy"></a>
         <a class="store-badge-link" href="https://play.google.com/store/apps/details?id=com.isao.concheki" target="_blank" rel="noopener" data-store="google-play" data-store-cta="download" aria-label="Get ConCheki on Google Play (opens in a new tab)"><img class="store-badge store-badge-google-play" src="../../../images/store-badges/get-it-on-google-play-en.png" alt="Get it on Google Play" width="646" height="250" loading="lazy"></a>
@@ -238,19 +205,17 @@
     </section>
 
     <section class="faq-section section-shell" id="faq" aria-labelledby="faq-title">
-      <div class="faq-heading"><p class="section-kicker">FAQ</p><h2 id="faq-title">Frequently asked questions</h2></div>
+      <div class="faq-heading"><h2 id="faq-title">FAQ</h2></div>
       <div class="faq-list">
-        <details><summary>How do visit stamps and the cheki photo book differ?</summary><p>Checking in at a participating cafe records visits and earns stamps and points. Scan your cheki prints or add photos to organize them by date, cast member, and cafe on your device. You can revisit both visits and photo memories in one app.</p></details>
-        <details><summary>What should I check before my first visit?</summary><p>Check that the cafe participates. Currently, ConCheki supports <a href="#stores">Melty Candy and CheersCruise</a> in Yonago, Tottori, Japan. At the cafe, open Check In, scan the QR code, and use location information to confirm the store.</p></details>
-        <details><summary>Where can I use ConCheki?</summary><p>You can use it at Melty Candy and CheersCruise in Yonago, Tottori, Japan. Visit the <a href="#stores">supported cafe introductions</a> for each cafe's concept and official information.</p></details>
-        <details><summary>Is the app free?</summary><p>The app is free to download and use, with optional in-app purchases.</p></details>
-        <details><summary>Why does check-in use location information?</summary><p>Location is used only to verify a visit when the QR code is scanned and to prevent misuse. It is not used for movement tracking or advertising.</p></details>
-        <details><summary>Are manually added cheki photos uploaded?</summary><p>No. Cheki photos you add manually remain on your device and are not uploaded externally.</p></details>
+        <details><summary>Which cafes are supported?</summary><p>Melty Candy and CheersCruise in Yonago, Japan. <a href="#stores">Explore the cafes</a>.</p></details>
+        <details><summary>Is the app free?</summary><p>The app is free, with optional in-app purchases.</p></details>
+        <details><summary>Why use location?</summary><p>Location confirms your visit and prevents misuse. It is not used for movement tracking or advertising.</p></details>
+        <details><summary>Where are photos stored?</summary><p>Manually added photos stay on your device and are not uploaded.</p></details>
       </div>
     </section>
 
     <section class="seo-related" aria-labelledby="seo-related-title">
-      <h2 id="seo-related-title">More tools for concerts and fandom</h2>
+      <h2 id="seo-related-title">More fan tools</h2>
       <ul>
         <li><a href="../../pages/bingo.html">Setlist Bingo — free printable bingo maker</a></li>
         <li><a href="../../pages/idol-pv-player.html">Idol MV player — discover and play YouTube MVs</a></li>
@@ -263,5 +228,13 @@
     <div class="footer-brand"><picture style="display: contents"><source type="image/webp" srcset="../../../images/concheki/app-icon.webp"><img src="../../../images/concheki/app-icon.png" alt="" width="1024" height="1024" loading="lazy"></picture><div><strong>ConCheki</strong><span>Concafe visits and fan collections</span></div></div>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../">Portfolio</a><a href="../../../pages/concheki-terms.html">Terms (Japanese)</a><a href="../../../pages/concheki-privacy.html">Privacy (Japanese)</a><a href="../../pages/contact.html">Contact</a><span>© 2026 Isao Kawaguchi</span></nav>
   </footer>
+
+  <nav class="concheki-mobile-nav" aria-label="Mobile page navigation">
+    <a href="#top" aria-current="location"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+    <a href="#stores"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 10v10h16V10M3 10l2-7h14l2 7M3 10c0 3 4 3 4 0 0 3 5 3 5 0 0 3 5 3 5 0 0 3 4 3 4 0M9 20v-6h6v6"/></svg><span>Cafes</span></a>
+    <a href="#features"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 3 3 5-6"/></svg><span>Features</span></a>
+    <a href="#faq"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 17h.01"/></svg><span>FAQ</span></a>
+    <a href="#download"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></svg><span>Get app</span></a>
+  </nav>
 </body>
 </html>

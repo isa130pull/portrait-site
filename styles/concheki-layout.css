@@ -1,0 +1,478 @@
+body.theme-concheki {
+  --page-width: 1120px;
+  --page-x: clamp(20px, 4vw, 40px);
+  --display-font: var(--body-font);
+  --muted: #705e68;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.theme-concheki main [id] {
+  scroll-margin-top: 88px;
+}
+
+.theme-concheki .header-inner {
+  gap: 24px;
+}
+
+.theme-concheki .site-header nav {
+  gap: 22px;
+}
+
+.theme-concheki .seo-breadcrumb {
+  padding-top: 12px;
+  font-size: 12px;
+}
+
+.theme-concheki .hero {
+  min-height: 0;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 40px;
+  padding-block: 48px 64px;
+}
+
+.theme-concheki .hero h1 {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-wrap: initial;
+}
+
+.concheki-hero-subtitle {
+  display: block;
+  margin-top: 12px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.theme-concheki .hero-lead {
+  max-width: 460px;
+  margin: 20px 0 22px;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.theme-concheki .hero .seo-jump-links {
+  margin: 12px 0 0;
+}
+
+.theme-concheki .seo-jump-links a,
+.theme-concheki .seo-related a {
+  color: #a23764;
+}
+
+.theme-concheki .language-availability-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+}
+
+.theme-concheki .store-actions {
+  gap: 8px 16px;
+}
+
+.theme-concheki .store-badge-link {
+  min-height: 56px;
+}
+
+.theme-concheki .store-badge-app-store {
+  height: 40px;
+}
+
+.theme-concheki .store-badge-google-play {
+  height: 54px;
+}
+
+.theme-concheki .hero-art {
+  width: 100%;
+  min-height: 0;
+  padding: 16px;
+}
+
+.theme-concheki .hero-art::before {
+  width: min(100%, 340px);
+}
+
+.theme-concheki .device-main {
+  position: relative;
+  width: min(100%, 230px);
+  border-width: 6px;
+  border-radius: 26px;
+  transform: none;
+  box-shadow: 0 16px 40px rgba(var(--ink-rgb), 0.14);
+}
+
+.theme-concheki .section-shell {
+  padding-block: 56px;
+}
+
+.theme-concheki .section-heading {
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.theme-concheki .section-heading h2,
+.theme-concheki .download-section h2,
+.theme-concheki .faq-heading h2 {
+  font-size: 30px;
+  font-weight: 750;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-wrap: initial;
+}
+
+.theme-concheki .section-heading > p {
+  margin: 0;
+  font-size: 15px;
+}
+
+.theme-concheki .concafe-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.theme-concheki .concafe-definition {
+  margin-bottom: 24px;
+  padding-left: 16px;
+  border-left: 3px solid var(--accent);
+}
+
+.theme-concheki .concafe-definition h3 {
+  font-size: 17px;
+}
+
+.theme-concheki .concafe-card-body {
+  padding: 20px;
+}
+
+.theme-concheki .concafe-card-brand {
+  margin-bottom: 14px;
+}
+
+.theme-concheki .concafe-card-brand img {
+  width: 76px;
+  height: 60px;
+}
+
+.theme-concheki .concafe-card h3 {
+  font-size: 22px;
+  letter-spacing: 0;
+  overflow-wrap: normal;
+}
+
+.theme-concheki .concafe-card p {
+  margin-bottom: 12px;
+}
+
+.theme-concheki .concafe-card .concafe-status {
+  margin: 0;
+}
+
+.theme-concheki .concafe-note {
+  margin-top: 18px;
+  font-size: 13px;
+}
+
+.theme-concheki .feature-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.theme-concheki .feature-card {
+  min-height: 0;
+  padding: 24px;
+  border-radius: 20px;
+}
+
+.theme-concheki .feature-number {
+  margin-bottom: 16px;
+  letter-spacing: 0;
+}
+
+.theme-concheki .feature-card h3 {
+  margin-bottom: 10px;
+  font-size: 21px;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.theme-concheki .feature-card.featured {
+  background: var(--soft);
+  color: var(--ink);
+}
+
+.theme-concheki .feature-card.featured .feature-number {
+  color: var(--muted);
+}
+
+.theme-concheki .feature-card.featured p {
+  color: var(--ink);
+}
+
+.theme-concheki .screenshots {
+  gap: 20px;
+}
+
+.theme-concheki .concheki-swipe-hint {
+  display: none;
+}
+
+.theme-concheki .screenshots figure {
+  width: 100%;
+  margin: 0;
+}
+
+.theme-concheki .screenshots img {
+  border-radius: 20px;
+}
+
+.theme-concheki .screenshots figcaption {
+  padding-top: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.theme-concheki .download-section {
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 20px 24px;
+  padding-block: 40px;
+}
+
+.theme-concheki .download-section > picture > img {
+  width: 64px;
+  margin: 0;
+  border-width: 2px;
+}
+
+.theme-concheki .download-section p {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.theme-concheki .download-section .store-actions {
+  grid-column: 2;
+  justify-content: flex-start;
+}
+
+.theme-concheki .faq-section {
+  grid-template-columns: minmax(180px, 0.5fr) minmax(0, 1.5fr);
+  gap: 40px;
+}
+
+.theme-concheki .faq-list summary {
+  padding: 18px 32px 18px 0;
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.theme-concheki .faq-list summary::after {
+  top: 20px;
+  font-size: 20px;
+}
+
+.theme-concheki .faq-list details p {
+  padding: 0 24px 18px 0;
+}
+
+.theme-concheki .seo-related {
+  margin-top: 0;
+  padding-block: 28px;
+}
+
+.theme-concheki .seo-related h2 {
+  font-size: 21px;
+}
+
+.theme-concheki .seo-related a {
+  font-size: 14px;
+}
+
+.concheki-mobile-nav {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  body.theme-concheki {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .theme-concheki .header-inner {
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .theme-concheki .header-cta {
+    display: none;
+  }
+
+  .theme-concheki .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .concheki-mobile-nav {
+    position: fixed;
+    z-index: 1100;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
+    padding: 8px max(8px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
+    border-top: 1px solid var(--line);
+    background: rgba(255, 248, 251, 0.98);
+    box-shadow: 0 -4px 20px rgba(var(--ink-rgb), 0.06);
+  }
+
+  .concheki-mobile-nav a {
+    display: flex;
+    min-height: 48px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    border-radius: 12px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+
+  .concheki-mobile-nav a[aria-current="location"] {
+    background: var(--soft);
+    color: var(--ink);
+  }
+
+  .concheki-mobile-nav svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .concheki-mobile-nav a:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: -2px;
+  }
+}
+
+@media (max-width: 720px) {
+  .theme-concheki .hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-block: 28px 40px;
+  }
+
+  .theme-concheki .hero h1 {
+    font-size: 36px;
+  }
+
+  .concheki-hero-subtitle {
+    margin-top: 8px;
+    font-size: 21px;
+  }
+
+  .theme-concheki .hero-lead {
+    margin-block: 16px;
+    font-size: 15px;
+  }
+
+  .theme-concheki .hero-art {
+    padding: 12px;
+  }
+
+  .theme-concheki .device-main {
+    width: min(52vw, 210px);
+    border-width: 5px;
+    border-radius: 22px;
+  }
+
+  .theme-concheki .hero-art::before {
+    width: min(90%, 320px);
+  }
+
+  .theme-concheki .section-shell {
+    padding-block: 40px;
+  }
+
+  .theme-concheki .section-heading {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .theme-concheki .section-heading h2,
+  .theme-concheki .download-section h2,
+  .theme-concheki .faq-heading h2 {
+    font-size: 25px;
+  }
+
+  .theme-concheki .section-heading > p {
+    margin-top: 8px;
+    font-size: 14px;
+  }
+
+  .theme-concheki .feature-grid {
+    gap: 12px;
+  }
+
+  .theme-concheki .feature-card {
+    padding: 20px;
+  }
+
+  .theme-concheki .feature-number {
+    margin-bottom: 8px;
+  }
+
+  .theme-concheki .faq-section {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .theme-concheki .download-section {
+    display: grid;
+    text-align: left;
+  }
+
+  .theme-concheki .download-section .store-actions {
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .theme-concheki .concheki-swipe-hint {
+    display: block;
+  }
+
+  .theme-concheki .concafe-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-concheki .screenshots {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 14px;
+    scroll-snap-type: x proximity;
+  }
+
+  .theme-concheki .screenshots figure {
+    flex: 0 0 min(66vw, 230px);
+    scroll-snap-align: start;
+  }
+}
+
+@media print {
+  body.theme-concheki {
+    padding-bottom: 0;
+  }
+
+  .concheki-mobile-nav {
+    display: none;
+  }
+}
