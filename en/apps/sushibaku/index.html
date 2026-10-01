@@ -90,6 +90,27 @@
   <script src="../../../scripts/app-marketing.js" defer></script>
   <script src="../../../scripts/app-experience.js?v=20260814" defer></script>
   <script src="../../../scripts/language-preference.js?v=20260813-4" defer></script>
+  <link rel="stylesheet" href="../../../styles/seo-content.css?v=20261001-2">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://isa130pull.github.io/portrait-site/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "SushiBomb",
+      "item": "https://isa130pull.github.io/portrait-site/en/apps/sushibaku/"
+    }
+  ]
+}
+  </script>
 </head>
 <body class="theme-sushibaku" data-app="sushibaku" data-inherit-language="true">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -106,10 +127,18 @@
   </header>
 
   <main id="main-content">
+    <nav class="seo-breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../../">Home</a></li>
+        <li aria-current="page">SushiBomb</li>
+      </ol>
+    </nav>
+
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">SUSHI × DESTRUCTION</p>
-        <h1 id="hero-title"><span class="heading-line">Launch sushi.</span><span class="heading-line">Wreck the <em>whole town.</em></span></h1>
+        <h1 id="hero-title"><span class="hero-product">SushiBomb — Sushi destruction game</span>
+          <span class="heading-line">Launch sushi.</span><span class="heading-line">Wreck the <em>whole town.</em></span></h1>
         <p class="hero-lead">Tuna and salmon are ammunition today. Launch sushi to smash conveyor-belt restaurants and buildings in an explosive 30-second action game. Upgrade your favorite piece, then come back for even bigger destruction.</p>
         <div class="store-actions">
           <a class="store-badge-link" href="https://apps.apple.com/app/id1632633407" target="_blank" rel="noopener" data-store="app-store" data-store-cta="hero" aria-label="Download SushiBomb on the App Store (opens in a new tab)"><img class="store-badge store-badge-app-store" src="../../../images/store-badges/download-on-the-app-store-en.svg" alt="Download on the App Store" width="120" height="40"></a>
@@ -211,6 +240,15 @@
         <details><summary>What can I play besides the main stages?</summary><p>Along with nine stages, the game includes a time-attack mode and nationwide score rankings.</p></details>
         <details><summary>Is it free to play?</summary><p>Yes. The core game is free to play and is available from the App Store and Google Play.</p></details>
       </div>
+    </section>
+
+    <section class="seo-related" aria-labelledby="seo-related-title">
+      <h2 id="seo-related-title">Related free games and tools</h2>
+      <ul>
+        <li><a href="../iebaku/">House Breaker!! — free 30-second tap challenge</a></li>
+        <li><a href="../loridama/">RollingGirlz — tap-to-roll action game</a></li>
+        <li><a href="../../pages/pong/">POPONG — free Pong with mouse or touch controls</a></li>
+      </ul>
     </section>
   </main>
 

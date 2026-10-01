@@ -90,6 +90,27 @@
   <script src="../../scripts/app-marketing.js" defer></script>
   <script src="../../scripts/app-experience.js?v=20260814" defer></script>
   <script src="../../scripts/language-preference.js?v=20260813-4" defer></script>
+  <link rel="stylesheet" href="../../styles/seo-content.css?v=20261001-2">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://isa130pull.github.io/portrait-site/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "いえばく!",
+      "item": "https://isa130pull.github.io/portrait-site/apps/iebaku/"
+    }
+  ]
+}
+  </script>
 </head>
 <body class="theme-iebaku" data-app="iebaku" data-inherit-language="true">
   <a class="skip-link" href="#main-content">本文へ移動</a>
@@ -114,10 +135,18 @@
   </header>
 
   <main id="main-content">
+    <nav class="seo-breadcrumb" aria-label="パンくず">
+      <ol>
+        <li><a href="../../">ホーム</a></li>
+        <li aria-current="page">いえばく!</li>
+      </ol>
+    </nav>
+
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">30-SECOND DESTRUCTION GAME</p>
-        <h1 id="hero-title"><span class="heading-line">30秒で、</span><span class="heading-line">家ごと<em>スカッと。</em></span></h1>
+        <h1 id="hero-title"><span class="hero-product">いえばく!｜30秒カジュアル破壊ゲーム</span>
+          <span class="heading-line">30秒で、</span><span class="heading-line">家ごと<em>スカッと。</em></span></h1>
         <p class="hero-lead">狙って、タップして、家中をぶっ壊す。「いえばく!」は、1プレイ30秒で爽快感までたどり着けるカジュアル破壊ゲームです。壊して稼いだ資金でショットを強くし、次はもっと派手な一撃へ。</p>
         <div class="store-actions">
           <a class="store-badge-link" href="https://apps.apple.com/jp/app/id1550488323" target="_blank" rel="noopener" data-store="app-store" data-store-cta="hero" aria-label="App Storeでいえばく!をダウンロード（新しいタブ）">
@@ -281,6 +310,15 @@
         <details><summary>どんなやり込み要素がありますか？</summary><p>全11ステージに加え、ショットの強化、タイムアタック、スコアランキングを用意しています。</p></details>
         <details><summary>無料で遊べますか？</summary><p>基本プレイは無料です。App StoreまたはGoogle Playからダウンロードできます。</p></details>
       </div>
+    </section>
+
+    <section class="seo-related" aria-labelledby="seo-related-title">
+      <h2 id="seo-related-title">関連する無料ゲーム・ツール</h2>
+      <ul>
+        <li><a href="../sushibaku/">すしばく!｜無料の30秒すし飛ばし</a></li>
+        <li><a href="../loridama/">ろりだま｜タップで転がすアクション</a></li>
+        <li><a href="../../pages/pong/">POPONG｜マウス・タッチで遊ぶ無料PONG</a></li>
+      </ul>
     </section>
   </main>
 

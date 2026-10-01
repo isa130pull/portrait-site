@@ -88,6 +88,27 @@
   <script src="../../scripts/app-marketing.js" defer></script>
   <script src="../../scripts/app-experience.js?v=20260814" defer></script>
   <script src="../../scripts/language-preference.js?v=20260813-4" defer></script>
+  <link rel="stylesheet" href="../../styles/seo-content.css?v=20261001-2">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://isa130pull.github.io/portrait-site/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "AI美少女1/100",
+      "item": "https://isa130pull.github.io/portrait-site/apps/ai-girl/"
+    }
+  ]
+}
+  </script>
 </head>
 <body class="theme-aigirl" data-app="ai-girl" data-inherit-language="true">
   <a class="skip-link" href="#main-content">本文へ移動</a>
@@ -104,10 +125,18 @@
   </header>
 
   <main id="main-content">
+    <nav class="seo-breadcrumb" aria-label="パンくず">
+      <ol>
+        <li><a href="../../">ホーム</a></li>
+        <li aria-current="page">AI美少女1/100</li>
+      </ol>
+    </nav>
+
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">10 CHOICES, ONE FAVORITE</p>
-        <h1 id="hero-title"><span class="heading-line">二択で見つける、</span><span class="heading-line"><em>運命のひとり。</em></span></h1>
+        <h1 id="hero-title"><span class="hero-product">AI美少女1/100｜二択で好みのキャラクターを診断</span>
+          <span class="heading-line">二択で見つける、</span><span class="heading-line"><em>運命のひとり。</em></span></h1>
         <p class="hero-lead">好みのほうを選ぶ。それを10回繰り返すだけ。「AI美少女1/100」は、100人のキャラクターからあなたの理想に近いひとりを見つけ、図鑑へ集めていく診断ゲームです。</p>
         <div class="store-actions">
           <a class="store-badge-link" href="https://apps.apple.com/jp/app/id6451026485" target="_blank" rel="noopener" data-store="app-store" data-store-cta="hero" aria-label="App StoreでAI美少女1/100をダウンロード（新しいタブ）"><img class="store-badge store-badge-app-store" src="../../images/store-badges/download-on-the-app-store-ja.svg" alt="App Storeからダウンロード" width="109" height="40"></a>
@@ -217,6 +246,15 @@
         <details><summary>何度でも診断できますか？</summary><p>はい。選び方を変えながら繰り返し診断し、まだ見つけていないキャラクターを探せます。</p></details>
         <details><summary>無料で遊べますか？</summary><p>基本プレイは無料です。App StoreまたはGoogle Playからダウンロードできます。</p></details>
       </div>
+    </section>
+
+    <section class="seo-related" aria-labelledby="seo-related-title">
+      <h2 id="seo-related-title">関連する無料ゲーム・ツール</h2>
+      <ul>
+        <li><a href="../../pages/bingo.html">セトリビンゴ｜無料ビンゴカード作成・印刷</a></li>
+        <li><a href="../iebaku/">いえばく!｜無料の30秒タップチャレンジ</a></li>
+        <li><a href="../sushibaku/">すしばく!｜無料の30秒すし飛ばし</a></li>
+      </ul>
     </section>
   </main>
 

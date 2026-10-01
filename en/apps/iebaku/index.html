@@ -90,6 +90,27 @@
   <script src="../../../scripts/app-marketing.js" defer></script>
   <script src="../../../scripts/app-experience.js?v=20260814" defer></script>
   <script src="../../../scripts/language-preference.js?v=20260813-4" defer></script>
+  <link rel="stylesheet" href="../../../styles/seo-content.css?v=20261001-2">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://isa130pull.github.io/portrait-site/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "House Breaker!!",
+      "item": "https://isa130pull.github.io/portrait-site/en/apps/iebaku/"
+    }
+  ]
+}
+  </script>
 </head>
 <body class="theme-iebaku" data-app="iebaku" data-inherit-language="true">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -114,10 +135,18 @@
   </header>
 
   <main id="main-content">
+    <nav class="seo-breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../../">Home</a></li>
+        <li aria-current="page">House Breaker!!</li>
+      </ol>
+    </nav>
+
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">30-SECOND DESTRUCTION GAME</p>
-        <h1 id="hero-title"><span class="heading-line">30 seconds.</span><span class="heading-line">Smash the <em>whole house.</em></span></h1>
+        <h1 id="hero-title"><span class="hero-product">House Breaker!! — 30-second destruction game</span>
+          <span class="heading-line">30 seconds.</span><span class="heading-line">Smash the <em>whole house.</em></span></h1>
         <p class="hero-lead">Aim, tap, and wreck everything in sight. House Breaker!! delivers a complete burst of destruction in every 30-second session. Turn the money you earn into stronger shots, then come back for an even bigger impact.</p>
         <div class="store-actions">
           <a class="store-badge-link" href="https://apps.apple.com/app/id1550488323" target="_blank" rel="noopener" data-store="app-store" data-store-cta="hero" aria-label="Download House Breaker on the App Store (opens in a new tab)"><img class="store-badge store-badge-app-store" src="../../../images/store-badges/download-on-the-app-store-en.svg" alt="Download on the App Store" width="120" height="40"></a>
@@ -230,6 +259,15 @@
         <details><summary>What can I keep working toward?</summary><p>The game includes 11 stages, shot upgrades, time attack, and score rankings.</p></details>
         <details><summary>Is it free to play?</summary><p>Yes. The core game is free to play and is available from the App Store and Google Play.</p></details>
       </div>
+    </section>
+
+    <section class="seo-related" aria-labelledby="seo-related-title">
+      <h2 id="seo-related-title">Related free games and tools</h2>
+      <ul>
+        <li><a href="../sushibaku/">SushiBomb — free 30-second sushi challenge</a></li>
+        <li><a href="../loridama/">RollingGirlz — tap-to-roll action game</a></li>
+        <li><a href="../../pages/pong/">POPONG — free Pong with mouse or touch controls</a></li>
+      </ul>
     </section>
   </main>
 

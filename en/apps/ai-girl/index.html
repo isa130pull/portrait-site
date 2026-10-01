@@ -89,6 +89,27 @@
   <script src="../../../scripts/app-marketing.js" defer></script>
   <script src="../../../scripts/app-experience.js?v=20260814" defer></script>
   <script src="../../../scripts/language-preference.js?v=20260813-4" defer></script>
+  <link rel="stylesheet" href="../../../styles/seo-content.css?v=20261001-2">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://isa130pull.github.io/portrait-site/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "AI Girl 1/100",
+      "item": "https://isa130pull.github.io/portrait-site/en/apps/ai-girl/"
+    }
+  ]
+}
+  </script>
 </head>
 <body class="theme-aigirl" data-app="ai-girl" data-inherit-language="true">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -105,10 +126,18 @@
   </header>
 
   <main id="main-content">
+    <nav class="seo-breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../../">Home</a></li>
+        <li aria-current="page">AI Girl 1/100</li>
+      </ol>
+    </nav>
+
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">10 CHOICES, ONE FAVORITE</p>
-        <h1 id="hero-title"><span class="heading-line">Choose between two.</span><span class="heading-line">Find <em>the one.</em></span></h1>
+        <h1 id="hero-title"><span class="hero-product">AI Girl 1/100 — Two-choice character quiz</span>
+          <span class="heading-line">Choose between two.</span><span class="heading-line">Find <em>the one.</em></span></h1>
         <p class="hero-lead">Pick the character you prefer, then repeat 10 times. AI Girl 1/100 finds a favorite who fits your taste from a cast of 100 and adds every match to your collection.</p>
         <div class="store-actions">
           <a class="store-badge-link" href="https://apps.apple.com/app/id6451026485" target="_blank" rel="noopener" data-store="app-store" data-store-cta="hero" aria-label="Download AI Girl 1/100 on the App Store (opens in a new tab)"><img class="store-badge store-badge-app-store" src="../../../images/store-badges/download-on-the-app-store-en.svg" alt="Download on the App Store" width="120" height="40"></a>
@@ -206,6 +235,15 @@
         <details><summary>Can I take the quiz more than once?</summary><p>Yes. Change your choices and repeat the quiz to find characters you have not met yet.</p></details>
         <details><summary>Is it free to play?</summary><p>Yes. The core game is free to play and is available from the App Store and Google Play.</p></details>
       </div>
+    </section>
+
+    <section class="seo-related" aria-labelledby="seo-related-title">
+      <h2 id="seo-related-title">Related free games and tools</h2>
+      <ul>
+        <li><a href="../../pages/bingo.html">Setlist Bingo — free printable bingo maker</a></li>
+        <li><a href="../iebaku/">House Breaker!! — free 30-second tap challenge</a></li>
+        <li><a href="../sushibaku/">SushiBomb — free 30-second sushi challenge</a></li>
+      </ul>
     </section>
   </main>
 

@@ -72,6 +72,27 @@
   </script>
   <script src="../../scripts/app-marketing.js" defer></script>
   <script src="../../scripts/language-preference.js?v=20260813-4" defer></script>
+  <link rel="stylesheet" href="../../styles/seo-content.css?v=20261001-2">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://isa130pull.github.io/portrait-site/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "コンチェキ",
+      "item": "https://isa130pull.github.io/portrait-site/apps/concheki/"
+    }
+  ]
+}
+  </script>
 </head>
 <body class="theme-concheki" data-app="concheki" data-inherit-language="true">
   <a class="skip-link" href="#main-content">本文へ移動</a>
@@ -88,10 +109,18 @@
   </header>
 
   <main id="main-content">
+    <nav class="seo-breadcrumb" aria-label="パンくず">
+      <ol>
+        <li><a href="../../">ホーム</a></li>
+        <li aria-current="page">コンチェキ</li>
+      </ol>
+    </nav>
+
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">CONCAFE × OSHIKATSU</p>
-        <h1 id="hero-title"><span class="heading-line">通うたび、</span><span class="heading-line">推し活が</span><span class="heading-line"><em>もっと楽しく。</em></span></h1>
+        <h1 id="hero-title"><span class="hero-product">コンチェキ｜コンカフェ来店・推し活アプリ</span>
+          <span class="heading-line">通うたび、</span><span class="heading-line">推し活が</span><span class="heading-line"><em>もっと楽しく。</em></span></h1>
         <p class="hero-lead">コンカフェへの来店を、スタンプとポイントに。ガチャで推しキャストのアバターを集め、撮ったチェキも思い出も、ひとつのアプリに残せます。</p>
         <div class="store-actions">
           <a class="store-badge-link" href="https://apps.apple.com/jp/app/concheki/id6772491415" target="_blank" rel="noopener" data-store="app-store" data-store-cta="hero" aria-label="App Storeでコンチェキをダウンロード（新しいタブ）"><img class="store-badge store-badge-app-store" src="../../images/store-badges/download-on-the-app-store-ja.svg" alt="App Storeからダウンロード" width="109" height="40"></a>
@@ -175,6 +204,15 @@
         <details><summary>チェックインに位置情報を使うのはなぜですか？</summary><p>QRコード読み取り時の来店判定と不正防止のために使用します。移動の追跡や広告には利用しません。</p></details>
         <details><summary>チェキの写真は外部へ送信されますか？</summary><p>手動で登録したチェキは端末内だけに保存され、外部へ送信されません。</p></details>
       </div>
+    </section>
+
+    <section class="seo-related" aria-labelledby="seo-related-title">
+      <h2 id="seo-related-title">ライブ・推し活に使えるWebツール</h2>
+      <ul>
+        <li><a href="../../pages/bingo.html">セトリビンゴ｜無料ビンゴカード作成・印刷</a></li>
+        <li><a href="../../pages/idol-pv-player.html">地下アイドルPV｜YouTubeのMVを連続再生</a></li>
+        <li><a href="../../pages/x-search.html">X検索｜日付・画像・ユーザーで絞り込み</a></li>
+      </ul>
     </section>
   </main>
 

@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#071015" />
-  <title>X(旧Twitter)検索コマンドビルダー - 高度な検索を簡単作成【無料】</title>
-  <meta name="description" content="X(旧Twitter)の高度な検索クエリを簡単に作成できるツール。プリセットコマンドとクエリビルダーで複雑な検索も楽々。" />
+  <title>X（旧Twitter）検索コマンドビルダー｜日付・画像・ユーザー検索</title>
+  <meta name="description" content="X（旧Twitter）の投稿を日付・ユーザー・キーワード・画像・いいね数で絞り込む無料検索ツール。過去の投稿を探す検索コマンドの例と使い方を掲載。クエリ作成は登録不要で、コピーとXへの検索に対応。" />
   <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/x-search.html" />
   <link rel="alternate" hreflang="ja" href="https://isa130pull.github.io/portrait-site/pages/x-search.html" />
   <link rel="alternate" hreflang="en" href="https://isa130pull.github.io/portrait-site/en/pages/x-search.html" />
@@ -15,8 +15,8 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <!-- OGP -->
-  <meta property="og:title" content="X(旧Twitter)検索ビルダー" />
-  <meta property="og:description" content="X(旧Twitter)の高度な検索クエリを簡単に作成できるツール。プリセットコマンドとクエリビルダーで複雑な検索も楽々。" />
+  <meta property="og:title" content="X（旧Twitter）検索コマンドビルダー｜日付・画像・ユーザー検索" />
+  <meta property="og:description" content="X（旧Twitter）の投稿を日付・ユーザー・キーワード・画像・いいね数で絞り込む無料検索ツール。過去の投稿を探す検索コマンドの例と使い方を掲載。クエリ作成は登録不要で、コピーとXへの検索に対応。" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://isa130pull.github.io/portrait-site/pages/x-search.html" />
   <meta property="og:site_name" content="かわぐち（isa130pull）" />
@@ -30,8 +30,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="X(旧Twitter)検索ビルダー" />
-  <meta name="twitter:description" content="X(旧Twitter)の高度な検索クエリを簡単に作成できるツール。" />
+  <meta name="twitter:title" content="X（旧Twitter）検索コマンドビルダー｜日付・画像・ユーザー検索" />
+  <meta name="twitter:description" content="X（旧Twitter）の投稿を日付・ユーザー・キーワード・画像・いいね数で絞り込む無料検索ツール。過去の投稿を探す検索コマンドの例と使い方を掲載。クエリ作成は登録不要で、コピーとXへの検索に対応。" />
   <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-x-search.jpg" />
   <meta name="twitter:image:alt" content="X検索コマンドビルダー" />
 
@@ -42,7 +42,7 @@
     "@type": "WebApplication",
     "name": "X(旧Twitter)検索コマンドビルダー",
     "url": "https://isa130pull.github.io/portrait-site/pages/x-search.html",
-    "description": "X(旧Twitter)の高度な検索クエリを簡単に作成できる無料ツール。from:、since:、filter: などの検索オペレーターをフォーム入力で組み立て。",
+    "description": "X（旧Twitter）の投稿を日付・ユーザー・キーワード・画像・いいね数で絞り込む無料検索ツール。過去の投稿を探す検索コマンドの例と使い方を掲載。クエリ作成は登録不要で、コピーとXへの検索に対応。",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "All",
     "offers": {
@@ -280,6 +280,7 @@
       }
     })();
   </script>
+  <link rel="stylesheet" href="../styles/seo-content.css?v=20261001-2">
 </head>
 <body class="app-page" data-inherit-language="true">
 <header class="app-site-header">
@@ -302,9 +303,16 @@
   </div>
 </header>
 <main class="wrap app-main">
+    <nav class="seo-breadcrumb seo-breadcrumb--contained" aria-label="パンくず">
+      <ol>
+        <li><a href="../">ホーム</a></li>
+        <li aria-current="page">X検索コマンドビルダー</li>
+      </ol>
+    </nav>
+
   <div class="app-intro">
     <p class="app-kicker">Browser app / X search</p>
-    <h1>X(旧Twitter)検索ビルダー</h1>
+    <h1>X（旧Twitter）検索コマンドビルダー</h1>
   </div>
 
   <!-- Main Section -->
@@ -496,7 +504,7 @@
             <tr><td><code>to:</code></td><td>特定ユーザーへのリプライ</td><td><code>to:username</code></td></tr>
             <tr><td><code>@</code></td><td>特定ユーザーへのメンション</td><td><code>@username</code></td></tr>
             <tr><td><code>since:</code></td><td>指定日以降</td><td><code>since:2024-01-01</code></td></tr>
-            <tr><td><code>until:</code></td><td>指定日まで</td><td><code>until:2024-12-31</code></td></tr>
+            <tr><td><code>until:</code></td><td>指定日より前</td><td><code>until:2024-12-31</code></td></tr>
             <tr><td><code>filter:images</code></td><td>画像付き投稿のみ</td><td></td></tr>
             <tr><td><code>filter:videos</code></td><td>動画付き投稿のみ</td><td></td></tr>
             <tr><td><code>-filter:replies</code></td><td>リプライを除外</td><td></td></tr>
@@ -530,6 +538,34 @@
     <li>作成したクエリをワンクリックでコピー</li>
   </ul>
 </section>
+
+    <section class="seo-guide" aria-labelledby="x-guide-title">
+    <h2 id="x-guide-title">日付・画像・ユーザーを指定して検索する方法</h2>
+    <ol>
+      <li>「基本」では、ユーザーIDを@なしで入力し、目的に合うプリセットを選びます。</li>
+      <li>条件を組み合わせるときは「詳細」を開き、キーワード、投稿者、日付範囲、画像・動画などを指定します。</li>
+      <li>生成されたクエリを確認し、「Xで検索」で結果を開くか、「クリップボードにコピー」で保存します。</li>
+    </ol>
+    <h3>過去の投稿・画像付き投稿を探す検索例</h3>
+    <ul>
+      <li><code>from:isa130pull since:2026-09-01 until:2026-10-01</code>：指定ユーザーの2026年9月の投稿を探します。</li>
+      <li><code>ライブ filter:images -filter:replies</code>：「ライブ」を含む画像付き投稿を、リプライを除いて探します。</li>
+      <li><code>"Unity 開発" min_faves:10</code>：フレーズが一致する投稿を、いいね数の条件で絞ります。</li>
+    </ul>
+    <h3>検索結果が少ないときは？</h3>
+    <p>日付範囲を広げ、いいね数や画像などの条件を一つずつ外して確認します。クエリ作成に登録は不要ですが、結果の閲覧はXへのログインやX側の検索仕様に依存します。</p>
+    <p><a href="https://help.x.com/en/using-x/x-advanced-search" target="_blank" rel="noopener">X公式の高度な検索ガイド（英語・新しいタブ）</a></p>
+  </section>
+
+    <section class="seo-related seo-related--contained" aria-labelledby="seo-related-title">
+      <h2 id="seo-related-title">ライブ・推し活に使えるWebツール</h2>
+      <ul>
+        <li><a href="bingo.html">セトリビンゴ｜無料ビンゴカード作成・印刷</a></li>
+        <li><a href="idol-pv-player.html">地下アイドルPV｜YouTubeのMVを連続再生</a></li>
+      </ul>
+    </section>
+
+
 </main>
 
 <footer style="margin-top:48px;padding:24px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;text-align:center">

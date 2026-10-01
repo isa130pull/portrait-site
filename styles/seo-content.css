@@ -1,0 +1,151 @@
+.seo-breadcrumb,
+.seo-related {
+  box-sizing: border-box;
+}
+
+.seo-breadcrumb {
+  width: min(100%, var(--page-width, 1240px));
+  margin: 0 auto;
+  padding: 20px var(--page-x, 24px) 0;
+  color: var(--muted, var(--cocoa-soft, #5b6471));
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.seo-breadcrumb--contained {
+  width: auto;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.seo-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seo-breadcrumb li + li::before {
+  margin-right: 12px;
+  content: "/";
+}
+
+.seo-breadcrumb a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hero h1 .hero-product,
+.case-hero h1 .hero-product {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--ink, var(--cocoa, inherit));
+  font-family: var(--body-font, inherit);
+  font-size: clamp(17px, 1.6vw, 22px);
+  font-weight: 750;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+.seo-heading-subtitle {
+  display: block;
+  margin-top: 12px;
+  font-size: clamp(18px, 2.4vw, 25px);
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.seo-jump-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+.seo-jump-links a,
+.seo-related a,
+.seo-guide a {
+  color: var(--accent, var(--peach-deep, inherit));
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.seo-related {
+  width: min(100%, var(--page-width, 1240px));
+  margin: 48px auto 0;
+  padding: 32px var(--page-x, 24px);
+  border-top: 1px solid var(--line, var(--border, #ddd));
+  color: var(--ink, var(--fg, var(--cocoa, inherit)));
+}
+
+.seo-related--contained {
+  width: auto;
+  padding-inline: 0;
+}
+
+.seo-related h2,
+.seo-guide h2 {
+  margin: 0 0 16px;
+  color: inherit;
+  font-size: clamp(19px, 2vw, 24px);
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.seo-related ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 16px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seo-related a {
+  display: inline-block;
+  padding-block: 8px;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.6;
+}
+
+.seo-guide {
+  margin-top: 32px;
+  color: var(--fg, inherit);
+}
+
+.seo-guide li + li {
+  margin-top: 8px;
+}
+
+.seo-guide code {
+  overflow-wrap: anywhere;
+}
+
+.seo-guide h3 {
+  margin: 24px 0 8px;
+  font-size: 16px;
+}
+
+.seo-jump-links a:focus-visible,
+.seo-related a:focus-visible,
+.seo-breadcrumb a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+[id^="bingo-guide-"] {
+  scroll-margin-top: 110px;
+}
+
+@media print {
+  .seo-breadcrumb,
+  .seo-jump-links,
+  .seo-related {
+    display: none;
+  }
+}

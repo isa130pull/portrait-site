@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#071015" />
-<title>Japanese Underground Idol MV Player | Fair Endless Playback</title>
-<meta name="description" content="Discover Japanese underground idol music videos with a fair, endlessly refillable queue. Use your own YouTube Data API key and choose festival performers or keyword search." />
+<title>Japanese Underground Idol MV Player | YouTube Discovery &amp; Playback</title>
+<meta name="description" content="Discover and continuously play Japanese underground idol MVs on YouTube. Choose festival performers or keyword search; setup steps explain the required personal YouTube Data API key." />
 <link rel="canonical" href="https://isa130pull.github.io/portrait-site/en/pages/idol-pv-player.html" />
 <link rel="alternate" hreflang="ja" href="https://isa130pull.github.io/portrait-site/pages/idol-pv-player.html" />
 <link rel="alternate" hreflang="en" href="https://isa130pull.github.io/portrait-site/en/pages/idol-pv-player.html" />
@@ -15,8 +15,8 @@
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 <!-- OGP -->
-<meta property="og:title" content="Japanese Underground Idol MV Player" />
-<meta property="og:description" content="Play Japanese underground idol music videos in a fair, endlessly refillable queue using your own YouTube Data API key." />
+<meta property="og:title" content="Japanese Underground Idol MV Player | YouTube Discovery &amp; Playback" />
+<meta property="og:description" content="Discover and continuously play Japanese underground idol MVs on YouTube. Choose festival performers or keyword search; setup steps explain the required personal YouTube Data API key." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://isa130pull.github.io/portrait-site/en/pages/idol-pv-player.html" />
 <meta property="og:site_name" content="Isao Kawaguchi (isa130pull) Portfolio" />
@@ -30,8 +30,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Japanese Underground Idol MV Player" />
-<meta name="twitter:description" content="Discover underground idol music videos with a fair, endlessly refillable queue." />
+<meta name="twitter:title" content="Japanese Underground Idol MV Player | YouTube Discovery &amp; Playback" />
+<meta name="twitter:description" content="Discover and continuously play Japanese underground idol MVs on YouTube. Choose festival performers or keyword search; setup steps explain the required personal YouTube Data API key." />
 <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-idol-pv-player.jpg" />
 <meta name="twitter:image:alt" content="Japanese underground idol music video player" />
 
@@ -43,7 +43,7 @@
   "name": "Japanese Underground Idol MV Player",
   "alternateName": "地下アイドルPV垂れ流しプレーヤー",
   "url": "https://isa130pull.github.io/portrait-site/en/pages/idol-pv-player.html",
-  "description": "A free web app for discovering and continuously playing Japanese underground idol music videos in a fair queue using the user's YouTube Data API key.",
+  "description": "Discover and continuously play Japanese underground idol MVs on YouTube. Choose festival performers or keyword search; setup steps explain the required personal YouTube Data API key.",
   "applicationCategory": "MultimediaApplication",
   "operatingSystem": "All",
   "inLanguage": "en",
@@ -204,6 +204,7 @@
     }
   })();
 </script>
+  <link rel="stylesheet" href="../../styles/seo-content.css?v=20261001-2">
 </head>
 <body class="app-page" data-inherit-language="true">
 <header class="app-site-header">
@@ -226,6 +227,13 @@
   </div>
 </header>
 <main class="wrap app-main">
+    <nav class="seo-breadcrumb seo-breadcrumb--contained" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../">Home</a></li>
+        <li aria-current="page">Japanese Underground Idol MV Player</li>
+      </ol>
+    </nav>
+
   <div class="app-intro">
     <p class="app-kicker">Browser app / Idol PV player</p>
     <h1>🎤 Japanese Underground Idol MV Player</h1>
@@ -265,7 +273,7 @@
       <h2>Settings</h2>
       <label for="apiKey">YouTube Data API key</label>
       <input id="apiKey" type="password" placeholder="AIza... (paste your key)">
-      <div class="hint">Read-only. Your key is stored in this browser's localStorage and is not sent anywhere else.</div>
+      <div class="hint">Read-only. Your key is stored in this browser and sent to YouTube Data API when requesting videos.</div>
 
       <div class="hint" style="margin-top:8px;">Saving directly to an account playlist is restricted to the administrator's test account. Sign in from the player panel; the button appears only for that account.</div>
 
@@ -343,6 +351,30 @@
       <li>Continuous playback in a temporary YouTube playlist</li>
       <li>Theater mode for a larger player</li>
     </ul>
+  </section>
+
+    <section class="seo-guide" aria-labelledby="pv-guide-title">
+      <h2 id="pv-guide-title">How to play Japanese idol MVs continuously</h2>
+      <ol>
+        <li>Enter your own API key with YouTube Data API enabled in the API key field. See the <a href="https://developers.google.com/youtube/v3/getting-started" target="_blank" rel="noopener">official YouTube setup guide (opens in a new tab)</a>.</li>
+        <li>In Festival performers mode, edit the performer list, select “Resolve unmatched channels”, then “Collect recent MVs”. The built-in list is based on TIF2025 performers.</li>
+        <li>To discover new groups, switch to Keyword search, enter a phrase such as “地下アイドル MV”, and select “Collect videos”.</li>
+        <li>Once the queue contains videos, select “Play”. Adjust Shuffle, Auto refill and Theater to suit your viewing.</li>
+      </ol>
+      <h3>Do I need an API key or Google sign-in?</h3>
+      <p>Collecting videos requires your own YouTube Data API key. Google sign-in is not required for normal collection and playback. The key is stored in this browser and sent to YouTube Data API when requesting videos. Saving a playlist to an account is currently limited to the operator's test account.</p>
+      <h3>What if videos cannot be collected or played?</h3>
+      <p>Check that the API is enabled, review key restrictions and quota, and adjust keywords or the performer list. A video's availability or embedding restrictions may prevent playback.</p>
+    </section>
+
+    <section class="seo-related seo-related--contained" aria-labelledby="seo-related-title">
+      <h2 id="seo-related-title">More tools for concerts and fandom</h2>
+      <ul>
+        <li><a href="bingo.html">Setlist Bingo — free printable bingo maker</a></li>
+        <li><a href="x-search.html">X search — filter by dates, media and accounts</a></li>
+      </ul>
+
+
   </section>
 </main>
 

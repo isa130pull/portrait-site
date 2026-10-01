@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#071015" />
-<title>地下アイドルPV垂れ流しプレーヤー - 偏りなく永久ループ再生【無料】</title>
-<meta name="description" content="地下アイドルのPVを自分のYouTube Data APIキーで偏りなく・永久ループで垂れ流せる無料プレーヤー。フェス出演者199組のリストを内蔵、キーワード検索での新規発掘にも対応。" />
+<title>地下アイドルPVプレーヤー｜YouTubeのMV検索・連続再生</title>
+<meta name="description" content="YouTubeの地下アイドルPV・MVを検索して連続再生する無料Webツール。フェス出演者リストとキーワード検索に対応。必要な自分のYouTube Data APIキーの準備・使い方を掲載。" />
 <link rel="canonical" href="https://isa130pull.github.io/portrait-site/pages/idol-pv-player.html" />
 <link rel="alternate" hreflang="ja" href="https://isa130pull.github.io/portrait-site/pages/idol-pv-player.html" />
 <link rel="alternate" hreflang="en" href="https://isa130pull.github.io/portrait-site/en/pages/idol-pv-player.html" />
@@ -15,8 +15,8 @@
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 <!-- OGP -->
-<meta property="og:title" content="地下アイドルPV垂れ流しプレーヤー" />
-<meta property="og:description" content="地下アイドルのPVを偏りなく・永久ループで垂れ流せる無料プレーヤー。フェス出演者199組のリストを内蔵。" />
+<meta property="og:title" content="地下アイドルPVプレーヤー｜YouTubeのMV検索・連続再生" />
+<meta property="og:description" content="YouTubeの地下アイドルPV・MVを検索して連続再生する無料Webツール。フェス出演者リストとキーワード検索に対応。必要な自分のYouTube Data APIキーの準備・使い方を掲載。" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://isa130pull.github.io/portrait-site/pages/idol-pv-player.html" />
 <meta property="og:site_name" content="かわぐち（isa130pull）" />
@@ -30,8 +30,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="地下アイドルPV垂れ流しプレーヤー" />
-<meta name="twitter:description" content="地下アイドルのPVを偏りなく・永久ループで垂れ流せる無料プレーヤー。" />
+<meta name="twitter:title" content="地下アイドルPVプレーヤー｜YouTubeのMV検索・連続再生" />
+<meta name="twitter:description" content="YouTubeの地下アイドルPV・MVを検索して連続再生する無料Webツール。フェス出演者リストとキーワード検索に対応。必要な自分のYouTube Data APIキーの準備・使い方を掲載。" />
 <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-idol-pv-player.jpg" />
 <meta name="twitter:image:alt" content="地下アイドルPV垂れ流しプレーヤー" />
 
@@ -42,7 +42,7 @@
   "@type": "WebApplication",
   "name": "地下アイドルPV垂れ流しプレーヤー",
   "url": "https://isa130pull.github.io/portrait-site/pages/idol-pv-player.html",
-  "description": "地下アイドルのPVを自分のYouTube Data APIキーで偏りなく・永久ループで垂れ流せる無料プレーヤー。フェス出演者199組のリストを内蔵。",
+  "description": "YouTubeの地下アイドルPV・MVを検索して連続再生する無料Webツール。フェス出演者リストとキーワード検索に対応。必要な自分のYouTube Data APIキーの準備・使い方を掲載。",
   "applicationCategory": "MultimediaApplication",
   "operatingSystem": "All",
   "offers": {
@@ -202,6 +202,7 @@
     }
   })();
 </script>
+  <link rel="stylesheet" href="../styles/seo-content.css?v=20261001-2">
 </head>
 <body class="app-page" data-inherit-language="true">
 <header class="app-site-header">
@@ -224,6 +225,13 @@
   </div>
 </header>
 <main class="wrap app-main">
+    <nav class="seo-breadcrumb seo-breadcrumb--contained" aria-label="パンくず">
+      <ol>
+        <li><a href="../">ホーム</a></li>
+        <li aria-current="page">地下アイドルPVプレーヤー</li>
+      </ol>
+    </nav>
+
   <div class="app-intro">
     <p class="app-kicker">Browser app / Idol PV player</p>
     <h1>🎤 地下アイドルPV垂れ流しプレーヤー</h1>
@@ -263,7 +271,7 @@
       <h2>設定</h2>
       <label for="apiKey">YouTube Data API キー</label>
       <input id="apiKey" type="password" placeholder="AIza... (自分のキーを貼り付け)">
-      <div class="hint">読み取り専用。ブラウザ内 localStorage に保存され外部送信しません。</div>
+      <div class="hint">読み取り専用。このブラウザ内に保存され、動画取得時にYouTube Data APIへ送信されます。</div>
 
       <div class="hint" style="margin-top:8px;">「アカウントのプレイリストに保存」は isa130pull@gmail.com のみ利用可能です（OAuth同意画面をテストモードに限定し、テストユーザーとして登録済み）。左のプレーヤー欄でGoogleログインすると、本人の場合のみボタンが表示されます。</div>
 
@@ -341,6 +349,30 @@
       <li>YouTube上の一時プレイリストで連続再生 or 自分のアカウントに保存（OAuth）</li>
       <li>大画面（シアター）表示に対応</li>
     </ul>
+  </section>
+
+    <section class="seo-guide" aria-labelledby="pv-guide-title">
+      <h2 id="pv-guide-title">地下アイドルのMVを連続再生する手順</h2>
+      <ol>
+        <li>YouTube Data APIを有効にした自分のAPIキーを「APIキー」に入力します。準備方法は<a href="https://developers.google.com/youtube/v3/getting-started?hl=ja" target="_blank" rel="noopener">YouTube公式ガイド（新しいタブ）</a>を参照してください。</li>
+        <li>「フェス出演者から」では出演者リストを編集し、「チャンネルを解決（未解決のみ）」の後に「最新PVを集める」を選びます。内蔵リストはTIF2025の出演者をもとにしています。</li>
+        <li>新しいグループを探すときは「キーワード検索」に切り替え、「地下アイドル MV」などを入力して「動画を集める」を選びます。</li>
+        <li>キューに動画が入ったら「再生」を選びます。「シャッフル」「自動補充」「大画面」で視聴方法を調整できます。</li>
+      </ol>
+      <h3>APIキーやGoogleログインは必要ですか？</h3>
+      <p>動画の収集には自分のYouTube Data APIキーが必要です。通常の収集・再生ではGoogleログインは不要です。APIキーはこのブラウザ内に保存され、動画取得時にYouTube Data APIへ送信されます。アカウントへのプレイリスト保存は、現在は運営者のテストアカウントに限定されています。</p>
+      <h3>動画を取得・再生できないときは？</h3>
+      <p>APIの有効化・キーの制限・利用上限を確認し、キーワードや出演者リストを調整してください。動画の公開状態や埋め込み制限により、再生できない動画もあります。</p>
+    </section>
+
+    <section class="seo-related seo-related--contained" aria-labelledby="seo-related-title">
+      <h2 id="seo-related-title">ライブ・推し活に使えるWebツール</h2>
+      <ul>
+        <li><a href="bingo.html">セトリビンゴ｜無料ビンゴカード作成・印刷</a></li>
+        <li><a href="x-search.html">X検索｜日付・画像・ユーザーで絞り込み</a></li>
+      </ul>
+
+
   </section>
 </main>
 
