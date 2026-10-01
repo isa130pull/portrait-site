@@ -1,0 +1,151 @@
+.concafe-stores {
+  padding-top: 0;
+  scroll-margin-top: 110px;
+}
+
+.concafe-stores .section-heading {
+  margin-bottom: 28px;
+}
+
+.concafe-stores .section-heading h2 {
+  font-size: clamp(30px, 3.8vw, 48px);
+  letter-spacing: -0.04em;
+}
+
+.concafe-definition {
+  max-width: 850px;
+  margin: 0 0 36px;
+  color: var(--muted);
+}
+
+.concafe-definition h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.concafe-definition p {
+  margin: 0;
+}
+
+.concafe-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.concafe-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #fff;
+  scroll-margin-top: 110px;
+}
+
+.concafe-visual {
+  margin: 0;
+}
+
+.concafe-visual img {
+  width: 100%;
+  height: auto;
+}
+
+.concafe-visual figcaption {
+  padding: 12px 24px 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.concafe-card-body {
+  padding: 20px 24px 28px;
+}
+
+.concafe-card-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.concafe-card-brand img {
+  width: 112px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.concafe-status {
+  margin: 0;
+  padding: 5px 12px;
+  border-radius: 99px;
+  background: var(--soft);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.concafe-card h3 {
+  margin: 0 0 8px;
+  font-size: clamp(23px, 2.3vw, 30px);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.concafe-card p {
+  margin: 0 0 16px;
+}
+
+.concafe-card .concafe-status {
+  margin: 0;
+}
+
+.concafe-card .concafe-location {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.concafe-card a,
+.concafe-note a,
+.theme-concheki .faq-list a,
+.theme-concheki .download-section p a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.concafe-card a {
+  display: inline-block;
+  padding-block: 8px;
+  font-weight: 700;
+}
+
+.concafe-card a:focus-visible,
+.concafe-note a:focus-visible,
+.theme-concheki .faq-list a:focus-visible,
+.theme-concheki .download-section p a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.concafe-note {
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .concafe-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .concafe-card-body {
+    padding: 18px 20px 24px;
+  }
+
+  .concafe-visual figcaption {
+    padding-inline: 20px;
+  }
+}
