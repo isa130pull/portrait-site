@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ef8264">
   <title>Hitokoma | Face-Aware Photo Slideshow for iPhone and iPad</title>
-  <meta name="description" content="Hitokoma is a free photo slideshow app for iPhone and iPad that uses on-device face recognition to play memories featuring the people you choose. Photos and face data stay on your device.">
+  <meta name="description" content="Hitokoma is a free photo slideshow app for iPhone and iPad. Choose people using on-device face recognition, then filter by albums, dates, places, and favorites.">
   <meta name="author" content="Isao Kawaguchi (isa130pull)">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="robots" content="index,follow,max-image-preview:large">
@@ -16,14 +16,14 @@
 
   <link rel="icon" type="image/png" href="../../../images/hitokoma/app-icon.png">
   <link rel="apple-touch-icon" href="../../../images/hitokoma/app-icon.png">
-  <link rel="preload" href="../../../images/hitokoma/01-playback-640.webp" as="image" fetchpriority="high" type="image/webp" imagesrcset="../../../images/hitokoma/01-playback-640.webp 640w, ../../../images/hitokoma/01-playback.webp 832w" imagesizes="(max-width: 720px) 70vw, 400px">
+  <link rel="preload" href="../../../images/hitokoma/01-playback-640.webp" as="image" fetchpriority="high" type="image/webp" imagesrcset="../../../images/hitokoma/01-playback-640.webp 640w, ../../../images/hitokoma/01-playback.webp 832w" imagesizes="(max-width: 720px) 52vw, 230px">
   <link rel="stylesheet" href="../../../styles/hitokoma.css?v=20261001-images">
   <link rel="stylesheet" href="../../../styles/language-switcher.css?v=20260813">
   <link rel="stylesheet" href="../../../styles/app-language.css?v=20260813-2">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Hitokoma | Choose a Face. Play the Memories.">
-  <meta property="og:description" content="A face-aware photo slideshow that plays memories featuring the people you choose. Photos and face data are processed on your device.">
+  <meta property="og:description" content="Hitokoma is a free photo slideshow app for iPhone and iPad. Choose people using on-device face recognition, then filter by albums, dates, places, and favorites.">
   <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/hitokoma/ogp-hitokoma.png?v=20260812">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:creator" content="@isa130pull">
   <meta name="twitter:title" content="Hitokoma | Choose a Face. Play the Memories.">
-  <meta name="twitter:description" content="A face-aware photo slideshow that plays memories featuring the people you choose.">
+  <meta name="twitter:description" content="Hitokoma is a free photo slideshow app for iPhone and iPad. Choose people using on-device face recognition, then filter by albums, dates, places, and favorites.">
   <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/hitokoma/ogp-hitokoma.png?v=20260812">
   <meta name="twitter:image:alt" content="Hitokoma — choose a face and play the memories">
 
@@ -61,7 +61,7 @@
     "applicationSubCategory": "Photo and video",
     "operatingSystem": "iOS 18.0 or later, iPadOS 18.0 or later",
     "inLanguage": "en",
-    "description": "A photo slideshow app that uses on-device face recognition to organize photos by person and automatically play memories featuring the people the user chooses.",
+    "description": "Hitokoma is a free photo slideshow app for iPhone and iPad. Choose people using on-device face recognition, then filter by albums, dates, places, and favorites.",
     "featureList": [
       "Face recognition that organizes photos by person",
       "Filters for people, albums, places, dates, and favorites",
@@ -126,14 +126,16 @@
   ]
 }
   </script>
+  <link rel="stylesheet" href="../../../styles/app-detail-layout.css?v=20261002-details4">
+  <script src="../../../scripts/app-detail-navigation.js?v=20261002-details4" defer></script>
 </head>
-<body data-inherit-language="true">
+<body class="app-detail theme-hitokoma" data-inherit-language="true">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="Back to the top of the Hitokoma page"><picture style="display: contents"><source type="image/webp" srcset="../../../images/hitokoma/app-icon.webp"><img src="../../../images/hitokoma/app-icon.png" alt="" width="48" height="48"></picture><span>Hitokoma</span></a>
-      <nav aria-label="On-page navigation"><a href="#features">Features</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a></nav>
+      <nav aria-label="On-page navigation"><a href="#features">Use</a><a href="#privacy">Photos</a><a href="#setup">Setup</a><a href="#download">Get</a><a href="#faq">FAQ</a></nav>
       <div class="header-language-actions">
         <span class="language-switcher" aria-label="Choose language"><a lang="ja" hreflang="ja" href="../../../apps/hitokoma/" data-language-choice="ja">日本語</a><span class="language-separator" aria-hidden="true">/</span><span lang="en" aria-current="page">English</span></span>
         <a class="header-cta" href="https://apps.apple.com/app/id6780748272" target="_blank" rel="noopener" data-store-cta="header" aria-label="Download Hitokoma for free on the App Store (opens in a new tab)">Get started free</a>
@@ -151,58 +153,51 @@
 
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">FACE-AWARE PHOTO SLIDESHOW</p>
-        <h1 id="hero-title"><span class="hero-product">Hitokoma — Face recognition photo slideshow</span>
-          Keep the photos<br class="desktop-heading-break">of the people you love<br><span>close at hand.</span></h1>
-        <p class="hero-lead">Hitokoma is a photo frame app that lets you choose who appears in the slideshow—just your child, or the whole family. Enjoy a growing library of memories without spending time searching for them.</p>
+        <h1 id="hero-title">Hitokoma<span class="app-hero-subtitle">Choose people for <span class="app-phrase">photo slideshows</span></span></h1>
+        <p class="hero-lead">Hitokoma is a slideshow app for iPhone and iPad that lets you choose the people in your photos. It groups photos using face recognition, so you can play pictures of your child, your family, or someone else you want to see.</p>
         <div class="hero-actions">
           <a class="store-badge-link" href="https://apps.apple.com/app/id6780748272" target="_blank" rel="noopener" data-store-cta="hero" aria-label="Download Hitokoma for free on the App Store (opens in a new tab)"><img class="store-badge" src="../../../images/store-badges/download-on-the-app-store-en.svg" alt="Download on the App Store" width="120" height="40"></a>
           <p>For iPhone and iPad<br>Requires iOS / iPadOS 18.0 or later</p>
         </div>
-        <nav class="seo-jump-links" aria-label="Explore this app"><a href="#features">Features</a><a href="#faq">FAQ</a><a href="../../index.html#personal">All apps and web tools</a></nav>
+        <nav class="seo-jump-links" aria-label="Explore this app"><a href="#features">Features</a><a href="../../index.html#personal">All apps and web tools</a></nav>
       </div>
 
       <div class="hero-visual" aria-label="Hitokoma playback screen">
         <div class="hero-orbit" aria-hidden="true"></div>
-        <picture style="display: contents"><source type="image/webp" srcset="../../../images/hitokoma/01-playback-640.webp 640w, ../../../images/hitokoma/01-playback.webp 832w" sizes="(max-width: 720px) 70vw, 400px"><img class="hero-screen" src="../../../images/hitokoma/01-playback.png" alt="Hitokoma playing a photo with the person's face centered" width="832" height="1800" fetchpriority="high"></picture>
-        <picture style="display: contents"><source type="image/webp" srcset="../../../images/hitokoma/app-icon.webp"><img class="hero-icon" src="../../../images/hitokoma/app-icon.png" alt="Hitokoma app icon" width="1024" height="1024"></picture>
-      </div>
+        <picture style="display: contents"><source type="image/webp" srcset="../../../images/hitokoma/01-playback-640.webp 640w, ../../../images/hitokoma/01-playback.webp 832w" sizes="(max-width: 720px) 52vw, 230px"><img class="hero-screen" src="../../../images/hitokoma/01-playback.png" alt="Hitokoma playing a photo with the person's face centered" width="832" height="1800" fetchpriority="high"></picture>
+        </div>
     </section>
 
-    <ul class="trust-strip" aria-label="Hitokoma at a glance">
-      <li><strong>FREE</strong><span>Start right away</span></li>
-      <li><strong>ON DEVICE</strong><span>Photos and face data stay local</span></li>
-      <li><strong>SIMPLE</strong><span>Choose, place, and enjoy</span></li>
-    </ul>
 
-    <section class="problem-section section-shell" aria-labelledby="problem-title">
-      <div class="section-kicker">WHY HITOKOMA</div>
-      <div class="problem-grid">
-        <h2 id="problem-title">More photos,<br>but less time<br>to revisit them?</h2>
-        <div class="problem-copy"><p>You scroll through the camera roll again and again to find one person. Before you can finish an album, more photos have already arrived.</p><p class="large-copy">Hitokoma recognizes and organizes the people in your photos automatically. Choose who you want to see today, and your memories begin to flow.</p></div>
-      </div>
-    </section>
 
     <section class="features-section section-shell" id="features" aria-labelledby="features-title">
-      <div class="section-heading"><div><p class="section-kicker">FEATURES</p><h2 id="features-title">Three ways to make<br>memories easy to watch.</h2></div><p>The goal is not to organize photos for its own sake. Face recognition, filtering, and playback work together to make revisiting them feel effortless.</p></div>
+      <div class="section-heading" id="problem-title"><div><h2 id="features-title">Using Hitokoma</h2></div></div>
 
       <div class="feature-grid">
-        <article class="feature-card"><span class="feature-number">01</span><h3>Choose by person</h3><p>Faces are recognized on your device and organized by person. Pick just your child, the whole family, or anyone you want to see.</p></article>
-        <article class="feature-card featured"><span class="feature-number">02</span><h3>Filter the memories</h3><p>Combine people with albums, dates, places, and favorites to narrow the slideshow to exactly what you want today.</p></article>
-        <article class="feature-card"><span class="feature-number">03</span><h3>Let them flow</h3><p>A gentle face-centered zoom and calm transitions bring each photo to life. Dates, places, and names can appear over the image.</p></article>
+        <article class="feature-card">
+          <h3>Group photos by person</h3>
+          <p>Hitokoma recognizes faces on your device and groups photos by person. Name the people it finds, then choose whose photos to play. If a face is assigned incorrectly, you can move it to another person or merge entries manually.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Choose which photos to play</h3>
+          <p>Filter by people, albums, dates, places, and favorites. For a family trip, for example, select the travel dates or location along with the people you want to see.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Play a face-centered slideshow</h3>
+          <p>The slideshow slowly zooms toward faces and transitions between photos. You can also show the date, location, and people’s names over each image.</p>
+        </article>
       </div>
 
       <div class="screenshots" aria-label="Hitokoma app screens">
-        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/hitokoma/01-playback-640.webp 640w, ../../../images/hitokoma/01-playback.webp 832w" sizes="(max-width: 720px) 70vw, 400px"><img src="../../../images/hitokoma/01-playback.png" alt="Photo slideshow centered on the person's face" width="832" height="1800" loading="lazy"></picture><figcaption><span>01</span> Slow, face-centered playback</figcaption></figure>
-        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/hitokoma/02-people-640.webp 640w, ../../../images/hitokoma/02-people.webp 832w" sizes="(max-width: 720px) 70vw, 400px"><img src="../../../images/hitokoma/02-people.png" alt="People screen with photos organized through face recognition" width="832" height="1800" loading="lazy"></picture><figcaption><span>02</span> Recognize people automatically</figcaption></figure>
-        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/hitokoma/03-filters-640.webp 640w, ../../../images/hitokoma/03-filters.webp 832w" sizes="(max-width: 720px) 70vw, 400px"><img src="../../../images/hitokoma/03-filters.png" alt="Playback filters for people, albums, places, and dates" width="832" height="1800" loading="lazy"></picture><figcaption><span>03</span> Filter to what you want to see</figcaption></figure>
+        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/hitokoma/01-playback-640.webp 640w, ../../../images/hitokoma/01-playback.webp 832w" sizes="(max-width: 639px) 66vw, (max-width: 720px) 40vw, 320px"><img src="../../../images/hitokoma/01-playback.png" alt="Photo slideshow centered on the person's face" width="832" height="1800" loading="lazy"></picture><figcaption>Slideshow playback</figcaption></figure>
+        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/hitokoma/02-people-640.webp 640w, ../../../images/hitokoma/02-people.webp 832w" sizes="(max-width: 639px) 66vw, (max-width: 720px) 40vw, 320px"><img src="../../../images/hitokoma/02-people.png" alt="People screen with photos organized through face recognition" width="832" height="1800" loading="lazy"></picture><figcaption>People</figcaption></figure>
+        <figure><picture style="display: contents"><source type="image/webp" srcset="../../../images/hitokoma/03-filters-640.webp 640w, ../../../images/hitokoma/03-filters.webp 832w" sizes="(max-width: 639px) 66vw, (max-width: 720px) 40vw, 320px"><img src="../../../images/hitokoma/03-filters.png" alt="Playback filters for people, albums, places, and dates" width="832" height="1800" loading="lazy"></picture><figcaption>Playback filters</figcaption></figure>
       </div>
     </section>
 
     <section class="privacy-section" id="privacy" aria-labelledby="privacy-title">
       <div class="privacy-copy">
-        <p class="section-kicker">PRIVATE BY DESIGN</p>
-        <h2 id="privacy-title">Your precious photos<br>do not leave your device.</h2>
+        <h2 id="privacy-title">How your photos are handled</h2>
         <p>Face detection and person classification happen entirely on your iPhone or iPad. Photos, face features, and the names you enter are never sent to the developer or an external server.</p>
         <a href="../../../pages/dorapiku-privacy.html">Read the privacy policy (Japanese) →</a>
       </div>
@@ -216,7 +211,7 @@
     </section>
 
     <section class="use-section section-shell" aria-labelledby="use-title">
-      <div class="section-heading compact"><div><p class="section-kicker">EVERYDAY MOMENTS</p><h2 id="use-title">Make room for memories<br>in everyday life.</h2></div></div>
+      <div class="section-heading compact"><div><h2 id="use-title">Ways to use Hitokoma</h2></div></div>
       <div class="use-grid">
         <article><span aria-hidden="true">01</span><h3>On a charging stand</h3><p>Turn an unused iPhone or iPad into a photo frame. The screen stays awake during playback, and a tap brings the controls back.</p></article>
         <article><span aria-hidden="true">02</span><h3>With your family</h3><p>A child's growth, a family trip, someone living far away—choose a name and revisit the time you shared.</p></article>
@@ -224,9 +219,8 @@
       </div>
     </section>
 
-    <section class="steps-section section-shell" aria-labelledby="steps-title">
-      <p class="section-kicker">GET STARTED</p>
-      <h2 id="steps-title">Playing in<br>three simple steps.</h2>
+    <section id="setup" class="steps-section section-shell" aria-labelledby="steps-title">
+      <h2 id="steps-title">Getting started</h2>
       <ol class="steps-list">
         <li><span>1</span><div><h3>Allow photo access</h3><p>Hitokoma begins scanning from your newest photos, with all processing performed on the device.</p></div></li>
         <li><span>2</span><div><h3>Choose the people</h3><p>Name the people it finds and manually refine recognition results whenever needed.</p></div></li>
@@ -234,14 +228,14 @@
       </ol>
     </section>
 
-    <section class="download-section" aria-labelledby="download-title">
+    <section id="download" class="download-section" aria-labelledby="download-title">
       <picture style="display: contents"><source type="image/webp" srcset="../../../images/hitokoma/app-icon.webp"><img src="../../../images/hitokoma/app-icon.png" alt="Hitokoma app icon" width="1024" height="1024" loading="lazy"></picture>
-      <div><p class="section-kicker">FREE DOWNLOAD</p><h2 id="download-title">Bring sleeping photos<br>back into today.</h2><p>Hitokoma is free to start and does not require an account.</p></div>
+      <div><h2 id="download-title">Get Hitokoma</h2><p>Hitokoma is free to download for iPhone and iPad, with no account required. It displays ads and offers a one-time purchase to remove them.</p></div>
       <a class="store-badge-link" href="https://apps.apple.com/app/id6780748272" target="_blank" rel="noopener" data-store-cta="closing" aria-label="Download Hitokoma for free on the App Store (opens in a new tab)"><img class="store-badge" src="../../../images/store-badges/download-on-the-app-store-en.svg" alt="Download on the App Store" width="120" height="40" loading="lazy"></a>
     </section>
 
     <section class="faq-section section-shell" id="faq" aria-labelledby="faq-title">
-      <div class="faq-heading"><p class="section-kicker">FAQ</p><h2 id="faq-title">Frequently asked questions</h2></div>
+      <div class="faq-heading"><h2 id="faq-title">Frequently asked questions</h2></div>
       <div class="faq-list">
         <details><summary>Can I use an iPad as a family photo frame?</summary><p>Yes, on iPadOS 18.0 or later. Choose family members from People, place the iPad on a charging stand, and start the slideshow. The screen stays awake during playback, letting you enjoy it as a photo frame.</p></details>
         <details><summary>Can I make a slideshow of just one trip?</summary><p>Combine people, albums, shooting dates, locations, and favorites to filter photos. For example, choose the dates or location of a trip and the family members you want to see, then play those memories.</p></details>
@@ -270,11 +264,6 @@
     <p>© <span id="year"></span> Isao Kawaguchi (isa130pull)</p>
   </footer>
 
-  <aside class="mobile-download" aria-label="Fixed App Store link">
-    <div><strong>Hitokoma</strong><span>Free · iPhone / iPad</span></div>
-    <a href="https://apps.apple.com/app/id6780748272" target="_blank" rel="noopener" data-store-cta="mobile_sticky" aria-label="Download Hitokoma for free on the App Store (opens in a new tab)">Get</a>
-  </aside>
-
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -288,5 +277,13 @@
       });
     });
   </script>
+  <nav class="app-page-nav" data-page-nav data-nav-count="6" aria-label="On-page navigation">
+    <a href="#top" aria-current="location" aria-label="App introduction"><span>Intro</span></a>
+    <a href="#features" aria-label="Features and controls"><span>Use</span></a>
+    <a href="#privacy" aria-label="Photo and face data"><span>Photos</span></a>
+    <a href="#setup" aria-label="Getting started"><span>Setup</span></a>
+    <a href="#download" aria-label="Download"><span>Get</span></a>
+    <a href="#faq" aria-label="Frequently asked questions"><span>FAQ</span></a>
+  </nav>
 </body>
 </html>

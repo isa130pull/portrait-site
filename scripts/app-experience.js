@@ -50,10 +50,10 @@
         ] }
       ],
       results: [
-        { title: 'The gentle listener', description: 'You may be drawn to a calm character who makes everyday moments feel comfortable.' },
-        { title: 'The quiet mystery', description: 'A composed character with an unexpected side may keep catching your attention.' },
-        { title: 'The bright mood-maker', description: 'You may click with someone energetic who turns every day into a small adventure.' },
-        { title: 'The fearless challenger', description: 'A confident, cool character who pulls you into something new may be your type.' }
+        { title: 'The gentle listener', description: 'Your answers suggest a preference for calm, approachable characters.' },
+        { title: 'The quiet mystery', description: 'Your answers suggest a preference for calm, mysterious characters.' },
+        { title: 'The bright mood-maker', description: 'Your answers suggest a preference for bright, energetic characters.' },
+        { title: 'The fearless challenger', description: 'Your answers suggest a preference for confident, adventurous characters.' }
       ]
     } : {
       progress: function (current, total) { return total + '問中 ' + current + '問目'; },
@@ -80,10 +80,10 @@
         ] }
       ],
       results: [
-        { title: 'やさしい聞き上手タイプ', description: '穏やかで、一緒にいる日常を心地よくしてくれるキャラクターに惹かれそうです。' },
-        { title: '静かなミステリアスタイプ', description: '落ち着いた雰囲気の中に意外な一面を持つキャラクターが気になりそうです。' },
-        { title: '元気なムードメーカータイプ', description: '毎日を小さな冒険に変えてくれる、明るく行動的なキャラクターと好相性です。' },
-        { title: 'クールな挑戦者タイプ', description: '自信があり、新しい世界へ引っ張ってくれる格好いいキャラクターが好みかもしれません。' }
+        { title: 'やさしい聞き上手タイプ', description: '今回の回答では、穏やかで親しみやすいキャラクターを選ぶ傾向がありました。' },
+        { title: '静かなミステリアスタイプ', description: '今回の回答では、落ち着いていて、少しミステリアスなキャラクターを選ぶ傾向がありました。' },
+        { title: '元気なムードメーカータイプ', description: '今回の回答では、明るく行動的なキャラクターを選ぶ傾向がありました。' },
+        { title: 'クールな挑戦者タイプ', description: '今回の回答では、自信があり、挑戦することを好むキャラクターを選ぶ傾向がありました。' }
       ]
     };
 
@@ -170,7 +170,7 @@
       result: function (value) {
         return appName === 'sushibaku'
           ? value + ' sushi launches in 30 seconds! The full game has 36 kinds of sushi and nine stages.'
-          : value + ' hits in 30 seconds! The full game turns every hit into bigger destruction across 11 stages.';
+          : value + ' hits in 30 seconds! In the full app, upgrade your shots and play through 11 stages.';
       },
       share: function (value) {
         return 'I scored ' + value + ' in the ' + (appName === 'sushibaku' ? 'SushiBomb' : 'House Breaker') + ' 30-second web challenge!';
@@ -181,7 +181,7 @@
       result: function (value) {
         return appName === 'sushibaku'
           ? '30秒で寿司を' + value + '回飛ばしました！本編では36種類の寿司と全9ステージを楽しめます。'
-          : '30秒で' + value + '回ヒット！本編では一撃がさらに大きな破壊へつながり、全11ステージへ挑戦できます。';
+          : '30秒で' + value + '回ヒット！本編ではショットを強化しながら、全11ステージへ挑戦できます。';
       },
       share: function (value) {
         return (appName === 'sushibaku' ? 'すしばく!' : 'いえばく!') + 'の30秒Webチャレンジで' + value + '点！';
