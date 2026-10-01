@@ -5,6 +5,23 @@ body.theme-concheki {
   --muted: #705e68;
   font-size: 15px;
   line-height: 1.8;
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.concheki-phrase {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.theme-concheki p {
+  text-wrap: pretty;
+}
+
+.theme-concheki:lang(ja) p,
+.theme-concheki:lang(ja) .faq-list summary {
+  word-break: auto-phrase;
 }
 
 .theme-concheki main [id] {
@@ -176,39 +193,39 @@ body.theme-concheki {
 }
 
 .theme-concheki .feature-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 0;
 }
 
 .theme-concheki .feature-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  align-items: start;
+  gap: 32px;
   min-height: 0;
-  padding: 24px;
-  border-radius: 20px;
+  padding: 28px 0;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0;
+  background: transparent;
 }
 
-.theme-concheki .feature-number {
-  margin-bottom: 16px;
-  letter-spacing: 0;
+.theme-concheki .feature-card:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .theme-concheki .feature-card h3 {
-  margin-bottom: 10px;
+  margin: 0;
   font-size: 21px;
   letter-spacing: 0;
   line-height: 1.5;
 }
 
-.theme-concheki .feature-card.featured {
-  background: var(--soft);
-  color: var(--ink);
-}
-
-.theme-concheki .feature-card.featured .feature-number {
-  color: var(--muted);
-}
-
-.theme-concheki .feature-card.featured p {
-  color: var(--ink);
+.theme-concheki .feature-card p {
+  max-width: 64ch;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 15px;
+  line-height: 1.85;
 }
 
 .theme-concheki .screenshots {
@@ -295,7 +312,7 @@ body.theme-concheki {
 
 @media (max-width: 980px) {
   body.theme-concheki {
-    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
   }
 
   .theme-concheki .header-inner {
@@ -307,52 +324,62 @@ body.theme-concheki {
     display: none;
   }
 
-  .theme-concheki .feature-grid {
-    grid-template-columns: 1fr;
-  }
-
   .concheki-mobile-nav {
     position: fixed;
     z-index: 1100;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    right: max(12px, env(safe-area-inset-right, 0px));
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    left: max(12px, env(safe-area-inset-left, 0px));
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 4px;
-    padding: 8px max(8px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
-    border-top: 1px solid var(--line);
-    background: rgba(255, 248, 251, 0.98);
-    box-shadow: 0 -4px 20px rgba(var(--ink-rgb), 0.06);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0;
+    max-width: 560px;
+    margin-inline: auto;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 4px 24px rgba(var(--ink-rgb), 0.1);
+    backdrop-filter: blur(12px);
   }
 
   .concheki-mobile-nav a {
+    position: relative;
     display: flex;
-    min-height: 48px;
-    flex-direction: column;
+    min-width: 0;
+    min-height: 44px;
     align-items: center;
     justify-content: center;
-    gap: 3px;
-    border-radius: 12px;
+    padding: 0 2px 3px;
+    border-radius: 10px;
     color: var(--muted);
     font-size: 12px;
     font-weight: 650;
     line-height: 1.4;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .theme-concheki:lang(en) .concheki-mobile-nav {
+    grid-template-columns: 1fr 1fr 1fr 1.2fr 1fr 1fr;
   }
 
   .concheki-mobile-nav a[aria-current="location"] {
-    background: var(--soft);
     color: var(--ink);
+    font-weight: 800;
   }
 
-  .concheki-mobile-nav svg {
-    width: 21px;
-    height: 21px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  .concheki-mobile-nav a[aria-current="location"]::after {
+    position: absolute;
+    right: 0;
+    bottom: 4px;
+    left: 0;
+    width: 20px;
+    height: 3px;
+    margin-inline: auto;
+    border-radius: 2px;
+    background: var(--accent);
+    content: "";
   }
 
   .concheki-mobile-nav a:focus-visible {
@@ -416,16 +443,13 @@ body.theme-concheki {
     font-size: 14px;
   }
 
-  .theme-concheki .feature-grid {
-    gap: 12px;
-  }
-
   .theme-concheki .feature-card {
-    padding: 20px;
+    display: block;
+    padding-block: 24px;
   }
 
-  .theme-concheki .feature-number {
-    margin-bottom: 8px;
+  .theme-concheki .feature-card h3 {
+    margin-bottom: 10px;
   }
 
   .theme-concheki .faq-section {

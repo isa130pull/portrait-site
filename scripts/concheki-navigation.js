@@ -12,15 +12,11 @@
   });
   if (!destinations.length) return;
 
-  // FAQと入手のタブ順に依存せず、本文の並びで現在地を判定する。
-  destinations.sort(function (a, b) {
-    return a.section.compareDocumentPosition(b.section) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
-  });
-
   var queued = false;
   function updateCurrent() {
     queued = false;
-    var offset = (header ? header.getBoundingClientRect().height : 64) + 28;
+    var headerHeight = header ? header.getBoundingClientRect().height : 64;
+    var offset = Math.max(headerHeight + 28, window.innerHeight * 0.2);
     var current = destinations[0];
     destinations.forEach(function (destination) {
       if (destination.section.getBoundingClientRect().top <= offset) current = destination;
@@ -43,5 +39,7 @@
   window.addEventListener('scroll', scheduleUpdate, { passive: true });
   window.addEventListener('resize', scheduleUpdate);
   window.addEventListener('hashchange', scheduleUpdate);
+  window.addEventListener('load', scheduleUpdate);
+  if (document.fonts) document.fonts.ready.then(scheduleUpdate);
   updateCurrent();
 })();
