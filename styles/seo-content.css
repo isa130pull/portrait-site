@@ -3,6 +3,11 @@
   box-sizing: border-box;
 }
 
+/* picture の候補画像はレイアウトを占有しない。 */
+picture > source {
+  display: none;
+}
+
 .seo-breadcrumb {
   width: min(100%, var(--page-width, 1240px));
   margin: 0 auto;

@@ -523,7 +523,8 @@ main { overflow: hidden; }
   background: var(--peach);
   color: #fff;
 }
-.download-section > img {
+.download-section > img,
+.download-section > picture > img {
   width: clamp(100px, 12vw, 150px);
   border: 4px solid rgba(255, 255, 255, 0.75);
   border-radius: 24%;
@@ -681,6 +682,7 @@ footer > p {
     text-align: center;
   }
   .download-section > img,
+  .download-section > picture > img,
   .download-section .store-badge-link { grid-column: 1; justify-self: center; }
   .faq-list details p { padding-right: 0; }
   footer { display: flex; align-items: start; flex-direction: column; }

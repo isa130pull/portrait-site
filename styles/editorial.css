@@ -1934,3 +1934,5 @@ footer a {
     transition-duration: 0.01ms !important;
   }
 }
+/* picture の候補画像はレイアウトを占有しない。 */
+picture > source { display: none; }

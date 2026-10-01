@@ -735,7 +735,8 @@ main { overflow: hidden; }
   background: var(--ink);
   color: #fff;
 }
-.download-section > img {
+.download-section > img,
+.download-section > picture > img {
   width: 148px;
   border: 5px solid rgba(255, 255, 255, 0.86);
   border-radius: 24%;
@@ -815,7 +816,8 @@ footer {
   .video-link,
   .collection-visual { width: min(100%, 700px); }
   .download-section { grid-template-columns: 118px 1fr; }
-  .download-section > img { width: 118px; }
+  .download-section > img,
+  .download-section > picture > img { width: 118px; }
   .download-section .store-actions { grid-column: 1 / -1; justify-content: flex-start; }
 }
 
@@ -865,7 +867,8 @@ footer {
   .showcase-section { gap: 42px; padding-top: 84px; padding-bottom: 84px; }
   .collection-visual { min-height: 290px; }
   .download-section { grid-template-columns: 82px 1fr; padding-inline: var(--page-x); }
-  .download-section > img { width: 82px; border-width: 3px; }
+  .download-section > img,
+  .download-section > picture > img { width: 82px; border-width: 3px; }
   .download-section .store-actions { width: 100%; }
   .faq-section { grid-template-columns: 1fr; gap: 42px; }
   footer { display: block; text-align: center; }
@@ -884,7 +887,8 @@ footer {
   .theme-loridama .hero-art { min-height: 340px; }
   .theme-concheki .hero-art { min-height: 400px; }
   .download-section { display: block; text-align: center; }
-  .download-section > img { width: 92px; margin: 0 auto 24px; }
+  .download-section > img,
+  .download-section > picture > img { width: 92px; margin: 0 auto 24px; }
   .download-section .store-actions { justify-content: center; margin-top: 28px; }
 }
 

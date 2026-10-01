@@ -198,6 +198,14 @@ portrait-site/
 
 ## セットアップ手順
 
+### アプリ画像の配信
+
+- 日英トップとアプリ詳細は、`picture` で WebP を優先し、元の PNG / JPEG をフォールバックとして維持する。
+- スクリーンショットには元サイズと幅640pxの WebP を用意し、`srcset` / `sizes` で表示幅に応じて選択する。アイコンには元サイズの WebP を使用する。
+- 素材を更新する際は同名の WebP も更新する。生成例: `cwebp -q 85 -m 6 screen-01.png -o screen-01.webp`、縮小版: `cwebp -q 85 -m 6 -resize 640 0 screen-01.png -o screen-01-640.webp`。
+- 元画像の寸法を変更した場合は、HTML の `width` / `height` と `srcset` の幅も更新する。OGP・構造化データには元画像のURLを引き続き使用する。
+- 更新後は文字の読みやすさ、画像の欠落、モバイル表示を確認する。ストア公式バッジとプロフィール画像はこの変換の対象外。
+
 ### 1. お問い合わせフォームの設定
 
 詳細は [`pages/CONTACT_SETUP.md`](pages/CONTACT_SETUP.md) を参照。
