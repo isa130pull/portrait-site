@@ -797,6 +797,58 @@ button:disabled {
   background: rgba(4, 10, 14, 0.48);
 }
 
+.app-about h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.app-about .topic-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.app-about .topic-list li {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(4, 10, 14, 0.48);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.bingo-faq {
+  margin: 0 0 20px;
+}
+
+.bingo-faq > div {
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+}
+
+.bingo-faq > div:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.bingo-faq dt {
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.bingo-faq dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+.bingo-faq a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .print-sheets {
   display: none;
 }

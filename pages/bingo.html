@@ -53,7 +53,7 @@
         "featureList": [
           "3×3・5×5ビンゴカード作成",
           "中央FREEマス",
-          "4種類の用途別テンプレート",
+          "6種類の用途別テンプレート",
           "複数のシャッフル済みカード生成",
           "A4印刷・PDF保存",
           "ビンゴ成立の自動判定",
@@ -100,9 +100,9 @@
   <link rel="icon" type="image/png" sizes="512x512" href="../images/bingo/web-app-manifest-512x512.png">
   <link rel="stylesheet" href="../styles/app-shell.css?v=20260813">
   <link rel="stylesheet" href="../styles/language-switcher.css?v=20260813">
-  <link rel="stylesheet" href="../styles/bingo.css?v=20260814-2">
+  <link rel="stylesheet" href="../styles/bingo.css?v=20261027">
   <script src="../scripts/language-preference.js?v=20260813-4" defer></script>
-  <script src="../scripts/bingo.js?v=20260814-2" defer></script>
+  <script src="../scripts/bingo.js?v=20261027" defer></script>
 
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -175,6 +175,8 @@
             <option value="watch_party">配信・ライブ視聴</option>
             <option value="party">パーティー交流</option>
             <option value="learning">学習・復習</option>
+            <option value="bonenkai">忘年会</option>
+            <option value="christmas">クリスマス</option>
           </select>
         </div>
         <button id="sampleBtn" type="button" class="ghost">テンプレートを反映</button>
@@ -302,6 +304,8 @@
         <li><strong>配信・ライブ視聴：</strong>ゲスト、発表、衣装チェンジなどを視聴者同士で楽しめます。</li>
         <li><strong>パーティー交流：</strong>参加者に当てはまる特徴を探すアイスブレイクに使えます。</li>
         <li><strong>学習・復習：</strong>説明、要約、問題演習などの達成項目をゲーム感覚で進められます。</li>
+        <li><strong>忘年会：</strong>今年の振り返りや自己紹介のお題で、参加者同士の会話を広げます。</li>
+        <li><strong>クリスマス：</strong>サンタやツリーなどのお題で、クリスマス会や家族で遊べます。</li>
       </ul>
 
       <h2>使い方</h2>
@@ -329,6 +333,14 @@
       <h2>保存と共有について</h2>
       <p>入力内容はこのブラウザ内に保存されます。共有URLにはカードの内容が含まれるため、個人情報や公開したくない内容は入力しないでください。共有URLを開いた相手は、同じカードを日本語版・英語版のどちらでも表示できます。印刷・PDF用の複数カードは端末内で生成され、入力内容がサーバーへ送信されることはありません。</p>
 
+    </section>
+
+    <section class="seo-related seo-related--contained" aria-labelledby="seasonal-bingo-title">
+      <h2 id="seasonal-bingo-title">季節・イベント向けのビンゴ</h2>
+      <ul>
+        <li><a href="bingo-bonenkai.html">忘年会ビンゴ｜景品なしでも盛り上がるお題ビンゴ</a></li>
+        <li><a href="bingo-christmas.html">クリスマスビンゴ｜子どもも遊べる印刷用カード</a></li>
+      </ul>
     </section>
 
     <section class="seo-related seo-related--contained" aria-labelledby="seo-related-title">

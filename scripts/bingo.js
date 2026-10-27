@@ -149,6 +149,17 @@
         'Write a definition', 'Name three facts', 'Connect to real life', 'Create a quiz question', 'Spot a pattern',
         'Use the formula', 'Read aloud', 'Complete a challenge', 'Reflect for one minute', 'Set the next goal'
       ]
+    },
+    christmas: {
+      name: 'Christmas',
+      title: 'Christmas Bingo',
+      entries: [
+        'Santa Claus', 'Reindeer', 'Christmas tree', 'Wrapped present', 'Snowman',
+        'Stocking', 'Jingle bell', 'Wreath', 'Star topper', 'Candle',
+        'Gingerbread cookie', 'Candy cane', 'Hot cocoa', 'Twinkling lights', 'Christmas song',
+        'Sleigh', 'Chimney', 'Mittens', 'Scarf', 'Snowflake',
+        'Ornament', 'Poinsettia', 'Party cracker', 'Santa hat', 'Holiday card'
+      ]
     }
   } : {
     setlist: {
@@ -188,13 +199,37 @@
         '定義を書く', '事実を3つ挙げる', '生活と結びつける', 'クイズを1問作る', '規則性を見つける',
         '公式を使う', '声に出して読む', '応用問題に挑戦', '1分で振り返る', '次の目標を決める'
       ]
+    },
+    bonenkai: {
+      name: '忘年会',
+      title: '忘年会ビンゴ',
+      entries: [
+        '今年うれしかったこと', '今年始めたこと', '今年行った旅行先', '今年ハマった食べ物', '今年よく聴いた曲',
+        '買ってよかった物', '今年のちょっとした失敗', 'お世話になった人に感謝', '他部署の人と話す', '同じ誕生月の人',
+        '同じ出身地の人', '最近見た映画・ドラマ', '今年の目標を達成した人', '来年挑戦したいこと', 'おすすめのお店',
+        '休日の過ごし方', '年末年始の予定', '今年を漢字1文字で', '意外な特技', '初対面の人と自己紹介',
+        '同じ趣味の人', '幹事にひと言お礼', '全員で集合写真', '来年の抱負を宣言', '今年のベストショット'
+      ]
+    },
+    christmas: {
+      name: 'クリスマス',
+      title: 'クリスマスビンゴ',
+      entries: [
+        'サンタクロース', 'トナカイ', 'クリスマスツリー', 'プレゼント', '雪だるま',
+        'くつした', 'ベル', 'リース', 'ツリーの星', 'キャンドル',
+        'ジンジャークッキー', 'キャンディケイン', 'クリスマスケーキ', 'イルミネーション', 'クリスマスソング',
+        'そり', 'えんとつ', 'てぶくろ', 'マフラー', '雪の結晶',
+        'オーナメント', 'ポインセチア', 'クラッカー', 'サンタの帽子', 'メッセージカード'
+      ]
     }
   };
 
   var BOARD_SIZES = [3, 5];
   var MAX_CELL_LENGTH = 40;
   var MAX_TITLE_LENGTH = 60;
-  var STORAGE_KEY = 'bingo.saved.v1';
+  // Seasonal landing pages keep their own board so a saved card from another page does not replace their template.
+  var pageTemplateId = bingoTemplates[document.body.dataset.bingoTemplate] ? document.body.dataset.bingoTemplate : '';
+  var STORAGE_KEY = 'bingo.saved.v1' + (pageTemplateId ? '.' + pageTemplateId : '');
   var VALID_FONTS = ['system', 'gothic', 'marker', 'impact'];
   var LEGACY_FONT_MAP = {
     pop: 'marker',
@@ -294,19 +329,19 @@
       },
       {
         id: 'x_search',
-        category: 'Browser tool · Japanese',
+        category: 'Browser tool',
         title: 'Build advanced searches for X',
         description: 'Combine filters and create an X search query without memorizing commands.',
         cta: 'Open X Search Builder →',
-        href: '../../pages/x-search.html'
+        href: 'x-search.html'
       },
       {
         id: 'popong',
-        category: 'Browser game · Japanese',
+        category: 'Browser game',
         title: 'Play the free PONG game POPONG',
-        description: 'Choose a difficulty and race the computer to seven points—no sign-up needed.',
+        description: 'Choose a difficulty and race the computer to five points—no sign-up needed.',
         cta: 'Play now →',
-        href: '../../pages/pong/'
+        href: 'pong/'
       }
     ]
   } : {
@@ -800,9 +835,10 @@
   function loadLocal() {
     try {
       var saved = window.localStorage.getItem(STORAGE_KEY);
-      if (saved) loadFrom(JSON.parse(saved));
+      return saved ? loadFrom(JSON.parse(saved)) : false;
     } catch (error) {
       // Ignore invalid or unavailable local storage.
+      return false;
     }
   }
 
@@ -1111,6 +1147,28 @@
     trackEvent('bingo_reset', { board_size: state.size });
   }
 
+  function fillTemplate(template) {
+    state.cells = createMatrix(state.size, '');
+    template.entries.slice(0, state.size * state.size).forEach(function (value, index) {
+      var row = Math.floor(index / state.size);
+      var column = index % state.size;
+      state.cells[row][column] = value;
+    });
+    state.marked = createMatrix(state.size, false);
+    state.title = template.title;
+    state.id = null;
+    titleInput.value = state.title;
+  }
+
+  function applyPageTemplate() {
+    var size = Number(document.body.dataset.bingoSize);
+    if (BOARD_SIZES.includes(size)) {
+      state.size = size;
+      sizeSelect.value = String(size);
+    }
+    fillTemplate(bingoTemplates[pageTemplateId]);
+  }
+
   async function applyTemplate(templateId) {
     var template = bingoTemplates[templateId] || bingoTemplates.setlist;
     var hasContent = state.cells.some(function (row) {
@@ -1124,16 +1182,7 @@
       if (!confirmed) return;
     }
 
-    state.cells = createMatrix(state.size, '');
-    template.entries.slice(0, state.size * state.size).forEach(function (value, index) {
-      var row = Math.floor(index / state.size);
-      var column = index % state.size;
-      state.cells[row][column] = value;
-    });
-    state.marked = createMatrix(state.size, false);
-    state.title = template.title;
-    state.id = null;
-    titleInput.value = state.title;
+    fillTemplate(template);
     render();
     saveLocal();
     showToast(copy.templateDone(template.name));
@@ -1521,7 +1570,8 @@
     });
   }
 
-  loadLocal();
+  if (templateSelect && pageTemplateId) templateSelect.value = pageTemplateId;
+  if (!loadLocal() && pageTemplateId) applyPageTemplate();
   render();
   tryLoadFromUrl();
   window.addEventListener('hashchange', tryLoadFromUrl);
