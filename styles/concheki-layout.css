@@ -173,6 +173,11 @@ body.theme-concheki {
   height: 60px;
 }
 
+.theme-concheki .concafe-card-brand .concafe-logo-wide {
+  width: 144px;
+  height: 40px;
+}
+
 .theme-concheki .concafe-card h3 {
   font-size: 22px;
   letter-spacing: 0;
