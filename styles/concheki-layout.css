@@ -71,10 +71,6 @@ body.theme-concheki {
   line-height: 1.8;
 }
 
-.theme-concheki .hero .seo-jump-links {
-  margin: 12px 0 0;
-}
-
 .theme-concheki .seo-jump-links a,
 .theme-concheki .seo-related a {
   color: #a23764;
@@ -145,115 +141,103 @@ body.theme-concheki {
   font-size: 15px;
 }
 
-.theme-concheki .concafe-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+.concheki-hero-stores {
+  margin-top: 22px;
 }
 
-.theme-concheki .concafe-definition {
-  margin-bottom: 24px;
-  padding-left: 16px;
-  border-left: 3px solid var(--accent);
-}
-
-.theme-concheki .concafe-definition h3 {
-  font-size: 17px;
-}
-
-.theme-concheki .concafe-card-body {
-  padding: 20px;
-}
-
-.theme-concheki .concafe-card-brand {
-  margin-bottom: 14px;
-}
-
-.theme-concheki .concafe-card-brand img {
-  width: 76px;
-  height: 60px;
-}
-
-.theme-concheki .concafe-card-brand .concafe-logo-wide {
-  width: 144px;
-  height: 40px;
-}
-
-.theme-concheki .concafe-card h3 {
-  font-size: 22px;
-  letter-spacing: 0;
-  overflow-wrap: normal;
-}
-
-.theme-concheki .concafe-card p {
-  margin-bottom: 12px;
-}
-
-.theme-concheki .concafe-card .concafe-status {
-  margin: 0;
-}
-
-.theme-concheki .concafe-note {
-  margin-top: 18px;
+.concheki-hero-stores p {
+  margin: 0 0 8px;
+  color: var(--muted);
   font-size: 13px;
+  font-weight: 700;
 }
 
-.theme-concheki .feature-grid {
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-
-.theme-concheki .feature-card {
-  display: grid;
-  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
-  align-items: start;
-  gap: 32px;
-  min-height: 0;
-  padding: 28px 0;
-  border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0;
-  background: transparent;
-}
-
-.theme-concheki .feature-card:last-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.theme-concheki .feature-card h3 {
+.concheki-hero-stores ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin: 0;
-  font-size: 21px;
+  padding: 0;
+  list-style: none;
+}
+
+.concheki-hero-stores a {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  padding: 6px 16px;
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  border-radius: 99px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.concheki-hero-stores a:hover {
+  border-color: var(--accent);
+}
+
+.concheki-hero-stores a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.concheki-features {
+  background: var(--soft);
+}
+
+.concheki-features .section-heading {
+  margin-bottom: 28px;
+}
+
+.concheki-swipe-hint {
+  display: none;
+}
+
+.concheki-feature-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: concheki-feature;
+}
+
+.concheki-feature {
+  min-width: 0;
+  counter-increment: concheki-feature;
+}
+
+.concheki-feature img {
+  width: 100%;
+  border: 5px solid #fff;
+  border-radius: 22px;
+  box-shadow: 0 12px 32px rgba(var(--ink-rgb), 0.12);
+}
+
+.concheki-feature h3 {
+  margin: 16px 0 6px;
+  font-size: 17px;
   letter-spacing: 0;
   line-height: 1.5;
 }
 
-.theme-concheki .feature-card p {
-  max-width: 64ch;
-  color: rgba(255, 255, 255, 0.86);
-  font-size: 15px;
-  line-height: 1.85;
+.concheki-feature h3::before {
+  display: block;
+  color: #a23764;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  content: counter(concheki-feature, decimal-leading-zero);
 }
 
-.theme-concheki .screenshots {
-  gap: 20px;
-}
-
-.theme-concheki .concheki-swipe-hint {
-  display: none;
-}
-
-.theme-concheki .screenshots figure {
-  width: 100%;
+.concheki-feature p {
   margin: 0;
-}
-
-.theme-concheki .screenshots img {
-  border-radius: 20px;
-}
-
-.theme-concheki .screenshots figcaption {
-  padding-top: 12px;
-  font-size: 13px;
-  line-height: 1.6;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
 }
 
 .theme-concheki .download-section {
@@ -336,7 +320,7 @@ body.theme-concheki {
     bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     left: max(12px, env(safe-area-inset-left, 0px));
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 0;
     max-width: 560px;
     margin-inline: auto;
@@ -363,10 +347,6 @@ body.theme-concheki {
     line-height: 1.4;
     white-space: nowrap;
     text-decoration: none;
-  }
-
-  .theme-concheki:lang(en) .concheki-mobile-nav {
-    grid-template-columns: 1fr 1fr 1fr 1.2fr 1fr 1fr;
   }
 
   .concheki-mobile-nav a[aria-current="location"] {
@@ -415,17 +395,7 @@ body.theme-concheki {
   }
 
   .theme-concheki .hero-art {
-    padding: 12px;
-  }
-
-  .theme-concheki .device-main {
-    width: min(52vw, 210px);
-    border-width: 5px;
-    border-radius: 22px;
-  }
-
-  .theme-concheki .hero-art::before {
-    width: min(90%, 320px);
+    display: none;
   }
 
   .theme-concheki .section-shell {
@@ -448,15 +418,6 @@ body.theme-concheki {
     font-size: 14px;
   }
 
-  .theme-concheki .feature-card {
-    display: block;
-    padding-block: 24px;
-  }
-
-  .theme-concheki .feature-card h3 {
-    margin-bottom: 10px;
-  }
-
   .theme-concheki .faq-section {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -473,25 +434,23 @@ body.theme-concheki {
   }
 }
 
-@media (max-width: 639px) {
-  .theme-concheki .concheki-swipe-hint {
+@media (max-width: 900px) {
+  .concheki-swipe-hint {
     display: block;
   }
 
-  .theme-concheki .concafe-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .theme-concheki .screenshots {
+  .concheki-feature-list {
     display: flex;
     gap: 16px;
+    margin-inline: calc(var(--page-x) * -1);
+    padding: 0 var(--page-x) 14px;
     overflow-x: auto;
-    padding-bottom: 14px;
-    scroll-snap-type: x proximity;
+    scroll-padding-inline: var(--page-x);
+    scroll-snap-type: x mandatory;
   }
 
-  .theme-concheki .screenshots figure {
-    flex: 0 0 min(66vw, 230px);
+  .concheki-feature {
+    flex: 0 0 min(60vw, 220px);
     scroll-snap-align: start;
   }
 }
