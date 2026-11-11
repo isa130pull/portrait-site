@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#071015" />
+  <title>POPONG | Free Browser Pong Game, Controls and Tips</title>
+  <meta name="description" content="Play a free browser Pong game with mouse or touch controls. Learn Normal and Hard differences, race the CPU to five points, read tips, and post a clear time." />
+  <link rel="canonical" href="https://isa130pull.github.io/portrait-site/en/pages/pong/" />
+  <link rel="alternate" hreflang="ja" href="https://isa130pull.github.io/portrait-site/pages/pong/" />
+  <link rel="alternate" hreflang="en" href="https://isa130pull.github.io/portrait-site/en/pages/pong/" />
+  <link rel="alternate" hreflang="x-default" href="https://isa130pull.github.io/portrait-site/pages/pong/" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://isa130pull.github.io/portrait-site/en/pages/pong/" />
+  <meta property="og:title" content="POPONG | Free Classic Pong Game" />
+  <meta property="og:description" content="Use mouse or touch controls to beat the CPU to five points in Normal or Hard mode, then challenge the clear-time leaderboard." />
+  <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/ogp-popong.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:alt" content="POPONG classic browser Pong game" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Isao Kawaguchi (isa130pull) Portfolio" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@isa130pull" />
+  <meta name="twitter:title" content="POPONG | Free Classic Pong Game" />
+  <meta name="twitter:description" content="Use mouse or touch controls to beat the CPU to five points in Normal or Hard mode." />
+  <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-popong.jpg" />
+  <meta name="twitter:image:alt" content="POPONG classic browser Pong game" />
+
+  <!-- JSON-LD VideoGame / WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["VideoGame", "WebApplication"],
+    "name": "POPONG - Classic Browser Pong Game",
+    "url": "https://isa130pull.github.io/portrait-site/en/pages/pong/",
+    "description": "A free browser Pong game with mouse and touch controls. Beat the CPU to five points in Normal or Hard mode and optionally submit your clear time to an online leaderboard.",
+    "genre": "Arcade",
+    "gamePlatform": "Web Browser",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "A modern web browser with Canvas and JavaScript enabled",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "playMode": "SinglePlayer",
+    "featureList": [
+      "Mouse and touch controls",
+      "Normal and Hard difficulty modes",
+      "First-to-five CPU matches",
+      "Device-local best time saving",
+      "Online leaderboard"
+    ],
+    "numberOfPlayers": {
+      "@type": "QuantitativeValue",
+      "value": 1
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Isao Kawaguchi (isa130pull)"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is POPONG free and playable without an account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The game is free and does not require registration, so you can play immediately in your browser."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I play POPONG on a phone or tablet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Move your finger left and right across the game screen to control the lower paddle on a phone or tablet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many points do I need to win?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Score five points before the CPU to clear the game. Your clear time is saved on your device and can optionally be posted to the leaderboard."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Normal and Hard mode?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Normal starts with gentler ball and CPU movement. Hard uses a faster ball and quicker CPU response, so it requires more precise positioning."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://isa130pull.github.io/portrait-site/en/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "POPONG",
+        "item": "https://isa130pull.github.io/portrait-site/en/pages/pong/"
+      }
+    ]
+  }
+  </script>
+
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../../../images/index/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="../../../images/index/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../images/index/apple-touch-icon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+
+  <!-- PlayFab SDK -->
+  <script src="https://download.playfab.com/PlayFabClientApi.js" defer></script>
+  <script src="../../../pages/pong/playfab-manager.js?v=4" defer></script>
+
+  <style>
+    :root{
+      --bg: #0b0c0f;
+      --fg: #e8eaed;
+      --muted: #a1a7b3;
+      --accent: #60d5ff;
+      --card: #14161a;
+      --border: #1f2329;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#ffffff; --fg:#111318; --muted:#5a6472; --card:#f7f8fa; --border:#e5e7eb; --accent:#0ea5e9; }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0}
+    body{
+      background:var(--bg);
+      color:var(--fg);
+      font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      touch-action:none;
+    }
+    .wrap{
+      max-width:1280px;
+      margin:0 auto;
+      padding:16px 24px;
+      width:100%;
+    }
+    header{
+      padding:8px 0;
+      border-bottom:1px solid var(--border);
+    }
+    header .wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .back-link{
+      display:inline-block;
+      margin-bottom:0;
+      padding:8px 16px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      color:var(--fg);
+      text-decoration:none;
+      transition:border-color 0.2s;
+    }
+    .back-link:hover{
+      border-color:var(--accent);
+    }
+    .game-container{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#000;
+      position:relative;
+    }
+    .mute-btn,
+    .ranking-btn{
+      width:48px;
+      height:48px;
+      border:2px solid var(--border);
+      border-radius:8px;
+      background:var(--card);
+      color:var(--fg);
+      font-size:24px;
+      cursor:pointer;
+      transition:all 0.2s;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+      flex-shrink:0;
+    }
+    .mute-btn:hover,
+    .ranking-btn:hover{
+      border-color:var(--accent);
+    }
+    .mute-btn.muted{
+      opacity:0.5;
+    }
+    .header-buttons{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    #canvas{
+      display:block;
+      max-width:100%;
+      max-height:100%;
+      touch-action:none;
+      user-select:none;
+      -webkit-user-select:none;
+      -webkit-touch-callout:none;
+    }
+    @media (max-width: 767px){
+      .wrap{padding:8px 12px}
+      header{padding:6px 0}
+    }
+
+    /* 名前入力UI */
+    #nameInputContainer {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 32px 24px;
+      z-index: 1000;
+      display: none;
+      min-width: 320px;
+      max-width: 90%;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    #nameInputContainer.show {
+      display: block;
+    }
+    #nameInputContainer h2 {
+      margin: 0 0 16px 0;
+      font-family: 'Orbitron', monospace;
+      font-size: 24px;
+      color: var(--accent);
+      text-align: center;
+    }
+    #nameInputContainer p {
+      margin: 0 0 16px 0;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+    }
+    #playerNameInput {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-family: 'Orbitron', monospace;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      color: var(--fg);
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+    #playerNameInput:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .name-input-buttons {
+      display: flex;
+      gap: 12px;
+    }
+    .name-input-buttons button {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-family: 'Orbitron', monospace;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--card);
+      color: var(--fg);
+    }
+    #submitScoreBtn {
+      border-color: var(--accent) !important;
+      color: var(--accent) !important;
+    }
+    #submitScoreBtn:hover {
+      background: var(--accent);
+      color: var(--bg) !important;
+    }
+    #skipScoreBtn:hover {
+      border-color: var(--accent);
+    }
+    #nameInputContainer .error-message {
+      color: #ff5555;
+      font-size: 14px;
+      margin-top: -8px;
+      margin-bottom: 8px;
+      display: none;
+    }
+    #nameInputContainer .error-message.show {
+      display: block;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+      display: none;
+    }
+    .overlay.show {
+      display: block;
+    }
+    @media (max-width: 767px){
+      #nameInputContainer {
+        padding: 24px 16px;
+        min-width: 280px;
+      }
+      #nameInputContainer h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../../../styles/app-shell.css?v=20260814">
+  <link rel="stylesheet" href="../../../styles/language-switcher.css?v=20260814">
+  <link rel="stylesheet" href="../../../styles/pong-guide.css?v=20260814">
+
+  <!-- Google Analytics (gtag.js) - lazy loaded -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CF20TVK6DP');
+    (function(){
+      function loadGtag(){
+        if (location.hostname !== 'isa130pull.github.io' || (location.pathname !== '/portrait-site' && location.pathname.indexOf('/portrait-site/') !== 0)) return;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag);
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    })();
+  </script>
+
+  <script src="../../../scripts/language-preference.js?v=20260813-4" defer></script>
+  <script src="../../../pages/pong/index.js?v=26" charset="UTF-8" defer></script>
+  <link rel="stylesheet" href="../../../styles/seo-content.css?v=20261001-2">
+</head>
+<body class="app-page pong-page" data-inherit-language="true" onload="init()">
+  <header class="app-site-header">
+    <div class="app-site-header__inner">
+      <a class="app-brand" href="../../index.html" aria-label="Back to Isao Kawaguchi's home page">
+        <span class="app-brand-mark" aria-hidden="true">IK</span>
+        <span>Isao Kawaguchi <small>/ isa130pull</small></span>
+      </a>
+      <div class="header-buttons app-header-actions">
+        <span class="language-switcher" aria-label="Choose language">
+          <a lang="ja" hreflang="ja" href="../../../pages/pong/" data-language-choice="ja">日本語</a>
+          <span class="language-separator" aria-hidden="true">/</span>
+          <span lang="en" aria-current="page">English</span>
+        </span>
+        <a href="../../index.html#personal" class="back-link" aria-label="Back to independent apps">
+          <span aria-hidden="true">←</span>
+          <span class="back-link-label">Independent apps</span>
+        </a>
+        <button id="rankingBtn" class="ranking-btn" aria-label="View leaderboard">🏆</button>
+        <button id="muteBtn" class="mute-btn" aria-label="Mute audio">🔊</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="seo-breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../">Home</a></li>
+      <li aria-current="page">POPONG</li>
+    </ol>
+  </nav>
+
+  <main class="game-container">
+    <h1 class="visually-hidden">POPONG - Free Classic Browser Pong Game</h1>
+    <canvas id="canvas" role="img" aria-label="POPONG game screen">Your browser does not support Canvas.</canvas>
+  </main>
+
+  <nav class="game-jump" aria-label="Game guide">
+    <a id="howToLink" href="#how-to-play">See controls, rules, and tips ↓</a>
+  </nav>
+
+  <section id="how-to-play" class="game-guide" aria-labelledby="guide-title">
+    <div class="game-guide__intro">
+      <p class="game-guide__eyebrow">How to play / Controls / Tips</p>
+      <h2 id="guide-title">How to play POPONG</h2>
+      <p>POPONG is a free Pong game where you return the ball with the lower paddle and race the CPU to five points. There is nothing to download and no account is required, so you can start playing in a desktop or mobile browser.</p>
+    </div>
+
+    <ol class="guide-steps">
+      <li><strong>Click or tap the game screen</strong><br>Choose Normal or Hard mode.</li>
+      <li><strong>Move the lower paddle left and right</strong><br>Return the ball before it passes the bottom edge.</li>
+      <li><strong>Score five points before the CPU</strong><br>Improve your clear time and challenge the leaderboard.</li>
+    </ol>
+
+    <div class="guide-grid">
+      <article class="guide-card">
+        <h3>Desktop and mobile controls</h3>
+        <p><strong>Desktop:</strong> Move your mouse left and right over the game screen. The lower paddle follows your pointer.</p>
+        <p><strong>Phone or tablet:</strong> Drag your finger left and right on the game screen. Swipes inside the game control the paddle, so use the guide link directly below the game when you want to move to this section.</p>
+      </article>
+
+      <article class="guide-card">
+        <h3>Normal vs. Hard mode</h3>
+        <dl class="difficulty-list">
+          <dt>NORMAL</dt>
+          <dd>The ball and CPU start more gently, making this the best mode for learning the controls.</dd>
+          <dt>HARD</dt>
+          <dd>The ball moves faster and the CPU responds more quickly. Read the return angle early and position the paddle precisely.</dd>
+        </dl>
+      </article>
+    </div>
+
+    <h2>Tips for beating the CPU</h2>
+    <ul class="tips-grid">
+      <li><strong>Recover toward the center:</strong> After a return, move back to a position that can cover either side of the next shot.</li>
+      <li><strong>Use the paddle edges:</strong> The return angle changes with the contact point. Edge hits can send the CPU from side to side.</li>
+      <li><strong>Anticipate acceleration:</strong> The ball speeds up as a rally continues. Watch its direction and move toward the next landing point early.</li>
+    </ul>
+
+    <aside class="ranking-callout" aria-labelledby="ranking-guide-title">
+      <div>
+        <h2 id="ranking-guide-title">Clear-time leaderboard</h2>
+        <p>Winning a first-to-five match saves your clear time on your device. Enter a display name if you want to submit it to the separate Normal or Hard online leaderboard.</p>
+      </div>
+      <a href="ranking.html">View leaderboard →</a>
+    </aside>
+
+    <h2>Frequently asked questions</h2>
+    <dl class="faq-list">
+      <div><dt>Is POPONG free and playable without an account?</dt><dd>Yes. The game is free and does not require registration, so you can play immediately in your browser.</dd></div>
+      <div><dt>Can I play POPONG on a phone or tablet?</dt><dd>Yes. Move your finger left and right across the game screen to control the lower paddle on a phone or tablet.</dd></div>
+      <div><dt>How many points do I need to win?</dt><dd>Score five points before the CPU to clear the game. Your clear time is saved on your device and can optionally be posted to the leaderboard.</dd></div>
+      <div><dt>What is the difference between Normal and Hard mode?</dt><dd>Normal starts with gentler ball and CPU movement. Hard uses a faster ball and quicker CPU response, so it requires more precise positioning.</dd></div>
+    </dl>
+  </section>
+
+  <section class="seo-related" aria-labelledby="seo-related-title">
+    <h2 id="seo-related-title">Related free games and tools</h2>
+    <ul>
+      <li><a href="../../apps/iebaku/">House Breaker!! — 30-second house-smashing game</a></li>
+      <li><a href="../../apps/sushibaku/">SushiBomb — sushi-launching destruction game</a></li>
+      <li><a href="../bingo.html">Setlist Bingo — free printable bingo maker</a></li>
+      <li><a href="../bingo-christmas.html">Christmas Bingo — free printable holiday bingo cards</a></li>
+    </ul>
+  </section>
+
+  <!-- オーバーレイ -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- 名前入力UI -->
+  <div id="nameInputContainer">
+    <h2>RANKING</h2>
+    <p>Submit your clear time to the leaderboard?</p>
+    <label class="visually-hidden" for="playerNameInput">Leaderboard display name</label>
+    <input type="text" id="playerNameInput" placeholder="Enter a name (3–12 characters)" maxlength="12" autocomplete="off">
+    <div class="error-message" id="nameErrorMessage"></div>
+    <div class="name-input-buttons">
+      <button id="skipScoreBtn">Skip</button>
+      <button id="submitScoreBtn">Submit</button>
+    </div>
+  </div>
+</body>
+</html>
