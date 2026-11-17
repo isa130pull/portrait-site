@@ -1,0 +1,125 @@
+.concafe-stores {
+  scroll-margin-top: 110px;
+}
+
+.concafe-stores .section-heading {
+  margin-bottom: 28px;
+}
+
+.concafe-stores .section-heading h2 {
+  font-size: clamp(30px, 3.8vw, 48px);
+  letter-spacing: -0.04em;
+}
+
+.concafe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.concafe-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 22px 16px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #fff;
+  scroll-margin-top: 110px;
+}
+
+.concafe-card-brand {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.concafe-card-brand img {
+  width: 76px;
+  height: 60px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.concafe-card-brand .concafe-logo-wide {
+  width: 144px;
+  height: 40px;
+}
+
+.concafe-card h3 {
+  margin: 0 0 4px;
+  font-size: 21px;
+  line-height: 1.5;
+}
+
+.concafe-card p {
+  margin: 0 0 10px;
+}
+
+.concafe-card .concafe-location {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.concafe-card a,
+.concafe-note a,
+.theme-concheki .faq-list a,
+.theme-concheki .download-section p a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.concafe-card a {
+  display: inline-block;
+  margin-top: auto;
+  padding-block: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.concafe-card a:focus-visible,
+.concafe-note a:focus-visible,
+.theme-concheki .faq-list a:focus-visible,
+.theme-concheki .download-section p a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.concafe-note {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 760px) {
+  .concafe-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .concafe-card {
+    padding: 16px 20px 10px;
+  }
+
+  .concafe-card-brand {
+    height: 44px;
+    margin-bottom: 8px;
+  }
+
+  .concafe-card-brand img {
+    width: 56px;
+    height: 44px;
+  }
+
+  .concafe-card-brand .concafe-logo-wide {
+    width: 126px;
+    height: 35px;
+  }
+
+  .concafe-card h3 {
+    font-size: 19px;
+  }
+}

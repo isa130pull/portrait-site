@@ -1,0 +1,25 @@
+/* アプリ紹介ページのプレイ動画（無音ループ）。静止画と同じ枠・比率で表示する */
+.device video,
+.screenshots video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  background: #111;
+}
+
+.screenshots video {
+  border: clamp(4px, 0.7vw, 8px) solid #fff;
+  border-radius: clamp(18px, 2vw, 30px);
+  box-shadow: var(--shadow);
+}
+
+.app-detail .screenshots video { border-radius: 18px; }
+
+/* 動画を含むギャラリーは4列（幅720px以下は既存の2列・横スクロールに従う） */
+.app-detail .screenshots.has-video { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 720px) {
+  .app-detail .screenshots.has-video { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

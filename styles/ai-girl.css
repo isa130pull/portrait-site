@@ -1,0 +1,126 @@
+/* AI美少女1/149: shared by the Japanese and English pages. */
+body.theme-aigirl {
+  --paper: #fffafd;
+  --paper-rgb: 255, 250, 253;
+  --soft: #f7edf9;
+  --ink: #39283f;
+  --ink-rgb: 57, 40, 63;
+  --muted: #766578;
+  --accent: #b32175;
+  --accent-rgb: 179, 33, 117;
+  --accent-2: #7450b9;
+  --line: #e9dce9;
+  background: var(--paper);
+}
+.theme-aigirl .site-header { background: rgba(255, 250, 253, .96); border-bottom: 1px solid var(--line); }
+.theme-aigirl .brand img { border-radius: 12px; }
+.theme-aigirl .header-cta { border: 0; border-radius: 99px; background: var(--accent); color: white; box-shadow: none; }
+.theme-aigirl .hero { grid-template-columns: 1.05fr 1fr; gap: 24px; padding-block: 44px 70px; }
+.theme-aigirl p.aigirl-eyebrow { margin: 0 0 18px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .14em; line-height: 1.8; }
+.theme-aigirl .hero h1 { font-size: clamp(40px, 4.6vw, 62px); line-height: 1.3; letter-spacing: -.045em; }
+.aigirl-app-name { display: block; margin-bottom: 20px; color: var(--accent-2); font-size: 17px; letter-spacing: .025em; }
+.theme-aigirl .hero h1 em { color: var(--accent); font-style: normal; }
+.theme-aigirl .hero h1 .app-hero-subtitle { margin-top: 18px; font-size: 17px; letter-spacing: 0; }
+.theme-aigirl .hero-lead { max-width: 460px; margin-block: 18px; color: var(--muted); font-size: 15px; }
+.aigirl-facts { display: flex; flex-wrap: wrap; gap: 12px 22px; margin: 24px 0 16px; font-size: 11px; color: var(--muted); }
+.aigirl-facts b { display: block; color: var(--ink); font-size: 23px; letter-spacing: -.03em; line-height: 1.35; }
+.aigirl-store-note { max-width: 430px; margin: 5px 0 20px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+.theme-aigirl .hero .seo-jump-links { font-size: 12px; }
+.theme-aigirl .aigirl-hero-art { position: relative; display: block; height: 570px; min-height: 0; padding: 0; isolation: isolate; }
+.theme-aigirl .aigirl-hero-art::before { top: 12%; left: -2%; width: 104%; aspect-ratio: 1; border-radius: 48% 52% 41% 59%; background: linear-gradient(145deg, #fbd8eb, #e8ddfb); box-shadow: none; }
+.aigirl-phone { position: absolute; margin: 0; width: 49%; overflow: hidden; border: 6px solid #fff; border-radius: 28px; background: #fff; box-shadow: 0 18px 48px #57385b26; }
+.aigirl-phone img { display: block; width: 100%; height: auto; }
+.aigirl-phone-choice { top: 5%; left: 2%; z-index: 2; transform: rotate(-7deg); }
+.aigirl-phone-result { top: 15%; right: 0; z-index: 1; transform: rotate(8deg); }
+.aigirl-art-label { position: absolute; z-index: 3; right: 5%; bottom: 0; padding: 10px 18px; border: 1px solid #ead8ed; border-radius: 99px; background: #fffafd; color: var(--accent); box-shadow: 0 8px 30px #57385b14; font-size: 12px; font-weight: 750; }
+.theme-aigirl .experience-section { grid-template-columns: .85fr 1.15fr; align-items: center; gap: 56px; border-block: 1px solid var(--line); background: linear-gradient(135deg, #fff0f6, #f1ebfc); }
+.theme-aigirl .experience-copy h2 { margin-bottom: 20px; font-size: 36px; line-height: 1.5; letter-spacing: -.025em; }
+.theme-aigirl .experience-copy > p:not(.aigirl-eyebrow) { margin-bottom: 18px; font-size: 15px; }
+.theme-aigirl .experience-copy .aigirl-demo-note { font-size: 12px; }
+.aigirl-text-link { display: inline-block; color: var(--accent); font-size: 14px; font-weight: 750; text-underline-offset: 5px; }
+.theme-aigirl .experience-card { min-height: 0; padding: 28px; border: 1px solid #e7d5e5; border-radius: 28px; background: #fffafd; box-shadow: 0 16px 45px #7b4e7910; }
+.theme-aigirl .experience-meta { margin-bottom: 12px; font-size: 10px; letter-spacing: .03em; }
+.theme-aigirl .experience-card h3 { margin-bottom: 18px; font-size: 22px; }
+.theme-aigirl .quiz-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.theme-aigirl .quiz-options button { display: flex; flex-direction: column; gap: 7px; min-width: 0; padding: 6px 6px 9px; overflow: hidden; border: 1px solid #eaddea; border-radius: 17px; background: #fff; color: var(--ink); font-size: 12px; }
+.quiz-options button img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; }
+.theme-aigirl .quiz-options button:hover { border-color: var(--accent); background: #fff0f7; color: var(--accent); transform: translateY(-2px); }
+.theme-aigirl .quiz-options button:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; background: #fff0f7; color: var(--ink); }
+.theme-aigirl .experience-note { margin-top: 16px; font-size: 11px; }
+.aigirl-result-portrait { width: 160px; height: 160px; margin: 0 0 18px; border-radius: 22px; }
+.theme-aigirl .experience-actions a,
+.theme-aigirl .experience-actions button { min-height: 44px; padding: 10px 16px; border-radius: 99px; font-size: 12px; }
+.aigirl-quiz-loading { color: var(--muted); font-size: 14px; }
+.theme-aigirl .features-section { background: var(--paper); color: var(--ink); }
+.theme-aigirl .feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; border: 0; }
+.theme-aigirl .feature-card { display: block; padding: 24px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; box-shadow: none; }
+.aigirl-step { display: block; margin-bottom: 18px; color: #ac7bbb; font-size: 13px; font-weight: 750; }
+.theme-aigirl .feature-card h3 { margin: 0 0 12px; font-size: 19px; line-height: 1.6; }
+.theme-aigirl .feature-card p { color: var(--muted); font-size: 14px; }
+.theme-aigirl .feature-card:last-child { border-bottom: 0; }
+.theme-aigirl .screens-section { background: #f7f0f8; }
+.theme-aigirl .screens-section .section-heading { align-items: end; }
+.theme-aigirl .screens-section .section-heading > p { max-width: 310px; font-size: 13px; }
+.theme-aigirl .screenshots { display: flex; gap: 22px; overflow-x: auto; padding: 4px 2px 20px; scroll-snap-type: x proximity; scrollbar-color: #c69bd4 #eee0f0; }
+.theme-aigirl .screenshots:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 4px; }
+.theme-aigirl .screenshots figure { flex: 0 0 270px; width: auto; margin: 0; scroll-snap-align: start; }
+.theme-aigirl .screenshots img { width: 100%; border: 1px solid #e6d4e8; border-radius: 22px; box-shadow: none; }
+.theme-aigirl .screenshots figcaption { display: flex; gap: 10px; margin-top: 14px; color: var(--ink); font-size: 12px; text-align: left; }
+.theme-aigirl .screenshots figcaption span { color: var(--accent-2); }
+.theme-aigirl .aigirl-showcase { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 64px; width: min(100%, var(--page-width)); margin: auto; padding: 64px var(--page-x); background: none; }
+.aigirl-collection-art { display: flex; justify-content: center; padding: 20px; border-radius: 40px; background: linear-gradient(145deg, #ffe9f4, #eae0fa); }
+.aigirl-collection-art img { width: 205px; height: auto; border: 5px solid white; border-radius: 24px; box-shadow: 0 12px 35px #6a3f6526; }
+.theme-aigirl .showcase-copy { padding: 0; color: var(--ink); }
+.theme-aigirl .showcase-copy h2 { margin-bottom: 20px; }
+.theme-aigirl .showcase-copy p { color: var(--muted); font-size: 15px; }
+.theme-aigirl .download-section { color: var(--ink); gap: 24px; border-block: 1px solid var(--line); background: #fbeef6; }
+.theme-aigirl .download-section > picture img { width: 80px; height: 80px; border-radius: 20px; }
+.theme-aigirl .download-section h2 { font-size: 24px; }
+.theme-aigirl .download-section .aigirl-eyebrow { margin: 0 0 6px; font-size: 10px; }
+.theme-aigirl .download-section p:not(.aigirl-eyebrow) { color: var(--muted); font-size: 12px; }
+.theme-aigirl .showcase-copy p.aigirl-eyebrow { color: var(--accent); }
+.theme-aigirl .faq-list details { border-color: var(--line); }
+.theme-aigirl footer { border-top: 1px solid var(--line); background: white; }
+@media (max-width: 980px) {
+  .theme-aigirl .hero { gap: 20px; }
+  .theme-aigirl .hero h1 { font-size: 45px; }
+  .theme-aigirl .aigirl-hero-art { height: 470px; }
+  .theme-aigirl .experience-section { gap: 28px; }
+  .theme-aigirl .feature-grid { gap: 20px; }
+  .theme-aigirl .feature-card h3 { font-size: 17px; }
+}
+@media (max-width: 720px) {
+  .theme-aigirl .hero { grid-template-columns: 1fr; padding-block: 28px 38px; gap: 20px; }
+  .theme-aigirl .hero h1 { font-size: clamp(39px, 9vw, 54px); }
+  .aigirl-app-name { margin-bottom: 14px; font-size: 14px; }
+  .theme-aigirl .hero h1 .app-hero-subtitle { margin-top: 12px; font-size: 16px; }
+  .aigirl-eyebrow { margin-bottom: 12px; font-size: 10px; }
+  .theme-aigirl .hero-lead { max-width: 100%; font-size: 14px; }
+  .aigirl-facts { margin-block: 18px 10px; }
+  .theme-aigirl .aigirl-hero-art { width: min(100%, 430px); height: min(118vw, 510px); margin-inline: auto; padding: 0; }
+  .aigirl-phone { width: 46%; border-width: 5px; border-radius: 24px; }
+  .aigirl-phone-choice { left: 4%; }
+  .aigirl-phone-result { right: 3%; }
+  .aigirl-art-label { right: 8%; bottom: 1%; font-size: 11px; }
+  .theme-aigirl .experience-section { grid-template-columns: 1fr; gap: 24px; }
+  .theme-aigirl .experience-copy h2 { font-size: 30px; }
+  .theme-aigirl .experience-card { padding: 20px; }
+  .theme-aigirl .experience-card h3 { font-size: 20px; }
+  .theme-aigirl .feature-grid { grid-template-columns: 1fr; gap: 24px; }
+  .theme-aigirl .feature-card { padding-top: 18px; }
+  .aigirl-step { margin-bottom: 8px; }
+  .theme-aigirl .feature-card h3 { font-size: 19px; }
+  .theme-aigirl .screenshots figure { flex-basis: min(70vw, 270px); }
+  .theme-aigirl .aigirl-showcase { grid-template-columns: 1fr; gap: 28px; padding-block: 40px; }
+  .aigirl-collection-art { padding: 20px; }
+  .aigirl-collection-art img { width: 180px; }
+  .theme-aigirl .download-section { grid-template-columns: 64px 1fr; gap: 16px; }
+  .theme-aigirl .download-section > picture img { width: 64px; height: 64px; border-radius: 16px; }
+  .theme-aigirl .download-section > div:not(.store-actions) { display: block; }
+  .theme-aigirl .download-section h2 { font-size: 20px; }
+  .theme-aigirl .download-section .aigirl-eyebrow { font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-aigirl .quiz-options button { transition: none; }
+  .theme-aigirl .quiz-options button:hover { transform: none; }
+}

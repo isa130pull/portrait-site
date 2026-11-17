@@ -1,0 +1,1691 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#071015" />
+  <title>X (Twitter) Advanced Search Builder | Dates, Images &amp; Accounts</title>
+  <meta name="description" content="Build free advanced X (Twitter) searches by account, date, keywords, images, and likes. See examples for old posts, then copy the query or open it on X." />
+  <link rel="canonical" href="https://isa130pull.github.io/portrait-site/en/pages/x-search.html" />
+  <link rel="alternate" hreflang="ja" href="https://isa130pull.github.io/portrait-site/pages/x-search.html" />
+  <link rel="alternate" hreflang="en" href="https://isa130pull.github.io/portrait-site/en/pages/x-search.html" />
+  <link rel="alternate" hreflang="x-default" href="https://isa130pull.github.io/portrait-site/pages/x-search.html" />
+  <link rel="icon" href="../../images/index/favicon.ico" />
+  <meta name="robots" content="max-image-preview:large" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- OGP -->
+  <meta property="og:title" content="X (Twitter) Advanced Search Builder | Dates, Images &amp; Accounts" />
+  <meta property="og:description" content="Build free advanced X (Twitter) searches by account, date, keywords, images, and likes. See examples for old posts, then copy the query or open it on X." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://isa130pull.github.io/portrait-site/en/pages/x-search.html" />
+  <meta property="og:site_name" content="Isao Kawaguchi (isa130pull) Portfolio" />
+  <meta property="og:image" content="https://isa130pull.github.io/portrait-site/images/ogp-x-search.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:alt" content="X advanced search command builder" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="X (Twitter) Advanced Search Builder | Dates, Images &amp; Accounts" />
+  <meta name="twitter:description" content="Build free advanced X (Twitter) searches by account, date, keywords, images, and likes. See examples for old posts, then copy the query or open it on X." />
+  <meta name="twitter:image" content="https://isa130pull.github.io/portrait-site/images/ogp-x-search.jpg" />
+  <meta name="twitter:image:alt" content="X advanced search command builder" />
+
+  <!-- JSON-LD WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "X (Twitter) Advanced Search Builder",
+    "alternateName": "X検索コマンドビルダー",
+    "url": "https://isa130pull.github.io/portrait-site/en/pages/x-search.html",
+    "description": "Build free advanced X (Twitter) searches by account, date, keywords, images, and likes. See examples for old posts, then copy the query or open it on X.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "inLanguage": "en",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Isao Kawaguchi (isa130pull)"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://isa130pull.github.io/portrait-site/en/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "X Advanced Search Builder",
+        "item": "https://isa130pull.github.io/portrait-site/en/pages/x-search.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0b0c0f;
+      --fg: #e8eaed;
+      --muted: #a1a7b3;
+      --accent: #6ee7ff;
+      --card: #14161a;
+      --border: #1f2329;
+      --maxw: 900px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#ffffff; --fg:#111318; --muted:#5a6472; --card:#f7f8fa; --border:#e5e7eb; --accent:#0ea5e9; }
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: var(--maxw); margin-inline: auto; padding: 24px; }
+    header { padding: 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+    h1 { font-size: clamp(24px, 4vw, 32px); margin: 0; }
+    h2 { font-size: clamp(16px, 3vw, 18px); margin: 0 0 12px; font-weight: 600; }
+    .back-link { display: inline-flex; min-height: 44px; align-items: center; margin-bottom: 16px; padding: 8px 16px; border: 1px solid var(--border); border-radius: 8px; color: var(--fg); font-size: 14px; }
+    .back-link:hover { border-color: var(--accent); text-decoration: none; }
+
+    /* Section Card */
+    .section { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+
+    /* Search X Button */
+    .search-x-btn { width: 100%; padding: 14px 24px; background: var(--bg); border: 2px solid var(--accent); border-radius: 10px; color: var(--accent); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 16px; }
+    .search-x-btn:hover:not(:disabled) { background: var(--accent); color: var(--bg); }
+    .search-x-btn:disabled { opacity: 0.4; cursor: not-allowed; border-color: var(--border); color: var(--muted); }
+
+    /* Mode Tabs */
+    .mode-tabs { display: flex; gap: 0; margin-bottom: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .mode-tab { flex: 1; padding: 12px 16px; background: transparent; border: none; color: var(--muted); cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; text-align: center; }
+    .mode-tab:hover { color: var(--fg); }
+    .mode-tab.active { background: var(--accent); color: var(--bg); font-weight: 600; }
+
+    /* Preset Grid */
+    .preset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+    .preset-btn { padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; cursor: pointer; text-align: left; transition: all 0.2s; }
+    .preset-btn:hover { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent), transparent 85%); }
+    .preset-btn.selected { background: var(--accent); border-color: var(--accent); }
+    .preset-btn.selected .label { color: var(--bg); }
+    .preset-btn.selected code { color: color-mix(in oklab, var(--bg), transparent 30%); }
+    .preset-btn .label { font-weight: 600; font-size: 13px; color: var(--fg); margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .preset-btn code { display: block; font-size: 11px; color: var(--muted); font-family: 'SF Mono', Consolas, monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* Form Styles */
+    .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 12px; }
+    .form-group { margin-bottom: 12px; }
+    .form-group.inline { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 13px; color: var(--fg); }
+    label.checkbox { display: flex; min-height: 44px; align-items: center; gap: 8px; font-weight: 500; cursor: pointer; font-size: 13px; }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: 100%;
+      min-height: 44px;
+      padding: 8px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--fg);
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus { outline: none; border-color: var(--accent); }
+    input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
+    input[type="number"] { -moz-appearance: textfield; }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a1a7b3' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 32px;
+    }
+
+    /* Username Dropdown */
+    .username-dropdown { position: relative; }
+    .username-input-wrapper { display: flex; gap: 0; }
+    .username-input-wrapper input { border-radius: 8px 0 0 8px; flex: 1; }
+    .dropdown-toggle { display: grid; min-width: 44px; min-height: 44px; place-items: center; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-left: none; border-radius: 0 8px 8px 0; color: var(--muted); cursor: pointer; font-size: 12px; transition: all 0.2s; }
+    .dropdown-toggle:hover { color: var(--fg); background: var(--card); }
+    .dropdown-menu { position: absolute; top: 100%; left: 0; right: 0; background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-top: 4px; display: none; z-index: 100; max-height: 240px; overflow-y: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .dropdown-menu.show { display: block; }
+    .dropdown-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; cursor: pointer; font-size: 14px; transition: background 0.15s; }
+    .dropdown-item:hover { background: var(--bg); }
+    .dropdown-item.selected { color: var(--accent); }
+    .dropdown-item .username { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dropdown-item .delete-btn { min-width: 28px; min-height: 28px; padding: 2px 6px; background: transparent; border: none; color: var(--muted); cursor: pointer; font-size: 14px; border-radius: 4px; opacity: 0; transition: all 0.15s; }
+    .dropdown-item:hover .delete-btn { opacity: 1; }
+    .dropdown-item .delete-btn:hover { background: color-mix(in oklab, #ef4444, transparent 80%); color: #ef4444; }
+    .dropdown-empty { padding: 12px; color: var(--muted); font-size: 13px; text-align: center; }
+
+    /* Collapsible Section */
+    .collapsible { margin-top: 12px; }
+    .collapsible-toggle { display: flex; min-height: 44px; align-items: center; gap: 6px; cursor: pointer; color: var(--muted); font-size: 13px; font-weight: 500; padding: 8px 0; }
+    .collapsible-toggle:hover { color: var(--fg); }
+    .collapsible-toggle svg { transition: transform 0.2s; width: 14px; height: 14px; }
+    .collapsible-toggle.open svg { transform: rotate(90deg); }
+    .collapsible-content { display: none; padding-top: 12px; }
+    .collapsible-content.show { display: block; }
+
+    /* Query Preview */
+    .query-preview { background: var(--bg); border: 2px solid var(--accent); border-radius: 12px; padding: 14px; margin-top: 16px; }
+    .query-preview-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .query-preview code { display: block; font-family: 'SF Mono', Consolas, monospace; font-size: 14px; color: var(--accent); word-break: break-all; min-height: 20px; }
+    .query-preview .empty { color: var(--muted); font-style: italic; }
+    .query-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+
+    /* Buttons */
+    button { appearance: none; min-height: 44px; border: 1px solid var(--border); background: var(--card); color: var(--fg); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; }
+    button:hover { border-color: var(--accent); }
+    button.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+    button.primary:hover { opacity: 0.9; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button.small { padding: 6px 12px; font-size: 12px; }
+
+    /* Toast */
+    .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--card); color: var(--fg); border: 1px solid var(--border); padding: 10px 18px; border-radius: 10px; opacity: 0; pointer-events: none; transition: opacity 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000; font-size: 14px; }
+    .toast.show { opacity: 1; }
+
+    /* Reference Section */
+    .reference { margin-top: 8px; }
+    .reference-toggle { display: flex; min-height: 44px; align-items: center; gap: 6px; cursor: pointer; color: var(--muted); font-size: 13px; padding: 8px 0; }
+    .reference-toggle:hover { color: var(--fg); }
+    .reference-toggle svg { transition: transform 0.2s; }
+    .reference-toggle.open svg { transform: rotate(90deg); }
+    .reference-content { display: none; margin-top: 12px; }
+    .reference-content.show { display: block; }
+    .reference-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .reference-table th, .reference-table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+    .reference-table th { color: var(--muted); font-weight: 600; }
+    .reference-table code { background: var(--bg); padding: 2px 5px; border-radius: 4px; font-size: 11px; }
+
+    /* Mode Content */
+    .mode-content { display: none; }
+    .mode-content.active { display: block; }
+
+    /* Past Today */
+    .past-today { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .past-today-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .past-today-title { font-weight: 600; font-size: 14px; color: var(--fg); }
+    .past-today-date { font-size: 13px; color: var(--muted); }
+    .past-today-controls { display: flex; gap: 8px; }
+    .past-today-controls select { flex: 1; max-width: 200px; }
+    .past-today-btn { padding: 8px 20px; background: var(--accent); border: none; border-radius: 8px; color: var(--bg); font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .past-today-btn:hover { opacity: 0.9; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .preset-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .query-actions { flex-direction: column; }
+      .query-actions button { width: 100%; }
+    }
+    @media (max-width: 360px) {
+      .preset-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Custom Prompt Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.2s; padding: 20px; }
+    .modal-overlay.show { opacity: 1; pointer-events: auto; }
+    .modal-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; width: 100%; max-width: 340px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .modal-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--fg); }
+    .modal-input { width: 100%; padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--fg); font-size: 15px; margin-bottom: 16px; }
+    .modal-input:focus { outline: none; border-color: var(--accent); }
+    .modal-buttons { display: flex; gap: 10px; justify-content: flex-end; }
+    .modal-buttons button { min-width: 80px; }
+  </style>
+  <link rel="stylesheet" href="../../styles/app-shell.css?v=20260725b">
+  <link rel="stylesheet" href="../../styles/language-switcher.css?v=20260814">
+  <script src="../../scripts/language-preference.js?v=20260813-4" defer></script>
+
+  <!-- Google Analytics (gtag.js) - lazy loaded -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CF20TVK6DP');
+    (function(){
+      function loadGtag(){
+        if (location.hostname !== 'isa130pull.github.io' || (location.pathname !== '/portrait-site' && location.pathname.indexOf('/portrait-site/') !== 0)) return;
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CF20TVK6DP';
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag);
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../../styles/seo-content.css?v=20261001-2">
+</head>
+<body class="app-page" data-inherit-language="true">
+<header class="app-site-header">
+  <div class="app-site-header__inner">
+    <a class="app-brand" href="../index.html" aria-label="Back to Isao Kawaguchi's home page">
+      <span class="app-brand-mark" aria-hidden="true">IK</span>
+      <span>Isao Kawaguchi <small>/ isa130pull</small></span>
+    </a>
+    <div class="app-header-actions">
+      <span class="language-switcher" aria-label="Choose language">
+        <a lang="ja" hreflang="ja" href="../../pages/x-search.html" data-language-choice="ja">日本語</a>
+        <span class="language-separator" aria-hidden="true">/</span>
+        <span lang="en" aria-current="page">English</span>
+      </span>
+      <a href="../index.html#personal" class="back-link" aria-label="Back to independent apps">
+        <span aria-hidden="true">←</span>
+        <span class="back-link-label">Independent apps</span>
+      </a>
+    </div>
+  </div>
+</header>
+<main class="wrap app-main">
+    <nav class="seo-breadcrumb seo-breadcrumb--contained" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../">Home</a></li>
+        <li aria-current="page">X Advanced Search Builder</li>
+      </ol>
+    </nav>
+
+  <div class="app-intro">
+    <p class="app-kicker">Browser app / X search</p>
+    <h1>X (Twitter) Advanced Search Builder</h1>
+  </div>
+
+  <!-- Main Section -->
+  <section class="section">
+    <!-- Mode Tabs -->
+    <div class="mode-tabs" role="tablist" aria-label="Search mode">
+      <button id="basicModeTab" class="mode-tab active" type="button" role="tab" aria-controls="basicMode" aria-selected="true" data-mode="basic">Quick</button>
+      <button id="advancedModeTab" class="mode-tab" type="button" role="tab" aria-controls="advancedMode" aria-selected="false" tabindex="-1" data-mode="advanced">Advanced</button>
+    </div>
+
+    <!-- Basic Mode -->
+    <div class="mode-content active" id="basicMode" role="tabpanel" aria-labelledby="basicModeTab">
+      <!-- 対象ユーザーID -->
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label for="targetUsername">Target username (required)</label>
+        <div class="username-dropdown" id="usernameDropdownContainer">
+          <div class="username-input-wrapper">
+            <input type="text" id="targetUsername" placeholder="Enter without @" autocomplete="off">
+            <button type="button" class="dropdown-toggle" id="dropdownToggle" aria-label="Show saved usernames" aria-controls="usernameDropdown" aria-expanded="false">▼</button>
+          </div>
+          <div class="dropdown-menu" id="usernameDropdown"></div>
+        </div>
+      </div>
+
+      <div class="preset-grid" id="presetGrid"></div>
+
+      <!-- 過去の今日 -->
+      <div class="past-today">
+        <div class="past-today-header">
+          <label class="past-today-title" for="yearSelect">On this day</label>
+          <span class="past-today-date" id="todayDate"></span>
+        </div>
+        <select id="yearSelect"></select>
+      </div>
+
+      <!-- 相手ユーザーID -->
+      <div class="past-today">
+        <div class="past-today-header">
+          <label class="past-today-title" for="specificUsername">Other username</label>
+        </div>
+        <div class="form-group" style="margin-bottom: 12px;">
+          <div class="username-dropdown" id="specificUsernameDropdownContainer">
+            <div class="username-input-wrapper">
+              <input type="text" id="specificUsername" placeholder="Enter without @" autocomplete="off">
+              <button type="button" class="dropdown-toggle" id="specificDropdownToggle" aria-label="Show saved usernames" aria-controls="specificUsernameDropdown" aria-expanded="false">▼</button>
+            </div>
+            <div class="dropdown-menu" id="specificUsernameDropdown"></div>
+          </div>
+        </div>
+        <div class="preset-grid" id="specificPresetGrid"></div>
+      </div>
+    </div>
+
+    <!-- Advanced Mode -->
+    <div class="mode-content" id="advancedMode" role="tabpanel" aria-labelledby="advancedModeTab" hidden>
+      <form id="queryBuilder">
+        <!-- Keywords -->
+        <div class="form-row" style="align-items: flex-end;">
+          <div class="form-group" style="flex: 1; margin-bottom: 0;">
+            <label for="keyword">Search keywords</label>
+            <div class="username-dropdown" id="keywordDropdownContainer">
+              <div class="username-input-wrapper">
+                <input type="text" id="keyword" placeholder="Example: Unity game" autocomplete="off">
+                <button type="button" class="dropdown-toggle" id="keywordDropdownToggle" aria-label="Show keyword history" aria-controls="keywordDropdown" aria-expanded="false">▼</button>
+              </div>
+              <div class="dropdown-menu" id="keywordDropdown"></div>
+            </div>
+          </div>
+          <div class="form-group inline" style="margin-bottom: 0;">
+            <label class="checkbox">
+              <input type="checkbox" id="exactMatch">
+              Exact phrase
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="excludeKeyword">Exclude keywords</label>
+          <div class="username-dropdown" id="excludeKeywordDropdownContainer">
+            <div class="username-input-wrapper">
+              <input type="text" id="excludeKeyword" placeholder="Separate multiple words with spaces" autocomplete="off">
+              <button type="button" class="dropdown-toggle" id="excludeKeywordDropdownToggle" aria-label="Show excluded keyword history" aria-controls="excludeKeywordDropdown" aria-expanded="false">▼</button>
+            </div>
+            <div class="dropdown-menu" id="excludeKeywordDropdown"></div>
+          </div>
+        </div>
+
+        <!-- Users -->
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="fromUser">Posted by (from:)</label>
+            <div class="username-dropdown" id="fromUserDropdownContainer">
+              <div class="username-input-wrapper">
+                <input type="text" id="fromUser" placeholder="Enter without @" autocomplete="off">
+                <button type="button" class="dropdown-toggle" id="fromUserDropdownToggle" aria-label="Show sender history" aria-controls="fromUserDropdown" aria-expanded="false">▼</button>
+              </div>
+              <div class="dropdown-menu" id="fromUserDropdown"></div>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="toUser">Sent to (to:)</label>
+            <div class="username-dropdown" id="toUserDropdownContainer">
+              <div class="username-input-wrapper">
+                <input type="text" id="toUser" placeholder="Enter without @" autocomplete="off">
+                <button type="button" class="dropdown-toggle" id="toUserDropdownToggle" aria-label="Show recipient history" aria-controls="toUserDropdown" aria-expanded="false">▼</button>
+              </div>
+              <div class="dropdown-menu" id="toUserDropdown"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="form-row" style="margin-top: 12px;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="mediaType">Media</label>
+            <select id="mediaType">
+              <option value="">Any</option>
+              <option value="images">Images</option>
+              <option value="videos">Videos</option>
+              <option value="links">Links</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="replyFilter">Replies</label>
+            <select id="replyFilter">
+              <option value="">Include</option>
+              <option value="exclude">Exclude</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Engagement -->
+        <div class="form-row" style="margin-top: 12px;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="minFaves">Minimum likes</label>
+            <input type="number" id="minFaves" min="0" placeholder="Example: 100">
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="minRetweets">Minimum reposts</label>
+            <input type="number" id="minRetweets" min="0" placeholder="Example: 10">
+          </div>
+        </div>
+
+        <!-- Date Range -->
+        <div class="form-row" style="margin-top: 12px;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="sinceDate">Start date</label>
+            <input type="date" id="sinceDate">
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="untilDate">End date</label>
+            <input type="date" id="untilDate">
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Query Preview (共通) -->
+    <div class="query-preview">
+      <div class="query-preview-label">Search query</div>
+      <code id="queryOutput"><span class="empty">Your query will appear here</span></code>
+      <div class="query-actions">
+        <button id="copyBtn" class="primary" disabled>Copy to clipboard</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <!-- X検索ボタン -->
+    <button id="searchBtn" class="search-x-btn" disabled>Search on X</button>
+  </section>
+
+  <!-- Reference Section -->
+  <section class="section">
+    <div class="reference">
+      <div class="reference-toggle" id="referenceToggle">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 12l4-4-4-4v8z"/></svg>
+        Operator reference
+      </div>
+      <div class="reference-content" id="referenceContent">
+        <table class="reference-table">
+          <thead>
+            <tr>
+              <th>Operator</th>
+              <th>Description</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>from:</code></td><td>Posts from an account</td><td><code>from:username</code></td></tr>
+            <tr><td><code>to:</code></td><td>Replies sent to an account</td><td><code>to:username</code></td></tr>
+            <tr><td><code>@</code></td><td>Mentions of an account</td><td><code>@username</code></td></tr>
+            <tr><td><code>since:</code></td><td>Posted on or after a date</td><td><code>since:2024-01-01</code></td></tr>
+            <tr><td><code>until:</code></td><td>Posted before a date</td><td><code>until:2024-12-31</code></td></tr>
+            <tr><td><code>filter:images</code></td><td>Posts with images only</td><td></td></tr>
+            <tr><td><code>filter:videos</code></td><td>Posts with videos only</td><td></td></tr>
+            <tr><td><code>-filter:replies</code></td><td>Exclude replies</td><td></td></tr>
+            <tr><td><code>min_faves:</code></td><td>Minimum number of likes</td><td><code>min_faves:100</code></td></tr>
+            <tr><td><code>min_retweets:</code></td><td>Minimum number of reposts</td><td><code>min_retweets:10</code></td></tr>
+            <tr><td><code>lang:</code></td><td>Language filter</td><td><code>lang:en</code></td></tr>
+            <tr><td><code>"..."</code></td><td>Exact phrase</td><td><code>"Unity development"</code></td></tr>
+            <tr><td><code>-</code></td><td>Exclude a term</td><td><code>-advertisement</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+<section class="app-about">
+  <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">What is the X Advanced Search Builder?</h2>
+  <p style="margin:0 0 16px">This free tool turns your form selections into an advanced X (formerly Twitter) search query. Combine useful search operators without memorizing their syntax.</p>
+  <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">Supported search operators</h2>
+  <ul style="margin:0 0 16px;padding-left:20px">
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">from:</code> find posts from a specific account</li>
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">to:</code> find replies sent to a specific account</li>
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">since:</code> / <code style="background:var(--card);padding:2px 6px;border-radius:4px">until:</code> narrow results to a date range</li>
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">filter:images</code> show posts with images</li>
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">min_faves:</code> set a minimum number of likes</li>
+    <li><code style="background:var(--card);padding:2px 6px;border-radius:4px">-filter:replies</code> exclude replies</li>
+  </ul>
+  <h2 style="color:var(--fg);font-size:18px;margin:0 0 12px">Features</h2>
+  <ul style="margin:0;padding-left:20px">
+    <li>Free to use with no sign-up</li>
+    <li>Quick presets for common searches</li>
+    <li>Advanced mode for combining multiple filters</li>
+    <li>Copy the completed query with one click</li>
+  </ul>
+</section>
+
+    <section class="seo-guide" aria-labelledby="x-guide-title">
+    <h2 id="x-guide-title">How to search by date, images and account</h2>
+    <ol>
+      <li>In Basic mode, enter an account name without @ and choose a preset.</li>
+      <li>Open Advanced mode to combine keywords, an account, a date range, and image or video filters.</li>
+      <li>Check the generated query, then use “Search on X” to open results or “Copy to clipboard” to save it.</li>
+    </ol>
+    <h3>Example searches for old posts and images</h3>
+    <ul>
+      <li><code>from:isa130pull since:2026-09-01 until:2026-10-01</code>: find the account's posts from September 2026.</li>
+      <li><code>concert filter:images -filter:replies</code>: find image posts containing “concert”, excluding replies.</li>
+      <li><code>"Unity development" min_faves:10</code>: combine an exact phrase with a minimum like count.</li>
+    </ul>
+    <h3>What if there are too few results?</h3>
+    <p>Widen the date range and remove like-count or media filters one at a time. Building a query requires no sign-up; viewing results depends on X's login requirements and search behavior.</p>
+    <p><a href="https://help.x.com/en/using-x/x-advanced-search" target="_blank" rel="noopener">X's official advanced search guide (opens in a new tab)</a></p>
+  </section>
+
+    <section class="seo-related seo-related--contained" aria-labelledby="seo-related-title">
+      <h2 id="seo-related-title">More tools for concerts and fandom</h2>
+      <ul>
+        <li><a href="bingo.html">Setlist Bingo — free printable bingo maker</a></li>
+        <li><a href="bingo-christmas.html">Christmas Bingo — free printable holiday bingo cards</a></li>
+        <li><a href="idol-pv-player.html">Idol MV player — discover and play YouTube MVs</a></li>
+      </ul>
+    </section>
+
+
+</main>
+
+<footer style="margin-top:48px;padding:24px;border-top:1px solid var(--border);color:var(--muted);font-size:14px;text-align:center">
+  <p style="margin:0">&copy; <script>document.write(new Date().getFullYear())</script> Isao Kawaguchi (isa130pull)</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Custom Prompt Modal -->
+<div class="modal-overlay" id="promptModal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="promptTitle">
+    <div class="modal-title" id="promptTitle">Enter a username without @</div>
+    <input type="text" class="modal-input" id="promptInput" aria-labelledby="promptTitle" placeholder="Enter without @">
+    <div class="modal-buttons">
+      <button type="button" id="promptCancel">Cancel</button>
+      <button type="button" class="primary" id="promptOk">OK</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== Utilities =====
+const $ = (q) => document.querySelector(q);
+const $$ = (q) => document.querySelectorAll(q);
+const toast = $('#toast');
+
+const LS_USERNAME_KEY = 'x-search.username';
+const LS_USERNAMES_KEY = 'x-search.usernames';
+const LS_BUILDER_KEY = 'x-search.builder';
+const LS_MODE_KEY = 'x-search.mode';
+const LS_BASIC_SELECTIONS_KEY = 'x-search.basicSelections';
+const LS_SPECIFIC_USERNAME_KEY = 'x-search.specificUsername';
+const LS_SPECIFIC_USERNAMES_KEY = 'x-search.specificUsernames';
+const LS_KEYWORDS_KEY = 'x-search.keywords';
+const LS_EXCLUDE_KEYWORDS_KEY = 'x-search.excludeKeywords';
+const LS_FROM_USERS_KEY = 'x-search.fromUsers';
+const LS_TO_USERS_KEY = 'x-search.toUsers';
+const MAX_SAVED_USERNAMES = 10;
+const MAX_SAVED_ITEMS = 10;
+
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 1600);
+}
+
+// Generic dropdown manager factory
+function createDropdownManager(config) {
+  const { containerId, inputId, toggleId, dropdownId, storageKey, maxItems = MAX_SAVED_ITEMS, onSelect } = config;
+  const container = $(`#${containerId}`);
+  const input = $(`#${inputId}`);
+  const toggle = $(`#${toggleId}`);
+  const dropdown = $(`#${dropdownId}`);
+
+  function getItems() {
+    try {
+      const saved = localStorage.getItem(storageKey);
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) { return []; }
+  }
+
+  function saveItems(items) {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(items));
+    } catch (e) {}
+  }
+
+  function addItem(value) {
+    if (!value) return;
+    const items = getItems();
+    const index = items.indexOf(value);
+    if (index > -1) items.splice(index, 1);
+    items.unshift(value);
+    if (items.length > maxItems) items.length = maxItems;
+    saveItems(items);
+    render();
+  }
+
+  function removeItem(value) {
+    const items = getItems();
+    const index = items.indexOf(value);
+    if (index > -1) {
+      items.splice(index, 1);
+      saveItems(items);
+      render();
+    }
+  }
+
+  function render() {
+    const items = getItems();
+    const currentValue = input.value.trim();
+
+    if (items.length === 0) {
+      dropdown.innerHTML = '<div class="dropdown-empty">No history yet</div>';
+      return;
+    }
+
+    dropdown.innerHTML = items.map(item => {
+      const isSelected = item === currentValue;
+      return `
+        <div class="dropdown-item${isSelected ? ' selected' : ''}" data-value="${escapeHtml(item)}">
+          <span class="username">${escapeHtml(item)}</span>
+          <button type="button" class="delete-btn" data-delete="${escapeHtml(item)}" aria-label="Remove from history">×</button>
+        </div>
+      `;
+    }).join('');
+
+    dropdown.querySelectorAll('.dropdown-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-btn')) return;
+        selectItem(item.dataset.value);
+      });
+    });
+
+    dropdown.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        removeItem(btn.dataset.delete);
+      });
+    });
+  }
+
+  function selectItem(value) {
+    input.value = value;
+    close();
+    render();
+    if (onSelect) onSelect(value);
+  }
+
+  function toggleDropdown() {
+    const isOpen = dropdown.classList.toggle('show');
+    toggle?.setAttribute('aria-expanded', String(isOpen));
+  }
+
+  function close() {
+    dropdown.classList.remove('show');
+    toggle?.setAttribute('aria-expanded', 'false');
+  }
+
+  function clear() {
+    try { localStorage.removeItem(storageKey); } catch (e) {}
+  }
+
+  // Event listeners
+  if (toggle) {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleDropdown();
+    });
+  }
+
+  if (input) {
+    input.addEventListener('blur', () => {
+      const value = input.value.trim();
+      if (value) addItem(value);
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const value = input.value.trim();
+        if (value) addItem(value);
+        close();
+      }
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    if (container && !e.target.closest(`#${containerId}`)) {
+      close();
+    }
+  });
+
+  return { addItem, removeItem, render, clear, close };
+}
+
+// Custom prompt modal
+const promptModal = $('#promptModal');
+const promptTitle = $('#promptTitle');
+const promptInput = $('#promptInput');
+const promptOkBtn = $('#promptOk');
+const promptCancelBtn = $('#promptCancel');
+let promptResolve = null;
+
+function customPrompt(title) {
+  return new Promise((resolve) => {
+    promptResolve = resolve;
+    promptTitle.textContent = title;
+    promptInput.value = '';
+    promptModal.setAttribute('aria-hidden', 'false');
+    promptModal.classList.add('show');
+    setTimeout(() => promptInput.focus(), 100);
+  });
+}
+
+promptOkBtn.addEventListener('click', () => {
+  const value = promptInput.value.trim().replace(/^@/, '');
+  promptModal.classList.remove('show');
+  promptModal.setAttribute('aria-hidden', 'true');
+  if (promptResolve) promptResolve(value || null);
+});
+
+promptCancelBtn.addEventListener('click', () => {
+  promptModal.classList.remove('show');
+  promptModal.setAttribute('aria-hidden', 'true');
+  if (promptResolve) promptResolve(null);
+});
+
+promptInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    promptOkBtn.click();
+  } else if (e.key === 'Escape') {
+    promptCancelBtn.click();
+  }
+});
+
+promptModal.addEventListener('click', (e) => {
+  if (e.target === promptModal) {
+    promptCancelBtn.click();
+  }
+});
+
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('Copied');
+    return true;
+  } catch (e) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    showToast('Copied');
+    return true;
+  }
+}
+
+// Mobile detection
+function isMobile() {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+function isIOS() {
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function isAndroid() {
+  return /Android/i.test(navigator.userAgent);
+}
+
+function isInXApp() {
+  // X/Twitterアプリの内部ブラウザを検出
+  return /Twitter/i.test(navigator.userAgent);
+}
+
+function openXSearch(query) {
+  const encodedQuery = encodeURIComponent(query);
+  const webUrl = `https://x.com/search?q=${encodedQuery}&src=typed_query`;
+
+  // Xアプリ内ブラウザの場合はコピーして案内
+  if (isInXApp()) {
+    copyToClipboard(query);
+    showToast('Query copied. Paste it into the search field in the X app.');
+    return;
+  }
+
+  if (isMobile()) {
+    if (isIOS()) {
+      // iOS: 隠しiframeでアプリを開く（ブラウザは遷移しない）
+      const appUrl = `twitter://search?query=${encodedQuery}`;
+
+      // 隠しiframeを作成してアプリURLを開く
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = appUrl;
+      document.body.appendChild(iframe);
+
+      // アプリが開かなければ2秒後にWeb版へ（新しいタブで）
+      setTimeout(() => {
+        document.body.removeChild(iframe);
+        // アプリが開いていなければフォールバック
+        if (!document.hidden) {
+          window.open(webUrl, '_blank');
+        }
+      }, 2000);
+    } else if (isAndroid()) {
+      // Android: Intent URL (フォールバック組み込み)
+      window.location.href = `intent://search?query=${encodedQuery}#Intent;scheme=twitter;package=com.twitter.android;S.browser_fallback_url=${encodeURIComponent(webUrl)};end`;
+    } else {
+      window.open(webUrl, '_blank');
+    }
+  } else {
+    // PCの場合はブラウザで開く
+    window.open(webUrl, '_blank');
+  }
+}
+
+// ===== Target Username =====
+const targetUsernameInput = $('#targetUsername');
+const dropdownToggle = $('#dropdownToggle');
+const usernameDropdown = $('#usernameDropdown');
+
+function getTargetUsername() {
+  try { return localStorage.getItem(LS_USERNAME_KEY) || ''; } catch (e) { return ''; }
+}
+
+function setTargetUsername(username) {
+  try {
+    if (username) { localStorage.setItem(LS_USERNAME_KEY, username); }
+    else { localStorage.removeItem(LS_USERNAME_KEY); }
+  } catch (e) {}
+}
+
+// ===== Saved Usernames (Multiple) =====
+function getSavedUsernames() {
+  try {
+    const saved = localStorage.getItem(LS_USERNAMES_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (e) { return []; }
+}
+
+function saveSavedUsernames(usernames) {
+  try {
+    localStorage.setItem(LS_USERNAMES_KEY, JSON.stringify(usernames));
+  } catch (e) {}
+}
+
+function addUsername(username) {
+  if (!username) return;
+  const usernames = getSavedUsernames();
+  // Remove if exists (to move to top)
+  const index = usernames.indexOf(username);
+  if (index > -1) usernames.splice(index, 1);
+  // Add to beginning
+  usernames.unshift(username);
+  // Limit to max
+  if (usernames.length > MAX_SAVED_USERNAMES) {
+    usernames.length = MAX_SAVED_USERNAMES;
+  }
+  saveSavedUsernames(usernames);
+  renderDropdown();
+}
+
+function removeUsername(username) {
+  const usernames = getSavedUsernames();
+  const index = usernames.indexOf(username);
+  if (index > -1) {
+    usernames.splice(index, 1);
+    saveSavedUsernames(usernames);
+    renderDropdown();
+  }
+}
+
+// ===== Dropdown UI =====
+function renderDropdown() {
+  const usernames = getSavedUsernames();
+  const currentUsername = getTargetUsername();
+
+  if (usernames.length === 0) {
+    usernameDropdown.innerHTML = '<div class="dropdown-empty">No saved usernames</div>';
+    return;
+  }
+
+  usernameDropdown.innerHTML = usernames.map(u => {
+    const isSelected = u === currentUsername;
+    return `
+      <div class="dropdown-item${isSelected ? ' selected' : ''}" data-username="${escapeHtml(u)}">
+        <span class="username">${escapeHtml(u)}</span>
+        <button type="button" class="delete-btn" data-delete="${escapeHtml(u)}" aria-label="Remove from history">×</button>
+      </div>
+    `;
+  }).join('');
+
+  // Add click handlers
+  usernameDropdown.querySelectorAll('.dropdown-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete-btn')) return;
+      selectUsername(item.dataset.username);
+    });
+  });
+
+  usernameDropdown.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      removeUsername(btn.dataset.delete);
+    });
+  });
+}
+
+function toggleDropdown() {
+  const isOpen = usernameDropdown.classList.toggle('show');
+  dropdownToggle.setAttribute('aria-expanded', String(isOpen));
+}
+
+function closeDropdown() {
+  usernameDropdown.classList.remove('show');
+  dropdownToggle.setAttribute('aria-expanded', 'false');
+}
+
+function selectUsername(username) {
+  targetUsernameInput.value = username;
+  setTargetUsername(username);
+  renderPresets();
+  buildQuery();
+  closeDropdown();
+  renderDropdown();
+}
+
+// Event listeners
+targetUsernameInput.value = getTargetUsername();
+targetUsernameInput.addEventListener('input', () => {
+  const username = targetUsernameInput.value.trim().replace(/^@/, '');
+  setTargetUsername(username);
+  renderPresets();
+  // Sync to advanced mode fromUser field
+  if (formElements.fromUser) {
+    formElements.fromUser.value = username;
+  }
+  if (currentMode === 'basic') {
+    buildBasicQuery();
+  } else {
+    buildQuery();
+  }
+});
+
+// Save username when used (on blur or enter)
+targetUsernameInput.addEventListener('blur', () => {
+  const username = targetUsernameInput.value.trim().replace(/^@/, '');
+  if (username) {
+    addUsername(username);
+    applyDefaultFromSelection();
+    renderPresets();
+    buildBasicQuery();
+  }
+});
+
+targetUsernameInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const username = targetUsernameInput.value.trim().replace(/^@/, '');
+    if (username) {
+      addUsername(username);
+      applyDefaultFromSelection();
+      renderPresets();
+      buildBasicQuery();
+    }
+    closeDropdown();
+  }
+});
+
+dropdownToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  toggleDropdown();
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#usernameDropdownContainer')) {
+    closeDropdown();
+  }
+});
+
+// ===== Mode Switching =====
+let currentMode = localStorage.getItem(LS_MODE_KEY) || 'basic';
+
+function setMode(mode) {
+  currentMode = mode;
+  try { localStorage.setItem(LS_MODE_KEY, mode); } catch (e) {}
+
+  $$('.mode-tab').forEach(tab => {
+    const isActive = tab.dataset.mode === mode;
+    tab.classList.toggle('active', isActive);
+    tab.setAttribute('aria-selected', String(isActive));
+    tab.tabIndex = isActive ? 0 : -1;
+  });
+  $$('.mode-content').forEach(content => {
+    const isActive = content.id === (mode === 'basic' ? 'basicMode' : 'advancedMode');
+    content.classList.toggle('active', isActive);
+    content.hidden = !isActive;
+  });
+
+  // Update query preview based on mode
+  if (mode === 'basic') {
+    buildBasicQuery();
+  } else {
+    // Sync specificUsername to toUser when switching to advanced mode
+    const specificUser = getSpecificUsername();
+    if (specificUser && formElements.toUser && !formElements.toUser.value) {
+      formElements.toUser.value = specificUser;
+    }
+    buildQuery();
+  }
+}
+
+$$('.mode-tab').forEach(tab => {
+  tab.addEventListener('click', () => setMode(tab.dataset.mode));
+});
+
+// ===== Basic Mode (Toggle Options) =====
+// Main options (displayed in presetGrid)
+const BASIC_OPTIONS = [
+  { id: 'from', label: 'Posts', command: 'from:USERNAME', group: 'user', needsUsername: true },
+  { id: 'to', label: 'Replies to', command: 'to:USERNAME', group: 'user', needsUsername: true },
+  { id: 'images', label: 'With images', command: 'filter:images', group: 'media', needsUsername: false },
+  { id: 'videos', label: 'With videos', command: 'filter:videos', group: 'media', needsUsername: false },
+];
+
+// Specific user options
+const SPECIFIC_OPTIONS = [
+  { id: 'toSpecific', label: 'To account', command: 'to:SPECIFIC', group: 'specific' },
+  { id: 'fromSpecific', label: 'From account', command: 'from:SPECIFIC', group: 'specific' },
+];
+
+let selectedOptions = new Set();
+
+// Basic selections persistence
+function saveBasicSelections() {
+  try {
+    localStorage.setItem(LS_BASIC_SELECTIONS_KEY, JSON.stringify([...selectedOptions]));
+  } catch (e) {}
+}
+
+function loadBasicSelections() {
+  try {
+    const saved = localStorage.getItem(LS_BASIC_SELECTIONS_KEY);
+    if (saved) {
+      selectedOptions = new Set(JSON.parse(saved));
+    }
+  } catch (e) {}
+}
+
+// Specific username input and dropdown
+const specificUsernameInput = $('#specificUsername');
+const specificDropdownToggle = $('#specificDropdownToggle');
+const specificUsernameDropdown = $('#specificUsernameDropdown');
+
+function getSpecificUsername() {
+  return specificUsernameInput ? specificUsernameInput.value.trim().replace(/^@/, '') : '';
+}
+
+function setSpecificUsername(username) {
+  try {
+    if (username) { localStorage.setItem(LS_SPECIFIC_USERNAME_KEY, username); }
+    else { localStorage.removeItem(LS_SPECIFIC_USERNAME_KEY); }
+  } catch (e) {}
+}
+
+function loadSpecificUsername() {
+  try {
+    const saved = localStorage.getItem(LS_SPECIFIC_USERNAME_KEY);
+    if (saved && specificUsernameInput) {
+      specificUsernameInput.value = saved;
+    }
+  } catch (e) {}
+}
+
+// Saved specific usernames (history)
+function getSavedSpecificUsernames() {
+  try {
+    const saved = localStorage.getItem(LS_SPECIFIC_USERNAMES_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (e) { return []; }
+}
+
+function saveSavedSpecificUsernames(usernames) {
+  try {
+    localStorage.setItem(LS_SPECIFIC_USERNAMES_KEY, JSON.stringify(usernames));
+  } catch (e) {}
+}
+
+function addSpecificUsername(username) {
+  if (!username) return;
+  const usernames = getSavedSpecificUsernames();
+  const index = usernames.indexOf(username);
+  if (index > -1) usernames.splice(index, 1);
+  usernames.unshift(username);
+  if (usernames.length > MAX_SAVED_USERNAMES) {
+    usernames.length = MAX_SAVED_USERNAMES;
+  }
+  saveSavedSpecificUsernames(usernames);
+  renderSpecificDropdown();
+}
+
+function removeSpecificUsername(username) {
+  const usernames = getSavedSpecificUsernames();
+  const index = usernames.indexOf(username);
+  if (index > -1) {
+    usernames.splice(index, 1);
+    saveSavedSpecificUsernames(usernames);
+    renderSpecificDropdown();
+  }
+}
+
+function renderSpecificDropdown() {
+  const usernames = getSavedSpecificUsernames();
+  const currentUsername = getSpecificUsername();
+
+  if (usernames.length === 0) {
+    specificUsernameDropdown.innerHTML = '<div class="dropdown-empty">No saved usernames</div>';
+    return;
+  }
+
+  specificUsernameDropdown.innerHTML = usernames.map(u => {
+    const isSelected = u === currentUsername;
+    return `
+      <div class="dropdown-item${isSelected ? ' selected' : ''}" data-username="${escapeHtml(u)}">
+        <span class="username">${escapeHtml(u)}</span>
+        <button type="button" class="delete-btn" data-delete="${escapeHtml(u)}" aria-label="Remove from history">×</button>
+      </div>
+    `;
+  }).join('');
+
+  specificUsernameDropdown.querySelectorAll('.dropdown-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete-btn')) return;
+      selectSpecificUsername(item.dataset.username);
+    });
+  });
+
+  specificUsernameDropdown.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      removeSpecificUsername(btn.dataset.delete);
+    });
+  });
+}
+
+function toggleSpecificDropdown() {
+  const isOpen = specificUsernameDropdown.classList.toggle('show');
+  specificDropdownToggle.setAttribute('aria-expanded', String(isOpen));
+}
+
+function closeSpecificDropdown() {
+  specificUsernameDropdown.classList.remove('show');
+  specificDropdownToggle.setAttribute('aria-expanded', 'false');
+}
+
+function selectSpecificUsername(username) {
+  specificUsernameInput.value = username;
+  setSpecificUsername(username);
+  renderPresets();
+  buildBasicQuery();
+  closeSpecificDropdown();
+  renderSpecificDropdown();
+}
+
+specificUsernameInput.addEventListener('input', () => {
+  const username = specificUsernameInput.value.trim().replace(/^@/, '');
+  setSpecificUsername(username);
+  renderPresets();
+  buildBasicQuery();
+});
+
+specificUsernameInput.addEventListener('blur', () => {
+  const username = specificUsernameInput.value.trim().replace(/^@/, '');
+  if (username) addSpecificUsername(username);
+});
+
+specificUsernameInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const username = specificUsernameInput.value.trim().replace(/^@/, '');
+    if (username) addSpecificUsername(username);
+    closeSpecificDropdown();
+  }
+});
+
+specificDropdownToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  toggleSpecificDropdown();
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#specificUsernameDropdownContainer')) {
+    closeSpecificDropdown();
+  }
+});
+
+function renderPresets() {
+  const grid = $('#presetGrid');
+  const specificGrid = $('#specificPresetGrid');
+  const username = getTargetUsername();
+  const specificUser = getSpecificUsername();
+
+  // Render main options
+  grid.innerHTML = BASIC_OPTIONS.map(opt => {
+    const isSelected = selectedOptions.has(opt.id);
+    let displayCommand = opt.command;
+    let displayLabel = opt.label;
+
+    if (username && opt.needsUsername) {
+      displayCommand = displayCommand.replace(/USERNAME/g, username);
+      // 動的ラベル
+      if (opt.id === 'from') displayLabel = `Posts by ${username}`;
+      if (opt.id === 'to') displayLabel = `Replies to ${username}`;
+    }
+
+    return `
+      <div class="preset-btn${isSelected ? ' selected' : ''}" data-id="${opt.id}">
+        <div class="label">${displayLabel}</div>
+        <code>${displayCommand}</code>
+      </div>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => toggleOption(btn.dataset.id));
+  });
+
+  // Render specific user options
+  specificGrid.innerHTML = SPECIFIC_OPTIONS.map(opt => {
+    const isSelected = selectedOptions.has(opt.id);
+    let displayCommand = opt.command;
+    let displayLabel = opt.label;
+
+    if (specificUser) {
+      displayCommand = displayCommand.replace(/SPECIFIC/g, specificUser);
+      // 動的ラベル
+      if (opt.id === 'toSpecific') displayLabel = `To ${specificUser}`;
+      if (opt.id === 'fromSpecific') displayLabel = `From ${specificUser}`;
+    }
+
+    return `
+      <div class="preset-btn${isSelected ? ' selected' : ''}" data-id="${opt.id}">
+        <div class="label">${displayLabel}</div>
+        <code>${displayCommand}</code>
+      </div>
+    `;
+  }).join('');
+
+  specificGrid.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => toggleSpecificOption(btn.dataset.id));
+  });
+}
+
+async function toggleOption(optionId) {
+  const option = BASIC_OPTIONS.find(o => o.id === optionId);
+  if (!option) return;
+
+  // Check if username is needed
+  if (option.needsUsername) {
+    let username = getTargetUsername();
+    if (!username) {
+      username = await customPrompt('Enter a username without @');
+      if (!username) return;
+      setTargetUsername(username);
+      targetUsernameInput.value = username;
+      if (formElements.fromUser) {
+        formElements.fromUser.value = username;
+      }
+    }
+    addUsername(username);
+  }
+
+  // Toggle selection
+  if (selectedOptions.has(optionId)) {
+    selectedOptions.delete(optionId);
+  } else {
+    // Remove other options in the same group (exclusive)
+    if (option.group) {
+      BASIC_OPTIONS.filter(o => o.group === option.group && o.id !== optionId)
+        .forEach(o => selectedOptions.delete(o.id));
+    }
+    selectedOptions.add(optionId);
+  }
+
+  saveBasicSelections();
+  renderPresets();
+  buildBasicQuery();
+}
+
+async function toggleSpecificOption(optionId) {
+  const option = SPECIFIC_OPTIONS.find(o => o.id === optionId);
+  if (!option) return;
+
+  // Check if specific user is needed
+  let specificUser = getSpecificUsername();
+  if (!specificUser) {
+    specificUser = await customPrompt('Enter the other username without @');
+    if (!specificUser) return;
+    specificUsernameInput.value = specificUser;
+  }
+
+  // Toggle selection
+  if (selectedOptions.has(optionId)) {
+    selectedOptions.delete(optionId);
+  } else {
+    // Remove other options in the same group (exclusive)
+    SPECIFIC_OPTIONS.filter(o => o.group === option.group && o.id !== optionId)
+      .forEach(o => selectedOptions.delete(o.id));
+    selectedOptions.add(optionId);
+  }
+
+  saveBasicSelections();
+  renderPresets();
+  buildBasicQuery();
+}
+
+function buildBasicQuery() {
+  if (currentMode !== 'basic') return;
+
+  const username = getTargetUsername();
+  const specificUser = getSpecificUsername();
+  const parts = [];
+
+  // Process main options
+  BASIC_OPTIONS.forEach(opt => {
+    if (selectedOptions.has(opt.id)) {
+      let cmd = opt.command;
+      if (opt.needsUsername && username) {
+        cmd = cmd.replace(/USERNAME/g, username);
+      }
+      parts.push(cmd);
+    }
+  });
+
+  // Process specific user options
+  SPECIFIC_OPTIONS.forEach(opt => {
+    if (selectedOptions.has(opt.id) && specificUser) {
+      let cmd = opt.command.replace(/SPECIFIC/g, specificUser);
+      parts.push(cmd);
+    }
+  });
+
+  // Process past today
+  const yearsAgo = parseInt($('#yearSelect').value);
+  if (yearsAgo > 0) {
+    const today = new Date();
+    const targetDate = new Date(today.getFullYear() - yearsAgo, today.getMonth(), today.getDate());
+    const nextDate = new Date(targetDate);
+    nextDate.setDate(nextDate.getDate() + 1);
+
+    const formatDate = (d) => {
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    };
+
+    parts.push(`since:${formatDate(targetDate)}_00:00:00_JST`);
+    parts.push(`until:${formatDate(nextDate)}_00:00:00_JST`);
+  }
+
+  generatedQuery = parts.join(' ');
+  updatePreview();
+}
+
+// ===== Past Today =====
+function initPastToday() {
+  const today = new Date();
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+  const currentYear = today.getFullYear();
+
+  // Display today's date
+  $('#todayDate').textContent = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric' }).format(today);
+
+  // Generate year options (with "指定なし" as default)
+  const yearSelect = $('#yearSelect');
+  let options = '<option value="">Any year</option>';
+  for (let y = 1; y <= 15; y++) {
+    const targetYear = currentYear - y;
+    options += `<option value="${y}">${y} year${y === 1 ? '' : 's'} ago (${targetYear})</option>`;
+  }
+  yearSelect.innerHTML = options;
+
+  // Change event to update query
+  yearSelect.addEventListener('change', () => {
+    buildBasicQuery();
+  });
+}
+
+// ===== Query Builder (Advanced Mode) =====
+const formElements = {
+  keyword: $('#keyword'),
+  exactMatch: $('#exactMatch'),
+  excludeKeyword: $('#excludeKeyword'),
+  fromUser: $('#fromUser'),
+  toUser: $('#toUser'),
+  mediaType: $('#mediaType'),
+  replyFilter: $('#replyFilter'),
+  minFaves: $('#minFaves'),
+  minRetweets: $('#minRetweets'),
+  sinceDate: $('#sinceDate'),
+  untilDate: $('#untilDate')
+};
+
+const queryOutput = $('#queryOutput');
+const copyBtn = $('#copyBtn');
+const searchBtn = $('#searchBtn');
+const resetBtn = $('#resetBtn');
+
+let generatedQuery = '';
+
+function saveBuilderState() {
+  try {
+    const state = {};
+    Object.entries(formElements).forEach(([key, el]) => {
+      state[key] = el.type === 'checkbox' ? el.checked : el.value;
+    });
+    localStorage.setItem(LS_BUILDER_KEY, JSON.stringify(state));
+  } catch (e) {}
+}
+
+function loadBuilderState() {
+  try {
+    const saved = localStorage.getItem(LS_BUILDER_KEY);
+    if (!saved) return;
+    const state = JSON.parse(saved);
+    Object.entries(state).forEach(([key, value]) => {
+      const el = formElements[key];
+      if (!el) return;
+      if (el.type === 'checkbox') { el.checked = value; }
+      else { el.value = value; }
+    });
+  } catch (e) {}
+}
+
+function clearBuilderState() {
+  try { localStorage.removeItem(LS_BUILDER_KEY); } catch (e) {}
+}
+
+function buildQuery() {
+  if (currentMode !== 'advanced') return;
+
+  const parts = [];
+  const f = formElements;
+
+  const keyword = f.keyword.value.trim();
+  if (keyword) {
+    parts.push(f.exactMatch.checked ? `"${keyword}"` : keyword);
+  }
+
+  const excludes = f.excludeKeyword.value.trim();
+  if (excludes) {
+    excludes.split(/\s+/).forEach(word => {
+      if (word) parts.push(`-${word}`);
+    });
+  }
+
+  if (f.fromUser.value.trim()) parts.push(`from:${f.fromUser.value.trim()}`);
+  if (f.toUser.value.trim()) parts.push(`to:${f.toUser.value.trim()}`);
+
+  if (f.mediaType.value) parts.push(`filter:${f.mediaType.value}`);
+  if (f.replyFilter.value === 'exclude') parts.push('-filter:replies');
+
+  if (f.minFaves.value) parts.push(`min_faves:${f.minFaves.value}`);
+  if (f.minRetweets.value) parts.push(`min_retweets:${f.minRetweets.value}`);
+
+  if (f.sinceDate.value) parts.push(`since:${f.sinceDate.value}_00:00:00_JST`);
+  if (f.untilDate.value) parts.push(`until:${f.untilDate.value}_00:00:00_JST`);
+
+  generatedQuery = parts.join(' ');
+  updatePreview();
+  saveBuilderState();
+}
+
+function updatePreview() {
+  if (generatedQuery) {
+    queryOutput.innerHTML = `<span>${escapeHtml(generatedQuery)}</span>`;
+    copyBtn.disabled = false;
+    searchBtn.disabled = false;
+  } else {
+    queryOutput.innerHTML = '<span class="empty">Your query will appear here</span>';
+    copyBtn.disabled = true;
+    searchBtn.disabled = true;
+  }
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// Apply default selection: if targetUsername exists, select 'from' option
+function applyDefaultFromSelection() {
+  const username = getTargetUsername();
+  if (username) {
+    selectedOptions.add('from');
+    saveBasicSelections();
+  }
+}
+
+function resetAll() {
+  // Reset advanced mode form
+  $('#queryBuilder').reset();
+  // Clear advanced mode storage
+  clearBuilderState();
+  // Reset basic mode selections
+  selectedOptions.clear();
+  try {
+    localStorage.removeItem(LS_BASIC_SELECTIONS_KEY);
+    localStorage.removeItem(LS_SPECIFIC_USERNAME_KEY);
+  } catch (e) {}
+  // Clear specific username input
+  if (specificUsernameInput) specificUsernameInput.value = '';
+  // Apply default 'from' selection if username exists
+  applyDefaultFromSelection();
+  // Reset query
+  generatedQuery = '';
+  updatePreview();
+  renderPresets();
+  renderSpecificDropdown();
+  // Re-render advanced mode dropdowns
+  if (typeof keywordDropdown !== 'undefined') keywordDropdown.render();
+  if (typeof excludeKeywordDropdown !== 'undefined') excludeKeywordDropdown.render();
+  if (typeof fromUserDropdown !== 'undefined') fromUserDropdown.render();
+  if (typeof toUserDropdown !== 'undefined') toUserDropdown.render();
+  // Rebuild query for current mode
+  if (currentMode === 'basic') {
+    buildBasicQuery();
+  }
+  showToast('Reset complete');
+}
+
+// Form event listeners
+Object.values(formElements).forEach(el => {
+  el.addEventListener('input', buildQuery);
+  el.addEventListener('change', buildQuery);
+});
+
+// Set untilDate to sinceDate value when focused and empty
+formElements.untilDate.addEventListener('focus', () => {
+  if (formElements.sinceDate.value && !formElements.untilDate.value) {
+    formElements.untilDate.value = formElements.sinceDate.value;
+    buildQuery();
+  }
+});
+
+// Button handlers
+copyBtn.addEventListener('click', () => {
+  if (generatedQuery) copyToClipboard(generatedQuery);
+});
+
+searchBtn.addEventListener('click', () => {
+  if (generatedQuery) openXSearch(generatedQuery);
+});
+
+resetBtn.addEventListener('click', resetAll);
+
+// ===== Advanced Mode Dropdown Managers =====
+const keywordDropdown = createDropdownManager({
+  containerId: 'keywordDropdownContainer',
+  inputId: 'keyword',
+  toggleId: 'keywordDropdownToggle',
+  dropdownId: 'keywordDropdown',
+  storageKey: LS_KEYWORDS_KEY,
+  onSelect: buildQuery
+});
+
+const excludeKeywordDropdown = createDropdownManager({
+  containerId: 'excludeKeywordDropdownContainer',
+  inputId: 'excludeKeyword',
+  toggleId: 'excludeKeywordDropdownToggle',
+  dropdownId: 'excludeKeywordDropdown',
+  storageKey: LS_EXCLUDE_KEYWORDS_KEY,
+  onSelect: buildQuery
+});
+
+const fromUserDropdown = createDropdownManager({
+  containerId: 'fromUserDropdownContainer',
+  inputId: 'fromUser',
+  toggleId: 'fromUserDropdownToggle',
+  dropdownId: 'fromUserDropdown',
+  storageKey: LS_FROM_USERS_KEY,
+  onSelect: buildQuery
+});
+
+const toUserDropdown = createDropdownManager({
+  containerId: 'toUserDropdownContainer',
+  inputId: 'toUser',
+  toggleId: 'toUserDropdownToggle',
+  dropdownId: 'toUserDropdown',
+  storageKey: LS_TO_USERS_KEY,
+  onSelect: buildQuery
+});
+
+// ===== Collapsible Sections =====
+function setupCollapsible(toggleId, contentId) {
+  const toggle = $(`#${toggleId}`);
+  const content = $(`#${contentId}`);
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('open');
+    content.classList.toggle('show');
+  });
+}
+
+setupCollapsible('referenceToggle', 'referenceContent');
+
+// ===== Init =====
+loadBuilderState();
+loadBasicSelections();
+// Apply default 'from' selection if no saved selections and targetUsername exists
+if (selectedOptions.size === 0) {
+  applyDefaultFromSelection();
+}
+loadSpecificUsername();
+renderDropdown();
+renderSpecificDropdown();
+keywordDropdown.render();
+excludeKeywordDropdown.render();
+fromUserDropdown.render();
+toUserDropdown.render();
+renderPresets();
+initPastToday();
+
+// Sync target username to fromUser on load
+const savedUsername = getTargetUsername();
+if (savedUsername && formElements.fromUser && !formElements.fromUser.value) {
+  formElements.fromUser.value = savedUsername;
+}
+
+setMode(currentMode);
+if (currentMode === 'advanced') {
+  buildQuery();
+}
+</script>
+</body>
+</html>

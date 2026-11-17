@@ -1,0 +1,263 @@
+body.pong-page {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  touch-action: auto;
+}
+
+.pong-page .game-container {
+  position: relative;
+  height: clamp(460px, calc(100svh - 130px), 800px);
+  min-height: 460px;
+  flex: 0 0 auto;
+}
+
+.game-jump {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(5, 12, 17, 0.92);
+}
+
+.game-jump a {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.game-jump a:hover,
+.game-jump a:focus-visible {
+  text-decoration: underline;
+}
+
+.game-guide {
+  width: min(1100px, calc(100% - (var(--page-x) * 2)));
+  margin-inline: auto;
+  padding: clamp(52px, 8vw, 88px) 0 80px;
+  scroll-margin-top: 90px;
+}
+
+.game-guide__intro {
+  max-width: 780px;
+  margin-bottom: 34px;
+}
+
+.game-guide__eyebrow {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.game-guide h2,
+.game-guide h3,
+.game-guide p,
+.game-guide ol,
+.game-guide ul,
+.game-guide dl {
+  margin-top: 0;
+}
+
+.game-guide h2 {
+  margin-bottom: 14px;
+  color: var(--fg);
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: -0.035em;
+  line-height: 1.25;
+}
+
+.game-guide h3 {
+  margin-bottom: 10px;
+  color: var(--fg);
+  font-size: 18px;
+}
+
+.game-guide p,
+.game-guide li,
+.game-guide dd {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.game-guide a {
+  color: var(--accent);
+}
+
+.guide-steps,
+.guide-grid,
+.tips-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.guide-steps {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 0 48px;
+  padding: 0;
+  counter-reset: guide-step;
+  list-style: none;
+}
+
+.guide-steps li {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--border-strong);
+  background: rgba(11, 23, 30, 0.74);
+  counter-increment: guide-step;
+}
+
+.guide-steps li::before {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent);
+  content: "0" counter(guide-step);
+  font-family: "Orbitron", monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.guide-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 48px;
+}
+
+.guide-card {
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid var(--border-strong);
+  background:
+    radial-gradient(circle at 100% 0, rgba(96, 213, 255, 0.08), transparent 38%),
+    rgba(11, 23, 30, 0.78);
+}
+
+.guide-card p:last-child,
+.guide-card ul:last-child,
+.guide-card dl:last-child,
+.guide-card dd:last-child {
+  margin-bottom: 0;
+}
+
+.difficulty-list {
+  margin: 0;
+}
+
+.difficulty-list dt {
+  margin-bottom: 4px;
+  color: var(--fg);
+  font-family: "Orbitron", monospace;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.difficulty-list dt:not(:first-child) {
+  margin-top: 18px;
+}
+
+.difficulty-list dd {
+  margin-left: 0;
+}
+
+.tips-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 0 48px;
+  padding: 0;
+  list-style: none;
+}
+
+.tips-grid li {
+  padding: 18px 20px;
+  border-left: 2px solid var(--accent);
+  background: rgba(120, 246, 207, 0.04);
+}
+
+.ranking-callout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 56px;
+  padding: clamp(22px, 4vw, 34px);
+  border: 1px solid rgba(120, 246, 207, 0.28);
+  background: rgba(120, 246, 207, 0.055);
+}
+
+.ranking-callout h2 {
+  margin-bottom: 6px;
+  font-size: clamp(22px, 3vw, 30px);
+}
+
+.ranking-callout p {
+  margin-bottom: 0;
+}
+
+.ranking-callout a {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--canvas-deep);
+  font-size: 13px;
+  font-weight: 750;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.faq-list {
+  margin: 0;
+}
+
+.faq-list > div {
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+}
+
+.faq-list > div:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-list dt {
+  margin-bottom: 7px;
+  color: var(--fg);
+  font-weight: 700;
+}
+
+.faq-list dd {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .pong-page .game-container {
+    height: max(460px, calc(100svh - 116px));
+  }
+
+  .guide-steps,
+  .guide-grid,
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ranking-callout {
+    grid-template-columns: 1fr;
+  }
+
+  .ranking-callout a {
+    justify-self: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
